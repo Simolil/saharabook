@@ -1,0 +1,55 @@
+import { Camp } from '@/src/types';
+
+export const mockCamps: Camp[] = [
+  {
+    id: "1",
+    slug: "luxury-sand-spirit-camp",
+    name: "Sand Spirit Luxury Camp",
+    description_en: "An oasis of luxury in the heart of the Erg Chebbi dunes. Experience the silence of the Sahara in style.",
+    description_fr: "Une oasis de luxe au cœur des dunes de l'Erg Chebbi. Vivez le silence du Sahara avec style.",
+    destination: "merzouga",
+    latitude: 31.11,
+    longitude: -3.98,
+    price_per_night: 220,
+    currency: "EUR",
+    verification_tier: "elite",
+    private_bathroom: true,
+    max_guests: 4,
+    status: "active",
+    created_at: new Date().toISOString()
+  },
+  {
+    id: "2",
+    slug: "nomad-dream-zagora",
+    name: "Nomad Dream Desert Camp",
+    description_en: "Authentic Berber hospitality meets modern comfort in the mystical Zagora desert.",
+    description_fr: "L'hospitalité berbère authentique rencontre le confort moderne dans le désert mystique de Zagora.",
+    destination: "zagora",
+    latitude: 30.33,
+    longitude: -5.83,
+    price_per_night: 140,
+    currency: "EUR",
+    verification_tier: "verified",
+    private_bathroom: true,
+    max_guests: 2,
+    status: "active",
+    created_at: new Date().toISOString()
+  },
+  {
+    id: "3",
+    slug: "scarabeo-alternative-camp",
+    name: "Scarabeo Stone Desert Camp",
+    description_en: "Iconic glamping experience in the Agafay stone desert with stunning Atlas views.",
+    description_fr: "Expérience glamping emblématique dans le désert de pierre d'Agafay avec une vue imprenable sur l'Atlas.",
+    destination: "agafay",
+    latitude: 31.42,
+    longitude: -8.21,
+    price_per_night: 280,
+    currency: "EUR",
+    verification_tier: "elite",
+    private_bathroom: true,
+    max_guests: 3,
+    status: "active",
+    created_at: new Date().toISOString()
+  }
+];

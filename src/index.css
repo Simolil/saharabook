@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=Outfit:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Kaushan+Script&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-painting: "Kaushan Script", cursive;
+}
+
+@utility dunes-text-sahara {
+  background-image: 
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMjAwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDYwIEwwIDQwIEMgNDAgMjAsIDcwIDUwLCAxMDAgMzAgQyAxMzAgMTAsIDE3MCA1MCwgMjAwIDQwIEwyMDAgNjAgWiIgZmlsbD0iI0JBNzUxNyIgZmlsbC1vcGFjaXR5PSIwLjMiLz48L3N2Zz4="),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMjAwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDYwIEwwIDUwIEMgMzAgNDAsIDYwIDYwLCAxMDAgNDUgQyAxNDAgMzAsIDE3MCA1NSwgMjAwIDUwIEwyMDAgNjAgWiIgZmlsbD0iI0JBNzUxNyIgZmlsbC1vcGFjaXR5PSIwLjYiLz48L3N2Zz4="),
+    url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cGF0aCBkPSJNMCAxMDAgTCAwIDk1IEMgMTAgOTUsIDMwIDI1LCA1MCAyNSBDIDcwIDI1LCA5MCA5NSwgMTAwIDk1IEwgMTAwIDEwMCBaIiBmaWxsPSIjQkE3NTE3Ii8+PC9zdmc+"),
+    linear-gradient(to bottom, white 100%, white 100%);
+  background-size: 200% 45%, 150% 40%, 100% 60%, 100% 100%;
+  background-position: bottom left, bottom right, 0% 100%, top left;
+  background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility dunes-text-handpicked {
+  background-image: 
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMjAwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDYwIEwwIDQwIEMgNDAgMjAsIDcwIDUwLCAxMDAgMzAgQyAxMzAgMTAsIDE3MCA1MCwgMjAwIDQwIEwyMDAgNjAgWiIgZmlsbD0iI0JBNzUxNyIgZmlsbC1vcGFjaXR5PSIwLjMiLz48L3N2Zz4="),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMjAwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wIDYwIEwwIDUwIEMgMzAgNDAsIDYwIDYwLCAxMDAgNDUgQyAxNDAgMzAsIDE3MCA1NSwgMjAwIDUwIEwyMDAgNjAgWiIgZmlsbD0iI0JBNzUxNyIgZmlsbC1vcGFjaXR5PSIwLjYiLz48L3N2Zz4="),
+    url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIj48cGF0aCBkPSJNMCAxMDAgTCAwIDk1IEMgMTAgOTUsIDMwIDQ1LCA1MCA0NSBDIDcwIDQ1LCA5MCA5NSwgMTAwIDk1IEwgMTAwIDEwMCBaIiBmaWxsPSIjQkE3NTE3Ii8+PC9zdmc+"),
+    linear-gradient(to bottom, white 100%, white 100%);
+  background-size: 200% 20%, 150% 18%, 100% 14%, 100% 100%;
+  background-position: bottom left, bottom right, 0% 100%, top left;
+  background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
