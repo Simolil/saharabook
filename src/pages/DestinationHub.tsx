@@ -63,7 +63,7 @@ export default function DestinationHub() {
       {/* Header Section */}
       <section className="h-[60vh] relative flex items-center justify-center overflow-hidden">
         <img 
-          src={id === 'merzouga' ? "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1600" : "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1600"}
+          src={id === 'merzouga' ? "/merzouga-sunset.jpg" : "/desert-camp.jpg"}
           className="w-full h-full object-cover" 
           alt={data.name}
         />

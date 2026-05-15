@@ -97,9 +97,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { id: 'merzouga', name: 'Merzouga', sub: 'The High Sahara', img: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800' },
-              { id: 'zagora', name: 'Zagora', sub: 'The Draa Gateway', img: 'https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800' },
-              { id: 'agafay', name: 'Agafay', sub: 'The Marrakech Secret', img: 'https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=800' }
+              { id: 'merzouga', name: 'Merzouga', sub: 'The High Sahara', img: '/merzouga-sunset.jpg' },
+              { id: 'zagora', name: 'Zagora', sub: 'The Draa Gateway', img: '/desert-camp.jpg' },
+              { id: 'agafay', name: 'Agafay', sub: 'The Marrakech Secret', img: '/camel-trek.jpg' }
             ].map((dest) => (
               <Link key={dest.id} to={`/destinations/${dest.id}`} className="relative h-96 group rounded-3xl overflow-hidden shadow-xl">
                 <img src={dest.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={dest.name} />

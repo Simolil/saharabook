@@ -21,12 +21,12 @@ export default function TourDetail() {
         description={tour.description}
         price={tour.price}
         currency="EUR"
-        images={["https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=800"]}
+        images={["/merzouga-sunset.jpg"]}
       />
 
       <section className="relative h-[60vh]">
          <img 
-            src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1600" 
+            src="/merzouga-sunset.jpg" 
             className="w-full h-full object-cover" 
             alt={tour.title}
          />

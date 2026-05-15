@@ -54,7 +54,7 @@ export const tours: TourData[] = [
       The Agafay desert is Morocco's 'hidden' gem, offering a desert experience without the long drive to the Sahara. 
       This tour focuses on relaxation and luxury. Arrive in the late afternoon to witness a spectacular sunset over the Atlas Mountains. 
       Enjoy a gourmet Moroccan meal in a glass-walled tent or under the open sky. 
-      The camps in Agafay are among the most stylish in the country, featuring infinity pools and designer interiors. 
+      The camps in Agafay are among the most stylish in the country, featuring infinity pools and designer tents. 
       It's the ultimate romantic escape or a sophisticated way to experience the desert landscape in comfort.
     `
   }
