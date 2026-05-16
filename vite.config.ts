@@ -7,7 +7,7 @@ export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
     plugins: [react(), tailwindcss()],
-    base: mode === 'production' ? '/saharabook/' : '/',
+    base: '/',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
