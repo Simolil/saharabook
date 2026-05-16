@@ -35,7 +35,7 @@ export default function Home() {
             <span className="text-[#BA7517] font-black uppercase tracking-[0.4em] text-[10px] md:text-xs block mb-4">Morocco's Verified Desert Expert</span>
             <h1 className="text-5xl md:text-8xl text-white tracking-tighter leading-tight mb-10">
               <span className="dunes-text-sahara font-painting relative transition-all duration-700 inline-block px-1">The Sahara</span>
-              <span className="text-[#BA7517] font-serif italic text-3xl md:text-5xl align-middle mx-2 opacity-60">,</span>
+              <span className="text-white font-serif italic text-3xl md:text-5xl align-middle mx-2">,</span>
               <span className="font-painting relative transition-all duration-700 inline-block px-1">
                 <span className="dunes-text-handpicked">Handpick</span>
                 <span className="text-[#BA7517]">ed</span>
@@ -97,9 +97,9 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { id: 'merzouga', name: 'Merzouga', sub: 'The High Sahara', img: '/merzouga-sunset.jpg' },
-              { id: 'zagora', name: 'Zagora', sub: 'The Draa Gateway', img: '/desert-camp.jpg' },
-              { id: 'agafay', name: 'Agafay', sub: 'The Marrakech Secret', img: '/camel-trek.jpg' }
+              { id: 'merzouga', name: 'Merzouga', sub: 'The High Sahara', img: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800' },
+              { id: 'zagora', name: 'Zagora', sub: 'The Draa Gateway', img: 'https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800' },
+              { id: 'agafay', name: 'Agafay', sub: 'The Marrakech Secret', img: 'https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=800' }
             ].map((dest) => (
               <Link key={dest.id} to={`/destinations/${dest.id}`} className="relative h-96 group rounded-3xl overflow-hidden shadow-xl">
                 <img src={dest.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={dest.name} />

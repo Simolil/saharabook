@@ -244,7 +244,7 @@ export default function BookingFlow() {
                    <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-6">Your Stay</h3>
                    <div className="flex space-x-4 mb-6 pb-6 border-b border-gray-50">
                       <img 
-                        src="/merzouga-sunset.jpg" 
+                        src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=200" 
                         className="w-16 h-16 object-cover rounded-xl" 
                         alt={camp.name}
                       />

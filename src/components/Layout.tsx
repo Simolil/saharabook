@@ -52,25 +52,57 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
           {/* Brand Name */}
           <motion.div 
-            className={cn("text-2xl md:text-4xl leading-none font-painting tracking-normal relative z-10", textColor)}
+            className={cn("text-2xl md:text-4xl leading-none font-painting tracking-normal relative z-10 flex items-center px-4", textColor)}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Sahar<span className="text-[#BA7517]">a</span>
-          </motion.div>
-          
-          <div className={cn("text-[14px] md:text-[18px] font-painting leading-none opacity-80 mt-1 relative z-10 flex flex-col items-center", textColor)}>
-            <div className="relative px-2 group">
-              <span className="relative z-10 transition-transform duration-500 group-hover:scale-105 inline-block">
-                Book<span className="text-[#BA7517]">.ma</span>
+            {/* Unified Logo Background */}
+            <motion.div 
+              className="absolute inset-0 pointer-events-none z-0"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 1.4, delay: 0.3, ease: "circOut" }}
+            >
+              <svg viewBox="0 0 240 60" className="w-full h-full" preserveAspectRatio="none">
+                {/* Main thick brush stroke */}
+                <motion.path 
+                  d="M5 30 Q 60 15, 120 30 T 235 30 L 235 40 Q 175 55, 120 40 T 5 40 Z" 
+                  fill="#BA7517" 
+                  className="opacity-20"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 1.8, delay: 0.4 }}
+                />
+                {/* Thinner accent stroke */}
+                <motion.path 
+                  d="M15 35 Q 70 25, 130 35 T 225 35" 
+                  stroke="#BA7517" 
+                  strokeWidth="3" 
+                  strokeLinecap="round" 
+                  fill="none"
+                  className="opacity-30"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 2.2, delay: 0.6 }}
+                />
+              </svg>
+            </motion.div>
+
+            <div className="relative">
+              <span className="relative z-10">Sahar<span className="text-[#BA7517]">a</span></span>
+            </div>
+            
+            <div className="relative group">
+              <span className="relative z-10 transition-transform duration-500 group-hover:scale-105 inline-block text-[0.7em] md:text-[0.6em] translate-y-[-0.1em]">
+                Book
               </span>
               
               {/* Sand Dust Particles */}
-              {[...Array(8)].map((_, i) => (
+              {[...Array(6)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-1 h-1 bg-[#BA7517] rounded-full blur-[0.5px] pointer-events-none opacity-0"
+                  className="absolute w-0.5 h-0.5 bg-[#BA7517] rounded-full blur-[0.3px] pointer-events-none opacity-0"
                   animate={{
                     x: [0, (i % 2 === 0 ? 1 : -1) * (15 + i * 5), (i % 2 === 0 ? 30 : -30)],
                     y: [0, -8 - i * 3, -15],
@@ -89,38 +121,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   }}
                 />
               ))}
-
-              {/* Brush Stroke Background */}
-              <motion.div 
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[42%] w-[130%] h-[160%] pointer-events-none z-0"
-                initial={{ scaleX: 0, opacity: 0, rotate: -2 }}
-                animate={{ scaleX: 1, opacity: 1, rotate: 0 }}
-                transition={{ duration: 1.2, delay: 0.5, ease: "circOut" }}
-              >
-                <svg viewBox="0 0 100 40" className="w-full h-full" preserveAspectRatio="none">
-                  <motion.path 
-                    d="M0 20 Q 25 10, 50 20 T 100 20 L 100 25 Q 75 35, 50 25 T 0 25 Z" 
-                    fill="#BA7517" 
-                    className="opacity-20"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 1.5, delay: 0.6 }}
-                  />
-                  <motion.path 
-                    d="M5 22 Q 30 15, 55 22 T 95 22" 
-                    stroke="#BA7517" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    fill="none"
-                    className="opacity-30"
-                    initial={{ pathLength: 0 }}
-                    animate={{ pathLength: 1 }}
-                    transition={{ duration: 2, delay: 0.8 }}
-                  />
-                </svg>
-              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </Link>
     );
@@ -363,7 +365,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           <div className="mt-20 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 space-y-4 md:space-y-0">
-            <p>© 2026 SaharaBook.ma — Built for modern explorers.</p>
+            <p>© 2026 SaharaBook — Built for modern explorers.</p>
             <div className="flex space-x-6">
               <Link to="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>
               <Link to="/privacy" className="hover:text-gray-900 transition-colors">Privacy</Link>

@@ -4,24 +4,24 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
   {
-    url: "/merzouga-sunset.jpg",
-    title: "Erg Chebbi Sunset",
+    url: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1600",
+    title: "Sahara Desert",
     caption: "The golden hour in Merzouga's highest dunes."
   },
   {
-    url: "/desert-camp.jpg",
-    title: "Luxury Glamping",
-    caption: "Boutique tents with every modern comfort."
+    url: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=1600",
+    title: "Sahara Night",
+    caption: "Experience the magic of the desert under the stars."
   },
   {
-    url: "/camel-trek.jpg",
-    title: "Desert Journeys",
-    caption: "Ancient routes through the shifting sands."
+    url: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=1600",
+    title: "Agafay Stone Desert",
+    caption: "A boutique escape just minutes from Marrakech."
   },
   {
-    url: "/ait-ben-haddou.jpg",
-    title: "Ancient Heritage",
-    caption: "The historic Kasbah of Ait Ben Haddou."
+    url: "https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=1600",
+    title: "Magical Nights",
+    caption: "The clearest skies you will ever witness."
   }
 ];
 

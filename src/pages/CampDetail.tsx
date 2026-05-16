@@ -48,19 +48,19 @@ export default function CampDetail() {
         <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px]">
           <div className="md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-2xl relative">
             <img 
-               src="/merzouga-sunset.jpg" 
+               src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1200" 
                className="w-full h-full object-cover" 
                alt={`${camp.name} Main View`}
             />
           </div>
           <div className="rounded-3xl overflow-hidden shadow-xl">
-            <img src="/desert-camp.jpg" className="w-full h-full object-cover" alt="Interior" />
+            <img src="https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=600" className="w-full h-full object-cover" alt="Interior" />
           </div>
           <div className="rounded-3xl overflow-hidden shadow-xl">
-             <img src="/camel-trek.jpg" className="w-full h-full object-cover" alt="Activities" />
+             <img src="https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=600" className="w-full h-full object-cover" alt="Food" />
           </div>
           <div className="md:col-span-2 rounded-3xl overflow-hidden shadow-xl relative">
-             <img src="/ait-ben-haddou.jpg" className="w-full h-full object-cover" alt="Heritage" />
+             <img src="https://images.unsplash.com/photo-1489493585363-d6943649ef91?q=80&w=800" className="w-full h-full object-cover" alt="Stars" />
              <button className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md px-6 py-2 rounded-full font-bold text-xs shadow-lg">
                 View All Photos (24)
              </button>

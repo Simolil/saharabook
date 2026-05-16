@@ -5,13 +5,13 @@ import { Camp } from '@/src/types';
 import { formatCurrency, cn } from '@/src/lib/utils';
 import VerificationBadge from './VerificationBadge';
 
-export default function CampCard({ camp }: { camp: Camp }) {
+export default function CampCard({ camp }: { camp: Camp; key?: string }) {
   // Mock image based on destination
   const getMockImage = (dest: string) => {
     const images: Record<string, string> = {
-      merzouga: "/merzouga-sunset.jpg",
-      zagora: "/desert-camp.jpg",
-      agafay: "/camel-trek.jpg"
+      merzouga: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800",
+      zagora: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800",
+      agafay: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=800"
     };
     return images[dest] || images.merzouga;
   };
