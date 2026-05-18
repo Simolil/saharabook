@@ -1,16 +1,25 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, MapPin, Calendar, Heart, User, Menu, X, ChevronDown } from 'lucide-react';
+import { Search, MapPin, Calendar, Heart, User, Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/src/lib/utils';
 import { Helmet } from 'react-helmet-async';
 import { StarZellij, ZellijCorner } from './Zellij';
+import { useLanguage, Language } from '../lib/LanguageContext';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isDestDropdownOpen, setIsDestDropdownOpen] = React.useState(false);
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = React.useState(false);
+  const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
   const currentUrl = `${import.meta.env.VITE_APP_URL || ''}${location.pathname}`;
+
+  const languages: { code: Language; name: string; flag: string }[] = [
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'es', name: 'Español', flag: '🇪🇸' },
+  ];
 
   const destinations = [
     { name: 'Merzouga', path: '/destinations/merzouga', desc: 'Erg Chebbi Dunes' },
@@ -31,21 +40,25 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Link to="/" className="group flex items-center">
         <div className="relative flex flex-col items-center select-none pt-2">
           {/* Hand-painted Dune "Umbrella" */}
-          <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 w-12 h-10 md:w-16 md:h-12 pointer-events-none z-0">
+          <div className="absolute -top-5 md:-top-7 left-1/2 -translate-x-1/2 w-28 h-14 md:w-36 md:h-18 pointer-events-none z-0">
             <motion.svg 
-              viewBox="0 0 60 40" 
+              viewBox="0 0 120 70" 
               className="w-full h-full"
               initial={{ opacity: 0, scale: 0.8, y: 5 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
             >
-              {/* Main Ridge */}
-              <path 
-                d="M4 35 Q 28 8, 56 35" 
+              {/* Single Dune with Verified Tick at the end */}
+              <motion.path 
+                d="M10 50 Q 35 15, 60 50 L 72 62 L 95 38" 
                 stroke={accentColor} 
-                strokeWidth="3.5" 
+                strokeWidth="5" 
                 strokeLinecap="round"
+                strokeLinejoin="round"
                 fill="none" 
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2.2, delay: 0.4 }}
               />
             </motion.svg>
           </div>
@@ -90,12 +103,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </motion.div>
 
             <div className="relative">
-              <span className="relative z-10">Sahar<span className="text-[#BA7517]">a</span></span>
+              <span className="relative z-10">Bivoua<span className="text-[#BA7517]">c</span></span>
             </div>
             
             <div className="relative group">
               <span className="relative z-10 transition-transform duration-500 group-hover:scale-105 inline-block text-[0.7em] md:text-[0.6em] translate-y-[-0.1em]">
-                Book
+                .ma
               </span>
               
               {/* Sand Dust Particles */}
@@ -180,31 +193,109 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <link rel="alternate" href={currentUrl} hrefLang="ar-MA" />
       </Helmet>
       {/* Navigation */}
-      <nav className="absolute top-0 left-0 right-0 z-50 bg-transparent overflow-hidden h-16 md:h-24">
+      <nav className="absolute top-0 left-0 right-0 z-50 bg-transparent h-16 md:h-24">
         {/* Header Zellij Patterns - Very subtle in the background */}
         <ZellijCorner className="absolute top-0 right-0 translate-x-12 -translate-y-12 opacity-5" />
         <ZellijCorner className="absolute bottom-0 left-0 -translate-x-16 translate-y-16 rotate-45 opacity-5" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full relative z-10">
           <div className="flex justify-between items-center h-full">
-            {/* Left: Hamburger Menu */}
-            <div className="w-1/4 md:w-1/3 flex items-center">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="bg-[#BA7517] text-white h-9 md:h-11 px-4 md:px-6 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-[#EF9F27] transition-all shadow-lg shadow-[#BA7517]/20 border border-white/10 whitespace-nowrap flex items-center justify-center space-x-2 relative z-[70]"
-              >
-                {isMenuOpen ? <X size={16} /> : <Menu size={16} className="md:w-5 md:h-5" />}
-                <span className="hidden md:inline">Menu</span>
-              </button>
+            {/* Left: Hamburger Menu & Language Switcher */}
+            <div className="w-1/3 md:w-1/3 flex items-center">
+              <div className="flex items-center relative z-[70] md:space-x-1">
+                <div className="flex items-center bg-[#BA7517] rounded-lg md:rounded-xl shadow-lg shadow-[#BA7517]/20 border border-white/10">
+                  <button
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="text-white h-8 md:h-10 px-2 md:px-4 flex items-center justify-center hover:bg-white/10 transition-all rounded-l-lg md:rounded-xl"
+                  >
+                    {isMenuOpen ? <X size={16} /> : <Menu size={16} className="md:w-5 md:h-5" />}
+                    <span className="hidden md:inline ml-2 text-[10px] md:text-xs font-black uppercase tracking-widest">{t('nav.menu')}</span>
+                  </button>
+
+                  <div className="w-[1px] h-3 bg-white/20 md:hidden" />
+
+                  <div className="relative md:hidden">
+                    <button
+                      onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                      className="text-white h-8 px-2.5 flex items-center justify-center hover:bg-white/10 transition-all rounded-r-lg"
+                      title={t('nav.select_lang')}
+                    >
+                      <span className="text-[10px] font-bold uppercase">{language}</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Desktop Language Switcher (Transparent) */}
+                <div className="hidden md:block relative">
+                  <button
+                    onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                    className={cn(
+                      "h-10 px-3.5 flex items-center justify-center transition-all rounded-xl border border-transparent hover:bg-white/10",
+                      useLightHeader ? "text-white" : "text-[#26215C]"
+                    )}
+                    title={t('nav.select_lang')}
+                  >
+                    <Globe size={16} className={cn("transition-transform duration-500", isLangDropdownOpen && "rotate-180")} />
+                    <span className="ml-1.5 text-xs font-bold uppercase tracking-wider">{language}</span>
+                  </button>
+
+                  <AnimatePresence>
+                    {isLangDropdownOpen && (
+                      <>
+                        <motion.div 
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="fixed inset-0 z-[80] bg-black/5 backdrop-blur-[2px]"
+                          onClick={() => setIsLangDropdownOpen(false)}
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, y: 15, scale: 0.9, filter: 'blur(10px)' }}
+                          animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                          exit={{ opacity: 0, y: 15, scale: 0.9, filter: 'blur(10px)' }}
+                          className="absolute left-0 mt-3 w-40 bg-white/95 backdrop-blur-md rounded-2xl shadow-[0_20px_50px_rgba(38,33,92,0.15)] border border-white overflow-hidden z-[90] p-1.5"
+                        >
+                          <div className="space-y-1">
+                            <div className="px-3 py-2 text-[10px] font-black text-[#BA7517]/40 uppercase tracking-widest border-b border-gray-50 mb-1">
+                              {t('nav.select_lang')}
+                            </div>
+                            {languages.map((lang) => (
+                              <button
+                                key={lang.code}
+                                onClick={() => {
+                                  setLanguage(lang.code);
+                                  setIsLangDropdownOpen(false);
+                                }}
+                                className={cn(
+                                  "flex items-center justify-between w-full px-3 py-2.5 text-xs md:text-sm rounded-xl transition-all duration-300",
+                                  language === lang.code 
+                                    ? "bg-[#BA7517] text-white font-bold shadow-lg shadow-[#BA7517]/20" 
+                                    : "text-[#26215C] hover:bg-[#FAF7F2] hover:text-[#BA7517]"
+                                )}
+                              >
+                                <div className="flex items-center space-x-3">
+                                  <span className="text-lg leading-none">{lang.flag}</span>
+                                  <span>{lang.name}</span>
+                                </div>
+                                {language === lang.code && <motion.div layoutId="active-lang" className="w-1.5 h-1.5 bg-white rounded-full" />}
+                              </button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
 
             {/* Center: Logo */}
-            <div className="w-2/4 md:w-1/3 flex justify-center">
+            <div className="w-1/3 md:w-1/3 flex justify-center">
               <Logo light={useLightHeader} />
             </div>
 
             {/* Right: Actions */}
-            <div className="w-1/4 md:w-1/3 flex justify-end items-center space-x-3 md:space-x-6">
+            <div className="w-1/3 md:w-1/3 flex justify-end items-center space-x-2 md:space-x-4">
               <Link 
                 to="/compare" 
                 className={cn(
@@ -213,7 +304,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 )}
               >
                 <Search size={14} className="text-[#BA7517]" />
-                <span>Help</span>
+                <span>{t('nav.help')}</span>
               </Link>
               
               <Link 
@@ -221,8 +312,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 className="bg-[#BA7517] text-white h-9 md:h-11 px-4 md:px-6 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-[#EF9F27] transition-all shadow-lg shadow-[#BA7517]/20 border border-white/10 whitespace-nowrap flex items-center justify-center"
               >
                 <span className="flex flex-col md:flex-row items-center justify-center leading-[0.8] md:leading-normal">
-                  <span>Book</span>
-                  <span className="md:ml-1 mt-0.5 md:mt-0">Now</span>
+                  <span>{t('nav.book').split(' ')[0]}</span>
+                  {t('nav.book').includes(' ') && (
+                    <span className="md:ml-1 mt-0.5 md:mt-0">{t('nav.book').split(' ').slice(1).join(' ')}</span>
+                  )}
                 </span>
               </Link>
             </div>
@@ -255,7 +348,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
               <div className="relative z-10 w-full max-w-5xl px-4 grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-4 items-center">
                 <div className="md:col-span-3 space-y-4 md:space-y-8">
-                  <div className="text-[10px] font-black text-[#BA7517] uppercase tracking-[1em] mb-4 md:mb-8 opacity-60">Destinations</div>
+                  <div className="text-[10px] font-black text-[#BA7517] uppercase tracking-[1em] mb-4 md:mb-8 opacity-60">{t('nav.destinations')}</div>
                   <div className="space-y-4 md:space-y-6">
                     {destinations.map((dest) => (
                       <Link
@@ -277,7 +370,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                 <div className="md:col-span-1 flex flex-col justify-between h-full py-4 md:py-12">
                   <div className="space-y-6 md:space-y-12">
-                    <div className="text-[10px] font-black text-[#BA7517] uppercase tracking-[1em] mb-4 md:mb-8 opacity-60">Discover</div>
+                    <div className="text-[10px] font-black text-[#BA7517] uppercase tracking-[1em] mb-4 md:mb-8 opacity-60">{t('nav.discover')}</div>
                     <div className="space-y-4 md:space-y-8">
                       {navLinks.map((link) => (
                         <Link
@@ -286,7 +379,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                           onClick={() => setIsMenuOpen(false)}
                           className="block text-2xl md:text-3xl font-black uppercase text-white/70 hover:text-[#BA7517] transition-all duration-300"
                         >
-                          {link.name}
+                          {t(`nav.${link.name.toLowerCase().replace(' ', '_')}`)}
                         </Link>
                       ))}
                       <Link
@@ -294,13 +387,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         onClick={() => setIsMenuOpen(false)}
                         className="block text-2xl md:text-3xl font-black uppercase text-white/70 hover:text-[#BA7517] transition-all duration-300"
                       >
-                        Portal
+                        {t('nav.portal')}
                       </Link>
                     </div>
                   </div>
 
                   <div className="mt-12 pt-12 md:mt-0 md:pt-0 border-t md:border-t-0 border-white/10">
-                    <div className="text-[8px] md:text-[10px] text-[#FAF7F2]/40 uppercase tracking-[0.4em] font-black mb-6">Socials</div>
+                    <div className="text-[8px] md:text-[10px] text-[#FAF7F2]/40 uppercase tracking-[0.4em] font-black mb-6">{t('nav.socials')}</div>
                     <div className="flex space-x-6 text-[10px] font-bold uppercase tracking-widest text-[#FAF7F2]/60">
                       <span className="hover:text-[#BA7517] cursor-pointer transition-colors">IG</span>
                       <span className="hover:text-[#BA7517] cursor-pointer transition-colors">FB</span>
@@ -343,12 +436,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <Logo />
               </div>
               <p className="text-gray-600 max-w-md leading-relaxed">
-                The only specialized booking platform for verified luxury desert camps in Morocco. 
-                Experience Merzouga, Zagora, and Agafay with absolute peace of mind. No scams, just magic.
+                {t('footer.desc')}
               </p>
             </div>
             <div>
-              <h3 className="text-[#BA7517] font-semibold mb-6 uppercase tracking-widest text-xs">Destinations</h3>
+              <h3 className="text-[#BA7517] font-semibold mb-6 uppercase tracking-widest text-xs">{t('footer.destinations')}</h3>
               <ul className="space-y-4 text-sm text-gray-600">
                 <li><Link to="/destinations/merzouga" className="hover:text-[#BA7517] transition-colors">Merzouga (Erg Chebbi)</Link></li>
                 <li><Link to="/destinations/zagora" className="hover:text-[#BA7517] transition-colors">Zagora (Erg Chigaga)</Link></li>
@@ -356,16 +448,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </ul>
             </div>
             <div>
-              <h3 className="text-[#BA7517] font-semibold mb-6 uppercase tracking-widest text-xs">Trust</h3>
+              <h3 className="text-[#BA7517] font-semibold mb-6 uppercase tracking-widest text-xs">{t('footer.trust')}</h3>
               <ul className="space-y-4 text-sm text-gray-600">
-                <li><Link to="/scam-guide" className="hover:text-[#BA7517] transition-colors">Scam Prevention Guide</Link></li>
-                <li><Link to="/compare" className="hover:text-[#BA7517] transition-colors">Merzouga vs Zagora</Link></li>
-                <li><Link to="/partners" className="hover:text-[#BA7517] transition-colors">Join as Operator</Link></li>
+                <li><Link to="/scam-guide" className="hover:text-[#BA7517] transition-colors">{t('footer.scam_guide')}</Link></li>
+                <li><Link to="/compare" className="hover:text-[#BA7517] transition-colors">{t('footer.compare')}</Link></li>
+                <li><Link to="/partners" className="hover:text-[#BA7517] transition-colors">{t('footer.partners')}</Link></li>
               </ul>
             </div>
           </div>
           <div className="mt-20 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 space-y-4 md:space-y-0">
-            <p>© 2026 SaharaBook — Built for modern explorers.</p>
+            <p>© 2026 Bivouac.ma — {t('footer.built_for')}</p>
             <div className="flex space-x-6">
               <Link to="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>
               <Link to="/privacy" className="hover:text-gray-900 transition-colors">Privacy</Link>

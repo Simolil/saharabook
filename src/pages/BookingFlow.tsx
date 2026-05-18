@@ -164,7 +164,7 @@ export default function BookingFlow() {
                       <h2 className="text-3xl font-bold tracking-tighter text-[#26215C] mb-8">Secure Payment</h2>
                       <div className="bg-[#26215C] p-8 rounded-3xl text-white mb-8">
                          <div className="flex justify-between items-start mb-12">
-                            <h3 className="text-xl font-bold tracking-tight">SaharaBook<span className="text-[#BA7517]">Pay</span></h3>
+                            <h3 className="text-xl font-bold tracking-tight">Bivouac<span className="text-[#BA7517]">Pay</span></h3>
                             <CreditCard size={24} className="opacity-50" />
                          </div>
                          <div className="space-y-4">
@@ -196,7 +196,7 @@ export default function BookingFlow() {
                          <Check className="text-green-600" size={40} />
                       </div>
                       <h2 className="text-3xl font-bold tracking-tighter text-[#26215C] mb-4">You're going to the Sahara!</h2>
-                      <p className="text-gray-500 mb-12">Booking ID: <span className="text-[#BA7517] font-bold">SB-88219-X</span></p>
+                      <p className="text-gray-500 mb-12">Booking ID: <span className="text-[#BA7517] font-bold">BV-88219-X</span></p>
                       
                       {/* Offline Voucher */}
                       <div className="bg-[#FAF7F2] p-8 rounded-3xl border-2 border-dashed border-[#BA7517]/20 relative">
@@ -214,7 +214,7 @@ export default function BookingFlow() {
                          </div>
 
                          <div className="bg-white p-6 rounded-2xl shadow-sm mb-8 flex justify-center">
-                            <QRCodeSVG value={`https://saharabook.ma/v/${Math.random().toString(36).substr(2, 9)}`} size={120} fgColor="#26215C" />
+                            <QRCodeSVG value={`https://bivouac.ma/v/${Math.random().toString(36).substr(2, 9)}`} size={120} fgColor="#26215C" />
                          </div>
 
                          <div className="flex items-center justify-between pt-4 border-t border-gray-100">

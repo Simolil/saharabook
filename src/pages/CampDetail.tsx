@@ -6,30 +6,32 @@ import { mockCamps } from '@/src/lib/mockData';
 import VerificationBadge from '@/src/components/VerificationBadge';
 import { formatCurrency, cn } from '@/src/lib/utils';
 import { LodgingBusinessSchema } from '@/src/lib/seo';
+import { useLanguage } from '@/src/lib/LanguageContext';
 
 export default function CampDetail() {
   const { slug } = useParams<{ slug: string }>();
   const camp = mockCamps.find(c => c.slug === slug) || mockCamps[0];
+  const { t } = useLanguage();
 
   const amenities = [
-    { icon: Bath, label: 'Private Bathroom', value: true },
-    { icon: Wind, label: 'AC / Heating', value: true },
-    { icon: Coffee, label: 'Traditional Breakfast', value: true },
-    { icon: Users, label: 'Max 3 Guests', value: true },
-    { icon: Wifi, label: 'Desert WiFi', value: false },
+    { icon: Bath, label: t('amenity.bath'), value: true },
+    { icon: Wind, label: t('amenity.climate'), value: true },
+    { icon: Coffee, label: t('amenity.food'), value: true },
+    { icon: Users, label: t('amenity.guests').replace('{count}', camp.max_guests.toString()), value: true },
+    { icon: Wifi, label: t('amenity.wifi'), value: false },
   ];
 
   return (
     <div className="bg-[#FAF7F2] min-h-screen">
       <Helmet>
-        <title>{camp.name} | Luxury Desert Camp {camp.destination} | SaharaBook.ma</title>
+        <title>{camp.name} | Luxury Desert Camp {t(`search.${camp.destination.split(' ')[0].toLowerCase()}`)} | Bivouac.ma</title>
         <meta name="description" content={camp.description_en} />
       </Helmet>
 
       <LodgingBusinessSchema 
         name={camp.name}
         description={camp.description_en}
-        address={`${camp.destination} Desert, Morocco`}
+        address={`${t(`search.${camp.destination.split(' ')[0].toLowerCase()}`)} Desert, Morocco`}
         latitude={camp.latitude}
         longitude={camp.longitude}
         priceRange="€€"
@@ -42,7 +44,7 @@ export default function CampDetail() {
       <section className="relative px-4 pt-12 pb-8 max-w-7xl mx-auto">
         <Link to="/" className="inline-flex items-center space-x-2 text-xs font-bold text-[#26215C]/60 hover:text-[#BA7517] mb-8 transition-colors">
           <ArrowLeft size={14} />
-          <span>Back to Exploration</span>
+          <span>{t('detail.back')}</span>
         </Link>
         
         <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px]">
@@ -62,7 +64,7 @@ export default function CampDetail() {
           <div className="md:col-span-2 rounded-3xl overflow-hidden shadow-xl relative">
              <img src="https://images.unsplash.com/photo-1489493585363-d6943649ef91?q=80&w=800" className="w-full h-full object-cover" alt="Stars" />
              <button className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md px-6 py-2 rounded-full font-bold text-xs shadow-lg">
-                View All Photos (24)
+                {t('detail.photos')} (24)
              </button>
           </div>
         </div>
@@ -79,13 +81,13 @@ export default function CampDetail() {
                     <div className="flex items-center space-x-1 text-sm font-bold">
                        <Star size={16} className="text-amber-400 fill-amber-400" />
                        <span>4.9</span>
-                       <span className="text-gray-400 opacity-60 font-medium">(42 Reviews)</span>
+                       <span className="text-gray-400 opacity-60 font-medium">({t('detail.reviews').replace('{count}', '42')})</span>
                     </div>
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-[#26215C] mb-2">{camp.name}</h1>
                   <div className="flex items-center space-x-2 text-[#BA7517] font-bold text-sm">
                      <MapPin size={16} />
-                     <span>{camp.destination} Desert, Morocco</span>
+                     <span>{t(`search.${camp.destination.split(' ')[0].toLowerCase()}`)} Desert, Morocco</span>
                   </div>
                </div>
                <div className="flex items-center space-x-2">
@@ -108,7 +110,7 @@ export default function CampDetail() {
             </div>
 
             <div className="prose prose-stone max-w-none text-[#26215C]/80 leading-relaxed mb-16">
-               <h3 className="text-xl font-bold text-[#26215C] mb-4">The Experience</h3>
+               <h3 className="text-xl font-bold text-[#26215C] mb-4">{t('detail.experience')}</h3>
                <p className="mb-6">{camp.description_en}</p>
                <p>Every tent in {camp.name} is designed to offer maximum privacy while staying connected to the raw beauty of the Sahara. Our staff is recruited from the local tribes to ensure you experience genuine Berber hospitality. Dinner is included, featuring locally-sourced ingredients and traditional slow-cooked tagines.</p>
             </div>
@@ -117,7 +119,7 @@ export default function CampDetail() {
             <div className="bg-[#BA7517]/5 rounded-3xl p-8 border border-[#BA7517]/10 mb-16">
                <div className="flex items-center space-x-4 mb-6">
                   <ShieldCheck size={32} className="text-[#BA7517]" />
-                  <h4 className="text-lg font-bold text-[#26215C]">Why this camp is {camp.verification_tier}</h4>
+                  <h4 className="text-lg font-bold text-[#26215C]">{t('detail.why_verified').replace('{tier}', camp.verification_tier)}</h4>
                </div>
                <ul className="space-y-3">
                   {[
@@ -141,20 +143,20 @@ export default function CampDetail() {
                 <div className="flex items-baseline justify-between mb-8">
                    <div className="flex items-baseline space-x-1">
                       <span className="text-3xl font-bold text-[#26215C]">{formatCurrency(camp.price_per_night)}</span>
-                      <span className="text-xs text-gray-400 font-medium">/ night</span>
+                      <span className="text-xs text-gray-400 font-medium">{t('camp.night')}</span>
                    </div>
-                   <div className="text-[10px] bg-green-50 text-green-700 px-2 py-1 rounded-full font-bold uppercase tracking-widest">Available</div>
+                   <div className="text-[10px] bg-green-50 text-green-700 px-2 py-1 rounded-full font-bold uppercase tracking-widest">{t('detail.available')}</div>
                 </div>
 
                 <div className="space-y-4 mb-8">
                    <div className="flex flex-col space-y-1">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Dates</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">{t('detail.dates')}</label>
                       <button className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#26215C]">
                          <span>May 14 - May 16</span>
                       </button>
                    </div>
                    <div className="flex flex-col space-y-1">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Tent Type</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">{t('detail.tent_type')}</label>
                       <select className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#26215C] focus:outline-none">
                          <option>Royal Luxury Suite (+€0)</option>
                          <option>Honeymoon Tent (+€40)</option>
@@ -162,7 +164,7 @@ export default function CampDetail() {
                       </select>
                    </div>
                    <div className="flex flex-col space-y-1">
-                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Guests</label>
+                      <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">{t('search.guests')}</label>
                       <input type="number" defaultValue="2" min="1" max={camp.max_guests} className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#26215C]" />
                    </div>
                 </div>
@@ -173,11 +175,11 @@ export default function CampDetail() {
                       <span className="font-semibold">€440</span>
                    </div>
                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">Service Fee</span>
+                      <span className="text-gray-400">{t('detail.service_fee')}</span>
                       <span className="font-semibold">€0</span>
                    </div>
                    <div className="flex justify-between items-center pt-3 border-t border-gray-100">
-                      <span className="text-lg font-bold text-[#26215C]">Total</span>
+                      <span className="text-lg font-bold text-[#26215C]">{t('detail.total')}</span>
                       <span className="text-lg font-bold text-[#26215C]">€440</span>
                    </div>
                 </div>
@@ -186,9 +188,9 @@ export default function CampDetail() {
                    to={`/book/${camp.slug}`}
                    className="block w-full bg-[#BA7517] hover:bg-[#EF9F27] text-white text-center py-4 rounded-full font-bold shadow-lg shadow-[#BA7517]/20 transition-all active:scale-[0.98]"
                 >
-                   Reserve Now
+                   {t('detail.reserve')}
                 </Link>
-                <p className="text-[10px] text-center text-gray-400 mt-4 px-4 font-medium">You won't be charged yet. We'll verify availability in real-time.</p>
+                <p className="text-[10px] text-center text-gray-400 mt-4 px-4 font-medium">{t('detail.charge_notice')}</p>
              </div>
           </aside>
         </div>

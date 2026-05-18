@@ -4,8 +4,10 @@ import { Star, MapPin, Bath } from 'lucide-react';
 import { Camp } from '@/src/types';
 import { formatCurrency, cn } from '@/src/lib/utils';
 import VerificationBadge from './VerificationBadge';
+import { useLanguage } from '@/src/lib/LanguageContext';
 
 export default function CampCard({ camp }: { camp: Camp; key?: string }) {
+  const { t } = useLanguage();
   // Mock image based on destination
   const getMockImage = (dest: string) => {
     const images: Record<string, string> = {
@@ -32,7 +34,7 @@ export default function CampCard({ camp }: { camp: Camp; key?: string }) {
           <VerificationBadge tier={camp.verification_tier} />
         </div>
         <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#26215C]">
-          {formatCurrency(camp.price_per_night)} <span className="text-[10px] opacity-60 font-medium">/ night</span>
+          {formatCurrency(camp.price_per_night)} <span className="text-[10px] opacity-60 font-medium">{t('camp.night')}</span>
         </div>
       </div>
 
@@ -41,7 +43,7 @@ export default function CampCard({ camp }: { camp: Camp; key?: string }) {
         <div className="flex justify-between items-start mb-2">
           <div className="flex items-center space-x-1 text-[#BA7517]">
             <MapPin size={12} />
-            <span className="text-[10px] uppercase font-bold tracking-widest">{camp.destination}</span>
+            <span className="text-[10px] uppercase font-bold tracking-widest">{t(`search.${camp.destination.split(' ')[0].toLowerCase()}`)}</span>
           </div>
           <div className="flex items-center space-x-1">
             <Star size={12} className="text-amber-400 fill-amber-400" />
@@ -57,17 +59,17 @@ export default function CampCard({ camp }: { camp: Camp; key?: string }) {
         <div className="flex items-center space-x-4 mb-4 text-[#26215C]/60 text-xs">
           <div className="flex items-center space-x-1">
             <Bath size={14} />
-            <span>Private Bath</span>
+            <span>{t('camp.bath')}</span>
           </div>
           <div className="flex items-center space-x-1">
-            <span>Up to {camp.max_guests} guests</span>
+            <span>{t('camp.guests').replace('{count}', camp.max_guests.toString())}</span>
           </div>
         </div>
 
         <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-50">
-          <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400">Availability: Today</span>
+          <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400">{t('camp.availability')}</span>
           <button className="text-[#BA7517] text-xs font-bold hover:underline">
-            View Details
+            {t('camp.details')}
           </button>
         </div>
       </div>

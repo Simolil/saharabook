@@ -12,7 +12,7 @@ export default function VerificationBadge({ tier }: { tier: VerificationTier }) 
       tooltip: 'Basic information and photos have been reviewed by our team.'
     },
     verified: {
-      label: 'Sahara Verified',
+      label: 'Bivouac Verified',
       icon: ShieldCheck,
       color: 'bg-green-50 text-green-700 border-green-200',
       tooltip: 'We have physically visited this camp and verified its facilities and management.'

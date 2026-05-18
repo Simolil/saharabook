@@ -45,7 +45,7 @@ async function startServer() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`SaharaBook.ma Server running on http://localhost:${PORT}`);
+    console.log(`Bivouac.ma Server running on http://localhost:${PORT}`);
   });
 }
 

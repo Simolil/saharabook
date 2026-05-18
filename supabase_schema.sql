@@ -1,4 +1,4 @@
--- SaharaBook.ma Supabase Schema
+-- Bivouac.ma Supabase Schema
 
 -- Destinations Enum
 CREATE TYPE destination_type AS ENUM ('merzouga', 'zagora', 'agafay');
