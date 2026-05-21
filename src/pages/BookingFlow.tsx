@@ -164,7 +164,7 @@ export default function BookingFlow() {
                       <h2 className="text-3xl font-bold tracking-tighter text-[#26215C] mb-8">Secure Payment</h2>
                       <div className="bg-[#26215C] p-8 rounded-3xl text-white mb-8">
                          <div className="flex justify-between items-start mb-12">
-                            <h3 className="text-xl font-bold tracking-tight">Bivouac<span className="text-[#BA7517]">Pay</span></h3>
+                            <h3 className="text-xl font-bold tracking-tight"><span className="text-[#BA7517]">D</span>unecamps<span className="text-[#BA7517]">pay</span></h3>
                             <CreditCard size={24} className="opacity-50" />
                          </div>
                          <div className="space-y-4">
@@ -214,7 +214,7 @@ export default function BookingFlow() {
                          </div>
 
                          <div className="bg-white p-6 rounded-2xl shadow-sm mb-8 flex justify-center">
-                            <QRCodeSVG value={`https://bivouac.ma/v/${Math.random().toString(36).substr(2, 9)}`} size={120} fgColor="#26215C" />
+                            <QRCodeSVG value={`https://dunecamps.com/v/${Math.random().toString(36).substr(2, 9)}`} size={120} fgColor="#26215C" />
                          </div>
 
                          <div className="flex items-center justify-between pt-4 border-t border-gray-100">

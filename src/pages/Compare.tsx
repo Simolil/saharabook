@@ -18,7 +18,7 @@ export default function Compare() {
   return (
     <div className="bg-[#FAF7F2] min-h-screen pb-24">
       <Helmet>
-        <title>Compare Merzouga vs Zagora vs Agafay | Bivouac.ma</title>
+        <title>Compare Merzouga vs Zagora vs Agafay | Dunecamps</title>
         <meta name="description" content="Which Morocco desert destination is right for you? Compare dunes, travel time, and experiences." />
       </Helmet>
 

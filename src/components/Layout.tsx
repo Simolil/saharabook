@@ -102,14 +102,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </svg>
             </motion.div>
 
-            <div className="relative">
-              <span className="relative z-10">Bivoua<span className="text-[#BA7517]">c</span></span>
-            </div>
-            
-            <div className="relative group">
-              <span className="relative z-10 transition-transform duration-500 group-hover:scale-105 inline-block text-[0.7em] md:text-[0.6em] translate-y-[-0.1em]">
-                .ma
-              </span>
+            <div className="relative group flex items-center">
+              <span className="relative z-10"><span className="text-[#BA7517]">D</span>une<span className={light ? "text-white" : "text-[#BA7517]"}>camps</span></span>
               
               {/* Sand Dust Particles */}
               {[...Array(6)].map((_, i) => (
@@ -130,7 +124,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   }}
                   style={{
                     left: `${15 + i * 12}%`,
-                    top: '60%'
+                    top: '80%'
                   }}
                 />
               ))}
@@ -457,7 +451,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           <div className="mt-20 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 space-y-4 md:space-y-0">
-            <p>© 2026 Bivouac.ma — {t('footer.built_for')}</p>
+            <p>© 2026 Dunecamps — {t('footer.built_for')}</p>
             <div className="flex space-x-6">
               <Link to="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>
               <Link to="/privacy" className="hover:text-gray-900 transition-colors">Privacy</Link>

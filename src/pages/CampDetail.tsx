@@ -24,7 +24,7 @@ export default function CampDetail() {
   return (
     <div className="bg-[#FAF7F2] min-h-screen">
       <Helmet>
-        <title>{camp.name} | Luxury Desert Camp {t(`search.${camp.destination.split(' ')[0].toLowerCase()}`)} | Bivouac.ma</title>
+        <title>{camp.name} | Luxury Desert Camp {t(`search.${camp.destination.split(' ')[0].toLowerCase()}`)} | Dunecamps</title>
         <meta name="description" content={camp.description_en} />
       </Helmet>
 

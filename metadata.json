@@ -1,6 +1,6 @@
 {
-  "name": "Bivouac.ma",
+  "name": "dunecamps",
   "description": "Specialized Online Travel Agency (OTA) for Moroccan desert luxury camps (Merzouga, Zagora, Agafay).",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

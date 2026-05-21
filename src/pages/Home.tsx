@@ -111,7 +111,7 @@ export default function Home() {
   return (
     <div>
       <Helmet>
-        <title>Bivouac.ma | {t('hero.verified')} Luxury Desert Camps in Morocco</title>
+        <title>Dunecamps | {t('hero.verified')} Luxury Desert Camps in Morocco</title>
         <meta name="description" content={t('footer.desc')} />
       </Helmet>
 

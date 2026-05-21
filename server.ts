@@ -5,30 +5,31 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+
+// API Routes
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", time: new Date().toISOString() });
+});
+
+// Stripe Integration Placeholder
+app.post("/api/create-payment-intent", async (req, res) => {
+  try {
+    const { amount, currency } = req.body;
+    // In a real app, you'd initialize Stripe here
+    // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+    // const paymentIntent = await stripe.paymentIntents.create({ amount, currency });
+    res.json({ clientSecret: "mock_secret_" + Math.random().toString(36).substring(7) });
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
+
+// Conditionally start dev/production serving block if not on Vercel serverless
 async function startServer() {
-  const app = express();
-  const PORT = 3000;
-
-  app.use(express.json());
-
-  // API Routes
-  app.get("/api/health", (req, res) => {
-    res.json({ status: "ok", time: new Date().toISOString() });
-  });
-
-  // Stripe Integration Placeholder
-  app.post("/api/create-payment-intent", async (req, res) => {
-    try {
-      const { amount, currency } = req.body;
-      // In a real app, you'd initialize Stripe here
-      // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-      // const paymentIntent = await stripe.paymentIntents.create({ amount, currency });
-      res.json({ clientSecret: "mock_secret_" + Math.random().toString(36).substring(7) });
-    } catch (error) {
-      res.status(500).json({ error: (error as Error).message });
-    }
-  });
-
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -49,4 +50,8 @@ async function startServer() {
   });
 }
 
-startServer();
+if (!process.env.VERCEL) {
+  startServer();
+}
+
+export default app;

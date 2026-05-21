@@ -12,7 +12,7 @@ export default function TourDetail() {
   return (
     <div className="bg-[#FAF7F2] min-h-screen">
       <Helmet>
-        <title>{tour.title} | Bivouac.ma</title>
+        <title>{tour.title} | Dunecamps</title>
         <meta name="description" content={tour.description} />
       </Helmet>
 

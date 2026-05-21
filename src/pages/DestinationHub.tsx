@@ -29,7 +29,7 @@ export default function DestinationHub() {
       description: 'Erg Chebbi is home to the most iconic, high sand dunes in Morocco. Rising up to 150 meters, they offer a classic Sahara experience with deep golden sands and nomadic culture.',
       faqs: [
         { q: "How do I get to Merzouga from Marrakech?", a: "The drive takes about 9-10 hours. Most travelers take a private tour or a Supratours bus." },
-        { q: "Is Merzouga safe for solo travelers?", a: "Yes, Merzouga is very safe. We recommend booking verified camps through Bivouac.ma to avoid touts." }
+        { q: "Is Merzouga safe for solo travelers?", a: "Yes, Merzouga is very safe. We recommend booking verified camps through Dunecamps to avoid touts." }
       ]
     },
     zagora: {
@@ -56,7 +56,7 @@ export default function DestinationHub() {
   return (
     <div className="bg-[#FAF7F2] min-h-screen pb-24">
       <Helmet>
-        <title>{data.name} Luxury Camps & Tours | Bivouac.ma</title>
+        <title>{data.name} Luxury Camps & Tours | Dunecamps</title>
         <meta name="description" content={`Discover and book verified luxury desert camps in ${data.name}. ${data.description}`} />
       </Helmet>
       
@@ -154,7 +154,7 @@ export default function DestinationHub() {
                 <h2 className="text-3xl font-bold tracking-tighter text-[#26215C] mb-8">{t('hub.planning')} in {data.name}</h2>
                 <div className="prose prose-stone max-w-none text-[#26215C]/80 leading-relaxed">
                    <p className="mb-6">{data.description}</p>
-                   <p>Booking with Bivouac.ma ensures you direct access to camp operators via WhatsApp once confirmed, guaranteed private bathrooms (for Elite/Verified tiers), and secure digital payments. We handle the complexity of the Saharan logistics so you can focus on the stars.</p>
+                   <p>Booking with Dunecamps ensures you direct access to camp operators via WhatsApp once confirmed, guaranteed private bathrooms (for Elite/Verified tiers), and secure digital payments. We handle the complexity of the Saharan logistics so you can focus on the stars.</p>
                 </div>
              </div>
           </div>

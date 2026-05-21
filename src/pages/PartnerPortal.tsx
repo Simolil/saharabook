@@ -9,7 +9,7 @@ export default function PartnerPortal() {
   return (
     <div className="bg-[#FAF7F2] min-h-screen">
       <Helmet>
-        <title>Operator Portal | Bivouac.ma Partners</title>
+        <title>Operator Portal | Dunecamps Partners</title>
       </Helmet>
 
       <div className="max-w-7xl mx-auto px-4 py-16">
@@ -52,7 +52,7 @@ export default function PartnerPortal() {
             <div className="lg:col-span-3">
                {activeTab === 'onboarding' && (
                  <div className="bg-white p-12 rounded-[40px] shadow-sm border border-gray-100 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h2 className="text-3xl font-bold tracking-tighter text-[#26215C] mb-8">List your camp on <span className="text-[#BA7517]">Bivouac.ma</span></h2>
+                    <h2 className="text-3xl font-bold tracking-tighter text-[#26215C] mb-8">List your camp on <span className="text-[#BA7517]">Dunecamps</span></h2>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                        <div className="space-y-6">

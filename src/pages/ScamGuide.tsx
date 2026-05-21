@@ -11,12 +11,12 @@ export default function ScamGuide() {
     {
       title: "The 'Fake Camp' Bait",
       description: "Touts at Marrakech or Ouarzazate bus stations show you photos of luxury camps at low prices, but take you to a basic camp with no facilities.",
-      prevention: "Only book via Bivouac.ma — we hand-verify every location physically."
+      prevention: "Only book via Dunecamps — we hand-verify every location physically."
     },
     {
       title: "Hidden Transport Fees",
       description: "A camp booking seems cheap, but upon arrival, you are charged €50-€100 extra per person for the 4x4 or camel trek to reach the dunes.",
-      prevention: "All Bivouac.ma elite/verified bookings include camel transfer or 4x4 options explicitly."
+      prevention: "All Dunecamps elite/verified bookings include camel transfer or 4x4 options explicitly."
     },
     {
       title: "Phantasmagoric Bathrooms",
@@ -33,7 +33,7 @@ export default function ScamGuide() {
   return (
     <div className="bg-[#FAF7F2] min-h-screen">
       <Helmet>
-        <title>Morocco Desert Scam Guide 2026 | Bivouac.ma</title>
+        <title>Morocco Desert Scam Guide 2026 | Dunecamps</title>
         <meta name="description" content="How to avoid common Saharan desert scams in Merzouga and Zagora. The ultimate traveler guide to safe desert bookings." />
       </Helmet>
 
