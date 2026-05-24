@@ -57,5 +57,20 @@ export const tours: TourData[] = [
       The camps in Agafay are among the most stylish in the country, featuring infinity pools and designer tents. 
       It's the ultimate romantic escape or a sophisticated way to experience the desert landscape in comfort.
     `
+  },
+  {
+    slug: "foum-zguid-erg-chigaga-offroad-expedition",
+    title: "3-Day Off-Road Erg Chigaga Expedition from Foum Zguid",
+    description: "Unravel Morocco's wildest Sahara. Journey from Foum Zguid across the dry Lake Iriqui into the towering dunes of Erg Chigaga via 4x4 off-road.",
+    duration: "3 Days",
+    price: 380,
+    destination: "foumzguid",
+    start_city: "Foum Zguid",
+    content: `
+      Your rugged wilderness expedition begins in the ancient gateway of Foum Zguid. We traverse the vast fossil-rich plateaus and the dry clay-silt plains of Lake Iriqui by heavy-duty 4x4 vehicles.
+      As the road vanishes, you enter Erg Chigaga - the largest and least visited sand dunes region in Morocco, where peaks swell up to 40 meters.
+      Your base is an ultra-private, elite hand-verified wilderness camp. Experience true nomadic heritage, campfire cooking, and the purest, zero-pollution stargazing in the Moroccan kingdom.
+      This journey is designed specifically for seekers of solitude, raw landscape, and supreme authenticity, escaping the classic crowded tourist trail.
+    `
   }
 ];

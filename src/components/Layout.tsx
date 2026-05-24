@@ -23,8 +23,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const destinations = [
     { name: 'Merzouga', path: '/destinations/merzouga', desc: 'Erg Chebbi Dunes' },
-    { name: 'Zagora', path: '/destinations/zagora', desc: 'Erg Chigaga Wilds' },
+    { name: 'Zagora', path: '/destinations/zagora', desc: 'Draa Caravan Hub' },
     { name: 'Agafay', path: '/destinations/agafay', desc: 'Stone Desert' },
+    { name: 'Foum Zguid', path: '/destinations/foumzguid', desc: 'Erg Chigaga Wilds' },
   ];
 
   const navLinks = [
@@ -437,8 +438,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <h3 className="text-[#BA7517] font-semibold mb-6 uppercase tracking-widest text-xs">{t('footer.destinations')}</h3>
               <ul className="space-y-4 text-sm text-gray-600">
                 <li><Link to="/destinations/merzouga" className="hover:text-[#BA7517] transition-colors">Merzouga (Erg Chebbi)</Link></li>
-                <li><Link to="/destinations/zagora" className="hover:text-[#BA7517] transition-colors">Zagora (Erg Chigaga)</Link></li>
+                <li><Link to="/destinations/zagora" className="hover:text-[#BA7517] transition-colors">Zagora (Draa Valley)</Link></li>
                 <li><Link to="/destinations/agafay" className="hover:text-[#BA7517] transition-colors">Agafay (Stone Desert)</Link></li>
+                <li><Link to="/destinations/foumzguid" className="hover:text-[#BA7517] transition-colors">Foum Zguid (Erg Chigaga)</Link></li>
               </ul>
             </div>
             <div>

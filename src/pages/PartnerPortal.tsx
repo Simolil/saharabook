@@ -66,6 +66,7 @@ export default function PartnerPortal() {
                                 <option>Merzouga (Erg Chebbi)</option>
                                 <option>Zagora (Erg Chigaga)</option>
                                 <option>Agafay Desert</option>
+                                <option>Foum Zguid (Erg Chigaga)</option>
                              </select>
                           </div>
                        </div>

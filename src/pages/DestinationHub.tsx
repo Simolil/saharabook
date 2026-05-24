@@ -47,6 +47,15 @@ export default function DestinationHub() {
       faqs: [
         { q: "Does Agafay have sand dunes?", a: "No, Agafay consists of rolling stone hills. It is not a sandy desert like Merzouga." }
       ]
+    },
+    foumzguid: {
+      name: t('search.foumzguid'),
+      tagline: 'The Silent Giants',
+      description: 'Foum Zguid is the ultimate gateway to Erg Chigaga, Morocco’s wildest and most isolated desert dunes. Traveling across Lake Iriqui, this path offers uncompromised solitude and raw Saharan beauty.',
+      faqs: [
+        { q: "How to reach Erg Chigaga from Foum Zguid?", a: "Reaching the deep dunes from Foum Zguid requires an off-road 4x4 vehicle to traverse 2-3 hours of rugged fossil plateaus and the dried Lake Iriqui clay bed." },
+        { q: "Is Foum Zguid the best path for Erg Chigaga?", a: "Yes, it is the most Direct off-road track and bypasses the longer, more winding roads, offering an immediate transition to raw wilderness." }
+      ]
     }
   };
 
@@ -65,7 +74,15 @@ export default function DestinationHub() {
       {/* Header Section */}
       <section className="h-[60vh] relative flex items-center justify-center overflow-hidden">
         <img 
-          src={id === 'merzouga' ? "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1600" : "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1600"}
+          src={
+            id === 'merzouga' 
+              ? "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1600" 
+              : id === 'agafay'
+                ? "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1600"
+                : id === 'foumzguid'
+                  ? "https://images.unsplash.com/photo-1489493585363-d6943649ef91?q=80&w=1600"
+                  : "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1600"
+          }
           className="w-full h-full object-cover" 
           alt={data.name}
         />
