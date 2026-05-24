@@ -29,7 +29,7 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- Standard Pages -->
+  <!-- All Other Pages (Priority 0.8, Changefreq Monthly) -->
   <url>
     <loc>https://www.dunecamps.com/compare</loc>
     <changefreq>monthly</changefreq>
@@ -46,7 +46,7 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Individual Camp Pages -->
+  <!-- Camp Detail Pages -->
   <url>
     <loc>https://www.dunecamps.com/camps/luxury-sand-spirit-camp</loc>
     <changefreq>monthly</changefreq>
@@ -68,7 +68,7 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Individual Tour Pages -->
+  <!-- Tour Detail Pages -->
   <url>
     <loc>https://www.dunecamps.com/tours/3-days-from-marrakech-to-merzouga</loc>
     <changefreq>monthly</changefreq>
