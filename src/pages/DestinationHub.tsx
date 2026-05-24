@@ -6,6 +6,7 @@ import { cn } from '@/src/lib/utils';
 import SearchBar from '@/src/components/SearchBar';
 import CampCard from '@/src/components/CampCard';
 import { mockCamps } from '@/src/lib/mockData';
+import { tours } from '@/src/lib/toursData';
 import { FAQSchema } from '@/src/lib/seo';
 import { useLanguage } from '@/src/lib/LanguageContext';
 
@@ -61,6 +62,7 @@ export default function DestinationHub() {
 
   const data = destinationData[id || 'merzouga'] || destinationData.merzouga;
   const filteredCamps = mockCamps.filter(c => c.destination === id);
+  const matchingTour = tours.find(t => t.destination === id);
 
   return (
     <div className="bg-[#FAF7F2] min-h-screen pb-24">
@@ -95,12 +97,14 @@ export default function DestinationHub() {
         </div>
       </section>
 
-      {/* Sticky Search Bar */}
-      <div className={cn(
-        "z-40 px-4 transition-all duration-500",
-        isSticky ? "fixed top-24 left-0 right-0 w-full" : "relative -mt-16"
-      )}>
-        <SearchBar isSticky={isSticky} />
+      {/* Search Bar Wrapper - Keeps page layout static on scroll transition to prevent visual jumps */}
+      <div className="relative -mt-16 z-40 px-4 h-24 mb-6">
+        <div className={cn(
+          "w-full transition-all duration-300",
+          isSticky ? "fixed top-6 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4 z-45" : "relative"
+        )}>
+          <SearchBar isSticky={isSticky} />
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 mt-20">
@@ -165,6 +169,44 @@ export default function DestinationHub() {
                   </div>
                 )}
              </div>
+
+              {/* Bespoke Programs / Tours Section */}
+              {matchingTour && (
+                <div className="mt-16 bg-[#26215C] p-8 md:p-12 rounded-[40px] border border-[#BA7517]/30 shadow-2xl relative overflow-hidden text-left">
+                  {/* Background graphic */}
+                  <div className="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none translate-x-12 -translate-y-12">
+                     <svg viewBox="0 0 100 100" className="w-full h-full fill-[#BA7517]">
+                        <polygon points="50,0 100,35 80,90 20,90 0,35" />
+                     </svg>
+                  </div>
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 relative z-10 w-full text-left">
+                     <div className="flex-1 space-y-4">
+                        <span className="inline-block px-3 py-1 bg-[#BA7517]/20 border border-[#BA7517]/30 rounded-full text-[#BA7517] text-[10px] font-bold uppercase tracking-widest">
+                           Featured Experience Program
+                        </span>
+                        <h3 className="text-3xl font-bold text-white tracking-tight leading-tight">
+                           {matchingTour.title}
+                        </h3>
+                        <p className="text-white/70 text-sm leading-relaxed max-w-2xl">
+                           {matchingTour.description}
+                        </p>
+                        <div className="flex flex-wrap gap-3 text-[10px] md:text-xs font-bold text-white/85 pt-2">
+                           <span className="bg-white/10 px-3 py-1.5 rounded-full flex items-center gap-1.5 font-mono">⏱ {matchingTour.duration}</span>
+                           <span className="bg-white/10 px-3 py-1.5 rounded-full flex items-center gap-1.5 font-mono">📍 Starts: {matchingTour.start_city}</span>
+                           <span className="bg-[#BA7517]/20 text-[#EF9F27] px-3 py-1.5 rounded-full border border-[#BA7517]/30">Base Price From €{matchingTour.price}</span>
+                        </div>
+                     </div>
+                     <div className="shrink-0">
+                        <Link 
+                          to={`/tours/${matchingTour.slug}`} 
+                          className="inline-flex items-center space-x-2 bg-[#BA7517] hover:bg-[#EF9F27] text-white px-8 py-4 rounded-full font-bold text-sm shadow-xl transition-all transform hover:-translate-y-1"
+                        >
+                           <span>View Program Details</span>
+                        </Link>
+                     </div>
+                  </div>
+                </div>
+              )}
 
              {/* Editorial Content */}
              <div className="mt-24 pt-24 border-t border-[#BA7517]/10">

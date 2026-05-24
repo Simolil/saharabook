@@ -9,11 +9,11 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
   return (
     <div className={cn(
       "w-full max-w-5xl mx-auto transition-all duration-300",
-      isSticky ? "p-2 bg-white/[0.02] backdrop-blur-xl rounded-2xl border border-white/[0.05] shadow-2xl" : ""
+      isSticky ? "p-1 bg-[#26215C] rounded-2xl md:rounded-full border border-[#BA7517]/40 shadow-2xl" : ""
     )}>
       <div className={cn(
-        "bg-white/[0.02] backdrop-blur-xl rounded-2xl md:rounded-full shadow-2xl p-2 flex flex-col md:flex-row items-center border border-white/[0.05]",
-        isSticky ? "scale-[0.98]" : ""
+        "bg-[#26215C]/60 backdrop-blur-xl rounded-2xl md:rounded-full shadow-2xl p-2 flex flex-col md:flex-row items-center border border-white/10 transition-colors duration-300",
+        isSticky ? "bg-[#26215C] border-transparent" : ""
       )}>
         {/* Destination */}
         <div className="flex-1 w-full md:w-auto px-4 py-2 md:px-6 md:py-4 flex items-center space-x-3 border-b md:border-b-0 md:border-r border-white/10 group">

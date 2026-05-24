@@ -15,6 +15,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const currentUrl = `${import.meta.env.VITE_APP_URL || ''}${location.pathname}`;
 
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
   const languages: { code: Language; name: string; flag: string }[] = [
     { code: 'en', name: 'English', flag: '🇬🇧' },
     { code: 'fr', name: 'Français', flag: '🇫🇷' },
@@ -33,8 +37,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Scam Guide', path: '/scam-guide' },
   ];
 
-  const Logo = ({ light = false }: { light?: boolean }) => {
-    const textColor = light ? "text-white" : "text-[#26215C]";
+  const Logo = ({ isHeader = false }: { isHeader?: boolean }) => {
+    const textColor = isHeader ? "text-white" : "text-[#26215C]";
     const accentColor = "#BA7517";
 
     return (
@@ -104,7 +108,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </motion.div>
 
             <div className="relative group flex items-center">
-              <span className="relative z-10"><span className="text-[#BA7517]">D</span>une<span className={light ? "text-white" : "text-[#BA7517]"}>camps</span></span>
+              <span className="relative z-10">
+                <span className="text-[#BA7517]">Dune</span>
+                <span className={isHeader ? "text-white" : "text-[#26215C]"}>camps</span>
+              </span>
               
               {/* Sand Dust Particles */}
               {[...Array(6)].map((_, i) => (
@@ -286,7 +293,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             {/* Center: Logo */}
             <div className="w-1/3 md:w-1/3 flex justify-center">
-              <Logo light={useLightHeader} />
+              <Logo isHeader={true} />
             </div>
 
             {/* Right: Actions */}

@@ -36,7 +36,7 @@ export default function TourDetail() {
                <ArrowLeft size={14} />
                <span>All Journeys</span>
             </Link>
-            <h1 className="text-4xl md:text-6xl font-bold text-[#26215C] tracking-tighter max-w-3xl leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter max-w-3xl leading-tight">
                {tour.title}
             </h1>
          </div>
