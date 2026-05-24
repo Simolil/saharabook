@@ -12,15 +12,32 @@ import { useLanguage } from '@/src/lib/LanguageContext';
 
 export default function DestinationHub() {
   const { id } = useParams<{ id: string }>();
-  const [isSticky, setIsSticky] = React.useState(false);
+  const [isSticky, setIsSticky] = React.useState(() => 
+    typeof window !== 'undefined' ? (window.innerWidth >= 768 && window.scrollY > 400) : false
+  );
   const { t } = useLanguage();
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 400);
+      if (window.innerWidth >= 768) {
+        setIsSticky(window.scrollY > 400);
+      } else {
+        setIsSticky(false);
+      }
     };
+    
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsSticky(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const destinationData: Record<string, any> = {
@@ -101,7 +118,7 @@ export default function DestinationHub() {
       <div className="relative -mt-16 z-40 px-4 h-24 mb-6">
         <div className={cn(
           "w-full transition-all duration-300",
-          isSticky ? "fixed top-6 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4 z-45" : "relative"
+          isSticky ? "md:fixed md:top-6 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-5xl md:px-4 md:z-45 relative" : "relative"
         )}>
           <SearchBar isSticky={isSticky} />
         </div>
