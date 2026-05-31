@@ -65,6 +65,44 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 animate={{ pathLength: 1 }}
                 transition={{ duration: 2.2, delay: 0.4 }}
               />
+
+              {/* Elegant Small Sun rising at the end of the check mark */}
+              <motion.g
+                initial={{ opacity: 0, scale: 0.3, y: 14 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ 
+                  duration: 1.8, 
+                  delay: 2.7, // Smoothly rises after the 2.6s checkmark draw animation completes
+                  ease: "easeOut"
+                }}
+                style={{ transformOrigin: "95px 43px" }}
+              >
+                {/* Sun core */}
+                <circle cx="95" cy="43" r="5.5" fill="#BA7517" />
+                
+                {/* Sun rays rotating slowly */}
+                <motion.g
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  style={{ transformOrigin: "95px 43px" }}
+                >
+                  {[...Array(8)].map((_, idx) => {
+                    const angle = (idx * 45 * Math.PI) / 180;
+                    return (
+                      <line 
+                        key={idx}
+                        x1={95 + Math.cos(angle) * 8.5}
+                        y1={43 + Math.sin(angle) * 8.5}
+                        x2={95 + Math.cos(angle) * 11.5}
+                        y2={43 + Math.sin(angle) * 11.5}
+                        stroke="#BA7517"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                      />
+                    );
+                  })}
+                </motion.g>
+              </motion.g>
             </motion.svg>
           </div>
 
@@ -324,87 +362,146 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         
-        {/* Full-screen Overlay Menu */}
+        {/* Boutique Side-Drawer Menu */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.1 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 z-[60] bg-[#26215C] flex flex-col items-center justify-center overflow-hidden"
-            >
-              {/* Background patterns for overlay */}
-              <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <StarZellij className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%]" />
-                <StarZellij className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%]" color1="#26215C" color2="#BA7517" />
-              </div>
-
-              {/* Close Button */}
-              <button
+            <>
+              {/* Backdrop Overlay with Blur */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-8 right-8 text-[#FAF7F2] p-4 hover:rotate-90 transition-transform duration-500"
-              >
-                <X size={32} />
-              </button>
+                className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm"
+              />
 
-              <div className="relative z-10 w-full max-w-5xl px-4 grid grid-cols-1 md:grid-cols-5 gap-12 md:gap-4 items-center">
-                <div className="md:col-span-3 space-y-4 md:space-y-8">
-                  <div className="text-[10px] font-black text-[#BA7517] uppercase tracking-[1em] mb-4 md:mb-8 opacity-60">{t('nav.destinations')}</div>
-                  <div className="space-y-4 md:space-y-6">
-                    {destinations.map((dest) => (
-                      <Link
-                        key={dest.path}
-                        to={dest.path}
-                        onClick={() => setIsMenuOpen(false)}
-                        className="group block"
-                      >
-                        <div className="text-3xl sm:text-4xl md:text-6xl font-black text-[#FAF7F2] group-hover:text-[#BA7517] transition-all duration-500 tracking-tighter leading-none">
-                          {dest.name}
-                        </div>
-                        <div className="text-xs md:text-sm text-[#FAF7F2]/40 mt-2 uppercase tracking-[0.3em] font-bold group-hover:text-[#FAF7F2]/80 transition-colors drop-shadow-sm">{dest.desc}</div>
-                      </Link>
-                    ))}
-                  </div>
+              {/* Drawer Container Panel */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 28, stiffness: 220 }}
+                className="fixed right-0 top-0 bottom-0 h-full w-full sm:w-[460px] bg-[#26215C] border-l border-[#BA7517]/20 z-[70] shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-y-auto"
+              >
+                {/* Background luxury motifs */}
+                <div className="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
+                  <StarZellij className="absolute -top-12 -left-12 w-64 h-64" />
+                  <StarZellij className="absolute bottom-8 -right-8 w-80 h-80" color1="#26215C" color2="#BA7517" />
                 </div>
 
-                <div className="hidden md:block w-px h-64 bg-white/10 mx-auto" />
+                {/* Drawer Content */}
+                <div className="relative z-10 flex flex-col h-full min-h-[550px] justify-between p-6 sm:p-10">
+                  
+                  {/* Drawer Header */}
+                  <div className="flex justify-between items-center pb-6 border-b border-white/5 mb-6">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xs font-black uppercase tracking-[0.4em] text-[#BA7517]">
+                        Dunecamps
+                      </span>
+                      <span className="w-1.5 h-1.5 bg-[#BA7517] rounded-full animate-pulse" />
+                    </div>
+                    {/* Compact Close Button */}
+                    <button
+                      onClick={() => setIsMenuOpen(false)}
+                      className="text-[#FAF7F2] p-2 hover:bg-white/5 hover:text-[#BA7517] rounded-xl transition-all duration-300 flex items-center justify-center border border-white/5 hover:border-[#BA7517]/30"
+                      aria-label="Close menu"
+                    >
+                      <X size={20} />
+                    </button>
+                  </div>
 
-                <div className="md:col-span-1 flex flex-col justify-between h-full py-4 md:py-12">
-                  <div className="space-y-6 md:space-y-12">
-                    <div className="text-[10px] font-black text-[#BA7517] uppercase tracking-[1em] mb-4 md:mb-8 opacity-60">{t('nav.discover')}</div>
-                    <div className="space-y-4 md:space-y-8">
-                      {navLinks.map((link) => (
+                  {/* Main Navigation: Destinations */}
+                  <div className="space-y-4 my-auto">
+                    <div className="text-[10px] font-black text-[#BA7517] uppercase tracking-[1em] opacity-60 mb-4 block">
+                      {t('nav.destinations')}
+                    </div>
+                    <div className="space-y-4">
+                      {destinations.map((dest, i) => (
                         <Link
-                          key={link.path}
-                          to={link.path}
+                          key={dest.path}
+                          to={dest.path}
                           onClick={() => setIsMenuOpen(false)}
-                          className="block text-2xl md:text-3xl font-black uppercase text-white/70 hover:text-[#BA7517] transition-all duration-300"
+                          className="group block relative"
                         >
-                          {t(`nav.${link.name.toLowerCase().replace(' ', '_')}`)}
+                          <div className="flex items-baseline space-x-3">
+                            {/* Boutique Index Number */}
+                            <span className="text-[10px] font-black font-mono text-[#BA7517] opacity-55">
+                              0{i + 1}
+                            </span>
+                            <div className="text-2xl sm:text-3xl font-black text-[#FAF7F2] group-hover:text-[#BA7517] transition-all duration-300 tracking-tight leading-none">
+                              {dest.name}
+                            </div>
+                          </div>
+                          <div className="text-[10px] text-[#FAF7F2]/40 mt-1 uppercase tracking-[0.25em] font-bold group-hover:text-[#FAF7F2]/70 transition-colors pl-6">
+                            {dest.desc}
+                          </div>
                         </Link>
                       ))}
-                      <Link
-                        to="/partners"
+                    </div>
+                  </div>
+
+                  {/* Split Elegant Line Divider with Mini Zellij Star */}
+                  <div className="relative my-6 py-2 flex items-center justify-center">
+                    <div className="absolute left-0 right-0 h-px bg-white/10" />
+                    <div className="relative bg-[#26215C] px-3 z-10 text-[9px] text-[#BA7517]/40 uppercase tracking-[0.5em] font-black flex items-center space-x-2">
+                      <span>•</span>
+                      <span className="animate-[spin_20s_linear_infinite]">✦</span>
+                      <span>•</span>
+                    </div>
+                  </div>
+
+                  {/* Secondary Links & Footer */}
+                  <div className="space-y-6">
+                    <div>
+                      <div className="text-[10px] font-black text-[#BA7517] uppercase tracking-[1em] opacity-60 mb-3 block">
+                        {t('nav.discover')}
+                      </div>
+                      <div className="space-y-2.5">
+                        {navLinks.map((link) => (
+                          <Link
+                            key={link.path}
+                            to={link.path}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="block text-lg font-black uppercase text-white/70 hover:text-[#BA7517] transition-all duration-200"
+                          >
+                            {t(`nav.${link.name.toLowerCase().replace(' ', '_')}`)}
+                          </Link>
+                        ))}
+                        <Link
+                          to="/partners"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block text-lg font-black uppercase text-white/70 hover:text-[#BA7517] transition-all duration-200"
+                        >
+                          {t('nav.portal')}
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="pt-6 border-t border-white/5 flex justify-between items-center">
+                      <div>
+                        <div className="text-[8px] text-[#FAF7F2]/40 uppercase tracking-[0.4em] font-black mb-1.5">
+                          {t('nav.socials')}
+                        </div>
+                        <div className="flex space-x-4 text-[10px] font-bold uppercase tracking-widest text-[#FAF7F2]/60">
+                          <span className="hover:text-[#BA7517] cursor-pointer transition-colors">IG</span>
+                          <span className="hover:text-[#BA7517] cursor-pointer transition-colors">FB</span>
+                          <span className="hover:text-[#BA7517] cursor-pointer transition-colors">TA</span>
+                        </div>
+                      </div>
+                      <Link 
+                        to="/book"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-2xl md:text-3xl font-black uppercase text-white/70 hover:text-[#BA7517] transition-all duration-300"
+                        className="bg-[#BA7517] text-white text-[9px] font-black uppercase tracking-widest px-4 py-2.5 rounded-lg hover:bg-[#EF9F27] transition-all border border-white/10 shadow-md shadow-[#BA7517]/10"
                       >
-                        {t('nav.portal')}
+                        {t('nav.book')}
                       </Link>
                     </div>
                   </div>
 
-                  <div className="mt-12 pt-12 md:mt-0 md:pt-0 border-t md:border-t-0 border-white/10">
-                    <div className="text-[8px] md:text-[10px] text-[#FAF7F2]/40 uppercase tracking-[0.4em] font-black mb-6">{t('nav.socials')}</div>
-                    <div className="flex space-x-6 text-[10px] font-bold uppercase tracking-widest text-[#FAF7F2]/60">
-                      <span className="hover:text-[#BA7517] cursor-pointer transition-colors">IG</span>
-                      <span className="hover:text-[#BA7517] cursor-pointer transition-colors">FB</span>
-                      <span className="hover:text-[#BA7517] cursor-pointer transition-colors">TA</span>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </nav>
