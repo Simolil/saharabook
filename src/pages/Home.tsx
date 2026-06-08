@@ -58,7 +58,7 @@ export default function Home() {
         {/* Background Slideshow */}
         <div className="absolute inset-0 z-0">
           <Slideshow className="w-full h-full" />
-          <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-[#26215C] via-transparent to-black/20" />
+          <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-[#0B132B] via-transparent to-black/20" />
         </div>
 
         {/* Hero Content */}
@@ -113,7 +113,7 @@ export default function Home() {
       </section>
 
       {/* Intro Hook & Search Section */}
-      <section className="bg-white pt-16 pb-16 md:pt-20 md:pb-24 border-b border-[#BA7517]/10 relative overflow-hidden">
+      <section className="bg-[#FAF7F2] pt-16 pb-16 md:pt-20 md:pb-24 border-b border-[#BA7517]/10 relative overflow-hidden">
         {/* Search Bar - Positioned directly in the white page after the slideshow */}
         <div className="max-w-7xl mx-auto px-4 mb-16 md:mb-20 relative z-20">
           <motion.div
@@ -129,7 +129,7 @@ export default function Home() {
           <StarZellij />
         </div>
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <p className="text-[#26215C] text-xl md:text-3xl font-bold leading-tight tracking-tight">
+          <p className="text-[#0B132B] text-xl md:text-3xl font-bold leading-tight tracking-tight">
             {t('home.trust_hook').split('No scams')[0]} <span className="text-[#BA7517] bg-[#BA7517]/10 px-3 py-1 rounded-full italic font-medium inline-block mt-2 md:mt-0">No scams{t('home.trust_hook').split('No scams')[1]}</span>
           </p>
         </div>
@@ -140,8 +140,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 space-y-4 md:space-y-0">
             <div>
-              <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#26215C] mb-4">{t('home.find_your_camp')}</h2>
-              <p className="text-[#26215C]/60 max-w-md">{t('home.compare_desc')}</p>
+              <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#0B132B] mb-4">{t('home.find_your_camp')}</h2>
+              <p className="text-[#0B132B]/60 max-w-md">{t('home.compare_desc')}</p>
             </div>
             <Link to="/compare" className="group flex items-center space-x-2 text-[#BA7517] font-bold text-sm">
               <span>{t('home.view_all')}</span>
@@ -158,7 +158,7 @@ export default function Home() {
             ].map((dest) => (
               <Link key={dest.id} to={`/destinations/${dest.id}`} className="relative h-96 group rounded-3xl overflow-hidden shadow-xl">
                 <img src={dest.img} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={dest.name} />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#26215C]/90 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B]/90 via-transparent to-transparent" />
                 <div className="absolute bottom-8 left-8">
                    <p className="text-[#BA7517] text-[10px] font-bold uppercase tracking-widest mb-1">{dest.sub}</p>
                    <h3 className="text-3xl font-serif font-semibold text-white">{dest.name}</h3>
@@ -170,11 +170,11 @@ export default function Home() {
       </section>
 
       {/* Featured Camps */}
-      <section className="py-24 bg-white border-y border-[#BA7517]/5">
+      <section className="py-24 bg-[#FAF7F2] border-y border-[#BA7517]/5">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center space-x-4 mb-12">
             <ShieldCheck className="text-[#BA7517]" size={32} />
-            <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#26215C]">{t('home.top_rated')}</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#0B132B]">{t('home.top_rated')}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -186,7 +186,7 @@ export default function Home() {
       </section>
 
       {/* Trust Banner */}
-      <section className="py-24 bg-[#26215C] text-white">
+      <section className="py-24 bg-[#0B132B] text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className="mb-12 flex justify-center">
             <div className="w-20 h-20 bg-[#BA7517]/10 rounded-full flex items-center justify-center border border-[#BA7517]/20">
@@ -202,7 +202,7 @@ export default function Home() {
           <p className="text-white/60 text-lg mb-12 leading-relaxed">
             {t('home.scam_desc')}
           </p>
-          <Link to="/scam-guide" className="inline-flex items-center space-x-3 bg-white text-[#26215C] px-8 py-4 rounded-lg md:rounded-xl font-bold hover:bg-[#BA7517] hover:text-white transition-all transform hover:-translate-y-1">
+          <Link to="/scam-guide" className="inline-flex items-center space-x-3 bg-white text-[#0B132B] px-8 py-4 rounded-lg md:rounded-xl font-bold hover:bg-[#BA7517] hover:text-white transition-all transform hover:-translate-y-1">
              <span>{t('home.scam_action')}</span>
              <ArrowRight size={20} />
           </Link>

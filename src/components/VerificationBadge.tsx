@@ -39,9 +39,9 @@ export default function VerificationBadge({ tier }: { tier: VerificationTier }) 
       </div>
       
       {/* Tooltip */}
-      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#26215C] text-white text-[10px] rounded shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#0B132B] text-white text-[10px] rounded shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
         {config.tooltip}
-        <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#26215C]" />
+        <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#0B132B]" />
       </div>
     </div>
   );

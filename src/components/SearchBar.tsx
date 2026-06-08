@@ -9,10 +9,10 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
   return (
     <div className={cn(
       "w-full max-w-7xl mx-auto transition-all duration-300",
-      isSticky ? "p-1 bg-[#26215C] rounded-xl md:rounded-2xl border border-[#BA7517]/40 shadow-2xl" : ""
+      isSticky ? "p-1 bg-[#0B132B] rounded-xl md:rounded-2xl border border-[#BA7517]/40 shadow-2xl" : ""
     )}>
       <div className={cn(
-        "bg-[#26215C] rounded-xl md:rounded-2xl shadow-2xl p-2 flex flex-col md:flex-row items-center border border-white/10 transition-colors duration-300",
+        "bg-[#0B132B] rounded-xl md:rounded-2xl shadow-2xl p-2 flex flex-col md:flex-row items-center border border-white/10 transition-colors duration-300",
         isSticky ? "border-transparent" : ""
       )}>
         {/* Destination */}
@@ -21,10 +21,10 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
           <div className="flex flex-col flex-1">
             <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-black text-[#BA7517]">{t('search.destination')}</span>
             <select className="bg-transparent text-white text-xs md:text-sm font-semibold focus:outline-none appearance-none cursor-pointer">
-              <option value="merzouga" className="bg-[#26215C]">{t('search.merzouga')}</option>
-              <option value="zagora" className="bg-[#26215C]">{t('search.zagora')}</option>
-              <option value="agafay" className="bg-[#26215C]">{t('search.agafay')}</option>
-              <option value="foumzguid" className="bg-[#26215C]">{t('search.foumzguid')}</option>
+              <option value="merzouga" className="bg-[#0B132B]">{t('search.merzouga')}</option>
+              <option value="zagora" className="bg-[#0B132B]">{t('search.zagora')}</option>
+              <option value="agafay" className="bg-[#0B132B]">{t('search.agafay')}</option>
+              <option value="foumzguid" className="bg-[#0B132B]">{t('search.foumzguid')}</option>
             </select>
           </div>
         </div>

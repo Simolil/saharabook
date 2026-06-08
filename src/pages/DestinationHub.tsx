@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ShieldCheck, Map as MapIcon, Filter, ArrowDown } from 'lucide-react';
+import { ShieldCheck, Map as MapIcon, Filter } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { cn } from '@/src/lib/utils';
 import SearchBar from '@/src/components/SearchBar';
@@ -89,7 +89,7 @@ export default function DestinationHub() {
       </Helmet>
       
       <FAQSchema faqs={data.faqs} />
-
+      
       {/* Header Section */}
       <section className="h-[60vh] relative flex items-center justify-center overflow-hidden">
         <img 
@@ -128,10 +128,10 @@ export default function DestinationHub() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Sidebar Filters */}
           <aside className="hidden lg:block space-y-8">
-            <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+            <div className="bg-[#FAF7F2] p-8 rounded-3xl border border-[#BA7517]/15 shadow-sm">
                <div className="flex items-center space-x-2 mb-6">
                   <Filter size={16} className="text-[#BA7517]" />
-                  <h3 className="text-sm font-bold uppercase tracking-widest text-[#26215C]">{t('hub.filters')}</h3>
+                  <h3 className="text-sm font-bold uppercase tracking-widest text-[#0B132B]">{t('hub.filters')}</h3>
                </div>
                
                <div className="space-y-6">
@@ -154,7 +154,7 @@ export default function DestinationHub() {
                </div>
             </div>
 
-            <div className="bg-[#26215C] p-8 rounded-3xl text-white">
+            <div className="bg-[#0B132B] p-8 rounded-3xl text-white">
                <h4 className="text-xl font-serif font-semibold tracking-wide mb-4">{t('hub.trust_title')}</h4>
                <p className="text-xs text-white/70 leading-relaxed mb-6">
                  {t('hub.trust_desc')}
@@ -168,8 +168,8 @@ export default function DestinationHub() {
           {/* Main Grid */}
           <div className="lg:col-span-3">
              <div className="flex justify-between items-center mb-10">
-                <p className="text-sm text-[#26215C]/60">{t('hub.showing').replace('{count}', filteredCamps.length.toString())}</p>
-                <button className="flex items-center space-x-2 text-sm font-bold text-[#26215C] hover:text-[#BA7517]">
+                <p className="text-sm text-[#0B132B]/60">{t('hub.showing').replace('{count}', filteredCamps.length.toString())}</p>
+                <button className="flex items-center space-x-2 text-sm font-bold text-[#0B132B] hover:text-[#BA7517]">
                    <MapIcon size={16} />
                    <span>{t('hub.map')}</span>
                 </button>
@@ -177,19 +177,19 @@ export default function DestinationHub() {
 
              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {filteredCamps.length > 0 ? (
-                  filteredCamps.map(camp => (
-                    <CampCard key={camp.id} camp={camp} />
-                  ))
+                   filteredCamps.map(camp => (
+                     <CampCard key={camp.id} camp={camp} />
+                   ))
                 ) : (
-                  <div className="col-span-full py-20 text-center">
-                    <p className="text-gray-400">{t('hub.none')}</p>
-                  </div>
+                   <div className="col-span-full py-20 text-center">
+                     <p className="text-gray-400">{t('hub.none')}</p>
+                   </div>
                 )}
              </div>
 
               {/* Bespoke Programs / Tours Section */}
               {matchingTour && (
-                <div className="mt-16 bg-[#26215C] p-8 md:p-12 rounded-[40px] border border-[#BA7517]/30 shadow-2xl relative overflow-hidden text-left">
+                <div className="mt-16 bg-[#0B132B] p-8 md:p-12 rounded-[40px] border border-[#BA7517]/30 shadow-2xl relative overflow-hidden text-left">
                   {/* Background graphic */}
                   <div className="absolute top-0 right-0 w-64 h-64 opacity-[0.03] pointer-events-none translate-x-12 -translate-y-12">
                      <svg viewBox="0 0 100 100" className="w-full h-full fill-[#BA7517]">
@@ -227,8 +227,8 @@ export default function DestinationHub() {
 
              {/* Editorial Content */}
              <div className="mt-24 pt-24 border-t border-[#BA7517]/10">
-                <h2 className="text-4xl font-serif font-bold text-[#26215C] tracking-tight mb-8">{t('hub.planning')} in {data.name}</h2>
-                <div className="prose prose-stone max-w-none text-[#26215C]/80 leading-relaxed">
+                <h2 className="text-4xl font-serif font-bold text-[#0B132B] tracking-tight mb-8">{t('hub.planning')} in {data.name}</h2>
+                <div className="prose prose-stone max-w-none text-[#0B132B]/80 leading-relaxed">
                    <p className="mb-6">{data.description}</p>
                    <p>Booking with Dunecamps ensures you direct access to camp operators via WhatsApp once confirmed, guaranteed private bathrooms (for Elite/Verified tiers), and secure digital payments. We handle the complexity of the Saharan logistics so you can focus on the stars.</p>
                 </div>

@@ -39,7 +39,7 @@ export default function ScamGuide() {
 
       <FAQSchema faqs={faqs} />
 
-      <section className="py-24 bg-[#26215C] text-white">
+      <section className="py-24 bg-[#0B132B] text-white">
          <div className="max-w-4xl mx-auto px-4 text-center">
             <ShieldAlert size={64} className="text-[#BA7517] mx-auto mb-8" />
             <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-8 leading-tight">
@@ -55,13 +55,13 @@ export default function ScamGuide() {
       <section className="py-24 max-w-7xl mx-auto px-4">
          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {scams.map((scam, i) => (
-              <div key={i} className="bg-white p-10 rounded-3xl border border-gray-100 shadow-sm flex flex-col h-full">
+              <div key={i} className="bg-[#FAF7F2] p-10 rounded-3xl border border-[#BA7517]/15 shadow-sm flex flex-col h-full">
                  <div className="flex items-center space-x-2 text-rose-500 mb-6 uppercase tracking-widest text-[10px] font-bold">
                     <XCircle size={14} />
                     <span>{t('scam.the_scam')}</span>
                  </div>
-                 <h3 className="text-xl font-bold text-[#26215C] mb-4">{scam.title}</h3>
-                 <p className="text-[#26215C]/60 text-sm mb-8 flex-1 leading-relaxed">{scam.description}</p>
+                 <h3 className="text-xl font-bold text-[#0B132B] mb-4">{scam.title}</h3>
+                 <p className="text-[#0B132B]/60 text-sm mb-8 flex-1 leading-relaxed">{scam.description}</p>
                  <div className="bg-green-50 p-6 rounded-2xl border border-green-100">
                     <div className="flex items-center space-x-2 text-green-700 mb-2 uppercase tracking-widest text-[10px] font-bold">
                        <ShieldCheck size={14} />
@@ -73,11 +73,11 @@ export default function ScamGuide() {
             ))}
          </div>
 
-         <div className="mt-24 bg-white rounded-[40px] p-12 md:p-20 shadow-2xl relative overflow-hidden border border-gray-100">
+         <div className="mt-24 bg-[#FAF7F2] rounded-[40px] p-12 md:p-20 shadow-2xl relative overflow-hidden border border-[#BA7517]/25">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#BA7517]/5 rounded-full -translate-y-1/2 translate-x-1/2" />
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                <div>
-                  <h2 className="text-4xl font-bold tracking-tighter text-[#26215C] mb-8 leading-tight">{t('scam.promise_title').split('Promise')[0]} <span className="text-[#BA7517]">Promise.</span></h2>
+                  <h2 className="text-4xl font-bold tracking-tighter text-[#0B132B] mb-8 leading-tight">{t('scam.promise_title').split('Promise')[0]} <span className="text-[#BA7517]">Promise.</span></h2>
                   <ul className="space-y-6">
                      {[
                        "Physical onsite verification of every camp every 6 months",
@@ -87,15 +87,15 @@ export default function ScamGuide() {
                      ].map((item, i) => (
                        <li key={i} className="flex items-start space-x-4">
                           <CheckCircle2 size={24} className="text-[#BA7517] mt-1" />
-                          <span className="text-[#26215C] font-semibold">{item}</span>
+                          <span className="text-[#0B132B] font-semibold">{item}</span>
                        </li>
                      ))}
                   </ul>
                </div>
                <div className="bg-[#FAF7F2] p-8 rounded-3xl border border-[#BA7517]/10">
-                  <h4 className="font-bold text-[#26215C] mb-4">{t('scam.ready')}</h4>
-                  <p className="text-sm text-[#26215C]/60 mb-8">{t('home.scam_desc').split('. ')[1]}</p>
-                  <Link to="/compare" className="w-full bg-[#26215C] text-white py-4 rounded-lg md:rounded-xl font-bold flex items-center justify-center space-x-2">
+                  <h4 className="font-bold text-[#0B132B] mb-4">{t('scam.ready')}</h4>
+                  <p className="text-sm text-[#0B132B]/60 mb-8">{t('home.scam_desc').split('. ')[1]}</p>
+                  <Link to="/compare" className="w-full bg-[#0B132B] text-white py-4 rounded-lg md:rounded-xl font-bold flex items-center justify-center space-x-2">
                      <span>{t('scam.explore_action')}</span>
                      <ArrowRight size={18} />
                   </Link>

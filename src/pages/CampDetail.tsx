@@ -42,7 +42,7 @@ export default function CampDetail() {
 
       {/* Hero Gallery */}
       <section className="relative px-4 pt-12 pb-8 max-w-7xl mx-auto">
-        <Link to="/" className="inline-flex items-center space-x-2 text-xs font-bold text-[#26215C]/60 hover:text-[#BA7517] mb-8 transition-colors">
+        <Link to="/" className="inline-flex items-center space-x-2 text-xs font-bold text-[#0B132B]/60 hover:text-[#BA7517] mb-8 transition-colors">
           <ArrowLeft size={14} />
           <span>{t('detail.back')}</span>
         </Link>
@@ -77,14 +77,14 @@ export default function CampDetail() {
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 space-y-4 md:space-y-0">
                <div>
                   <div className="flex items-center space-x-3 mb-2">
-                    <VerificationBadge tier={camp.verification_tier} />
-                    <div className="flex items-center space-x-1 text-sm font-bold">
-                       <Star size={16} className="text-amber-400 fill-amber-400" />
-                       <span>4.9</span>
-                       <span className="text-gray-400 opacity-60 font-medium">({t('detail.reviews').replace('{count}', '42')})</span>
-                    </div>
+                     <VerificationBadge tier={camp.verification_tier} />
+                     <div className="flex items-center space-x-1 text-sm font-bold">
+                        <Star size={16} className="text-amber-400 fill-amber-400" />
+                        <span>4.9</span>
+                        <span className="text-gray-400 opacity-60 font-medium">({t('detail.reviews').replace('{count}', '42')})</span>
+                     </div>
                   </div>
-                  <h1 className="text-4xl md:text-5xl font-serif font-semibold text-[#26215C] mb-2">{camp.name}</h1>
+                  <h1 className="text-4xl md:text-5xl font-serif font-semibold text-[#0B132B] mb-2">{camp.name}</h1>
                   <div className="flex items-center space-x-2 text-[#BA7517] font-bold text-sm">
                      <MapPin size={16} />
                      <span>{t(`search.${camp.destination.split(' ')[0].toLowerCase()}`)} Desert, Morocco</span>
@@ -92,7 +92,7 @@ export default function CampDetail() {
                </div>
                <div className="flex items-center space-x-2">
                   <button className="p-3 bg-white border border-gray-100 rounded-full hover:bg-gray-50 transition-colors shadow-sm">
-                     <Share2 size={20} className="text-[#26215C]" />
+                     <Share2 size={20} className="text-[#0B132B]" />
                   </button>
                   <button className="p-3 bg-white border border-gray-100 rounded-full hover:bg-gray-50 transition-colors shadow-sm">
                      <Heart size={20} className="text-rose-500" />
@@ -109,8 +109,8 @@ export default function CampDetail() {
                ))}
             </div>
 
-            <div className="prose prose-stone max-w-none text-[#26215C]/80 leading-relaxed mb-16">
-               <h3 className="text-xl font-bold text-[#26215C] mb-4">{t('detail.experience')}</h3>
+            <div className="prose prose-stone max-w-none text-[#0B132B]/80 leading-relaxed mb-16">
+               <h3 className="text-xl font-bold text-[#0B132B] mb-4">{t('detail.experience')}</h3>
                <p className="mb-6">{camp.description_en}</p>
                <p>Every tent in {camp.name} is designed to offer maximum privacy while staying connected to the raw beauty of the Sahara. Our staff is recruited from the local tribes to ensure you experience genuine Berber hospitality. Dinner is included, featuring locally-sourced ingredients and traditional slow-cooked tagines.</p>
             </div>
@@ -119,7 +119,7 @@ export default function CampDetail() {
             <div className="bg-[#BA7517]/5 rounded-3xl p-8 border border-[#BA7517]/10 mb-16">
                <div className="flex items-center space-x-4 mb-6">
                   <ShieldCheck size={32} className="text-[#BA7517]" />
-                  <h4 className="text-lg font-bold text-[#26215C]">{t('detail.why_verified').replace('{tier}', camp.verification_tier)}</h4>
+                  <h4 className="text-lg font-bold text-[#0B132B]">{t('detail.why_verified').replace('{tier}', camp.verification_tier)}</h4>
                </div>
                <ul className="space-y-3">
                   {[
@@ -128,7 +128,7 @@ export default function CampDetail() {
                     "Direct operator WhatsApp connection post-booking",
                     "Private bathrooms physically tested for water pressure"
                   ].map((check) => (
-                    <li key={check} className="flex items-start space-x-2 text-sm text-[#26215C]/80">
+                    <li key={check} className="flex items-start space-x-2 text-sm text-[#0B132B]/80">
                        <Check size={16} className="text-green-600 mt-1 shrink-0" />
                        <span>{check}</span>
                     </li>
@@ -139,10 +139,10 @@ export default function CampDetail() {
 
           {/* Booking Sidebar */}
           <aside className="lg:col-span-1">
-             <div className="sticky top-28 bg-white rounded-3xl p-8 border border-[#BA7517]/10 shadow-2xl">
+             <div className="sticky top-28 bg-[#FAF7F2] rounded-3xl p-8 border border-[#BA7517]/15 shadow-2xl">
                 <div className="flex items-baseline justify-between mb-8">
                    <div className="flex items-baseline space-x-1">
-                      <span className="text-3xl font-bold text-[#26215C]">{formatCurrency(camp.price_per_night)}</span>
+                      <span className="text-3xl font-bold text-[#0B132B]">{formatCurrency(camp.price_per_night)}</span>
                       <span className="text-xs text-gray-400 font-medium">{t('camp.night')}</span>
                    </div>
                    <div className="text-[10px] bg-green-50 text-green-700 px-2 py-1 rounded-full font-bold uppercase tracking-widest">{t('detail.available')}</div>
@@ -151,13 +151,13 @@ export default function CampDetail() {
                 <div className="space-y-4 mb-8">
                    <div className="flex flex-col space-y-1">
                       <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">{t('detail.dates')}</label>
-                      <button className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#26215C]">
+                      <button className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#0B132B]">
                          <span>May 14 - May 16</span>
                       </button>
                    </div>
                    <div className="flex flex-col space-y-1">
                       <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">{t('detail.tent_type')}</label>
-                      <select className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#26215C] focus:outline-none">
+                      <select className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#0B132B] focus:outline-none">
                          <option>Royal Luxury Suite (+€0)</option>
                          <option>Honeymoon Tent (+€40)</option>
                          <option>Family Tent (+€20)</option>
@@ -165,7 +165,7 @@ export default function CampDetail() {
                    </div>
                    <div className="flex flex-col space-y-1">
                       <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">{t('search.guests')}</label>
-                      <input type="number" defaultValue="2" min="1" max={camp.max_guests} className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#26215C]" />
+                      <input type="number" defaultValue="2" min="1" max={camp.max_guests} className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm font-semibold text-[#0B132B]" />
                    </div>
                 </div>
 
@@ -179,8 +179,8 @@ export default function CampDetail() {
                       <span className="font-semibold">€0</span>
                    </div>
                    <div className="flex justify-between items-center pt-3 border-t border-gray-100">
-                      <span className="text-lg font-bold text-[#26215C]">{t('detail.total')}</span>
-                      <span className="text-lg font-bold text-[#26215C]">€440</span>
+                      <span className="text-lg font-bold text-[#0B132B]">{t('detail.total')}</span>
+                      <span className="text-lg font-bold text-[#0B132B]">€440</span>
                    </div>
                 </div>
 

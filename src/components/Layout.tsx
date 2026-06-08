@@ -38,7 +38,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   ];
 
   const Logo = ({ isHeader = false }: { isHeader?: boolean }) => {
-    const textColor = isHeader ? "text-white" : "text-[#26215C]";
+    const textColor = isHeader ? "text-white" : "text-[#0B132B]";
     const accentColor = "#BA7517";
 
     return (
@@ -114,9 +114,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </motion.div>
 
               <div className="relative group flex items-center">
-                <span className="relative z-10">
+                <span className="relative z-10 font-bold">
                   <span className={isHeader ? "text-white" : "text-[#BA7517]"}>Dune</span>
-                  <span className={isHeader ? "text-white" : "text-[#26215C]"}>camps</span>
+                  <span className={isHeader ? "text-white" : "text-[#0B132B]"}>camps</span>
                 </span>
                 
                 {/* Sand Dust Particles */}
@@ -155,7 +155,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <div 
         className="w-full h-full"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='40' viewBox='0 0 60 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M30 20l5-12h10l-8 7 3 12-10-7-10 7 3-12-8-7h10z' fill='%23BA7517'/%3E%3Cpath d='M0 20l3-8h7l-6 5 2 9-6-5-6 5 2-9-6-5h7z' fill='%2326215C'/%3E%3Cpath d='M60 20l3-8h7l-6 5 2 9-6-5-6 5 2-9-6-5h7z' fill='%2326215C'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%2300BCD4' opacity='0.5'/%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='40' viewBox='0 0 60 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M30 20l5-12h10l-8 7 3 12-10-7-10 7 3-12-8-7h10z' fill='%23BA7517'/%3E%3Cpath d='M0 20l3-8h7l-6 5 2 9-6-5-6 5 2-9-6-5h7z' fill='%230B132B'/%3E%3Cpath d='M60 20l3-8h7l-6 5 2 9-6-5-6 5 2-9-6-5h7z' fill='%230B132B'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%2300BCD4' opacity='0.5'/%3E%3C/g%3E%3C/svg%3E")`,
           backgroundSize: '40px 40px',
           backgroundRepeat: 'repeat-x'
         }}
@@ -169,14 +169,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const useLightHeader = isHeroPage || isDarkSectionPage;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] font-sans text-[#26215C] relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#FAF7F2] font-sans text-[#0B132B] relative overflow-x-hidden">
       {/* Moroccan Zellij Background - Richer layered pattern */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Repeating tile background */}
         <div 
           className="absolute inset-0 opacity-[0.08]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cpath d='M60 0l6 18 18-6-6 18 18 6-18 6 6 18-18-6-6 18-6-18-18 6 6-18-18-6 18-6-6-18 18 6z' fill='%23BA7517'/%3E%3Cpath d='M0 0l3 9 9-3-3 9 9 3-9 3 3 9-9-3-3 9-3-9-9 3 3-9-9-3 9-3-3-9 9 3z' fill='%2326215C'/%3E%3Cpath d='M120 0l3 9 9-3-3 9 9 3-9 3 3 9-9-3-3 9-3-9-9 3 3-9-9-3 9-3-3-9 9 3z' fill='%2326215C'/%3E%3Cpath d='M0 120l3 9 9-3-3 9 9 3-9 3 3 9-9-3-3 9-3-9-9 3 3-9-9-3 9-3-3-9 9 3z' fill='%2326215C'/%3E%3Cpath d='M120 120l3 9 9-3-3 9 9 3-9 3 3 9-9-3-3 9-3-9-9 3 3-9-9-3 9-3-3-9 9 3z' fill='%2326215C'/%3E%3Cpath d='M30 30l4 12 12-4-4 12 12 4-12 4 4 12-12-4-4 12-4-12-12 4 4-12-12-4 12-4-4-12 12 4z' fill='%23BA7517' opacity='0.3'/%3E%3Cpath d='M90 30l4 12 12-4-4 12 12 4-12 4 4 12-12-4-4 12-4-12-12 4 4-12-12-4 12-4-4-12 12 4z' fill='%2326215C' opacity='0.3'/%3E%3Cpath d='M30 90l4 12 12-4-4 12 12 4-12 4 4 12-12-4-4 12-4-12-12 4 4-12-12-4 12-4-4-12 12 4z' fill='%2326215C' opacity='0.3'/%3E%3Cpath d='M90 90l4 12 12-4-4 12 12 4-12 4 4 12-12-4-4 12-4-12-12 4 4-12-12-4 12-4-4-12 12 4z' fill='%23BA7517' opacity='0.3'/%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cpath d='M60 0l6 18 18-6-6 18 18 6-18 6 6 18-18-6-6 18-6-18-18 6 6-18-18-6 18-6-6-18 18 6z' fill='%23BA7517'/%3E%3Cpath d='M0 0l3 9 9-3-3 9 9 3-9 3 3 9-9-3-3 9-3-9-9 3 3-9-9-3 9-3-3-9 9 3z' fill='%230B132B'/%3E%3Cpath d='M120 0l3 9 9-3-3 9 9 3-9 3 3 9-9-3-3 9-3-9-9 3 3-9-9-3 9-3-3-9 9 3z' fill='%230B132B'/%3E%3Cpath d='M0 120l3 9 9-3-3 9 9 3-9 3 3 9-9-3-3 9-3-9-9 3 3-9-9-3 9-3-3-9 9 3z' fill='%230B132B'/%3E%3Cpath d='M120 120l3 9 9-3-3 9 9 3-9 3 3 9-9-3-3 9-3-9-9 3 3-9-9-3 9-3-3-9 9 3z' fill='%230B132B'/%3E%3Cpath d='M30 30l4 12 12-4-4 12 12 4-12 4 4 12-12-4-4 12-4-12-12 4 4-12-12-4 12-4-4-12 12 4z' fill='%23BA7517' opacity='0.3'/%3E%3Cpath d='M90 30l4 12 12-4-4 12 12 4-12 4 4 12-12-4-4 12-4-12-12 4 4-12-12-4 12-4-4-12 12 4z' fill='%230B132B' opacity='0.3'/%3E%3Cpath d='M30 90l4 12 12-4-4 12 12 4-12 4 4 12-12-4-4 12-4-12-12 4 4-12-12-4 12-4-4-12 12 4z' fill='%230B132B' opacity='0.3'/%3E%3Cpath d='M90 90l4 12 12-4-4 12 12 4-12 4 4 12-12-4-4 12-4-12-12 4 4-12-12-4 12-4-4-12 12 4z' fill='%23BA7517' opacity='0.3'/%3E%3C/g%3E%3C/svg%3E")`,
             backgroundSize: '120px 120px'
           }}
         />
@@ -186,13 +186,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <StarZellij />
         </div>
         <div className="absolute top-[40%] -right-32 w-96 h-96 opacity-[0.08] -rotate-12 scale-125">
-          <StarZellij color1="#26215C" color2="#BA7517" />
+          <StarZellij color1="#0B132B" color2="#BA7517" />
         </div>
         <div className="absolute top-[70%] -left-40 w-120 h-120 opacity-[0.06] rotate-45 scale-150">
           <StarZellij />
         </div>
         <div className="absolute -bottom-20 right-[20%] w-72 h-72 opacity-[0.07] rotate-180">
-          <StarZellij color1="#26215C" color2="#BA7517" />
+          <StarZellij color1="#0B132B" color2="#BA7517" />
         </div>
       </div>
       <Helmet>
@@ -202,12 +202,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <link rel="alternate" href={currentUrl} hrefLang="ar-MA" />
       </Helmet>
       {/* Navigation */}
-      <nav className="absolute top-0 left-0 right-0 z-50 bg-transparent h-16 md:h-24">
+      <nav className={cn(
+        "absolute top-0 left-0 right-0 z-50 h-16 md:h-24 transition-all duration-300 flex items-center justify-center",
+        useLightHeader 
+          ? "bg-transparent text-white" 
+          : "fixed bg-transparent text-white h-20 md:h-24 py-2"
+      )}>
         {/* Header Zellij Patterns - Very subtle in the background */}
         <ZellijCorner className="absolute top-0 right-0 translate-x-12 -translate-y-12 opacity-5" />
         <ZellijCorner className="absolute bottom-0 left-0 -translate-x-16 translate-y-16 rotate-45 opacity-5" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full relative z-10">
+        <div className={cn(
+          "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full w-full relative z-10 transition-all duration-300",
+          !useLightHeader && "bg-[#0B132B]/95 backdrop-blur-md rounded-2xl md:rounded-3xl border border-[#BA7517]/25 shadow-2xl px-6 md:px-8"
+        )}>
           <div className="flex justify-between items-center h-full">
             {/* Left: Hamburger Menu & Language Switcher */}
             <div className="w-1/3 md:w-1/3 flex items-center">
@@ -216,31 +224,31 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   "flex items-center rounded-lg md:rounded-xl transition-all duration-300 border h-8 md:h-10",
                   useLightHeader 
                     ? "border-[#BA7517]/40 text-white" 
-                    : "border-[#BA7517]/30 text-[#26215C]"
+                    : "border-[#BA7517]/30 text-white"
                 )}>
                   <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     className={cn(
                       "h-full px-2 md:px-4 flex items-center justify-center transition-all duration-300 rounded-l-lg md:rounded-l-xl",
-                      useLightHeader ? "hover:bg-white/5" : "hover:bg-[#BA7517]/5"
+                      useLightHeader ? "hover:bg-white/5" : "hover:bg-white/5"
                     )}
                   >
                     {isMenuOpen ? <X size={16} /> : <Menu size={16} className="md:w-5 md:h-5 text-[#BA7517]" />}
-                    <span className="hidden md:inline ml-2 text-[10px] md:text-xs font-black uppercase tracking-widest">{t('nav.menu')}</span>
+                    <span className="hidden md:inline ml-2 text-[10px] md:text-xs font-black uppercase tracking-widest text-white">{t('nav.menu')}</span>
                   </button>
 
-                  <div className={cn("w-[1px] h-3 md:hidden", useLightHeader ? "bg-white/20" : "bg-[#BA7517]/20")} />
+                  <div className={cn("w-[1px] h-3 md:hidden", useLightHeader ? "bg-white/20" : "bg-white/20")} />
 
                   <div className="relative md:hidden h-full">
                     <button
                       onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
                       className={cn(
                         "h-full px-2.5 flex items-center justify-center transition-all duration-300 rounded-r-lg md:rounded-r-xl",
-                        useLightHeader ? "hover:bg-white/5" : "hover:bg-[#BA7517]/5"
+                        useLightHeader ? "hover:bg-white/5" : "hover:bg-white/5"
                       )}
                       title={t('nav.select_lang')}
                     >
-                      <span className="text-[10px] font-bold uppercase">{language}</span>
+                      <span className="text-[10px] font-bold uppercase text-white">{language}</span>
                     </button>
                   </div>
                 </div>
@@ -251,12 +259,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
                     className={cn(
                       "h-10 px-3.5 flex items-center justify-center transition-all rounded-xl border border-transparent hover:bg-white/10",
-                      useLightHeader ? "text-white" : "text-[#26215C]"
+                      useLightHeader ? "text-white" : "text-white"
                     )}
                     title={t('nav.select_lang')}
                   >
-                    <Globe size={16} className={cn("transition-transform duration-500", isLangDropdownOpen && "rotate-180")} />
-                    <span className="ml-1.5 text-xs font-bold uppercase tracking-wider">{language}</span>
+                    <Globe size={16} className={cn("text-[#BA7517] transition-transform duration-500", isLangDropdownOpen && "rotate-180")} />
+                    <span className="ml-1.5 text-xs font-bold uppercase tracking-wider text-white">{language}</span>
                   </button>
 
                   <AnimatePresence>
@@ -290,7 +298,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                                   "flex items-center justify-between w-full px-3 py-2.5 text-xs md:text-sm rounded-xl transition-all duration-300",
                                   language === lang.code 
                                     ? "bg-[#BA7517] text-white font-bold shadow-lg shadow-[#BA7517]/20" 
-                                    : "text-[#26215C] hover:bg-[#FAF7F2] hover:text-[#BA7517]"
+                                    : "text-[#0B132B] hover:bg-[#FAF7F2] hover:text-[#BA7517]"
                                 )}
                               >
                                 <div className="flex items-center space-x-3">
@@ -319,12 +327,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link 
                 to="/compare" 
                 className={cn(
-                  "hidden lg:flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] transition-opacity hover:opacity-70",
-                  useLightHeader ? "text-white" : "text-[#26215C]"
+                  "hidden lg:flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] transition-opacity hover:opacity-75 group",
+                  useLightHeader ? "text-white" : "text-white"
                 )}
               >
                 <Search size={14} className="text-[#BA7517]" />
-                <span>{t('nav.help')}</span>
+                <span className="text-white group-hover:text-[#BA7517] transition-colors">{t('nav.help')}</span>
               </Link>
               
               <Link 
@@ -333,13 +341,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   "transition-all duration-300 border h-8 md:h-10 px-4 md:px-5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest whitespace-nowrap flex items-center justify-center",
                   useLightHeader 
                     ? "border-[#BA7517]/40 text-white hover:bg-white/5" 
-                    : "border-[#BA7517]/30 text-[#BA7517] hover:bg-[#BA7517]/5"
+                    : "border-[#BA7517]/40 text-[#BA7517] hover:bg-white/5 bg-transparent"
                 )}
               >
                 <span className="flex flex-col md:flex-row items-center justify-center leading-[0.8] md:leading-normal">
-                  <span>{t('nav.book').split(' ')[0]}</span>
+                  <span className="text-white">{t('nav.book').split(' ')[0]}</span>
                   {t('nav.book').includes(' ') && (
-                    <span className="md:ml-1 mt-0.5 md:mt-0">{t('nav.book').split(' ').slice(1).join(' ')}</span>
+                    <span className="md:ml-1 mt-0.5 md:mt-0 text-white">{t('nav.book').split(' ').slice(1).join(' ')}</span>
                   )}
                 </span>
               </Link>
@@ -367,12 +375,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 28, stiffness: 220 }}
-                className="fixed right-0 top-0 bottom-0 h-full w-full sm:w-[460px] bg-[#26215C] border-l border-[#BA7517]/20 z-[70] shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-y-auto"
+                className="fixed right-0 top-0 bottom-0 h-full w-full sm:w-[460px] bg-[#0B132B] border-l border-[#BA7517]/20 z-[70] shadow-[0_0_60px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-y-auto"
               >
                 {/* Background luxury motifs */}
                 <div className="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
                   <StarZellij className="absolute -top-12 -left-12 w-64 h-64" />
-                  <StarZellij className="absolute bottom-8 -right-8 w-80 h-80" color1="#26215C" color2="#BA7517" />
+                  <StarZellij className="absolute bottom-8 -right-8 w-80 h-80" color1="#0B132B" color2="#BA7517" />
                 </div>
 
                 {/* Drawer Content */}
@@ -429,7 +437,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   {/* Split Elegant Line Divider with Mini Zellij Star */}
                   <div className="relative my-6 py-2 flex items-center justify-center">
                     <div className="absolute left-0 right-0 h-px bg-white/10" />
-                    <div className="relative bg-[#26215C] px-3 z-10 text-[9px] text-[#BA7517]/40 uppercase tracking-[0.5em] font-black flex items-center space-x-2">
+                    <div className="relative bg-[#0B132B] px-3 z-10 text-[9px] text-[#BA7517]/40 uppercase tracking-[0.5em] font-black flex items-center space-x-2">
                       <span>•</span>
                       <span className="animate-[spin_20s_linear_infinite]">✦</span>
                       <span>•</span>
@@ -500,32 +508,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white text-[#26215C] py-20 relative overflow-hidden border-t border-gray-100">
-        {/* Sahara Dunes at the Very Bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none overflow-hidden opacity-[0.3]">
-          <svg className="w-full h-full" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0 120L0 50C300 10 500 110 720 50C940 10 1140 110 1440 50L1440 120L0 120Z" fill="#BA7517" />
-          </svg>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none overflow-hidden opacity-[0.5]">
-          <svg className="w-full h-full" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0 80L0 35C240 65 480 20 720 40C960 60 1200 20 1440 35L1440 80L0 80Z" fill="#BA7517" />
-          </svg>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <footer className="bg-[#FAF9F5] text-[#0B132B] relative overflow-hidden border-t border-[#BA7517]/25">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="col-span-2">
               <div className="mb-6">
-                <Logo />
+                <Logo isHeader={false} />
               </div>
-              <p className="text-gray-600 max-w-md leading-relaxed">
+              <p className="text-[#0B132B]/70 max-w-md leading-relaxed text-sm">
                 {t('footer.desc')}
               </p>
             </div>
             <div>
               <h3 className="text-[#BA7517] font-semibold mb-6 uppercase tracking-widest text-xs">{t('footer.destinations')}</h3>
-              <ul className="space-y-4 text-sm text-gray-600">
+              <ul className="space-y-4 text-sm text-[#0B132B]/80">
                 <li><Link to="/destinations/merzouga" className="hover:text-[#BA7517] transition-colors">Merzouga (Erg Chebbi)</Link></li>
                 <li><Link to="/destinations/zagora" className="hover:text-[#BA7517] transition-colors">Zagora (Draa Valley)</Link></li>
                 <li><Link to="/destinations/agafay" className="hover:text-[#BA7517] transition-colors">Agafay (Stone Desert)</Link></li>
@@ -534,18 +530,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
             <div>
               <h3 className="text-[#BA7517] font-semibold mb-6 uppercase tracking-widest text-xs">{t('footer.trust')}</h3>
-              <ul className="space-y-4 text-sm text-gray-600">
+              <ul className="space-y-4 text-sm text-[#0B132B]/80">
                 <li><Link to="/scam-guide" className="hover:text-[#BA7517] transition-colors">{t('footer.scam_guide')}</Link></li>
                 <li><Link to="/compare" className="hover:text-[#BA7517] transition-colors">{t('footer.compare')}</Link></li>
                 <li><Link to="/partners" className="hover:text-[#BA7517] transition-colors">{t('footer.partners')}</Link></li>
               </ul>
             </div>
           </div>
-          <div className="mt-20 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 space-y-4 md:space-y-0">
+        </div>
+
+        {/* Small darker part at the bottom of the footer */}
+        <div className="bg-[#0B132B] border-t border-[#BA7517]/10 py-8 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-xs text-[#FAF7F2]/40 space-y-4 md:space-y-0">
             <p>© 2026 Dunecamps — {t('footer.built_for')}</p>
             <div className="flex space-x-6">
-              <Link to="/terms" className="hover:text-gray-900 transition-colors">Terms</Link>
-              <Link to="/privacy" className="hover:text-gray-900 transition-colors">Privacy</Link>
+              <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+              <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
             </div>
           </div>
         </div>

@@ -51,29 +51,29 @@ export default function TourDetail() {
                      <Clock className="text-[#BA7517]" size={20} />
                      <div>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Duration</p>
-                        <p className="text-sm font-bold text-[#26215C]">{tour.duration}</p>
+                        <p className="text-sm font-bold text-[#0B132B]">{tour.duration}</p>
                      </div>
                   </div>
                   <div className="flex items-center space-x-3">
                      <MapPin className="text-[#BA7517]" size={20} />
                      <div>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Starts From</p>
-                        <p className="text-sm font-bold text-[#26215C]">{tour.start_city}</p>
+                        <p className="text-sm font-bold text-[#0B132B]">{tour.start_city}</p>
                      </div>
                   </div>
                   <div className="flex items-center space-x-3">
                      <BadgeEuro className="text-[#BA7517]" size={20} />
                      <div>
                         <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Base Price</p>
-                        <p className="text-sm font-bold text-[#26215C]">From €{tour.price}</p>
+                        <p className="text-sm font-bold text-[#0B132B]">From €{tour.price}</p>
                      </div>
                   </div>
                </div>
 
                {/* Content */}
-               <div className="prose prose-stone max-w-none text-[#26215C]/80">
-                  <h2 className="text-2xl font-bold text-[#26215C] mb-6">Overview</h2>
-                  <div className="whitespace-pre-line leading-relaxed italic border-l-4 border-[#BA7517] pl-8 py-2 bg-white rounded-r-2xl shadow-sm mb-12">
+               <div className="prose prose-stone max-w-none text-[#0B132B]/80">
+                  <h2 className="text-2xl font-bold text-[#0B132B] mb-6">Overview</h2>
+                  <div className="whitespace-pre-line leading-relaxed italic border-l-4 border-[#BA7517] pl-8 py-2 bg-[#FAF7F2] rounded-r-2xl border-y border-r border-[#BA7517]/15 shadow-sm mb-12">
                      {tour.description}
                   </div>
                   <div className="leading-relaxed space-y-6">
@@ -84,8 +84,8 @@ export default function TourDetail() {
                </div>
 
                {/* Highlights */}
-               <div className="bg-white p-12 rounded-[40px] shadow-sm border border-gray-100">
-                  <h3 className="text-2xl font-bold text-[#26215C] mb-8">What is Included</h3>
+               <div className="bg-[#FAF7F2] p-12 rounded-[40px] shadow-sm border border-[#BA7517]/15">
+                  <h3 className="text-2xl font-bold text-[#0B132B] mb-8">What is Included</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                      {[
                        "Private 4x4 Transportation",
@@ -95,7 +95,7 @@ export default function TourDetail() {
                        "Sandboarding in the Dunes",
                        "Authentic Dinner & Music"
                      ].map(item => (
-                       <div key={item} className="flex items-center space-x-3 text-sm font-semibold text-[#26215C]/80">
+                       <div key={item} className="flex items-center space-x-3 text-sm font-semibold text-[#0B132B]/80">
                           <CheckCircle size={18} className="text-[#BA7517]" />
                           <span>{item}</span>
                        </div>
@@ -106,15 +106,15 @@ export default function TourDetail() {
 
             {/* Sidebar CTA */}
             <aside className="lg:col-span-1">
-               <div className="sticky top-28 bg-[#26215C] p-10 rounded-[40px] text-white shadow-2xl">
+               <div className="sticky top-28 bg-[#0B132B] p-10 rounded-[40px] text-white shadow-2xl">
                   <h4 className="text-2xl font-bold mb-6">Inquiry only</h4>
                   <p className="text-white/60 text-sm mb-8 leading-relaxed">
                      Our tours are custom-designed for each guest. Contact our Saharan concierge to check dates and customize your itinerary.
                   </p>
                   
                   <div className="space-y-4 mb-10">
-                    <input className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#BA7517]" placeholder="Your Email" />
-                    <textarea className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm h-32 focus:outline-none focus:border-[#BA7517]" placeholder="Questions / Preferred Dates" />
+                     <input className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#BA7517]" placeholder="Your Email" />
+                     <textarea className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm h-32 focus:outline-none focus:border-[#BA7517]" placeholder="Questions / Preferred Dates" />
                   </div>
 
                   <button className="w-full bg-[#BA7517] hover:bg-[#EF9F27] text-white py-4 rounded-xl font-bold flex items-center justify-center space-x-2 transition-all">

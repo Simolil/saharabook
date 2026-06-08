@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, PlusCircle, CheckCircle, BarChart3, MessageSquare, ShieldCheck, Mail } from 'lucide-react';
+import { LayoutDashboard, PlusCircle, CheckCircle, BarChart3, MessageSquare, ShieldCheck } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { cn } from '@/src/lib/utils';
 
@@ -16,7 +16,7 @@ export default function PartnerPortal() {
          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Sidebar nav */}
             <aside className="lg:col-span-1">
-               <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 space-y-2">
+               <div className="bg-[#FAF7F2] p-8 rounded-3xl shadow-sm border border-[#BA7517]/15 space-y-2">
                   {[
                     { id: 'onboarding', label: 'Onboarding', icon: PlusCircle },
                     { id: 'dashboard', label: 'My Dashboard', icon: LayoutDashboard },
@@ -28,7 +28,7 @@ export default function PartnerPortal() {
                       onClick={() => setActiveTab(tab.id)}
                       className={cn(
                         "w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold transition-all",
-                        activeTab === tab.id ? "bg-[#BA7517] text-white" : "text-[#26215C] hover:bg-gray-50"
+                        activeTab === tab.id ? "bg-[#BA7517] text-white" : "text-[#0B132B] hover:bg-gray-50"
                       )}
                     >
                       <tab.icon size={18} />
@@ -37,7 +37,7 @@ export default function PartnerPortal() {
                   ))}
                </div>
 
-               <div className="mt-8 bg-[#26215C] p-8 rounded-3xl text-white">
+               <div className="mt-8 bg-[#0B132B] p-8 rounded-3xl text-white">
                   <ShieldCheck size={32} className="text-[#BA7517] mb-4" />
                   <h4 className="font-bold text-sm mb-2">Elite Status Pursuit</h4>
                   <p className="text-[10px] text-white/60 leading-relaxed uppercase tracking-widest font-medium">Response Rate: 98%</p>
@@ -51,8 +51,8 @@ export default function PartnerPortal() {
             {/* Main content */}
             <div className="lg:col-span-3">
                {activeTab === 'onboarding' && (
-                 <div className="bg-white p-12 rounded-[40px] shadow-sm border border-gray-100 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <h2 className="text-3xl font-bold tracking-tighter text-[#26215C] mb-8">List your camp on <span className="text-[#BA7517]">Dunecamps</span></h2>
+                 <div className="bg-[#FAF7F2] p-12 rounded-[40px] shadow-sm border border-[#BA7517]/15 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <h2 className="text-3xl font-bold tracking-tighter text-[#0B132B] mb-8">List your camp on <span className="text-[#BA7517]">Dunecamps</span></h2>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
                        <div className="space-y-6">
@@ -86,7 +86,7 @@ export default function PartnerPortal() {
                     </div>
 
                     <div className="p-8 bg-[#FAF7F2] rounded-3xl border border-[#BA7517]/10 mb-12">
-                       <h4 className="font-bold text-[#26215C] mb-4">Onboarding Flow</h4>
+                       <h4 className="font-bold text-[#0B132B] mb-4">Onboarding Flow</h4>
                        <div className="space-y-4">
                           {[
                             "Step 1: Upload basic info & camp registration docs",
@@ -96,7 +96,7 @@ export default function PartnerPortal() {
                           ].map((step, i) => (
                             <div key={i} className="flex items-center space-x-3 text-sm">
                                <div className="w-5 h-5 bg-white border border-gray-200 rounded-full flex items-center justify-center text-[10px] font-bold">{i+1}</div>
-                               <span className="text-[#26215C]/80">{step}</span>
+                               <span className="text-[#0B132B]/80">{step}</span>
                             </div>
                           ))}
                        </div>
@@ -116,16 +116,16 @@ export default function PartnerPortal() {
                          { label: 'Upcoming Bookings', value: '18', icon: CheckCircle },
                          { label: 'Unread Reviews', value: '3', icon: MessageSquare }
                        ].map(stat => (
-                         <div key={stat.label} className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
+                         <div key={stat.label} className="bg-[#FAF7F2] p-8 rounded-3xl border border-[#BA7517]/15 shadow-sm">
                             <stat.icon size={24} className="text-[#BA7517] mb-4" />
                             <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-1">{stat.label}</p>
-                            <h4 className="text-2xl font-bold text-[#26215C]">{stat.value}</h4>
+                            <h4 className="text-2xl font-bold text-[#0B132B]">{stat.value}</h4>
                          </div>
                        ))}
                     </div>
 
-                    <div className="bg-white p-12 rounded-[40px] shadow-sm border border-gray-100">
-                       <h3 className="text-2xl font-bold text-[#26215C] mb-8">Recent Activity</h3>
+                    <div className="bg-[#FAF7F2] p-12 rounded-[40px] shadow-sm border border-[#BA7517]/15">
+                       <h3 className="text-2xl font-bold text-[#0B132B] mb-8">Recent Activity</h3>
                        <div className="space-y-6">
                           {[
                             { msg: "New Booking for May 24th - Erg Chebbi Luxury", time: "2 hours ago" },
@@ -133,7 +133,7 @@ export default function PartnerPortal() {
                             { msg: "Payout of €1,200 processed to Stripe", time: "1 day ago" }
                           ].map((item, i) => (
                             <div key={i} className="flex items-center justify-between py-4 border-b border-gray-50 last:border-0">
-                               <p className="text-sm font-semibold text-[#26215C]">{item.msg}</p>
+                               <p className="text-sm font-semibold text-[#0B132B]">{item.msg}</p>
                                <span className="text-xs text-gray-400">{item.time}</span>
                             </div>
                           ))}

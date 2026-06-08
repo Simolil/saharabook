@@ -22,7 +22,7 @@ export default function CampCard({ camp }: { camp: Camp; key?: string }) {
   return (
     <Link 
       to={`/camps/${camp.slug}`}
-      className="group bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col h-full"
+      className="group bg-[#FAF7F2] rounded-3xl overflow-hidden border border-[#BA7517]/15 shadow-sm hover:shadow-2xl hover:border-[#BA7517]/30 transition-all duration-500 flex flex-col h-full"
     >
       {/* Thumbnail */}
       <div className="relative h-64 overflow-hidden">
@@ -34,13 +34,13 @@ export default function CampCard({ camp }: { camp: Camp; key?: string }) {
         <div className="absolute top-4 left-4">
           <VerificationBadge tier={camp.verification_tier} />
         </div>
-        <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#26215C]">
+        <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#0B132B]">
           {formatCurrency(camp.price_per_night)} <span className="text-[10px] opacity-60 font-medium">{t('camp.night')}</span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 flex-1 flex flex-col">
+      <div className="p-6 flex-1 flex flex-col bg-[#FAF7F2]">
         <div className="flex justify-between items-start mb-2">
           <div className="flex items-center space-x-1 text-[#BA7517]">
             <MapPin size={12} />
@@ -48,31 +48,32 @@ export default function CampCard({ camp }: { camp: Camp; key?: string }) {
           </div>
           <div className="flex items-center space-x-1">
             <Star size={12} className="text-amber-400 fill-amber-400" />
-            <span className="text-xs font-bold">4.9</span>
+            <span className="text-xs font-bold text-[#0B132B]">4.9</span>
             <span className="text-[10px] text-gray-400">(42)</span>
           </div>
         </div>
 
-        <h3 className="text-lg font-serif font-semibold text-[#26215C] mb-2 group-hover:text-[#BA7517] transition-colors">
+        <h3 className="text-lg font-serif font-semibold text-[#0B132B] mb-2 group-hover:text-[#BA7517] transition-colors">
           {camp.name}
         </h3>
 
-        <div className="flex items-center space-x-4 mb-4 text-[#26215C]/60 text-xs">
+        <div className="flex items-center space-x-4 mb-4 text-[#0B132B]/60 text-xs">
           <div className="flex items-center space-x-1">
-            <Bath size={14} />
+            <Bath size={14} className="text-[#BA7517]" />
             <span>{t('camp.bath')}</span>
           </div>
           <div className="flex items-center space-x-1">
             <span>{t('camp.guests').replace('{count}', camp.max_guests.toString())}</span>
           </div>
         </div>
+      </div>
 
-        <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-50">
-          <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400">{t('camp.availability')}</span>
-          <button className="text-[#BA7517] text-xs font-bold hover:underline">
-            {t('camp.details')}
-          </button>
-        </div>
+      {/* Bottom Area: Dark Background ("only at the bottom") */}
+      <div className="px-6 py-4 bg-gradient-to-t from-[#0B132B] via-[#14213D] to-[#1D2D50]/95 border-t border-[#BA7517]/10 flex items-center justify-between">
+        <span className="text-[10px] uppercase font-bold tracking-widest text-[#FAF7F2]/60">{t('camp.availability')}</span>
+        <button className="text-[#BA7517] text-xs font-bold group-hover:text-white transition-colors">
+          {t('camp.details')}
+        </button>
       </div>
     </Link>
   );
