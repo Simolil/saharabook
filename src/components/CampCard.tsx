@@ -53,7 +53,7 @@ export default function CampCard({ camp }: { camp: Camp; key?: string }) {
           </div>
         </div>
 
-        <h3 className="text-lg font-bold text-[#26215C] mb-2 group-hover:text-[#BA7517] transition-colors">
+        <h3 className="text-lg font-serif font-semibold text-[#26215C] mb-2 group-hover:text-[#BA7517] transition-colors">
           {camp.name}
         </h3>
 

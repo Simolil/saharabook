@@ -84,7 +84,7 @@ export default function CampDetail() {
                        <span className="text-gray-400 opacity-60 font-medium">({t('detail.reviews').replace('{count}', '42')})</span>
                     </div>
                   </div>
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tighter text-[#26215C] mb-2">{camp.name}</h1>
+                  <h1 className="text-4xl md:text-5xl font-serif font-semibold text-[#26215C] mb-2">{camp.name}</h1>
                   <div className="flex items-center space-x-2 text-[#BA7517] font-bold text-sm">
                      <MapPin size={16} />
                      <span>{t(`search.${camp.destination.split(' ')[0].toLowerCase()}`)} Desert, Morocco</span>
@@ -186,7 +186,7 @@ export default function CampDetail() {
 
                 <Link 
                    to={`/book/${camp.slug}`}
-                   className="block w-full bg-[#BA7517] hover:bg-[#EF9F27] text-white text-center py-4 rounded-full font-bold shadow-lg shadow-[#BA7517]/20 transition-all active:scale-[0.98]"
+                   className="block w-full bg-[#BA7517] hover:bg-[#EF9F27] text-white text-center py-4 rounded-lg md:rounded-xl font-bold shadow-lg shadow-[#BA7517]/20 transition-all active:scale-[0.98]"
                 >
                    {t('detail.reserve')}
                 </Link>

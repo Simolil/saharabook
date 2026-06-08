@@ -43,139 +43,108 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     return (
       <Link to="/" className="group flex items-center">
-        <div className="relative flex flex-col items-center select-none pt-2">
-          {/* Hand-painted Dune "Umbrella" */}
-          <div className="absolute -top-5 md:-top-7 left-1/2 -translate-x-1/2 w-28 h-14 md:w-36 md:h-18 pointer-events-none z-0">
-            <motion.svg 
-              viewBox="0 0 120 70" 
-              className="w-full h-full"
-              initial={{ opacity: 0, scale: 0.8, y: 5 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
-            >
-              {/* Single Dune with Verified Tick at the end */}
-              <motion.path 
-                d="M10 50 Q 35 15, 60 50 L 72 62 L 95 38" 
-                stroke={accentColor} 
-                strokeWidth="5" 
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none" 
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 2.2, delay: 0.4 }}
-              />
-
-              {/* Elegant Small Sun rising at the end of the check mark */}
-              <motion.g
-                initial={{ opacity: 0, scale: 0.3, y: 14 }}
+        <div className={cn(
+          "relative flex items-center justify-center select-none rounded-lg md:rounded-xl transition-all duration-300 border h-8 md:h-10 px-3 md:px-4",
+          isHeader 
+            ? "border-[#BA7517]/40 hover:bg-white/5" 
+            : "border-[#BA7517]/30 hover:bg-[#BA7517]/5"
+        )}>
+          <div className="relative flex flex-col items-center select-none pt-2 md:pt-2.5 pb-0.5">
+            {/* Hand-painted Dune "Umbrella" */}
+            <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 w-16 h-8 md:w-20 md:h-10 pointer-events-none z-0">
+              <motion.svg 
+                viewBox="0 0 120 70" 
+                className="w-full h-full"
+                initial={{ opacity: 0, scale: 0.8, y: 3 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ 
-                  duration: 1.8, 
-                  delay: 2.7, // Smoothly rises after the 2.6s checkmark draw animation completes
-                  ease: "easeOut"
-                }}
-                style={{ transformOrigin: "95px 43px" }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
               >
-                {/* Sun core */}
-                <circle cx="95" cy="43" r="5.5" fill="#BA7517" />
-                
-                {/* Sun rays rotating slowly */}
-                <motion.g
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  style={{ transformOrigin: "95px 43px" }}
-                >
-                  {[...Array(8)].map((_, idx) => {
-                    const angle = (idx * 45 * Math.PI) / 180;
-                    return (
-                      <line 
-                        key={idx}
-                        x1={95 + Math.cos(angle) * 8.5}
-                        y1={43 + Math.sin(angle) * 8.5}
-                        x2={95 + Math.cos(angle) * 11.5}
-                        y2={43 + Math.sin(angle) * 11.5}
-                        stroke="#BA7517"
-                        strokeWidth="1.2"
-                        strokeLinecap="round"
-                      />
-                    );
-                  })}
-                </motion.g>
-              </motion.g>
-            </motion.svg>
-          </div>
-
-          {/* Brand Name */}
-          <motion.div 
-            className={cn("text-2xl md:text-4xl leading-none font-painting tracking-normal relative z-10 flex items-center px-4", textColor)}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Unified Logo Background */}
-            <motion.div 
-              className="absolute inset-0 pointer-events-none z-0"
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 1.4, delay: 0.3, ease: "circOut" }}
-            >
-              <svg viewBox="0 0 240 60" className="w-full h-full" preserveAspectRatio="none">
-                {/* Main thick brush stroke */}
+                {/* Single Dune with Verified Tick at the end */}
                 <motion.path 
-                  d="M5 30 Q 60 15, 120 30 T 235 30 L 235 40 Q 175 55, 120 40 T 5 40 Z" 
-                  fill="#BA7517" 
-                  className="opacity-20"
+                  d="M10 50 Q 35 15, 60 50 L 72 62 L 95 38 L 118 62" 
+                  stroke={accentColor} 
+                  strokeWidth="5" 
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none" 
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.8, delay: 0.4 }}
+                  transition={{ duration: 2.2, delay: 0.4 }}
                 />
-                {/* Thinner accent stroke */}
-                <motion.path 
-                  d="M15 35 Q 70 25, 130 35 T 225 35" 
-                  stroke="#BA7517" 
-                  strokeWidth="3" 
-                  strokeLinecap="round" 
-                  fill="none"
-                  className="opacity-30"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 2.2, delay: 0.6 }}
-                />
-              </svg>
-            </motion.div>
-
-            <div className="relative group flex items-center">
-              <span className="relative z-10">
-                <span className="text-[#BA7517]">Dune</span>
-                <span className={isHeader ? "text-white" : "text-[#26215C]"}>camps</span>
-              </span>
-              
-              {/* Sand Dust Particles */}
-              {[...Array(6)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-0.5 h-0.5 bg-[#BA7517] rounded-full blur-[0.3px] pointer-events-none opacity-0"
-                  animate={{
-                    x: [0, (i % 2 === 0 ? 1 : -1) * (15 + i * 5), (i % 2 === 0 ? 30 : -30)],
-                    y: [0, -8 - i * 3, -15],
-                    opacity: [0, 0.4, 0],
-                    scale: [0, 1, 0.2],
-                  }}
-                  transition={{
-                    duration: 4 + i * 0.5,
-                    repeat: Infinity,
-                    delay: i * 0.4,
-                    ease: "easeInOut"
-                  }}
-                  style={{
-                    left: `${15 + i * 12}%`,
-                    top: '80%'
-                  }}
-                />
-              ))}
+              </motion.svg>
             </div>
-          </motion.div>
+
+            {/* Brand Name */}
+            <motion.div 
+              className={cn("text-base md:text-[19px] leading-none font-comic-cat tracking-tight relative z-10 flex items-center px-1.5 md:px-2.5", textColor)}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* Unified Logo Background */}
+              <motion.div 
+                className="absolute inset-0 pointer-events-none z-0"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 1.4, delay: 0.3, ease: "circOut" }}
+              >
+                <svg viewBox="0 0 240 60" className="w-full h-full" preserveAspectRatio="none">
+                  {/* Main thick brush stroke */}
+                  <motion.path 
+                    d="M5 30 Q 60 15, 120 30 T 235 30 L 235 40 Q 175 55, 120 40 T 5 40 Z" 
+                    fill="#BA7517" 
+                    className="opacity-20"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 1.8, delay: 0.4 }}
+                  />
+                  {/* Thinner accent stroke */}
+                  <motion.path 
+                    d="M15 35 Q 70 25, 130 35 T 225 35" 
+                    stroke="#BA7517" 
+                    strokeWidth="3" 
+                    strokeLinecap="round" 
+                    fill="none"
+                    className="opacity-30"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 2.2, delay: 0.6 }}
+                  />
+                </svg>
+              </motion.div>
+
+              <div className="relative group flex items-center">
+                <span className="relative z-10">
+                  <span className={isHeader ? "text-white" : "text-[#BA7517]"}>Dune</span>
+                  <span className={isHeader ? "text-white" : "text-[#26215C]"}>camps</span>
+                </span>
+                
+                {/* Sand Dust Particles */}
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-0.5 h-0.5 bg-[#BA7517] rounded-full blur-[0.3px] pointer-events-none opacity-0"
+                    animate={{
+                      x: [0, (i % 2 === 0 ? 1 : -1) * (15 + i * 5), (i % 2 === 0 ? 30 : -30)],
+                      y: [0, -8 - i * 3, -15],
+                      opacity: [0, 0.4, 0],
+                      scale: [0, 1, 0.2],
+                    }}
+                    transition={{
+                      duration: 4 + i * 0.5,
+                      repeat: Infinity,
+                      delay: i * 0.4,
+                      ease: "easeInOut"
+                    }}
+                    style={{
+                      left: `${15 + i * 12}%`,
+                      top: '80%'
+                    }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </Link>
     );
@@ -243,21 +212,32 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {/* Left: Hamburger Menu & Language Switcher */}
             <div className="w-1/3 md:w-1/3 flex items-center">
               <div className="flex items-center relative z-[70] md:space-x-1">
-                <div className="flex items-center bg-[#BA7517] rounded-lg md:rounded-xl shadow-lg shadow-[#BA7517]/20 border border-white/10">
+                <div className={cn(
+                  "flex items-center rounded-lg md:rounded-xl transition-all duration-300 border h-8 md:h-10",
+                  useLightHeader 
+                    ? "border-[#BA7517]/40 text-white" 
+                    : "border-[#BA7517]/30 text-[#26215C]"
+                )}>
                   <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="text-white h-8 md:h-10 px-2 md:px-4 flex items-center justify-center hover:bg-white/10 transition-all rounded-l-lg md:rounded-xl"
+                    className={cn(
+                      "h-full px-2 md:px-4 flex items-center justify-center transition-all duration-300 rounded-l-lg md:rounded-l-xl",
+                      useLightHeader ? "hover:bg-white/5" : "hover:bg-[#BA7517]/5"
+                    )}
                   >
-                    {isMenuOpen ? <X size={16} /> : <Menu size={16} className="md:w-5 md:h-5" />}
+                    {isMenuOpen ? <X size={16} /> : <Menu size={16} className="md:w-5 md:h-5 text-[#BA7517]" />}
                     <span className="hidden md:inline ml-2 text-[10px] md:text-xs font-black uppercase tracking-widest">{t('nav.menu')}</span>
                   </button>
 
-                  <div className="w-[1px] h-3 bg-white/20 md:hidden" />
+                  <div className={cn("w-[1px] h-3 md:hidden", useLightHeader ? "bg-white/20" : "bg-[#BA7517]/20")} />
 
-                  <div className="relative md:hidden">
+                  <div className="relative md:hidden h-full">
                     <button
                       onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                      className="text-white h-8 px-2.5 flex items-center justify-center hover:bg-white/10 transition-all rounded-r-lg"
+                      className={cn(
+                        "h-full px-2.5 flex items-center justify-center transition-all duration-300 rounded-r-lg md:rounded-r-xl",
+                        useLightHeader ? "hover:bg-white/5" : "hover:bg-[#BA7517]/5"
+                      )}
                       title={t('nav.select_lang')}
                     >
                       <span className="text-[10px] font-bold uppercase">{language}</span>
@@ -349,7 +329,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               
               <Link 
                 to="/book" 
-                className="bg-[#BA7517] text-white h-9 md:h-11 px-4 md:px-6 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest hover:bg-[#EF9F27] transition-all shadow-lg shadow-[#BA7517]/20 border border-white/10 whitespace-nowrap flex items-center justify-center"
+                className={cn(
+                  "transition-all duration-300 border h-8 md:h-10 px-4 md:px-5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest whitespace-nowrap flex items-center justify-center",
+                  useLightHeader 
+                    ? "border-[#BA7517]/40 text-white hover:bg-white/5" 
+                    : "border-[#BA7517]/30 text-[#BA7517] hover:bg-[#BA7517]/5"
+                )}
               >
                 <span className="flex flex-col md:flex-row items-center justify-center leading-[0.8] md:leading-normal">
                   <span>{t('nav.book').split(' ')[0]}</span>

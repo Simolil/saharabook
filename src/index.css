@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=Outfit:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alice&family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&family=Outfit:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Kaushan+Script&family=Sora:wght@300;400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Comic+Neue:wght@300;400;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/comic-cat');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-sans: "Comic Cat", "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+  --font-serif: "Comic Cat", "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+  --font-alice: "Comic Cat", "Comic Neue", "Comic Sans MS", cursive, sans-serif;
   --font-painting: "Kaushan Script", cursive;
+  --font-sora: "Comic Cat", "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+  --font-comic-cat: "Comic Cat", "Comic Neue", "Comic Sans MS", cursive, sans-serif;
 }
 
 @utility dunes-text-sahara {

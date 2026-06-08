@@ -95,7 +95,7 @@ export default function ScamGuide() {
                <div className="bg-[#FAF7F2] p-8 rounded-3xl border border-[#BA7517]/10">
                   <h4 className="font-bold text-[#26215C] mb-4">{t('scam.ready')}</h4>
                   <p className="text-sm text-[#26215C]/60 mb-8">{t('home.scam_desc').split('. ')[1]}</p>
-                  <Link to="/compare" className="w-full bg-[#26215C] text-white py-4 rounded-full font-bold flex items-center justify-center space-x-2">
+                  <Link to="/compare" className="w-full bg-[#26215C] text-white py-4 rounded-lg md:rounded-xl font-bold flex items-center justify-center space-x-2">
                      <span>{t('scam.explore_action')}</span>
                      <ArrowRight size={18} />
                   </Link>

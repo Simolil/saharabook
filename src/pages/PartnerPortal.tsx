@@ -102,7 +102,7 @@ export default function PartnerPortal() {
                        </div>
                     </div>
 
-                    <button className="bg-[#BA7517] text-white px-12 py-4 rounded-full font-bold hover:bg-[#EF9F27] transition-all shadow-xl shadow-[#BA7517]/20">
+                    <button className="bg-[#BA7517] text-white px-12 py-4 rounded-lg md:rounded-xl font-bold hover:bg-[#EF9F27] transition-all shadow-xl shadow-[#BA7517]/20">
                        Submit for Verification
                     </button>
                  </div>

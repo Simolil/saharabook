@@ -90,7 +90,7 @@ export default function BookingFlow() {
                             </div>
                          </div>
                       </div>
-                      <button onClick={nextStep} className="mt-12 w-full bg-[#BA7517] text-white py-4 rounded-full font-bold flex items-center justify-center space-x-2">
+                      <button onClick={nextStep} className="mt-12 w-full bg-[#BA7517] text-white py-4 rounded-lg md:rounded-xl font-bold flex items-center justify-center space-x-2">
                          <span>Next: Guest Details</span>
                          <ArrowRight size={18} />
                       </button>
@@ -141,11 +141,11 @@ export default function BookingFlow() {
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-4 mt-12">
-                         <button onClick={prevStep} className="bg-gray-100 text-[#26215C] py-4 rounded-full font-bold flex items-center justify-center space-x-2">
+                         <button onClick={prevStep} className="bg-gray-100 text-[#26215C] py-4 rounded-lg md:rounded-xl font-bold flex items-center justify-center space-x-2">
                            <ArrowLeft size={18} />
                            <span>Back</span>
                          </button>
-                         <button onClick={nextStep} className="bg-[#BA7517] text-white py-4 rounded-full font-bold flex items-center justify-center space-x-2">
+                         <button onClick={nextStep} className="bg-[#BA7517] text-white py-4 rounded-lg md:rounded-xl font-bold flex items-center justify-center space-x-2">
                            <span>Next: Payment</span>
                            <ArrowRight size={18} />
                          </button>
@@ -179,7 +179,7 @@ export default function BookingFlow() {
                          <ShieldCheck className="text-green-600" size={20} />
                          <span className="text-xs text-green-800 font-medium">Your payment is held in escrow until check-in.</span>
                       </div>
-                      <button onClick={nextStep} className="w-full bg-[#BA7517] text-white py-4 rounded-full font-bold flex items-center justify-center space-x-2">
+                      <button onClick={nextStep} className="w-full bg-[#BA7517] text-white py-4 rounded-lg md:rounded-xl font-bold flex items-center justify-center space-x-2">
                          <span>Pay €440 & Confirm</span>
                       </button>
                    </motion.div>

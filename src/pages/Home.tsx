@@ -21,78 +21,16 @@ const AnimatedHeroWord = ({ word }: AnimatedHeroWordProps) => {
 
   return (
     <motion.span
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={{
-        animate: {
-          transition: {
-            staggerChildren: 0.1,
-          },
-        },
-        exit: {
-          transition: {
-            staggerChildren: 0.05,
-            staggerDirection: -1,
-          },
-        },
+      initial={{ opacity: 0, x: -20, filter: 'blur(8px)' }}
+      animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, x: 20, filter: 'blur(8px)' }}
+      transition={{ 
+        duration: 0.8, 
+        ease: [0.22, 1, 0.36, 1]
       }}
-      className="inline-block whitespace-nowrap px-1 relative"
+      className="inline-block dunes-text-sahara font-comic-cat tracking-tight px-1"
     >
-      <span className="sr-only">{translatedWord}</span>
-      <span className="flex" aria-hidden="true">
-        {translatedWord.split('').map((char, index) => (
-          <motion.span
-            key={index}
-            variants={{
-              initial: { opacity: 0, x: -15, filter: 'blur(8px)', scale: 0.9 },
-              animate: { opacity: 1, x: 0, filter: 'blur(0px)', scale: 1 },
-              exit: { opacity: 0, x: 15, filter: 'blur(8px)', scale: 0.9 },
-            }}
-            transition={{ 
-              duration: 0.8, 
-              ease: [0.22, 1, 0.36, 1],
-              exit: { delay: 0.15 } 
-            }}
-            className={`inline-block ${index >= translatedWord.length - 2 ? 'text-[#BA7517]' : 'text-white'}`}
-          >
-            {char === ' ' ? '\u00A0' : char}
-          </motion.span>
-        ))}
-      </span>
-      
-      {word === 'Verified' && (
-        <motion.div 
-          variants={{
-            initial: { opacity: 0, x: -5 },
-            animate: { opacity: 1, x: 0 },
-            exit: { opacity: 0, x: 15, scale: 0.8, filter: 'blur(10px)' }
-          }}
-          transition={{ 
-            animate: { duration: 1.2, delay: 0.6 },
-            exit: { duration: 0.4, delay: 0 } 
-          }}
-          className="absolute left-[calc(100%+0.5rem)] md:left-[calc(100%+1.5rem)] top-1/2 -translate-y-1/2 w-20 h-12 md:w-36 md:h-24 pointer-events-none"
-        >
-          <svg viewBox="0 0 120 70" className="w-full h-full">
-            <motion.path 
-              d="M10 50 Q 35 15, 60 50 L 72 62 L 115 18" 
-              stroke="#BA7517" 
-              strokeWidth="5" 
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              fill="none" 
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ 
-                duration: 1.0, 
-                delay: 0.9,
-                ease: "easeInOut"
-              }}
-            />
-          </svg>
-        </motion.div>
-      )}
+      {translatedWord}
     </motion.span>
   );
 };
@@ -124,43 +62,36 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center mt-[-15vh] md:mt-[-10vh]">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.div
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.8 }}
           >
             <motion.div 
-              className="inline-flex items-center space-x-3 bg-white/5 backdrop-blur-xl border border-white/10 px-6 py-2 rounded-full mb-8 shadow-2xl relative overflow-hidden group cursor-default"
+              className="inline-flex items-center space-x-3 border border-[#BA7517]/40 px-6 py-2 rounded-xl mb-8 relative group cursor-default"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              {/* Animated highlight sweep */}
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-                animate={{ x: ['100%', '-100%'] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 5 }}
-              />
-              
               <ShieldCheck size={16} className="text-[#BA7517] relative z-10" />
               <span className="text-white text-[10px] md:text-xs font-black uppercase tracking-[0.3em] relative z-10">{t('hero.expert')}</span>
               
               {/* Subtle pulsing dot */}
               <div className="absolute right-3 top-1/2 -translate-y-1/2 w-1 h-1 bg-[#BA7517] rounded-full">
                 <motion.div 
-                  className="absolute inset-0 bg-[#BA7517] rounded-full"
-                  animate={{ scale: [1, 3], opacity: [0.5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                   className="absolute inset-0 bg-[#BA7517] rounded-full"
+                   animate={{ scale: [1, 3], opacity: [0.5, 0] }}
+                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </div>
             </motion.div>
-            <h1 className="text-5xl md:text-8xl text-white tracking-tighter leading-tight mb-10 flex flex-col md:flex-row items-center justify-center gap-x-4 gap-y-2 text-center px-4">
+            <h1 className="text-5xl md:text-8xl text-white tracking-tight leading-tight mb-10 flex flex-col md:flex-row items-center justify-center gap-x-4 gap-y-2 text-center px-4 font-comic-cat font-normal">
               <div className="flex items-center justify-center shrink-0">
-                <span className="dunes-text-sahara font-painting relative transition-all duration-700 inline-block px-1 tracking-normal">{t('hero.the_sahara')}</span>
-                <span className="text-white font-serif italic text-3xl md:text-5xl align-baseline mx-1">,</span>
+                <span className="dunes-text-sahara font-comic-cat relative transition-all duration-700 inline-block px-1 tracking-tight">{t('hero.the_sahara')}</span>
+                <span className="text-white font-comic-cat text-3xl md:text-5xl align-baseline mx-1 relative translate-y-1.5 md:translate-y-3">,</span>
               </div>
-              <div className="font-painting relative transition-all duration-700 inline-block tracking-normal min-w-[240px] md:min-w-[500px] text-center md:text-left align-middle overflow-visible">
+              <div className="font-comic-cat relative transition-all duration-700 inline-block tracking-tight min-w-[240px] md:min-w-[380px] text-center align-middle overflow-visible">
                 <AnimatePresence mode="wait">
                   <AnimatedHeroWord key={headerWord} word={headerWord} />
                 </AnimatePresence>
@@ -169,21 +100,8 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Search Bar - Positioned near the bottom edge */}
-        <div className="absolute bottom-24 md:bottom-14 left-0 w-full z-20">
-          <div className="max-w-5xl mx-auto px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              <SearchBar />
-            </motion.div>
-          </div>
-        </div>
-
         {/* Scroll Indicator */}
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-40">
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-40">
            <div className="w-[1px] h-8 bg-white/20 relative overflow-hidden">
               <motion.div 
                 animate={{ y: [0, 48] }}
@@ -194,8 +112,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Intro Hook */}
-      <section className="bg-white py-16 md:py-24 border-b border-[#BA7517]/10 relative overflow-hidden">
+      {/* Intro Hook & Search Section */}
+      <section className="bg-white pt-16 pb-16 md:pt-20 md:pb-24 border-b border-[#BA7517]/10 relative overflow-hidden">
+        {/* Search Bar - Positioned directly in the white page after the slideshow */}
+        <div className="max-w-7xl mx-auto px-4 mb-16 md:mb-20 relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 45 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <SearchBar />
+          </motion.div>
+        </div>
         <div className="absolute top-0 right-0 w-32 h-32 opacity-[0.03] translate-x-12 -translate-y-12">
           <StarZellij />
         </div>
@@ -211,7 +140,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 space-y-4 md:space-y-0">
             <div>
-              <h2 className="text-4xl font-bold tracking-tighter text-[#26215C] mb-4">{t('home.find_your_camp')}</h2>
+              <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#26215C] mb-4">{t('home.find_your_camp')}</h2>
               <p className="text-[#26215C]/60 max-w-md">{t('home.compare_desc')}</p>
             </div>
             <Link to="/compare" className="group flex items-center space-x-2 text-[#BA7517] font-bold text-sm">
@@ -232,7 +161,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#26215C]/90 via-transparent to-transparent" />
                 <div className="absolute bottom-8 left-8">
                    <p className="text-[#BA7517] text-[10px] font-bold uppercase tracking-widest mb-1">{dest.sub}</p>
-                   <h3 className="text-3xl font-bold text-white tracking-tight">{dest.name}</h3>
+                   <h3 className="text-3xl font-serif font-semibold text-white">{dest.name}</h3>
                 </div>
               </Link>
             ))}
@@ -245,7 +174,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center space-x-4 mb-12">
             <ShieldCheck className="text-[#BA7517]" size={32} />
-            <h2 className="text-4xl font-bold tracking-tighter text-[#26215C]">{t('home.top_rated')}</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#26215C]">{t('home.top_rated')}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -266,14 +195,14 @@ export default function Home() {
                </div>
             </div>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-serif font-bold italic mb-8 leading-tight">
             {t('home.scam_title').split('Don\'t')[0]} 
             <span className="text-[#BA7517]"> Don't{t('home.scam_title').split('Don\'t')[1]}</span>
           </h2>
           <p className="text-white/60 text-lg mb-12 leading-relaxed">
             {t('home.scam_desc')}
           </p>
-          <Link to="/scam-guide" className="inline-flex items-center space-x-3 bg-white text-[#26215C] px-8 py-4 rounded-full font-bold hover:bg-[#BA7517] hover:text-white transition-all transform hover:-translate-y-1">
+          <Link to="/scam-guide" className="inline-flex items-center space-x-3 bg-white text-[#26215C] px-8 py-4 rounded-lg md:rounded-xl font-bold hover:bg-[#BA7517] hover:text-white transition-all transform hover:-translate-y-1">
              <span>{t('home.scam_action')}</span>
              <ArrowRight size={20} />
           </Link>

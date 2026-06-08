@@ -8,12 +8,12 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
 
   return (
     <div className={cn(
-      "w-full max-w-5xl mx-auto transition-all duration-300",
-      isSticky ? "p-1 bg-[#26215C] rounded-2xl md:rounded-full border border-[#BA7517]/40 shadow-2xl" : ""
+      "w-full max-w-7xl mx-auto transition-all duration-300",
+      isSticky ? "p-1 bg-[#26215C] rounded-xl md:rounded-2xl border border-[#BA7517]/40 shadow-2xl" : ""
     )}>
       <div className={cn(
-        "bg-[#26215C]/60 backdrop-blur-xl rounded-2xl md:rounded-full shadow-2xl p-2 flex flex-col md:flex-row items-center border border-white/10 transition-colors duration-300",
-        isSticky ? "bg-[#26215C] border-transparent" : ""
+        "bg-[#26215C] rounded-xl md:rounded-2xl shadow-2xl p-2 flex flex-col md:flex-row items-center border border-white/10 transition-colors duration-300",
+        isSticky ? "border-transparent" : ""
       )}>
         {/* Destination */}
         <div className="flex-1 w-full md:w-auto px-4 py-2 md:px-6 md:py-4 flex items-center space-x-3 border-b md:border-b-0 md:border-r border-white/10 group">
@@ -60,7 +60,7 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
         </div>
 
         {/* Search Action */}
-        <button className="w-full md:w-auto bg-[#BA7517] hover:bg-[#EF9F27] text-white px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-full font-bold text-sm md:text-base flex items-center justify-center space-x-2 transition-all active:scale-95">
+        <button className="w-full md:w-auto bg-[#BA7517] hover:bg-[#EF9F27] text-white px-6 py-3 md:px-8 md:py-4 rounded-lg md:rounded-xl font-bold text-sm md:text-base flex items-center justify-center space-x-2 transition-all active:scale-95">
           <span>{t('search.action')}</span>
           <ArrowRight className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" />
         </button>

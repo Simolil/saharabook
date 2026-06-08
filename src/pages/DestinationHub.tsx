@@ -109,7 +109,7 @@ export default function DestinationHub() {
         
         <div className="relative z-10 text-center max-w-4xl px-4">
            <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white text-[10px] font-bold uppercase tracking-widest mb-4">{t('hub.explorer')}</span>
-           <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tighter mb-4">{data.name}</h1>
+           <h1 className="text-5xl md:text-7xl font-serif font-bold italic text-white tracking-wide mb-4">{data.name}</h1>
            <p className="text-white font-medium text-lg italic font-serif">{data.tagline}</p>
         </div>
       </section>
@@ -118,7 +118,7 @@ export default function DestinationHub() {
       <div className="relative -mt-16 z-40 px-4 h-24 mb-6">
         <div className={cn(
           "w-full transition-all duration-300",
-          isSticky ? "md:fixed md:top-6 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-5xl md:px-4 md:z-45 relative" : "relative"
+          isSticky ? "md:fixed md:top-6 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-7xl md:px-4 md:z-45 relative" : "relative"
         )}>
           <SearchBar isSticky={isSticky} />
         </div>
@@ -155,7 +155,7 @@ export default function DestinationHub() {
             </div>
 
             <div className="bg-[#26215C] p-8 rounded-3xl text-white">
-               <h4 className="text-lg font-bold mb-4">{t('hub.trust_title')}</h4>
+               <h4 className="text-xl font-serif font-semibold tracking-wide mb-4">{t('hub.trust_title')}</h4>
                <p className="text-xs text-white/70 leading-relaxed mb-6">
                  {t('hub.trust_desc')}
                </p>
@@ -201,7 +201,7 @@ export default function DestinationHub() {
                         <span className="inline-block px-3 py-1 bg-[#BA7517]/20 border border-[#BA7517]/30 rounded-full text-[#BA7517] text-[10px] font-bold uppercase tracking-widest">
                            Featured Experience Program
                         </span>
-                        <h3 className="text-3xl font-bold text-white tracking-tight leading-tight">
+                        <h3 className="text-3xl md:text-4xl font-serif font-bold text-white tracking-wide leading-tight">
                            {matchingTour.title}
                         </h3>
                         <p className="text-white/70 text-sm leading-relaxed max-w-2xl">
@@ -216,7 +216,7 @@ export default function DestinationHub() {
                      <div className="shrink-0">
                         <Link 
                           to={`/tours/${matchingTour.slug}`} 
-                          className="inline-flex items-center space-x-2 bg-[#BA7517] hover:bg-[#EF9F27] text-white px-8 py-4 rounded-full font-bold text-sm shadow-xl transition-all transform hover:-translate-y-1"
+                          className="inline-flex items-center space-x-2 bg-[#BA7517] hover:bg-[#EF9F27] text-white px-8 py-4 rounded-lg md:rounded-xl font-bold text-sm shadow-xl transition-all transform hover:-translate-y-1"
                         >
                            <span>View Program Details</span>
                         </Link>
@@ -227,7 +227,7 @@ export default function DestinationHub() {
 
              {/* Editorial Content */}
              <div className="mt-24 pt-24 border-t border-[#BA7517]/10">
-                <h2 className="text-3xl font-bold tracking-tighter text-[#26215C] mb-8">{t('hub.planning')} in {data.name}</h2>
+                <h2 className="text-4xl font-serif font-bold text-[#26215C] tracking-tight mb-8">{t('hub.planning')} in {data.name}</h2>
                 <div className="prose prose-stone max-w-none text-[#26215C]/80 leading-relaxed">
                    <p className="mb-6">{data.description}</p>
                    <p>Booking with Dunecamps ensures you direct access to camp operators via WhatsApp once confirmed, guaranteed private bathrooms (for Elite/Verified tiers), and secure digital payments. We handle the complexity of the Saharan logistics so you can focus on the stars.</p>
