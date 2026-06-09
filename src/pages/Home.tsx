@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, Star, ShieldCheck, Map, Info } from 'lucide-react';
+import { ArrowRight, Star, ShieldCheck, Map, Info, Check, Sparkles } from 'lucide-react';
 import SearchBar from '@/src/components/SearchBar';
 import CampCard from '@/src/components/CampCard';
 import Slideshow from '@/src/components/Slideshow';
@@ -18,19 +18,47 @@ interface AnimatedHeroWordProps {
 const AnimatedHeroWord = ({ word }: AnimatedHeroWordProps) => {
   const { t } = useLanguage();
   const translatedWord = t(`hero.${word.toLowerCase()}`);
+  const isVerified = word.toLowerCase() === 'verified';
 
   return (
     <motion.span
-      initial={{ opacity: 0, x: -20, filter: 'blur(8px)' }}
-      animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-      exit={{ opacity: 0, x: 20, filter: 'blur(8px)' }}
+      initial={{ opacity: 0, y: 35, rotateX: -60, filter: 'blur(8px)' }}
+      animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, y: -35, rotateX: 60, filter: 'blur(8px)' }}
       transition={{ 
-        duration: 0.8, 
-        ease: [0.22, 1, 0.36, 1]
+        duration: 0.9, 
+        ease: [0.16, 1, 0.3, 1]
       }}
-      className="inline-block dunes-text-sahara font-comic-cat tracking-tight px-1"
+      style={{ transformOrigin: "center bottom", backfaceVisibility: "hidden" }}
+      className="inline-flex items-center justify-center md:justify-start dunes-text-sahara font-comic-cat tracking-tight pl-0 pr-2 select-none whitespace-nowrap"
     >
-      {translatedWord}
+      <span>{translatedWord}</span>
+      {isVerified && (
+        <motion.svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-10 h-10 md:w-16 md:h-16 ml-3 sm:ml-4 shrink-0"
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.25, delay: 0.85 }}
+        >
+          <motion.path
+            d="M4.5 12.5 C 6 14.5, 8.5 18, 10 20 C 13.5 13.5, 17 7, 20.5 4"
+            stroke="#BA7517"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 0.65,
+              ease: [0.16, 1, 0.3, 1],
+              delay: 1.0,
+            }}
+          />
+        </motion.svg>
+      )}
     </motion.span>
   );
 };
@@ -86,12 +114,26 @@ export default function Home() {
                 />
               </div>
             </motion.div>
-            <h1 className="text-5xl md:text-8xl text-white tracking-tight leading-tight mb-10 flex flex-col md:flex-row items-center justify-center gap-x-4 gap-y-2 text-center px-4 font-comic-cat font-normal">
+            <h1 className="text-5xl md:text-8xl text-white tracking-tight leading-tight mb-10 flex flex-col md:flex-row items-center justify-center gap-x-2 gap-y-2 text-center px-4 font-comic-cat font-normal">
               <div className="flex items-center justify-center shrink-0">
-                <span className="dunes-text-sahara font-comic-cat relative transition-all duration-700 inline-block px-1 tracking-tight">{t('hero.the_sahara')}</span>
-                <span className="text-white font-comic-cat text-3xl md:text-5xl align-baseline mx-1 relative translate-y-1.5 md:translate-y-3">,</span>
+                <motion.span 
+                  initial={{ opacity: 0, y: 35, filter: 'blur(8px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+                  className="dunes-text-sahara font-comic-cat relative inline-block px-1 tracking-tight"
+                >
+                  {t('hero.the_sahara')}
+                </motion.span>
+                <motion.span 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  className="text-white font-comic-cat text-3xl md:text-5xl align-baseline relative translate-y-1 md:translate-y-2"
+                >
+                  ,
+                </motion.span>
               </div>
-              <div className="font-comic-cat relative transition-all duration-700 inline-block tracking-tight min-w-[240px] md:min-w-[380px] text-center align-middle overflow-visible">
+              <div className="font-comic-cat relative inline-flex items-center justify-center md:justify-start text-center md:text-left tracking-tight w-[200px] sm:w-[260px] md:w-[380px] lg:w-[460px] align-middle overflow-visible shrink-0 ml-1 md:ml-2">
                 <AnimatePresence mode="wait">
                   <AnimatedHeroWord key={headerWord} word={headerWord} />
                 </AnimatePresence>
