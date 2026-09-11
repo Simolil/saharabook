@@ -52,7 +52,7 @@ const AnimatedHeroWord = ({ word }: AnimatedHeroWordProps) => {
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
             transition={{
-              duration: 0.65,
+              duration: 1.2,
               ease: [0.16, 1, 0.3, 1],
               delay: 1.0,
             }}
