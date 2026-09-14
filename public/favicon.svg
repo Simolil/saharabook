@@ -1,178 +1,114 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
   <defs>
-    <!-- Bronze Metallic Frame Gradient -->
-    <linearGradient id="bronzeFrame" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8F6728" />
-      <stop offset="25%" stop-color="#DDA343" />
-      <stop offset="50%" stop-color="#A27329" />
-      <stop offset="75%" stop-color="#E8B85C" />
-      <stop offset="100%" stop-color="#5C3B0E" />
+    <!-- Soft Squircle Clip -->
+    <clipPath id="squircleClip">
+      <rect width="256" height="256" rx="58" />
+    </clipPath>
+
+    <!-- Warm Dune Gradients -->
+    <linearGradient id="duneLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E89B55" />
+      <stop offset="60%" stop-color="#DE823A" />
+      <stop offset="100%" stop-color="#CF6E28" />
     </linearGradient>
 
-    <!-- Dark Bronze Inset -->
-    <linearGradient id="darkBronze" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#42290A" />
-      <stop offset="50%" stop-color="#241505" />
-      <stop offset="100%" stop-color="#120A02" />
+    <linearGradient id="duneShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C76126" />
+      <stop offset="100%" stop-color="#9C4415" />
     </linearGradient>
 
-    <!-- Glow Behind Mashrabiya Lattice -->
-    <radialGradient id="latticeGlow" cx="50%" cy="45%" r="65%">
-      <stop offset="0%" stop-color="#FFBE3B" />
-      <stop offset="45%" stop-color="#F58B12" />
-      <stop offset="80%" stop-color="#B85107" />
-      <stop offset="100%" stop-color="#471A02" />
+    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFAE2C" />
+      <stop offset="100%" stop-color="#F58F10" />
     </radialGradient>
-
-    <!-- Sunset Sky Inside Archway -->
-    <linearGradient id="archSky" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#E65805" />
-      <stop offset="35%" stop-color="#F57C00" />
-      <stop offset="70%" stop-color="#FFA726" />
-      <stop offset="100%" stop-color="#FFCA28" />
-    </linearGradient>
-
-    <!-- Inner Arch Bevel Highlight -->
-    <linearGradient id="archGoldBevel" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#F7D388" />
-      <stop offset="20%" stop-color="#BA7E26" />
-      <stop offset="50%" stop-color="#FCE1A6" />
-      <stop offset="80%" stop-color="#915B15" />
-      <stop offset="100%" stop-color="#F7D388" />
-    </linearGradient>
-
-    <clipPath id="archInteriorClip"><path d="M 68,246 L 68,148 L 74,148 C 74,142 66,132 58,118 C 48,100 52,78 72,66 C 86,57 108,55 128,40 C 148,55 170,57 184,66 C 204,78 208,100 198,118 C 190,132 182,142 182,148 L 188,148 L 188,246 Z" /></clipPath>
-
-    <pattern id="mashrabiya" width="32" height="32" patternUnits="userSpaceOnUse">
-      <!-- Outer star spokes -->
-      <g stroke="#613C0C" stroke-width="1.2" fill="none" opacity="0.95">
-        <!-- Center octagon -->
-        <polygon points="16,8 21.6,10.4 24,16 21.6,21.6 16,24 10.4,21.6 8,16 10.4,10.4" fill="#3D2305" fill-opacity="0.6" />
-        <!-- 8-pointed star points -->
-        <polygon points="16,4 20,12 28,12 22,18 25,26 16,21 7,26 10,18 4,12 12,12" stroke="#A8752B" stroke-width="1" />
-        <!-- Diagonal connecting lines -->
-        <line x1="0" y1="0" x2="32" y2="32" stroke="#875618" stroke-width="0.9" />
-        <line x1="32" y1="0" x2="0" y2="32" stroke="#875618" stroke-width="0.9" />
-        <line x1="16" y1="0" x2="16" y2="32" stroke="#875618" stroke-width="0.9" />
-        <line x1="0" y1="16" x2="32" y2="16" stroke="#875618" stroke-width="0.9" />
-      </g>
-    </pattern>
-
   </defs>
 
-  <!-- Outer Square Tile -->
-  <rect width="256" height="256" rx="20" fill="url(#bronzeFrame)" />
-  <rect x="5" y="5" width="246" height="246" rx="16" fill="url(#darkBronze)" />
-  <!-- Glowing Backdrop behind Lattice -->
-  <rect x="7" y="7" width="242" height="242" rx="14" fill="url(#latticeGlow)" />
-  <rect x="7" y="7" width="242" height="242" rx="14" fill="url(#mashrabiya)" />
-  <!-- Moorish Arch Architectural Moulding -->
-  <path d="M 52,250 L 52,148 L 58,148 C 58,138 48,126 40,110 C 28,88 34,62 58,48 C 76,37 104,35 128,18 C 152,35 180,37 198,48 C 222,62 228,88 216,110 C 208,126 198,138 198,148 L 204,148 L 204,250 Z" fill="none" stroke="url(#bronzeFrame)" stroke-width="12" stroke-linejoin="round" />
-  <path d="M 60,248 L 60,148 L 66,148 C 66,140 56,128 48,114 C 38,94 42,70 65,57 C 82,47 106,45 128,29 C 150,45 174,47 191,57 C 214,70 218,94 208,114 C 200,128 190,140 190,148 L 196,148 L 196,248 Z" fill="none" stroke="url(#darkBronze)" stroke-width="6" stroke-linejoin="round" />
-  <path d="M 68,246 L 68,148 L 74,148 C 74,142 66,132 58,118 C 48,100 52,78 72,66 C 86,57 108,55 128,40 C 148,55 170,57 184,66 C 204,78 208,100 198,118 C 190,132 182,142 182,148 L 188,148 L 188,246 Z" fill="none" stroke="url(#archGoldBevel)" stroke-width="4" stroke-linejoin="round" />
-  <!-- Interior of the Arch (Desert Sunset Scene) -->
-  <g clip-path="url(#archInteriorClip)">
-    <!-- Sunset Sky -->
-    <rect x="40" y="20" width="176" height="236" fill="url(#archSky)" />
-    <rect x="40" y="20" width="176" height="236" fill="url(#archSky)" opacity="0.9" />
-    <!-- Desert Sun on the Horizon -->
-    <circle cx="140" cy="192" r="32" fill="#FFFFFF" />
-    <circle cx="140" cy="192" r="36" fill="#FFF8E7" opacity="0.3" />
-    <!-- Dark Desert Dune Ground -->
-    <path d="M 40,200 C 70,198 100,199 130,203 C 160,207 185,204 216,202 L 216,256 L 40,256 Z" fill="#111318" />
+  <!-- Background Squircle Tile -->
+  <rect width="256" height="256" rx="58" fill="#F6EFE6" />
 
-    <!-- Camel Silhouette inside the Portal -->
+  <!-- The "D" Monogram Composition -->
+  <g clip-path="url(#squircleClip)">
+    
+    <!-- Interior Sky / Counter Area of "D" -->
+    <path d="M 62,64 L 148,64 C 188,64 202,96 202,132 C 202,170 186,200 144,200 L 62,200 Z" fill="#FBF7F0" />
+
+    <!-- Golden Sun inside the "D" -->
+    <circle cx="148" cy="112" r="19" fill="url(#sunGrad)" />
+
+    <!-- Back Desert Dune Crest & Shadow inside the "D" -->
+    <path d="M 138,140 C 145,148 160,158 178,168 L 168,200 L 98,200 Z" fill="url(#duneShadow)" />
+
+    <!-- Front Rolling Dunes -->
+    <path d="M 62,174 C 74,166 102,148 138,140 C 166,160 178,172 178,200 L 62,200 Z" fill="url(#duneLight)" />
+    <!-- Lower Sand Wave filling bottom of D -->
+    <path d="M 62,174 C 92,154 135,148 178,172 L 178,200 L 62,200 Z" fill="url(#duneLight)" />
+
+    <!-- Two Palm Trees in Deep Pine Green -->
+    <!-- Tall Palm Tree -->
+    <g fill="#1E3A34" stroke="#1E3A34" stroke-linecap="round">
+      <!-- Trunk -->
+      <path d="M 94,152 Q 95,134 97,118 Q 99,134 96,152 Z" stroke-width="1" />
+      <!-- Fronds -->
+      <path d="M 97,118 Q 87,114 83,120" stroke-width="2.5" fill="none" />
+      <path d="M 97,118 Q 89,109 88,114" stroke-width="2.5" fill="none" />
+      <path d="M 97,118 Q 97,107 101,109" stroke-width="2.5" fill="none" />
+      <path d="M 97,118 Q 106,109 110,115" stroke-width="2.5" fill="none" />
+      <path d="M 97,118 Q 108,116 112,122" stroke-width="2.5" fill="none" />
+    </g>
+
+    <!-- Shorter Palm Tree -->
+    <g fill="#1E3A34" stroke="#1E3A34" stroke-linecap="round">
+      <!-- Trunk -->
+      <path d="M 109,146 Q 110,138 112,128 Q 114,138 111,146 Z" stroke-width="0.8" />
+      <!-- Fronds -->
+      <path d="M 112,128 Q 105,124 102,129" stroke-width="2" fill="none" />
+      <path d="M 112,128 Q 107,120 106,124" stroke-width="2" fill="none" />
+      <path d="M 112,128 Q 115,119 117,121" stroke-width="2" fill="none" />
+      <path d="M 112,128 Q 120,121 122,126" stroke-width="2" fill="none" />
+      <path d="M 112,128 Q 120,127 123,132" stroke-width="2" fill="none" />
+    </g>
+
+    <!-- Bold Letter "D" Silhouette (Deep Pine Green) -->
+    <!-- Cut with Flight Path at the top right -->
     <path d="
-      M 148,150
-      C 152,149 156,150 159,153
-      C 161,155 161,158 158,160
-      C 154,162 151,161 149,162
-      C 147,164 148,166 144,168
-      C 141,170 137,169 133,173
-      C 129,177 125,183 124,189
-      C 123,194 121,198 120,203
-      /* Front leg (bent forward stride) */
-      L 123,205
-      L 126,215
-      L 119,230
-      L 115,230
-      L 120,216
-      L 116,206
-      /* Chest to front straight leg */
-      L 113,206
-      L 112,216
-      L 108,230
-      L 104,230
-      L 107,216
-      L 109,203
-      /* Belly */
-      C 103,205 97,204 91,202
-      /* Rear inner leg */
-      L 90,208
-      L 88,217
-      L 85,230
-      L 81,230
-      L 84,217
-      L 86,205
-      /* Rear outer leg */
-      C 83,201 80,197 79,192
-      L 76,208
-      L 73,230
-      L 69,230
-      L 72,208
-      L 76,190
-      /* Rump and Tail */
-      C 74,185 73,180 74,175
-      C 73,176 71,180 70,184
-      C 69,188 69,191 70,192
-      C 71,192 71.5,189 72,184
-      C 73,179 74,174 77,171
-      C 80,168 83,168 86,164
-      /* Camel Hump */
-      C 89,155 94,143 103,143
-      C 111,143 115,150 119,158
-      C 123,163 127,164 131,160
-      /* Graceful Arched Neck */
-      C 135,155 139,150 143,148
-      /* Ear & Head */
-      C 144,146 146,146 147,148
+      M 62,64
+      H 148
+      C 156,64 163,66 170,70
+      L 155,83
+      C 152,83 148,83 144,83
+      H 84
+      V 181
+      H 62
       Z
-    " fill="#111318" />
+    " fill="#1E3A34" />
 
-    <!-- Nomad Caravan Guide Silhouette -->
+    <!-- Left Vertical Stem of D -->
+    <rect x="62" y="64" width="22" height="136" rx="3" fill="#1E3A34" />
+
+    <!-- Right Curve of D -->
     <path d="
-      M 177,168
-      C 179,168 181,170 180,172
-      C 179.5,174 177,175 176.5,177
-      C 175,179 174,182 172,185
-      C 170,187 168,190 167.5,193
-      /* Robe flowing down */
-      L 165,212
-      L 163,222
-      L 166,222
-      /* Foot stepping */
-      L 167,227
-      L 164,227
-      L 166,223
-      /* Front foot */
-      L 173,223
-      L 175,227
-      L 172,227
-      L 174,223
-      /* Front drape */
-      L 177,212
-      C 178,205 177,196 177,188
-      C 176.5,182 177,177 177,173
-      C 177,170 176.5,168.5 176,168
+      M 174,75
+      C 188,88 202,108 202,134
+      C 202,176 174,200 138,200
+      L 96,200
+      C 134,200 178,188 178,136
+      C 178,106 166,88 156,83
+      L 174,75
       Z
-    " fill="#111318" />
+    " fill="#1E3A34" />
 
-    <!-- Lead Rope -->
-    <path d="M 150,161 C 151,180 157,196 168,194" fill="none" stroke="#111318" stroke-width="1.8" stroke-linecap="round" />
+    <!-- Flight Trail Notch through Top of D -->
+    <path d="M 152,84 Q 164,80 174,74 Q 170,70 156,82 Z" fill="#F6EFE6" />
+
+    <!-- Ascending Airplane Silhouette at Top Right -->
+    <g transform="translate(196, 68) rotate(35) scale(0.9)" fill="#1E3A34">
+      <!-- Fuselage -->
+      <path d="M 0,-14 C 1.8,-14 2.8,-10 2.8,-2 L 2.8,12 C 2.8,13.5 1.5,14.5 0,14.5 C -1.5,14.5 -2.8,13.5 -2.8,12 L -2.8,-2 C -2.8,-10 -1.8,-14 0,-14 Z" />
+      <!-- Main Wings -->
+      <path d="M 0,-2 L 14,5 L 14,8 L 0,3 L -14,3 L -14,0 L 0,-2 Z" />
+      <!-- Tail Wings -->
+      <path d="M 0,10 L 6,13.5 L 6,15 L 0,13.5 L -6,15 L -6,13.5 Z" />
+    </g>
 
   </g>
-
-  <!-- Inner Arch Gold Rim -->
-  <path d="M 68,246 L 68,148 L 74,148 C 74,142 66,132 58,118 C 48,100 52,78 72,66 C 86,57 108,55 128,40 C 148,55 170,57 184,66 C 204,78 208,100 198,118 C 190,132 182,142 182,148 L 188,148 L 188,246 Z" fill="none" stroke="url(#bronzeFrame)" stroke-width="3" />
-  <rect x="2" y="2" width="252" height="252" rx="18" fill="none" stroke="#FCE1A6" stroke-width="1.5" stroke-opacity="0.4" />
 </svg>
