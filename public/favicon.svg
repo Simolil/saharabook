@@ -1,106 +1,178 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
   <defs>
-    <!-- Desert Sunset Sky Gradient -->
-    <linearGradient id="desertSunset" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#E65100" />
+    <!-- Bronze Metallic Frame Gradient -->
+    <linearGradient id="bronzeFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8F6728" />
+      <stop offset="25%" stop-color="#DDA343" />
+      <stop offset="50%" stop-color="#A27329" />
+      <stop offset="75%" stop-color="#E8B85C" />
+      <stop offset="100%" stop-color="#5C3B0E" />
+    </linearGradient>
+
+    <!-- Dark Bronze Inset -->
+    <linearGradient id="darkBronze" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#42290A" />
+      <stop offset="50%" stop-color="#241505" />
+      <stop offset="100%" stop-color="#120A02" />
+    </linearGradient>
+
+    <!-- Glow Behind Mashrabiya Lattice -->
+    <radialGradient id="latticeGlow" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#FFBE3B" />
+      <stop offset="45%" stop-color="#F58B12" />
+      <stop offset="80%" stop-color="#B85107" />
+      <stop offset="100%" stop-color="#471A02" />
+    </radialGradient>
+
+    <!-- Sunset Sky Inside Archway -->
+    <linearGradient id="archSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E65805" />
       <stop offset="35%" stop-color="#F57C00" />
       <stop offset="70%" stop-color="#FFA726" />
-      <stop offset="100%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FFCA28" />
     </linearGradient>
 
-    <!-- Subtle Golden Border -->
-    <linearGradient id="tileBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFA726" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#E65100" stop-opacity="0.3" />
+    <!-- Inner Arch Bevel Highlight -->
+    <linearGradient id="archGoldBevel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F7D388" />
+      <stop offset="20%" stop-color="#BA7E26" />
+      <stop offset="50%" stop-color="#FCE1A6" />
+      <stop offset="80%" stop-color="#915B15" />
+      <stop offset="100%" stop-color="#F7D388" />
     </linearGradient>
+
+    <clipPath id="archInteriorClip"><path d="M 68,246 L 68,148 L 74,148 C 74,142 66,132 58,118 C 48,100 52,78 72,66 C 86,57 108,55 128,40 C 148,55 170,57 184,66 C 204,78 208,100 198,118 C 190,132 182,142 182,148 L 188,148 L 188,246 Z" /></clipPath>
+
+    <pattern id="mashrabiya" width="32" height="32" patternUnits="userSpaceOnUse">
+      <!-- Outer star spokes -->
+      <g stroke="#613C0C" stroke-width="1.2" fill="none" opacity="0.95">
+        <!-- Center octagon -->
+        <polygon points="16,8 21.6,10.4 24,16 21.6,21.6 16,24 10.4,21.6 8,16 10.4,10.4" fill="#3D2305" fill-opacity="0.6" />
+        <!-- 8-pointed star points -->
+        <polygon points="16,4 20,12 28,12 22,18 25,26 16,21 7,26 10,18 4,12 12,12" stroke="#A8752B" stroke-width="1" />
+        <!-- Diagonal connecting lines -->
+        <line x1="0" y1="0" x2="32" y2="32" stroke="#875618" stroke-width="0.9" />
+        <line x1="32" y1="0" x2="0" y2="32" stroke="#875618" stroke-width="0.9" />
+        <line x1="16" y1="0" x2="16" y2="32" stroke="#875618" stroke-width="0.9" />
+        <line x1="0" y1="16" x2="32" y2="16" stroke="#875618" stroke-width="0.9" />
+      </g>
+    </pattern>
+
   </defs>
 
-  <!-- Base Rounded Favicon Tile for Browser Tab and Mobile Display -->
-  <rect width="128" height="128" rx="26" fill="url(#desertSunset)" />
-  <rect x="1" y="1" width="126" height="126" rx="25" fill="none" stroke="url(#tileBorder)" stroke-width="2" />
+  <!-- Outer Square Tile -->
+  <rect width="256" height="256" rx="20" fill="url(#bronzeFrame)" />
+  <rect x="5" y="5" width="246" height="246" rx="16" fill="url(#darkBronze)" />
+  <!-- Glowing Backdrop behind Lattice -->
+  <rect x="7" y="7" width="242" height="242" rx="14" fill="url(#latticeGlow)" />
+  <rect x="7" y="7" width="242" height="242" rx="14" fill="url(#mashrabiya)" />
+  <!-- Moorish Arch Architectural Moulding -->
+  <path d="M 52,250 L 52,148 L 58,148 C 58,138 48,126 40,110 C 28,88 34,62 58,48 C 76,37 104,35 128,18 C 152,35 180,37 198,48 C 222,62 228,88 216,110 C 208,126 198,138 198,148 L 204,148 L 204,250 Z" fill="none" stroke="url(#bronzeFrame)" stroke-width="12" stroke-linejoin="round" />
+  <path d="M 60,248 L 60,148 L 66,148 C 66,140 56,128 48,114 C 38,94 42,70 65,57 C 82,47 106,45 128,29 C 150,45 174,47 191,57 C 214,70 218,94 208,114 C 200,128 190,140 190,148 L 196,148 L 196,248 Z" fill="none" stroke="url(#darkBronze)" stroke-width="6" stroke-linejoin="round" />
+  <path d="M 68,246 L 68,148 L 74,148 C 74,142 66,132 58,118 C 48,100 52,78 72,66 C 86,57 108,55 128,40 C 148,55 170,57 184,66 C 204,78 208,100 198,118 C 190,132 182,142 182,148 L 188,148 L 188,246 Z" fill="none" stroke="url(#archGoldBevel)" stroke-width="4" stroke-linejoin="round" />
+  <!-- Interior of the Arch (Desert Sunset Scene) -->
+  <g clip-path="url(#archInteriorClip)">
+    <!-- Sunset Sky -->
+    <rect x="40" y="20" width="176" height="236" fill="url(#archSky)" />
+    <rect x="40" y="20" width="176" height="236" fill="url(#archSky)" opacity="0.9" />
+    <!-- Desert Sun on the Horizon -->
+    <circle cx="140" cy="192" r="32" fill="#FFFFFF" />
+    <circle cx="140" cy="192" r="36" fill="#FFF8E7" opacity="0.3" />
+    <!-- Dark Desert Dune Ground -->
+    <path d="M 40,200 C 70,198 100,199 130,203 C 160,207 185,204 216,202 L 216,256 L 40,256 Z" fill="#111318" />
 
-  <!-- Radiant Desert Sun Resting on Horizon -->
-  <circle cx="70" cy="98" r="28" fill="#FFFFFF" />
-
-  <!-- Caravan Group & Desert Floor Silhouette -->
-  <g fill="#111318">
-    <!-- Dune Horizon Floor -->
-    <path d="M 0,105 C 32,103 62,106 90,108 C 108,109 118,106 128,103 L 128,128 L 0,128 Z" />
-
-    <!-- Camel Silhouette -->
+    <!-- Camel Silhouette inside the Portal -->
     <path d="
-      M 70,41
-      C 73,40 76,41 78,43
-      C 79.5,44.5 80,47 77,48.5
-      C 74,50 71.5,49 70.5,50
-      C 69,51.5 69.5,53 67,54
-      C 65,55 62,54 59,57
-      C 56,60 53,65 52,70
-      C 51,74 50,78 49,82
-      L 51,84
-      L 53,93
-      L 48,107
-      L 45,107
-      L 49,94
-      L 46,85
-      L 44,85
-      L 43,94
-      L 40,107
-      L 37,107
-      L 39,94
-      L 41,83
-      C 37,84 32,83 28,81
-      L 27,86
-      L 26,94
-      L 24,107
-      L 21,107
-      L 23,94
-      L 24,84
-      C 22,81 20,78 19,74
-      L 17,88
-      L 15,107
-      L 12,107
-      L 14,88
-      L 17,72
-      C 16,68 15,64 16,60
-      C 15.5,60 14,64 13,67
-      C 12,70 12,72 13,73
-      C 13.5,73 14,71 14.5,67
-      C 15,63 16,59 18,57
-      C 20,55 22,55 24,52
-      C 26,45 30,34 38,34
-      C 44,34 47,40 50,47
-      C 53,51 56,52 59,48
-      C 62,44 65,40 68,39
-      C 68.5,37 70,37.5 70.5,39
+      M 148,150
+      C 152,149 156,150 159,153
+      C 161,155 161,158 158,160
+      C 154,162 151,161 149,162
+      C 147,164 148,166 144,168
+      C 141,170 137,169 133,173
+      C 129,177 125,183 124,189
+      C 123,194 121,198 120,203
+      /* Front leg (bent forward stride) */
+      L 123,205
+      L 126,215
+      L 119,230
+      L 115,230
+      L 120,216
+      L 116,206
+      /* Chest to front straight leg */
+      L 113,206
+      L 112,216
+      L 108,230
+      L 104,230
+      L 107,216
+      L 109,203
+      /* Belly */
+      C 103,205 97,204 91,202
+      /* Rear inner leg */
+      L 90,208
+      L 88,217
+      L 85,230
+      L 81,230
+      L 84,217
+      L 86,205
+      /* Rear outer leg */
+      C 83,201 80,197 79,192
+      L 76,208
+      L 73,230
+      L 69,230
+      L 72,208
+      L 76,190
+      /* Rump and Tail */
+      C 74,185 73,180 74,175
+      C 73,176 71,180 70,184
+      C 69,188 69,191 70,192
+      C 71,192 71.5,189 72,184
+      C 73,179 74,174 77,171
+      C 80,168 83,168 86,164
+      /* Camel Hump */
+      C 89,155 94,143 103,143
+      C 111,143 115,150 119,158
+      C 123,163 127,164 131,160
+      /* Graceful Arched Neck */
+      C 135,155 139,150 143,148
+      /* Ear & Head */
+      C 144,146 146,146 147,148
       Z
-    " />
+    " fill="#111318" />
 
     <!-- Nomad Caravan Guide Silhouette -->
     <path d="
-      M 97,58
-      C 98.5,58 100,59.5 99.5,61.5
-      C 99,63.5 97,64.5 96.5,66
-      C 95.5,68 94.5,71 93,73
-      C 91.5,74.5 90,77 89.5,80
-      L 88,96
-      L 86,104
-      L 89,104
-      L 90,108
-      L 87,108
-      L 89,105
-      L 95,105
-      L 97,108
-      L 94,108
-      L 96,105
-      L 98,96
-      C 99,90 98,82 98,75
-      C 97.5,70 98,66 98,62
-      C 98,60 97.5,58.5 97,58
+      M 177,168
+      C 179,168 181,170 180,172
+      C 179.5,174 177,175 176.5,177
+      C 175,179 174,182 172,185
+      C 170,187 168,190 167.5,193
+      /* Robe flowing down */
+      L 165,212
+      L 163,222
+      L 166,222
+      /* Foot stepping */
+      L 167,227
+      L 164,227
+      L 166,223
+      /* Front foot */
+      L 173,223
+      L 175,227
+      L 172,227
+      L 174,223
+      /* Front drape */
+      L 177,212
+      C 178,205 177,196 177,188
+      C 176.5,182 177,177 177,173
+      C 177,170 176.5,168.5 176,168
       Z
-    " />
+    " fill="#111318" />
+
+    <!-- Lead Rope -->
+    <path d="M 150,161 C 151,180 157,196 168,194" fill="none" stroke="#111318" stroke-width="1.8" stroke-linecap="round" />
+
   </g>
 
-  <!-- Lead Rope from Camel to Nomad Hand -->
-  <path d="M 72,50 C 72,66 78,82 89.5,80" fill="none" stroke="#111318" stroke-width="1.8" stroke-linecap="round" />
+  <!-- Inner Arch Gold Rim -->
+  <path d="M 68,246 L 68,148 L 74,148 C 74,142 66,132 58,118 C 48,100 52,78 72,66 C 86,57 108,55 128,40 C 148,55 170,57 184,66 C 204,78 208,100 198,118 C 190,132 182,142 182,148 L 188,148 L 188,246 Z" fill="none" stroke="url(#bronzeFrame)" stroke-width="3" />
+  <rect x="2" y="2" width="252" height="252" rx="18" fill="none" stroke="#FCE1A6" stroke-width="1.5" stroke-opacity="0.4" />
 </svg>
