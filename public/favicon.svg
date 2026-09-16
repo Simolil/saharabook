@@ -32,8 +32,6 @@
     </clipPath>
   </defs>
 
-  <!-- Clean Base Tile -->
-  <rect width="512" height="512" rx="96" fill="#FFFFFF" />
 
   <!-- Main Letter 'D' Body -->
   <g>
