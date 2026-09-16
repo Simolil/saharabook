@@ -68,5 +68,39 @@ export const mockCamps: Camp[] = [
     max_guests: 4,
     status: "active",
     created_at: new Date().toISOString()
+  },
+  {
+    id: "5",
+    slug: "mhamid-chigaga-nomad-camp",
+    name: "M'Hamid Chigaga Nomad Camp",
+    description_en: "Authentic Sahrawi hospitality at the threshold of Erg Chigaga. Sunset camel caravans and deep dune tranquility.",
+    description_fr: "Hospitalité sahraouie authentique aux portes de l'Erg Chigaga. Caravanes de dromadaires au coucher du soleil et tranquillité absolue.",
+    destination: "mhamid",
+    latitude: 29.82,
+    longitude: -5.72,
+    price_per_night: 190,
+    currency: "EUR",
+    verification_tier: "verified",
+    private_bathroom: true,
+    max_guests: 4,
+    status: "active",
+    created_at: new Date().toISOString()
+  },
+  {
+    id: "6",
+    slug: "ksar-ouarzazate-desert-lodge",
+    name: "Ksar Ouarzazate Desert Lodge",
+    description_en: "Historic Kasbah glamping lodge nestled between ancient palm groves and Atlas mountain desert valleys.",
+    description_fr: "Lodge de glamping dans une casbah historique nichée entre palmeraies millénaires et vallées désertiques de l'Atlas.",
+    destination: "ouarzazate",
+    latitude: 30.93,
+    longitude: -6.93,
+    price_per_night: 160,
+    currency: "EUR",
+    verification_tier: "elite",
+    private_bathroom: true,
+    max_guests: 3,
+    status: "active",
+    created_at: new Date().toISOString()
   }
 ];

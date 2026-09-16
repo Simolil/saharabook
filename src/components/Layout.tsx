@@ -30,6 +30,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Zagora', path: '/destinations/zagora', desc: 'Draa Caravan Hub' },
     { name: 'Agafay', path: '/destinations/agafay', desc: 'Stone Desert' },
     { name: 'Foum Zguid', path: '/destinations/foumzguid', desc: 'Erg Chigaga Wilds' },
+    { name: "M'Hamid", path: '/destinations/mhamid', desc: 'Erg Chigaga Dunes' },
+    { name: 'Ouarzazate', path: '/destinations/ouarzazate', desc: 'Desert Kasbahs' },
   ];
 
   const navLinks = [
@@ -526,6 +528,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <li><Link to="/destinations/zagora" className="hover:text-[#BA7517] transition-colors">Zagora (Draa Valley)</Link></li>
                 <li><Link to="/destinations/agafay" className="hover:text-[#BA7517] transition-colors">Agafay (Stone Desert)</Link></li>
                 <li><Link to="/destinations/foumzguid" className="hover:text-[#BA7517] transition-colors">Foum Zguid (Erg Chigaga)</Link></li>
+                <li><Link to="/destinations/mhamid" className="hover:text-[#BA7517] transition-colors">M'Hamid (Erg Chigaga)</Link></li>
+                <li><Link to="/destinations/ouarzazate" className="hover:text-[#BA7517] transition-colors">Ouarzazate (Kasbah Gateway)</Link></li>
               </ul>
             </div>
             <div>

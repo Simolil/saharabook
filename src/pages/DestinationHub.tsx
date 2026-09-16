@@ -74,6 +74,24 @@ export default function DestinationHub() {
         { q: "How to reach Erg Chigaga from Foum Zguid?", a: "Reaching the deep dunes from Foum Zguid requires an off-road 4x4 vehicle to traverse 2-3 hours of rugged fossil plateaus and the dried Lake Iriqui clay bed." },
         { q: "Is Foum Zguid the best path for Erg Chigaga?", a: "Yes, it is the most Direct off-road track and bypasses the longer, more winding roads, offering an immediate transition to raw wilderness." }
       ]
+    },
+    mhamid: {
+      name: t('search.mhamid'),
+      tagline: 'Where the Road Ends and Dunes Begin',
+      description: "M'Hamid El Ghizlane is the final oasis outpost of the Draa Valley and the eastern launchpad into Erg Chigaga's sea of towering golden waves.",
+      faqs: [
+        { q: "How far is Erg Chigaga from M'Hamid?", a: "It is approximately 55 km of off-road desert trail (around 2 hours by 4x4 vehicle) through acacia valleys and rolling sand dunes." },
+        { q: "What is the difference between M'Hamid and Zagora?", a: "Zagora is a larger administrative town, whereas M'Hamid is the true end of the paved road situated directly at the frontier of the Sahara." }
+      ]
+    },
+    ouarzazate: {
+      name: t('search.ouarzazate'),
+      tagline: 'The Gateway & Hollywood of Morocco',
+      description: 'Surrounded by ancient clay Kasbahs, palm oases, and pre-Saharan mountain valleys, Ouarzazate is the legendary staging ground connecting the High Atlas with the desert.',
+      faqs: [
+        { q: "Is Ouarzazate a good base for desert trips?", a: "Yes, it dramatically cuts the long drive from Marrakech in half, allowing relaxed exploration of Ait Ben Haddou and the Draa Valley." },
+        { q: "Are there desert camps in Ouarzazate?", a: "Yes, boutique desert lodges and glamping retreats operate in the nearby oasis valleys and stony plateaus." }
+      ]
     }
   };
 
@@ -100,7 +118,9 @@ export default function DestinationHub() {
                 ? "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1600"
                 : id === 'foumzguid'
                   ? "https://images.unsplash.com/photo-1489493585363-d6943649ef91?q=80&w=1600"
-                  : "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1600"
+                  : id === 'ouarzazate'
+                    ? "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1600"
+                    : "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1600"
           }
           className="w-full h-full object-cover" 
           alt={data.name}

@@ -25,6 +25,8 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
               <option value="zagora" className="bg-[#0B132B]">{t('search.zagora')}</option>
               <option value="agafay" className="bg-[#0B132B]">{t('search.agafay')}</option>
               <option value="foumzguid" className="bg-[#0B132B]">{t('search.foumzguid')}</option>
+              <option value="mhamid" className="bg-[#0B132B]">{t('search.mhamid')}</option>
+              <option value="ouarzazate" className="bg-[#0B132B]">{t('search.ouarzazate')}</option>
             </select>
           </div>
         </div>

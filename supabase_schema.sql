@@ -1,7 +1,7 @@
 -- Bivouac.ma Supabase Schema
 
 -- Destinations Enum
-CREATE TYPE destination_type AS ENUM ('merzouga', 'zagora', 'agafay');
+CREATE TYPE destination_type AS ENUM ('merzouga', 'zagora', 'agafay', 'foumzguid', 'ouarzazate', 'mhamid');
 CREATE TYPE verification_tier_type AS ENUM ('listed', 'verified', 'elite');
 CREATE TYPE booking_status_type AS ENUM ('pending', 'confirmed', 'cancelled');
 CREATE TYPE language_type AS ENUM ('en', 'fr', 'ar');

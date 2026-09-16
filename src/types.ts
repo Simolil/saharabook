@@ -1,4 +1,4 @@
-export type Destination = 'merzouga' | 'zagora' | 'agafay' | 'foumzguid';
+export type Destination = 'merzouga' | 'zagora' | 'agafay' | 'foumzguid' | 'ouarzazate' | 'mhamid' | 'chigaga';
 export type VerificationTier = 'listed' | 'verified' | 'elite';
 export type BookingStatus = 'pending' | 'confirmed' | 'cancelled';
 export type Language = 'en' | 'fr' | 'ar';

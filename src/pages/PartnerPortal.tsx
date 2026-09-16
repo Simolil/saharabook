@@ -67,6 +67,8 @@ export default function PartnerPortal() {
                                 <option>Zagora (Erg Chigaga)</option>
                                 <option>Agafay Desert</option>
                                 <option>Foum Zguid (Erg Chigaga)</option>
+                                <option>M'Hamid (Erg Chigaga)</option>
+                                <option>Ouarzazate (Kasbah & Pre-Sahara)</option>
                              </select>
                           </div>
                        </div>
