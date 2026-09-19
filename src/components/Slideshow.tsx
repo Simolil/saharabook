@@ -20,8 +20,28 @@ const images = [
   },
   {
     url: "/images/slideshow/slide-4.jpg",
-    title: "Magical Nights",
-    caption: "The clearest skies you will ever witness."
+    title: "Erg Chigaga Wilds",
+    caption: "Untamed dunes and infinite open horizons."
+  },
+  {
+    url: "/images/slideshow/slide-5.jpg",
+    title: "Sunset Caravan",
+    caption: "Traditional camel trekking across sweeping desert ridges."
+  },
+  {
+    url: "/images/slideshow/slide-6.jpg",
+    title: "Luxury Nomad Camps",
+    caption: "Hand-woven Berber craft with modern en-suite comfort."
+  },
+  {
+    url: "/images/slideshow/slide-7.jpg",
+    title: "Desert Campfire",
+    caption: "Acoustic Gnawa drumming under the Milky Way."
+  },
+  {
+    url: "/images/slideshow/slide-8.jpg",
+    title: "Kasbah Gateway",
+    caption: "Ancient earthen architecture at the desert's threshold."
   }
 ];
 
