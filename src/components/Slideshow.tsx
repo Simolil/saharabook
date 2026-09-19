@@ -59,54 +59,60 @@ export default function Slideshow({ className = "" }: { className?: string }) {
     setIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  // Preload all slideshow images into browser memory to eliminate transition lag
+  React.useEffect(() => {
+    images.forEach((img) => {
+      const preload = new Image();
+      preload.src = img.url;
+    });
+  }, []);
+
   React.useEffect(() => {
     const timer = setInterval(next, 6000);
     return () => clearInterval(timer);
   }, []);
 
   const variants = {
-    enter: (direction: number) => ({
+    enter: {
       opacity: 0,
-      scale: 1.1
-    }),
+    },
     center: {
       zIndex: 1,
       opacity: 1,
-      scale: 1
     },
-    exit: (direction: number) => ({
+    exit: {
       zIndex: 0,
       opacity: 0,
-      scale: 0.95
-    })
+    }
   };
 
   return (
     <div className={`relative overflow-hidden bg-black ${className}`}>
-      <AnimatePresence initial={false} custom={direction}>
+      <AnimatePresence initial={false}>
         <motion.div
           key={index}
-          custom={direction}
           variants={variants}
           initial="enter"
           animate="center"
           exit="exit"
           transition={{
-            opacity: { duration: 1.5, ease: "easeInOut" },
-            scale: { duration: 2, ease: "linear" }
+            opacity: { duration: 1.2, ease: "easeInOut" }
           }}
+          style={{ willChange: "opacity" }}
           className="absolute inset-0"
         >
           <img
             src={images[index].url}
             alt={images[index].title}
+            loading="eager"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Subtle Overlay */}
-      <div className="absolute inset-0 bg-black/20" />
+      {/* Dark overlay to balance bright daylight photos */}
+      <div className="absolute inset-0 bg-black/30" />
 
       {/* Controls - subtle in background mode */}
       <div className="absolute bottom-10 right-10 z-10 flex space-x-2">

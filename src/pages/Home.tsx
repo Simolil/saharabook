@@ -89,6 +89,11 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-[#0B132B] via-transparent to-black/20" />
         </div>
 
+        {/* Soft Dark Vignette directly under the writing for crisp contrast against bright photos */}
+        <div className="absolute inset-0 z-[5] pointer-events-none flex items-center justify-center">
+          <div className="w-full max-w-3xl h-72 sm:h-80 md:h-96 bg-black/45 rounded-full blur-3xl" />
+        </div>
+
         {/* Hero Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <motion.div
