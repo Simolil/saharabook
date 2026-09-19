@@ -48,7 +48,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className={cn(
           "relative flex items-center justify-center select-none rounded-lg md:rounded-xl transition-all duration-300 border h-8 md:h-10 px-3 md:px-4",
           isHeader 
-            ? "border-[#BA7517]/40 hover:bg-white/5" 
+            ? "border-[#BA7517]/40 hover:bg-white/10 shadow-[0_2px_6px_rgba(0,0,0,0.15)]" 
             : "border-[#BA7517]/30 hover:bg-[#BA7517]/5"
         )}>
           <div className="relative flex flex-col items-center select-none pt-2 md:pt-2.5 pb-0.5">
@@ -207,7 +207,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <nav className={cn(
         "absolute top-0 left-0 right-0 z-50 h-16 md:h-24 transition-all duration-300 flex items-center justify-center",
         useLightHeader 
-          ? "bg-transparent text-white" 
+          ? "bg-gradient-to-b from-black/20 to-transparent text-white" 
           : "fixed bg-transparent text-white h-20 md:h-24 py-2"
       )}>
         {/* Header Zellij Patterns - Very subtle in the background */}
@@ -225,7 +225,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className={cn(
                   "flex items-center rounded-lg md:rounded-xl transition-all duration-300 border h-8 md:h-10",
                   useLightHeader 
-                    ? "border-[#BA7517]/40 text-white" 
+                    ? "border-[#BA7517]/40 text-white shadow-[0_2px_6px_rgba(0,0,0,0.15)]" 
                     : "border-[#BA7517]/30 text-white"
                 )}>
                   <button
@@ -260,8 +260,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <button
                     onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
                     className={cn(
-                      "h-10 px-3.5 flex items-center justify-center transition-all rounded-xl border border-transparent hover:bg-white/10",
-                      useLightHeader ? "text-white" : "text-white"
+                      "h-10 px-3.5 flex items-center justify-center transition-all rounded-xl border",
+                      useLightHeader 
+                        ? "text-white border-[#BA7517]/30 shadow-[0_2px_6px_rgba(0,0,0,0.15)] hover:bg-white/10" 
+                        : "text-white border-transparent hover:bg-white/10"
                     )}
                     title={t('nav.select_lang')}
                   >
@@ -329,7 +331,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <Link 
                 to="/compare" 
                 className={cn(
-                  "hidden lg:flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] transition-opacity hover:opacity-75 group",
+                  "hidden lg:flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] transition-opacity hover:opacity-75 group drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]",
                   useLightHeader ? "text-white" : "text-white"
                 )}
               >
@@ -342,7 +344,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 className={cn(
                   "transition-all duration-300 border h-8 md:h-10 px-4 md:px-5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest whitespace-nowrap flex items-center justify-center",
                   useLightHeader 
-                    ? "border-[#BA7517]/40 text-white hover:bg-white/5" 
+                    ? "border-[#BA7517]/40 text-white hover:bg-white/10 shadow-[0_2px_6px_rgba(0,0,0,0.15)]" 
                     : "border-[#BA7517]/40 text-[#BA7517] hover:bg-white/5 bg-transparent"
                 )}
               >
