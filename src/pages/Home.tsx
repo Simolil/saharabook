@@ -193,7 +193,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { id: 'merzouga', name: t('search.merzouga'), sub: 'The High Sahara', img: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800' },
+              { id: 'merzouga', name: t('search.merzouga'), sub: 'The High Sahara', img: '/images/destinations/merzouga.jpg' },
               { id: 'zagora', name: t('search.zagora'), sub: 'The Draa Gateway', img: 'https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800' },
               { id: 'agafay', name: t('search.agafay'), sub: 'The Marrakech Secret', img: 'https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=800' },
               { id: 'foumzguid', name: t('search.foumzguid'), sub: 'Erg Chigaga Gateway', img: 'https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=800' },

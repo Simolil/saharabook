@@ -4,22 +4,22 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const images = [
   {
-    url: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1600",
+    url: "/images/slideshow/slide-1.jpg",
     title: "Sahara Desert",
     caption: "The golden hour in Merzouga's highest dunes."
   },
   {
-    url: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=1600",
+    url: "/images/slideshow/slide-2.jpg",
     title: "Sahara Night",
     caption: "Experience the magic of the desert under the stars."
   },
   {
-    url: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=1600",
+    url: "/images/slideshow/slide-3.jpg",
     title: "Agafay Stone Desert",
     caption: "A boutique escape just minutes from Marrakech."
   },
   {
-    url: "https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=1600",
+    url: "/images/slideshow/slide-4.jpg",
     title: "Magical Nights",
     caption: "The clearest skies you will ever witness."
   }
