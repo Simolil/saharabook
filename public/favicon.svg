@@ -1,176 +1,81 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <!-- Warm Golden Saffron Sunset Fill -->
-    <linearGradient id="saffronGold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F7A014" />
-      <stop offset="60%" stop-color="#F59E0B" />
-      <stop offset="100%" stop-color="#ED8A0A" />
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141926" />
+      <stop offset="100%" stop-color="#090D16" />
     </linearGradient>
 
-    <!-- Clip Path for the Letter D Form -->
-    <clipPath id="letterDClip">
-      <!-- Outer D silhouette -->
-      <path d="
-        M 98,72
-        H 130
-        V 120
-        H 160
-        L 280,72
-        C 350,72 424,130 424,256
-        C 424,382 350,440 280,440
-        L 160,440
-        V 392
-        H 130
-        V 440
-        H 98
-        V 392
-        H 124
-        V 120
-        H 98
-        Z
-      " />
-    </clipPath>
+    <!-- Golden Tent Gradient -->
+    <linearGradient id="goldTent" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="25%" stop-color="#FBBF24" />
+      <stop offset="65%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- Subtle Golden Top Highlight -->
+    <linearGradient id="highlightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#FBBF24" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Glow Effect -->
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#F59E0B" flood-opacity="0.35" />
+    </filter>
   </defs>
 
+  <!-- Dark Rounded Container -->
+  <rect width="512" height="512" rx="116" fill="url(#bgGrad)" />
+  <rect width="504" height="504" x="4" y="4" rx="112" fill="none" stroke="#F59E0B" stroke-width="2" stroke-opacity="0.15" />
 
-  <!-- Main Letter 'D' Body -->
-  <g>
-    <!-- Solid D Shape -->
-    <path d="
-      M 98,74
-      H 134
-      C 134,86 138,92 150,92
-      H 270
-      C 356,92 424,152 424,256
-      C 424,360 356,420 270,420
-      H 150
-      C 138,420 134,426 134,438
-      H 98
-      C 98,426 102,420 114,420
-      H 124
-      V 92
-      H 114
-      C 102,92 98,86 98,74
-      Z
-    " fill="url(#saffronGold)" />
-
-    <!-- 3 White Aerodynamic Wind Swooshes in the Upper Sky -->
-    <!-- Top Wind Streak -->
-    <path d="M 180,104 C 230,86 310,94 374,134 C 330,118 240,102 180,104 Z" fill="#FFFFFF" />
-    <!-- Middle Wind Streak -->
-    <path d="M 144,142 C 210,118 290,128 350,164 C 300,146 220,132 144,142 Z" fill="#FFFFFF" />
-    <!-- Lower Wind Streak -->
-    <path d="M 124,178 C 170,160 216,166 250,186 C 220,174 170,168 124,178 Z" fill="#FFFFFF" />
-
-    <!-- Radiant White Desert Sun -->
-    <circle cx="322" cy="184" r="28" fill="#FFFDF8" />
-
-    <!-- Sahara Caravan & Desert Dunes in Deep Espresso Brown -->
-    <g fill="#2C1810">
-      <!-- Lower Base Dune Ridge -->
-      <path d="
-        M 98,420
-        C 140,404 220,388 320,404
-        C 350,408 376,416 394,420
-        L 394,440
-        L 98,440
+  <!-- Tent Silhouette with Glow -->
+  <g filter="url(#softGlow)">
+    <!-- Main Tent Geometry -->
+    <path 
+      d="
+        M 256,88
+        C 264,88 274,96 281,108
+        L 426,382
+        C 432,393 426,408 412,408
+        L 326,408
+        C 316,408 308,401 303,391
+        L 256,278
+        L 209,391
+        C 204,401 196,408 186,408
+        L 100,408
+        C 86,408 80,393 86,382
+        L 231,108
+        C 238,96 248,88 256,88
         Z
-      " />
+      "
+      fill="url(#goldTent)"
+    />
 
-      <!-- Golden Dune Valley Divider -->
-      <path d="
-        M 98,416
-        C 150,396 230,382 324,398
-        C 346,402 368,408 384,412
-      " fill="none" stroke="url(#saffronGold)" stroke-width="12" stroke-linecap="round" />
-
-      <!-- Upper Main Dune Crest -->
-      <path d="
-        M 124,402
-        C 180,372 260,360 372,390
-        L 372,440
-        L 124,440
+    <!-- Inner Shadow & Dimension -->
+    <path 
+      d="
+        M 256,88
+        C 264,88 274,96 281,108
+        L 426,382
+        C 432,393 426,408 412,408
+        L 326,408
+        C 316,408 308,401 303,391
+        L 256,278
+        L 209,391
+        C 204,401 196,408 186,408
+        L 100,408
+        C 86,408 80,393 86,382
+        L 231,108
+        C 238,96 248,88 256,88
         Z
-      " />
-
-      <!-- Berber Caravan Guide Silhouette (Walking Left) -->
-      <!-- Turban & Hooded Djellaba Robe -->
-      <path d="
-        M 170,270
-        C 174,268 178,272 178,278
-        C 177,284 174,286 172,290
-        C 169,294 168,298 165,302
-        /* Forward arm holding lead rope */
-        C 158,306 148,312 144,316
-        C 140,320 144,324 148,322
-        L 160,314
-        /* Flowing Djellaba Body */
-        L 155,348
-        L 148,382
-        L 168,382
-        L 172,352
-        L 180,382
-        L 194,382
-        L 186,346
-        L 189,310
-        C 189,296 182,284 175,274
-        Z
-      " />
-
-      <!-- Dromedary Camel with Traveler Rider -->
-      <!-- Camel Neck, Head, Body, Legs, and Passenger -->
-      <path d="
-        /* Camel Head & Muzzle */
-        M 226,260
-        C 230,256 242,254 252,256
-        C 256,258 252,266 244,268
-        C 238,270 234,272 236,276
-        /* Throat curving down */
-        C 244,290 262,314 282,316
-        C 294,318 296,306 294,296
-        /* Rider seated on saddle */
-        C 294,292 292,286 290,280
-        L 298,274
-        /* Rider Body & Arm reaching to reins */
-        C 302,266 308,254 316,246
-        /* Rider's Safari / Sun Hat */
-        C 306,244 300,240 310,230
-        C 318,222 334,224 336,232
-        C 340,240 330,244 322,246
-        /* Rider Backpack on shoulders */
-        C 328,252 336,262 336,272
-        C 334,282 326,290 318,294
-        /* Saddle curve & Camel Hump */
-        C 328,284 340,284 350,296
-        /* Camel Back, Rump, and Tail */
-        C 362,310 368,330 376,346
-        /* Rear Right Leg */
-        L 380,382
-        L 368,382
-        L 364,348
-        /* Rear Left Leg */
-        L 354,382
-        L 344,382
-        L 350,336
-        /* Belly curve */
-        C 334,338 316,334 300,328
-        /* Front Left Leg */
-        L 304,382
-        L 294,382
-        L 290,344
-        /* Front Right Leg */
-        L 276,382
-        L 266,382
-        L 272,336
-        /* Chest */
-        C 264,324 250,306 242,286
-        /* Back to neck */
-        C 236,274 228,266 226,260
-        Z
-      " />
-
-      <!-- Lead Line connecting Guide Hand to Camel Bridle -->
-      <path d="M 148,322 C 160,344 190,330 226,272" fill="none" stroke="#2C1810" stroke-width="4.5" stroke-linecap="round" />
-    </g>
+      "
+      fill="none"
+      stroke="#B45309"
+      stroke-width="6"
+      stroke-linejoin="round"
+      opacity="0.5"
+    />
   </g>
 </svg>
