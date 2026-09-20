@@ -42,6 +42,21 @@ const images = [
     url: "/images/slideshow/slide-8.jpg",
     title: "Kasbah Gateway",
     caption: "Ancient earthen architecture at the desert's threshold."
+  },
+  {
+    url: "/images/slideshow/slide-9.png",
+    title: "Desert Serenity",
+    caption: "Endless horizons and tranquil Saharan moments."
+  },
+  {
+    url: "/images/slideshow/slide-10.png",
+    title: "Oasis & Dunes",
+    caption: "Hidden gems and tranquil springs in the sand."
+  },
+  {
+    url: "/images/slideshow/slide-11.jpg",
+    title: "Sahara Panorama",
+    caption: "Immersive landscapes under endless desert skies."
   }
 ];
 
