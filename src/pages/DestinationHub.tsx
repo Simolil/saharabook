@@ -111,17 +111,21 @@ export default function DestinationHub() {
       {/* Header Section */}
       <section className="h-[60vh] relative flex items-center justify-center overflow-hidden">
         <img 
-          src={
-            id === 'merzouga' 
-              ? "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1600" 
-              : id === 'agafay'
-                ? "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1600"
-                : id === 'foumzguid'
-                  ? "https://images.unsplash.com/photo-1489493585363-d6943649ef91?q=80&w=1600"
-                  : id === 'ouarzazate'
-                    ? "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1600"
-                    : "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1600"
-          }
+          src={`/images/destinations/${id || 'merzouga'}.jpg`}
+          onError={(e) => {
+            const fallbacks: Record<string, string> = {
+              merzouga: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1600",
+              agafay: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1600",
+              foumzguid: "https://images.unsplash.com/photo-1489493585363-d6943649ef91?q=80&w=1600",
+              ouarzazate: "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1600",
+              zagora: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1600",
+              mhamid: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1600"
+            };
+            const fallbackUrl = fallbacks[id || 'merzouga'] || fallbacks.merzouga;
+            if (e.currentTarget.src !== fallbackUrl) {
+              e.currentTarget.src = fallbackUrl;
+            }
+          }}
           className="w-full h-full object-cover" 
           alt={data.name}
         />
