@@ -1,6 +1,7 @@
 import React from 'react';
 import { LayoutDashboard, PlusCircle, CheckCircle, BarChart3, MessageSquare, ShieldCheck } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import BackButton from '@/src/components/BackButton';
 import { cn } from '@/src/lib/utils';
 
 export default function PartnerPortal() {
@@ -12,7 +13,8 @@ export default function PartnerPortal() {
         <title>Operator Portal | Dunecamps Partners</title>
       </Helmet>
 
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-4 py-12">
+         <BackButton className="mb-6" />
          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Sidebar nav */}
             <aside className="lg:col-span-1">

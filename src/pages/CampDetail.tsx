@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ShieldCheck, Star, Bath, Users, Wifi, Wind, Coffee, MapPin, ArrowLeft, Heart, Share2, Check } from 'lucide-react';
+import { ShieldCheck, Star, Bath, Users, Wifi, Wind, Coffee, MapPin, Heart, Share2, Check } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import BackButton from '@/src/components/BackButton';
 import { mockCamps } from '@/src/lib/mockData';
 import VerificationBadge from '@/src/components/VerificationBadge';
 import { formatCurrency, cn } from '@/src/lib/utils';
@@ -42,10 +43,7 @@ export default function CampDetail() {
 
       {/* Hero Gallery */}
       <section className="relative px-4 pt-12 pb-8 max-w-7xl mx-auto">
-        <Link to="/" className="inline-flex items-center space-x-2 text-xs font-bold text-[#0B132B]/60 hover:text-[#BA7517] mb-8 transition-colors">
-          <ArrowLeft size={14} />
-          <span>{t('detail.back')}</span>
-        </Link>
+        <BackButton className="mb-6" />
         
         <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[600px]">
           <div className="md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden shadow-2xl relative">

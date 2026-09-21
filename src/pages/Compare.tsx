@@ -2,6 +2,7 @@ import React from 'react';
 import { Info } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import BackButton from '@/src/components/BackButton';
 import { cn } from '@/src/lib/utils';
 
 export default function Compare() {
@@ -21,7 +22,11 @@ export default function Compare() {
         <meta name="description" content="Which Morocco desert destination is right for you? Compare dunes, travel time, and experiences." />
       </Helmet>
 
-      <section className="py-24 bg-[#FAF7F2]">
+      <div className="max-w-7xl mx-auto px-4 pt-8">
+        <BackButton />
+      </div>
+
+      <section className="py-16 bg-[#FAF7F2]">
          <div className="max-w-4xl mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-7xl font-serif font-bold text-[#0B132B] mb-8">Where the <span className="text-[#BA7517] italic">Stars</span> Align.</h1>
             <p className="text-[#0B132B]/60 text-lg leading-relaxed max-w-2xl mx-auto">

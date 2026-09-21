@@ -1,7 +1,8 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Clock, MapPin, BadgeEuro, ArrowLeft, Send, CheckCircle } from 'lucide-react';
+import { Clock, MapPin, BadgeEuro, Send, CheckCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import BackButton from '@/src/components/BackButton';
 import { ProductSchema } from '@/src/lib/seo';
 import { tours } from '@/src/lib/toursData';
 
@@ -32,10 +33,7 @@ export default function TourDetail() {
          />
          <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-[#FAF7F2]" />
          <div className="absolute bottom-12 left-0 right-0 max-w-7xl mx-auto px-4">
-            <Link to="/" className="inline-flex items-center space-x-2 text-white/80 hover:text-white text-xs font-bold uppercase tracking-widest mb-8">
-               <ArrowLeft size={14} />
-               <span>All Journeys</span>
-            </Link>
+            <BackButton variant="dark" className="mb-6" />
             <h1 className="text-4xl md:text-6xl font-bold text-white tracking-tighter max-w-3xl leading-tight">
                {tour.title}
             </h1>

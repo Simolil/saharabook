@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ShieldCheck, Map as MapIcon, Filter } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { cn } from '@/src/lib/utils';
+import BackButton from '@/src/components/BackButton';
 import SearchBar from '@/src/components/SearchBar';
 import CampCard from '@/src/components/CampCard';
 import { mockCamps } from '@/src/lib/mockData';
@@ -109,7 +110,7 @@ export default function DestinationHub() {
       <FAQSchema faqs={data.faqs} />
       
       {/* Header Section */}
-      <section className="h-[60vh] relative flex items-center justify-center overflow-hidden">
+      <section className="h-[55vh] md:h-[65vh] min-h-[420px] relative flex items-center justify-center overflow-hidden">
         <img 
           src={`/images/destinations/${id || 'merzouga'}.jpg`}
           onError={(e) => {
@@ -126,20 +127,24 @@ export default function DestinationHub() {
               e.currentTarget.src = fallbackUrl;
             }
           }}
-          className="w-full h-full object-cover" 
+          className="absolute inset-0 w-full h-full object-cover" 
           alt={data.name}
         />
-        <div className="absolute inset-0 bg-black/30 bg-gradient-to-t from-[#FAF7F2] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-black/45 bg-gradient-to-t from-[#FAF7F2] via-black/25 to-black/35" />
         
-        <div className="relative z-10 text-center max-w-4xl px-4">
-           <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white text-[10px] font-bold uppercase tracking-widest mb-4">{t('hub.explorer')}</span>
-           <h1 className="text-5xl md:text-7xl font-serif font-bold italic text-white tracking-wide mb-4">{data.name}</h1>
-           <p className="text-white font-medium text-lg italic font-serif">{data.tagline}</p>
+        <div className="absolute top-20 md:top-24 left-4 sm:left-8 z-30">
+          <BackButton variant="dark" />
+        </div>
+
+        <div className="relative z-10 text-center max-w-4xl px-6 pt-10 pb-8">
+           <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white text-[10px] font-bold uppercase tracking-widest mb-3">{t('hub.explorer')}</span>
+           <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-bold italic text-white tracking-wide mb-3 leading-tight drop-shadow-md">{data.name}</h1>
+           <p className="text-white/95 font-medium text-base sm:text-lg italic font-serif max-w-lg mx-auto drop-shadow">{data.tagline}</p>
         </div>
       </section>
 
       {/* Search Bar Wrapper - Keeps page layout static on scroll transition to prevent visual jumps */}
-      <div className="relative -mt-16 z-40 px-4 h-24 mb-6">
+      <div className="relative -mt-10 md:-mt-16 z-40 px-4 min-h-[5rem] mb-6">
         <div className={cn(
           "w-full transition-all duration-300",
           isSticky ? "md:fixed md:top-6 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-7xl md:px-4 md:z-45 relative" : "relative"

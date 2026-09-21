@@ -2,6 +2,7 @@ import React from 'react';
 import { ShieldAlert, CheckCircle2, XCircle, Info, ShieldCheck, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import BackButton from '@/src/components/BackButton';
 import { FAQSchema } from '@/src/lib/seo';
 import { useLanguage } from '@/src/lib/LanguageContext';
 
@@ -39,7 +40,10 @@ export default function ScamGuide() {
 
       <FAQSchema faqs={faqs} />
 
-      <section className="py-24 bg-[#0B132B] text-white">
+      <section className="py-24 bg-[#0B132B] text-white relative">
+         <div className="max-w-7xl mx-auto px-4 absolute top-8 left-0 right-0 z-20">
+            <BackButton variant="dark" />
+         </div>
          <div className="max-w-4xl mx-auto px-4 text-center">
             <ShieldAlert size={64} className="text-[#BA7517] mx-auto mb-8" />
             <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-8 leading-tight">

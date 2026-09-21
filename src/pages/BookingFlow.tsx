@@ -13,6 +13,7 @@ import {
 import { QRCodeSVG } from "qrcode.react";
 import { formatCurrency, cn } from "@/src/lib/utils";
 import { mockCamps } from "@/src/lib/mockData";
+import BackButton from "@/src/components/BackButton";
 
 export default function BookingFlow() {
   const { campSlug } = useParams<{ campSlug: string }>();
@@ -39,6 +40,8 @@ export default function BookingFlow() {
   return (
     <div className="bg-[#FAF7F2] min-h-screen py-12 md:py-24">
       <div className="max-w-4xl mx-auto px-4">
+        <BackButton className="mb-8" />
+
         {/* Progress Tracker */}
         <div className="flex justify-between items-center mb-16 px-4">
           {steps.map((s, i) => (
