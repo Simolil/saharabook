@@ -210,8 +210,11 @@ export default function DateRangePicker({
 
   const calendarCard = (
     <div 
+      data-search-picker="true"
       className="w-[360px] sm:w-[380px] max-w-[calc(100vw-2rem)] bg-[#0B132B] border border-[#BA7517]/60 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95)] ring-1 ring-white/10 p-5 md:p-6 text-white relative animate-in fade-in zoom-in-95 duration-200"
       onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onTouchStart={(e) => e.stopPropagation()}
     >
       {/* Header - Identical structure to Guests & Destination pickers */}
       <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/10">
@@ -377,7 +380,11 @@ export default function DateRangePicker({
     return createPortal(
       <div 
         className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
-        onClick={onClose}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            onClose();
+          }
+        }}
       >
         {calendarCard}
       </div>,
@@ -388,11 +395,14 @@ export default function DateRangePicker({
   // On desktop, render anchored above (top) or below (bottom) the search bar
   return (
     <div 
+      data-search-picker="true"
       className={cn(
         "absolute left-0 md:left-[22%] lg:left-[24%] z-[100]",
         placement === 'top' ? "bottom-full mb-3" : "top-full mt-3"
       )}
       onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onTouchStart={(e) => e.stopPropagation()}
     >
       {calendarCard}
     </div>

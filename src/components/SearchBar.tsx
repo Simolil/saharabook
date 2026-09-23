@@ -49,14 +49,25 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
   const dateTriggerRef = useRef<HTMLDivElement>(null);
   const guestsTriggerRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdowns on click outside
+  // Close dropdowns on click outside (safely ignoring clicks inside portalled or inline pickers)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
-        setIsDestinationPickerOpen(false);
-        setIsDatePickerOpen(false);
-        setIsGuestsPickerOpen(false);
+      const target = event.target as Element | null;
+      if (!target) return;
+
+      // Inside search bar? Keep open
+      if (searchBarRef.current && searchBarRef.current.contains(target as Node)) {
+        return;
       }
+
+      // Inside any picker popup or portal? Keep open
+      if (target.closest && target.closest('[data-search-picker]')) {
+        return;
+      }
+
+      setIsDestinationPickerOpen(false);
+      setIsDatePickerOpen(false);
+      setIsGuestsPickerOpen(false);
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -109,11 +120,13 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
         {/* Destination Trigger */}
         <div 
           ref={destinationTriggerRef}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setIsDestinationPickerOpen(prev => !prev);
             setIsDatePickerOpen(false);
             setIsGuestsPickerOpen(false);
           }}
+          onMouseDown={(e) => e.stopPropagation()}
           className={cn(
             "flex-1 w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3.5 flex items-center space-x-3 border-b md:border-b-0 md:border-r border-[#BA7517]/30 cursor-pointer rounded-lg transition-colors group",
             isDestinationPickerOpen ? "bg-white/10" : "hover:bg-white/5"
@@ -142,11 +155,13 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
         {/* Dates Trigger (Check-in & Check-out) */}
         <div 
           ref={dateTriggerRef}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setIsDatePickerOpen(prev => !prev);
             setIsDestinationPickerOpen(false);
             setIsGuestsPickerOpen(false);
           }}
+          onMouseDown={(e) => e.stopPropagation()}
           className={cn(
             "flex-1 w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3.5 flex items-center space-x-3 border-b md:border-b-0 md:border-r border-[#BA7517]/30 cursor-pointer rounded-lg transition-colors group",
             isDatePickerOpen ? "bg-white/10" : "hover:bg-white/5"
@@ -184,11 +199,13 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
         {/* Guests Trigger */}
         <div 
           ref={guestsTriggerRef}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             setIsGuestsPickerOpen(prev => !prev);
             setIsDatePickerOpen(false);
             setIsDestinationPickerOpen(false);
           }}
+          onMouseDown={(e) => e.stopPropagation()}
           className={cn(
             "flex-1 w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3.5 flex items-center space-x-3 cursor-pointer rounded-lg transition-colors group",
             isGuestsPickerOpen ? "bg-white/10" : "hover:bg-white/5"
