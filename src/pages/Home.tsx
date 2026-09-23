@@ -82,11 +82,11 @@ export default function Home() {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative h-[100dvh] min-h-[580px] max-h-[100dvh] flex flex-col justify-between items-center pt-16 sm:pt-20 md:pt-20 pb-3 sm:pb-4 md:pb-5 px-3 sm:px-4 z-30 overflow-visible">
+      <section className="relative h-[100dvh] min-h-[580px] max-h-[100dvh] flex flex-col justify-between items-center pt-14 sm:pt-16 md:pt-20 pb-0 px-3 sm:px-4 z-30 overflow-visible">
         {/* Background Slideshow */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Slideshow className="w-full h-full" />
-          <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-[#0B132B] via-transparent to-black/20" />
+          <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-[#0B132B] via-transparent to-black/20 pointer-events-none" />
         </div>
 
         {/* Soft Dark Vignette directly under the writing for crisp contrast against bright photos */}
@@ -148,8 +148,8 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Search Bar - Guaranteed fully visible at the bottom of the hero */}
-        <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 z-50 relative shrink-0">
+        {/* Search Bar - Guaranteed fully visible and elevated 1.5cm above the bottom edge */}
+        <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 z-50 relative shrink-0 mb-[1.5cm]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

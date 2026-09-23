@@ -129,19 +129,24 @@ export default function Slideshow({ className = "" }: { className?: string }) {
       {/* Dark overlay to balance bright daylight photos */}
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Controls - subtle in background mode, positioned cleanly above search bar */}
-      <div className="absolute bottom-24 md:bottom-28 right-6 md:right-10 z-10 hidden sm:flex space-x-2">
+      {/* Controls - compact, transparent, and only on big devices */}
+      <div className="absolute bottom-3.5 right-8 z-20 hidden lg:flex items-center space-x-1.5 pointer-events-auto">
         {images.map((_, i) => (
           <button
             key={i}
+            aria-label={`Go to slide ${i + 1}`}
             onClick={() => {
               setDirection(i > index ? 1 : -1);
               setIndex(i);
             }}
-            className={`h-1.5 transition-all duration-500 rounded-full ${
-              i === index ? "w-10 bg-[#BA7517]" : "w-3 bg-white/30 hover:bg-white/50"
-            }`}
-          />
+            className="p-1 group cursor-pointer focus:outline-none"
+          >
+            <span
+              className={`block h-1 transition-all duration-500 rounded-full ${
+                i === index ? "w-6 bg-[#BA7517]" : "w-2 bg-white/40 group-hover:bg-white/70"
+              }`}
+            />
+          </button>
         ))}
       </div>
     </div>
