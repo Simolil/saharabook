@@ -205,10 +205,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </Helmet>
       {/* Navigation */}
       <nav className={cn(
-        "absolute top-0 left-0 right-0 z-50 h-16 md:h-24 transition-all duration-300 flex items-center justify-center",
+        "absolute top-0 left-0 right-0 z-50 h-16 md:h-20 lg:h-24 transition-all duration-300 flex items-center justify-center",
         useLightHeader 
           ? "bg-gradient-to-b from-black/20 to-transparent text-white" 
-          : "fixed bg-transparent text-white h-20 md:h-24 py-2"
+          : "fixed bg-transparent text-white h-16 md:h-20 lg:h-24 py-2"
       )}>
         {/* Header Zellij Patterns - Very subtle in the background */}
         <ZellijCorner className="absolute top-0 right-0 translate-x-12 -translate-y-12 opacity-5" />

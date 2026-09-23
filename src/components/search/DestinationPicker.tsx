@@ -73,12 +73,12 @@ export default function DestinationPicker({
   const { t } = useLanguage();
 
   const [isMobile, setIsMobile] = useState<boolean>(() => {
-    return typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+    return typeof window !== 'undefined' ? window.innerWidth < 640 : false;
   });
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 640);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -90,7 +90,7 @@ export default function DestinationPicker({
   const destinationCard = (
     <div 
       data-search-picker="true"
-      className="w-[360px] sm:w-[380px] max-w-[calc(100vw-2rem)] bg-[#0B132B] border border-[#BA7517]/60 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95)] ring-1 ring-white/10 p-5 md:p-6 text-white relative animate-in fade-in zoom-in-95 duration-200"
+      className="w-[340px] sm:w-[380px] max-w-[calc(100vw-2rem)] max-h-[min(540px,calc(100vh-130px))] overflow-y-auto bg-[#0B132B] border border-[#BA7517]/60 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95)] ring-1 ring-white/10 p-4 sm:p-5 md:p-6 text-white relative animate-in fade-in zoom-in-95 duration-200"
       onClick={(e) => e.stopPropagation()}
       onMouseDown={(e) => e.stopPropagation()}
       onTouchStart={(e) => e.stopPropagation()}
@@ -184,7 +184,7 @@ export default function DestinationPicker({
   if (isMobile && typeof document !== 'undefined') {
     return createPortal(
       <div 
-        className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto"
+        className="fixed inset-0 z-[9999] flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-xs overflow-y-auto"
         onClick={(e) => {
           if (e.target === e.currentTarget) {
             onClose();
@@ -201,7 +201,7 @@ export default function DestinationPicker({
     <div 
       data-search-picker="true"
       className={cn(
-        "absolute left-0 md:left-2 z-[100]",
+        "absolute left-0 sm:left-1 md:left-2 z-[100]",
         placement === 'top' ? "bottom-full mb-3" : "top-full mt-3"
       )}
       onClick={(e) => e.stopPropagation()}

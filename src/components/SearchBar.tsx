@@ -114,7 +114,7 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
       )}
     >
       <div className={cn(
-        "rounded-xl md:rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-2 flex flex-col md:flex-row items-center border border-[#BA7517]/40 backdrop-blur-md transition-all duration-300",
+        "rounded-xl md:rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-1.5 sm:p-2 flex flex-col md:flex-row items-center border border-[#BA7517]/40 backdrop-blur-md transition-all duration-300",
         isSticky ? "bg-[#0B132B]/85 border-transparent" : "bg-black/25 hover:bg-black/35"
       )}>
         {/* Destination Trigger */}
@@ -128,26 +128,26 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
           }}
           onMouseDown={(e) => e.stopPropagation()}
           className={cn(
-            "flex-1 w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3.5 flex items-center space-x-3 border-b md:border-b-0 md:border-r border-[#BA7517]/30 cursor-pointer rounded-lg transition-colors group",
+            "flex-1 w-full md:w-auto px-3.5 py-2 md:px-3.5 md:py-2.5 lg:px-5 lg:py-3.5 flex items-center space-x-2.5 lg:space-x-3 border-b md:border-b-0 md:border-r border-[#BA7517]/30 cursor-pointer rounded-lg transition-colors group",
             isDestinationPickerOpen ? "bg-white/10" : "hover:bg-white/5"
           )}
         >
-          <MapPin className="text-[#BA7517] group-hover:scale-110 transition-transform w-[18px] h-[18px] md:w-[20px] md:h-[20px] shrink-0" />
+          <MapPin className="text-[#BA7517] group-hover:scale-110 transition-transform w-[16px] h-[16px] md:w-[18px] md:h-[18px] lg:w-[20px] lg:h-[20px] shrink-0" />
           <div className="flex flex-col flex-1 text-left min-w-0">
-            <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-black text-[#BA7517]">
+            <span className="text-[9px] lg:text-[10px] uppercase tracking-widest font-black text-[#BA7517]">
               {t('search.destination')}
             </span>
-            <div className="text-white text-xs md:text-sm font-semibold truncate flex items-center justify-between">
+            <div className="text-white text-xs lg:text-sm font-semibold truncate flex items-center justify-between">
               <span className="truncate">{currentDestName}</span>
               {currentDestRegion && (
-                <span className="text-[9px] uppercase tracking-wider text-[#BA7517] font-bold ml-1.5 hidden sm:inline-block px-1.5 py-0.5 rounded bg-white/10 shrink-0">
+                <span className="text-[9px] uppercase tracking-wider text-[#BA7517] font-bold ml-1.5 hidden xl:inline-block px-1.5 py-0.5 rounded bg-white/10 shrink-0">
                   {currentDestRegion}
                 </span>
               )}
             </div>
           </div>
           <ChevronDown size={14} className={cn(
-            "text-white/40 group-hover:text-white transition-transform duration-200 shrink-0",
+            "text-white/40 group-hover:text-white transition-transform duration-200 shrink-0 ml-1",
             isDestinationPickerOpen && "rotate-180 text-[#BA7517]"
           )} />
         </div>
@@ -163,14 +163,14 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
           }}
           onMouseDown={(e) => e.stopPropagation()}
           className={cn(
-            "flex-1 w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3.5 flex items-center space-x-3 border-b md:border-b-0 md:border-r border-[#BA7517]/30 cursor-pointer rounded-lg transition-colors group",
+            "flex-1 w-full md:w-auto px-3.5 py-2 md:px-3.5 md:py-2.5 lg:px-5 lg:py-3.5 flex items-center space-x-2.5 lg:space-x-3 border-b md:border-b-0 md:border-r border-[#BA7517]/30 cursor-pointer rounded-lg transition-colors group",
             isDatePickerOpen ? "bg-white/10" : "hover:bg-white/5"
           )}
         >
-          <Calendar className="text-[#BA7517] group-hover:scale-110 transition-transform w-[18px] h-[18px] md:w-[20px] md:h-[20px] shrink-0" />
+          <Calendar className="text-[#BA7517] group-hover:scale-110 transition-transform w-[16px] h-[16px] md:w-[18px] md:h-[18px] lg:w-[20px] lg:h-[20px] shrink-0" />
           <div className="flex flex-col flex-1 text-left min-w-0">
             <div className="flex items-center space-x-1.5">
-              <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-black text-[#BA7517]">
+              <span className="text-[9px] lg:text-[10px] uppercase tracking-widest font-black text-[#BA7517]">
                 {t('search.arrival')} – {t('search.departure')}
               </span>
               {nights > 0 && (
@@ -180,13 +180,13 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
               )}
             </div>
             
-            <div className="text-white text-xs md:text-sm font-semibold truncate">
+            <div className="text-white text-xs lg:text-sm font-semibold truncate">
               {checkIn && checkOut ? (
-                <span>
+                <span className="truncate">
                   {formatShortDate(checkIn)} — {formatShortDate(checkOut)}
                 </span>
               ) : checkIn ? (
-                <span className="text-white/80">
+                <span className="text-white/80 truncate">
                   {formatShortDate(checkIn)} — <span className="text-[#BA7517]">Select checkout</span>
                 </span>
               ) : (
@@ -207,20 +207,20 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
           }}
           onMouseDown={(e) => e.stopPropagation()}
           className={cn(
-            "flex-1 w-full md:w-auto px-4 py-2.5 md:px-6 md:py-3.5 flex items-center space-x-3 cursor-pointer rounded-lg transition-colors group",
+            "flex-1 w-full md:w-auto px-3.5 py-2 md:px-3.5 md:py-2.5 lg:px-5 lg:py-3.5 flex items-center space-x-2.5 lg:space-x-3 cursor-pointer rounded-lg transition-colors group",
             isGuestsPickerOpen ? "bg-white/10" : "hover:bg-white/5"
           )}
         >
-          <Users className="text-[#BA7517] group-hover:scale-110 transition-transform w-[18px] h-[18px] md:w-[20px] md:h-[20px] shrink-0" />
+          <Users className="text-[#BA7517] group-hover:scale-110 transition-transform w-[16px] h-[16px] md:w-[18px] md:h-[18px] lg:w-[20px] lg:h-[20px] shrink-0" />
           <div className="flex flex-col flex-1 text-left min-w-0">
-            <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-black text-[#BA7517]">
+            <span className="text-[9px] lg:text-[10px] uppercase tracking-widest font-black text-[#BA7517]">
               {t('search.guests')}
             </span>
-            <div className="text-white text-xs md:text-sm font-semibold truncate">
+            <div className="text-white text-xs lg:text-sm font-semibold truncate">
               <span>
                 {totalGuests} {totalGuests === 1 ? 'guest' : 'guests'}
               </span>
-              <span className="text-white/40 mx-1.5">·</span>
+              <span className="text-white/40 mx-1">·</span>
               <span>
                 {guests.tents} {guests.tents === 1 ? 'tent' : 'tents'}
               </span>
@@ -232,10 +232,10 @@ export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) 
         <button 
           type="button"
           onClick={handleSearchSubmit}
-          className="w-full md:w-auto border border-[#BA7517]/40 hover:border-[#BA7517] bg-white/10 hover:bg-white/20 text-white px-6 py-2.5 md:px-7 md:py-3 rounded-lg md:rounded-xl font-bold text-xs md:text-sm uppercase tracking-wider flex items-center justify-center space-x-2 transition-all active:scale-95 shadow-[0_2px_6px_rgba(0,0,0,0.15)] group cursor-pointer shrink-0"
+          className="w-full md:w-auto border border-[#BA7517]/40 hover:border-[#BA7517] bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 md:px-5 md:py-2.5 lg:px-7 lg:py-3 rounded-lg md:rounded-xl font-bold text-xs lg:text-sm uppercase tracking-wider flex items-center justify-center space-x-1.5 lg:space-x-2 transition-all active:scale-95 shadow-[0_2px_6px_rgba(0,0,0,0.15)] group cursor-pointer shrink-0 mt-1.5 md:mt-0"
         >
           <span className="text-white group-hover:text-[#BA7517] transition-colors">{t('search.action')}</span>
-          <ArrowRight className="w-[14px] h-[14px] md:w-[16px] md:h-[16px] text-[#BA7517] group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-[14px] h-[14px] lg:w-[16px] lg:h-[16px] text-[#BA7517] group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
 

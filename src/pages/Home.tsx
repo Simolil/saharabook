@@ -82,7 +82,7 @@ export default function Home() {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative min-h-[100dvh] flex flex-col justify-between items-center pt-28 md:pt-36 pb-8 md:pb-12 z-30">
+      <section className="relative h-[100dvh] min-h-[580px] max-h-[100dvh] flex flex-col justify-between items-center pt-16 sm:pt-20 md:pt-20 pb-3 sm:pb-4 md:pb-5 px-3 sm:px-4 z-30 overflow-visible">
         {/* Background Slideshow */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Slideshow className="w-full h-full" />
@@ -94,21 +94,22 @@ export default function Home() {
           <div className="w-full max-w-3xl h-72 sm:h-80 md:h-96 bg-black/45 rounded-full blur-3xl" />
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center my-auto">
+        {/* Hero Content - Perfectly centered in available vertical space */}
+        <div className="relative z-10 max-w-6xl mx-auto px-4 text-center flex-1 flex flex-col justify-center items-center my-0">
           <motion.div
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.8 }}
+             className="flex flex-col items-center"
           >
             <motion.div 
-              className="inline-flex items-center space-x-3 border border-[#BA7517]/40 px-6 py-2 rounded-xl mb-6 md:mb-8 relative group cursor-default"
+              className="inline-flex items-center space-x-2.5 sm:space-x-3 border border-[#BA7517]/40 px-3.5 py-1 sm:px-4 sm:py-1.5 md:px-5 md:py-1.5 rounded-lg md:rounded-xl mb-2 sm:mb-3 md:mb-4 relative group cursor-default"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              <ShieldCheck size={16} className="text-[#BA7517] relative z-10" />
-              <span className="text-white text-[10px] md:text-xs font-black uppercase tracking-[0.3em] relative z-10">{t('hero.expert')}</span>
+              <ShieldCheck size={15} className="text-[#BA7517] relative z-10" />
+              <span className="text-white text-[9px] sm:text-[10px] md:text-xs font-black uppercase tracking-[0.25em] md:tracking-[0.3em] relative z-10">{t('hero.expert')}</span>
               
               {/* Subtle pulsing dot */}
               <div className="absolute right-3 top-1/2 -translate-y-1/2 w-1 h-1 bg-[#BA7517] rounded-full">
@@ -119,7 +120,7 @@ export default function Home() {
                 />
               </div>
             </motion.div>
-            <h1 className="text-5xl md:text-8xl text-white tracking-tight leading-tight mb-6 md:mb-8 flex flex-col md:flex-row items-center justify-center gap-x-2 gap-y-2 text-center px-4 font-comic-cat font-normal">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl text-white tracking-tight leading-tight mb-2 sm:mb-3 md:mb-4 flex flex-col md:flex-row items-center justify-center gap-x-2 gap-y-1 md:gap-y-1.5 text-center px-2 sm:px-4 font-comic-cat font-normal">
               <div className="flex items-center justify-center shrink-0">
                 <motion.span 
                   initial={{ opacity: 0, y: 35, filter: 'blur(8px)' }}
@@ -133,12 +134,12 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.8 }}
-                  className="text-white font-comic-cat text-3xl md:text-5xl align-baseline relative translate-y-1 md:translate-y-2"
+                  className="text-white font-comic-cat text-xl sm:text-2xl md:text-3xl lg:text-5xl align-baseline relative translate-y-0.5 md:translate-y-1"
                 >
                   ,
                 </motion.span>
               </div>
-              <div className="font-comic-cat relative inline-flex items-center justify-center md:justify-start text-center md:text-left tracking-tight w-[200px] sm:w-[260px] md:w-[380px] lg:w-[460px] align-middle overflow-visible shrink-0 ml-1 md:ml-2">
+              <div className="font-comic-cat relative inline-flex items-center justify-center md:justify-start text-center md:text-left tracking-tight w-[160px] sm:w-[210px] md:w-[260px] lg:w-[350px] xl:w-[440px] align-middle overflow-visible shrink-0 ml-1 md:ml-2">
                 <AnimatePresence mode="wait">
                   <AnimatedHeroWord key={headerWord} word={headerWord} />
                 </AnimatePresence>
@@ -147,10 +148,10 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Search Bar - Positioned at the bottom of the slideshow */}
-        <div className="w-full max-w-7xl mx-auto px-4 z-50 relative mt-6 md:mt-8">
+        {/* Search Bar - Guaranteed fully visible at the bottom of the hero */}
+        <div className="w-full max-w-6xl mx-auto px-2 sm:px-4 z-50 relative shrink-0">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative z-50"
