@@ -5,6 +5,7 @@ import { ArrowRight, Star, ShieldCheck, Map, Info, Check, Sparkles } from 'lucid
 import SearchBar from '@/src/components/SearchBar';
 import CampCard from '@/src/components/CampCard';
 import Slideshow from '@/src/components/Slideshow';
+import PropertyTypeBrowser from '@/src/components/PropertyTypeBrowser';
 import { mockCamps } from '@/src/lib/mockData';
 import { Helmet } from 'react-helmet-async';
 import { StarZellij } from '@/src/components/Zellij';
@@ -162,16 +163,33 @@ export default function Home() {
       </section>
 
       {/* Intro Hook Section */}
-      <section className="bg-[#FAF7F2] py-16 md:py-24 border-b border-[#BA7517]/10 relative z-10 overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 opacity-[0.03] translate-x-12 -translate-y-12">
+      <section className="bg-gradient-to-b from-[#F5EFEB] via-[#FAF7F2] to-[#FAF7F2] py-14 sm:py-16 md:py-20 border-b border-[#BA7517]/15 relative z-10 overflow-hidden">
+        {/* Soft Moroccan Zellij Accents */}
+        <div className="absolute top-0 right-0 w-36 h-36 opacity-[0.05] translate-x-8 -translate-y-8 text-[#BA7517] pointer-events-none">
           <StarZellij />
         </div>
+        <div className="absolute bottom-0 left-0 w-36 h-36 opacity-[0.04] -translate-x-8 translate-y-8 rotate-45 text-[#BA7517] pointer-events-none">
+          <StarZellij />
+        </div>
+
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-          <p className="text-[#0B132B] text-xl md:text-3xl font-bold leading-tight tracking-tight">
-            {t('home.trust_hook').split('No scams')[0]} <span className="text-[#BA7517] bg-[#BA7517]/10 px-3 py-1 rounded-full italic font-medium inline-block mt-2 md:mt-0">No scams{t('home.trust_hook').split('No scams')[1]}</span>
+          <p className="text-[#0B132B] text-xl sm:text-2xl md:text-3xl font-serif font-bold leading-relaxed tracking-tight">
+            {t('home.trust_hook').includes('No scams') ? (
+              <>
+                {t('home.trust_hook').split('No scams')[0]}{' '}
+                <span className="text-[#BA7517] bg-[#BA7517]/10 border border-[#BA7517]/25 px-3.5 py-1 rounded-full italic font-medium inline-block mt-2 md:mt-0 shadow-xs">
+                  No scams{t('home.trust_hook').split('No scams')[1]}
+                </span>
+              </>
+            ) : (
+              t('home.trust_hook')
+            )}
           </p>
         </div>
       </section>
+
+      {/* Booking.com Style Browse by Property Type */}
+      <PropertyTypeBrowser />
 
       {/* Destination Grid */}
       <section className="py-24 bg-[#FAF7F2]">
