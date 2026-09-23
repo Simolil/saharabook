@@ -82,9 +82,9 @@ export default function Home() {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative h-screen h-[100dvh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[100dvh] flex flex-col justify-between items-center pt-28 md:pt-36 pb-8 md:pb-12 z-30">
         {/* Background Slideshow */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <Slideshow className="w-full h-full" />
           <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-[#0B132B] via-transparent to-black/20" />
         </div>
@@ -95,14 +95,14 @@ export default function Home() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center my-auto">
           <motion.div
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.8 }}
           >
             <motion.div 
-              className="inline-flex items-center space-x-3 border border-[#BA7517]/40 px-6 py-2 rounded-xl mb-8 relative group cursor-default"
+              className="inline-flex items-center space-x-3 border border-[#BA7517]/40 px-6 py-2 rounded-xl mb-6 md:mb-8 relative group cursor-default"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -119,7 +119,7 @@ export default function Home() {
                 />
               </div>
             </motion.div>
-            <h1 className="text-5xl md:text-8xl text-white tracking-tight leading-tight mb-10 flex flex-col md:flex-row items-center justify-center gap-x-2 gap-y-2 text-center px-4 font-comic-cat font-normal">
+            <h1 className="text-5xl md:text-8xl text-white tracking-tight leading-tight mb-6 md:mb-8 flex flex-col md:flex-row items-center justify-center gap-x-2 gap-y-2 text-center px-4 font-comic-cat font-normal">
               <div className="flex items-center justify-center shrink-0">
                 <motion.span 
                   initial={{ opacity: 0, y: 35, filter: 'blur(8px)' }}
@@ -147,31 +147,21 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-40">
-           <div className="w-[1px] h-8 bg-white/20 relative overflow-hidden">
-              <motion.div 
-                animate={{ y: [0, 48] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="absolute top-0 left-0 w-full h-4 bg-[#BA7517]"
-              />
-           </div>
-        </div>
-      </section>
-
-      {/* Intro Hook & Search Section */}
-      <section className="bg-[#FAF7F2] pt-16 pb-16 md:pt-20 md:pb-24 border-b border-[#BA7517]/10 relative overflow-hidden">
-        {/* Search Bar - Positioned directly in the white page after the slideshow */}
-        <div className="max-w-7xl mx-auto px-4 mb-16 md:mb-20 relative z-20">
+        {/* Search Bar - Positioned at the bottom of the slideshow */}
+        <div className="w-full max-w-7xl mx-auto px-4 z-50 relative mt-6 md:mt-8">
           <motion.div
-            initial={{ opacity: 0, y: 45 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative z-50"
           >
             <SearchBar />
           </motion.div>
         </div>
+      </section>
+
+      {/* Intro Hook Section */}
+      <section className="bg-[#FAF7F2] py-16 md:py-24 border-b border-[#BA7517]/10 relative z-10 overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 opacity-[0.03] translate-x-12 -translate-y-12">
           <StarZellij />
         </div>

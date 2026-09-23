@@ -144,10 +144,10 @@ export default function DestinationHub() {
       </section>
 
       {/* Search Bar Wrapper - Keeps page layout static on scroll transition to prevent visual jumps */}
-      <div className="relative -mt-10 md:-mt-16 z-40 px-4 min-h-[5rem] mb-6">
+      <div className="relative -mt-10 md:-mt-16 z-50 px-4 min-h-[5rem] mb-6">
         <div className={cn(
           "w-full transition-all duration-300",
-          isSticky ? "md:fixed md:top-6 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-7xl md:px-4 md:z-45 relative" : "relative"
+          isSticky ? "md:fixed md:top-6 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-7xl md:px-4 md:z-50 relative" : "relative"
         )}>
           <SearchBar isSticky={isSticky} />
         </div>

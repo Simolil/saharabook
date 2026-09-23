@@ -129,8 +129,8 @@ export default function Slideshow({ className = "" }: { className?: string }) {
       {/* Dark overlay to balance bright daylight photos */}
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Controls - subtle in background mode */}
-      <div className="absolute bottom-10 right-10 z-10 flex space-x-2">
+      {/* Controls - subtle in background mode, positioned cleanly above search bar */}
+      <div className="absolute bottom-24 md:bottom-28 right-6 md:right-10 z-10 hidden sm:flex space-x-2">
         {images.map((_, i) => (
           <button
             key={i}
