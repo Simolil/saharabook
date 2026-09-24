@@ -124,7 +124,7 @@ export default function PropertyTypeBrowser() {
   return (
     <section className="py-10 md:py-14 bg-[#FAF7F2] border-b border-[#BA7517]/10 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header - Compact Booking.com style */}
+        {/* Header - Compact & refined */}
         <div className="flex items-end justify-between mb-6 gap-4">
           <div>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0B132B] tracking-tight">
@@ -135,8 +135,8 @@ export default function PropertyTypeBrowser() {
             </p>
           </div>
 
-          {/* Sleek Carousel Arrows */}
-          <div className="flex items-center space-x-1.5 shrink-0">
+          {/* Carousel Arrows (only visible on mobile/tablet when scrolling) */}
+          <div className="flex lg:hidden items-center space-x-1.5 shrink-0">
             <button
               onClick={() => handleScroll('left')}
               disabled={!canScrollLeft}
@@ -166,10 +166,10 @@ export default function PropertyTypeBrowser() {
           </div>
         </div>
 
-        {/* Carousel Container */}
+        {/* Display Container: 5-column grid on laptop (no scroll), smooth swipe on smaller devices */}
         <div
           ref={scrollContainerRef}
-          className="flex space-x-4 sm:space-x-5 overflow-x-auto pb-3 pt-1 snap-x snap-mandatory scroll-smooth scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0"
+          className="flex lg:grid lg:grid-cols-5 space-x-4 lg:space-x-0 lg:gap-5 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 pt-1 snap-x snap-mandatory scroll-smooth scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {PROPERTY_TYPES.map((item) => (
@@ -184,10 +184,10 @@ export default function PropertyTypeBrowser() {
                   setSelectedType(item);
                 }
               }}
-              className="group w-[205px] sm:w-[225px] md:w-[245px] shrink-0 snap-start flex flex-col cursor-pointer focus:outline-none"
+              className="group w-[220px] sm:w-[240px] lg:w-auto shrink-0 snap-start flex flex-col cursor-pointer focus:outline-none"
             >
-              {/* Image Container with Elegant Rounded Corners & Zoom */}
-              <div className="relative h-36 sm:h-40 md:h-44 w-full rounded-2xl overflow-hidden bg-stone-900 shadow-xs ring-1 ring-black/5 group-hover:shadow-md transition-shadow duration-300">
+              {/* Image Container with Elegant Rounded Corners & Generous Height */}
+              <div className="relative h-48 sm:h-52 md:h-56 lg:h-60 w-full rounded-2xl overflow-hidden bg-stone-900 shadow-sm ring-1 ring-black/5 group-hover:shadow-lg transition-all duration-300">
                 <img
                   src={item.image}
                   onError={(e) => {
@@ -196,37 +196,18 @@ export default function PropertyTypeBrowser() {
                     }
                   }}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-106"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                 />
                 
-                {/* Subtle Gradient Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-
-                {/* Category Pill Tag */}
-                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-xs text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-white/10 shadow-xs">
-                  {item.category}
-                </div>
-
-                {/* Subtle Price Tag */}
-                <div className="absolute bottom-2.5 right-2.5 bg-white/95 backdrop-blur-xs text-[#0B132B] text-[10px] font-bold px-2 py-0.5 rounded-md shadow-xs">
-                  from {formatCurrency(item.priceFrom)}
-                </div>
+                {/* Gentle Ambient Vignette for image depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none group-hover:opacity-75 transition-opacity" />
               </div>
 
-              {/* Card Meta - Compact and elegant */}
-              <div className="pt-2.5 px-0.5 flex flex-col">
+              {/* Just the Title underneath */}
+              <div className="pt-3 px-1">
                 <h3 className="text-sm sm:text-base font-serif font-bold text-[#0B132B] group-hover:text-[#BA7517] transition-colors leading-tight">
                   {item.title}
                 </h3>
-                
-                <p className="text-[11px] sm:text-xs text-[#0B132B]/55 font-medium mt-0.5">
-                  {item.count} stays available
-                </p>
-
-                {/* Evocative Vibe teaser */}
-                <p className="text-[11px] text-[#0B132B]/70 line-clamp-2 mt-1.5 leading-snug italic border-l border-[#BA7517]/40 pl-2">
-                  "{item.vibe}"
-                </p>
               </div>
             </div>
           ))}
