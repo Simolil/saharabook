@@ -91,10 +91,10 @@ export default function FoumZguidHub() {
       </svg>
 
       {/* =========================================================================
-          1. THE HERO SECTION (Instant Authority & Mood Setting)
+          1. THE HERO SECTION (Full Device Screen Viewport - Fits All Devices)
           ========================================================================= */}
-      <section className="relative min-h-[640px] sm:min-h-[680px] md:min-h-[720px] lg:min-h-[760px] flex flex-col justify-between overflow-hidden bg-stone-950">
-        {/* Wide Cinematic Background Photo */}
+      <section className="relative h-[100dvh] min-h-[600px] flex flex-col justify-between overflow-hidden bg-stone-950">
+        {/* Wide Cinematic Background Photo - Vivid & Clearly Visible */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/src/assets/images/foum_zguid_lake_iriki_hero_1790326234555.jpg" 
@@ -104,16 +104,15 @@ export default function FoumZguidHub() {
               }
             }}
             alt="4x4 tracks crossing the vast dry Lake Iriki clay bed meeting Erg Chigaga dunes under an amber sky"
-            className="w-full h-full object-cover object-center transform scale-[1.02] filter brightness-[0.88] contrast-[1.08]"
+            className="w-full h-full object-cover object-center transform scale-[1.01] filter brightness-[0.98] contrast-[1.04]"
           />
-          {/* Deep Amber and Vignette Overlays for Instant Authority */}
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/45 to-stone-950/60" />
-          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/80 via-transparent to-stone-950/60" />
-          <div className="absolute inset-0 bg-[#BA7517]/10 mix-blend-color-burn pointer-events-none" />
+          {/* Lightened, subtle gradient overlays so the background photo shines through with clarity */}
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/75 via-black/15 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-stone-950/70" />
         </div>
 
-        {/* Top Bar: Exactly matching reference image hjhjh.PNG with no header and clean top position */}
-        <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-2 flex items-center justify-between gap-4">
+        {/* Top Bar: Exactly matching reference image with no header and clean top position */}
+        <div className="relative z-20 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-5 sm:pt-7 pb-2 flex items-center justify-between gap-4">
           <div className="flex items-center space-x-3">
             <BackButton variant="dark" />
             {/* Breadcrumb Navigation */}
@@ -139,13 +138,13 @@ export default function FoumZguidHub() {
           </div>
         </div>
 
-        {/* Center Content: Headline & Subheadline */}
-        <div className="relative z-20 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-8 text-center">
+        {/* Center Content: Headline & Subheadline (Vertically centered) */}
+        <div className="relative z-20 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-2 sm:py-4 text-center my-auto flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-[#EF9F27]/30 text-[#EF9F27] text-[10px] sm:text-[11px] font-bold uppercase tracking-widest mb-2.5 sm:mb-3 shadow-sm"
+            className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-[#EF9F27]/30 text-[#EF9F27] text-[10px] sm:text-[11px] font-bold uppercase tracking-widest mb-2 sm:mb-3 shadow-sm"
           >
             <Compass size={13} className="animate-spin-slow" />
             <span>Erg Chigaga & Lake Iriki Expedition Gateway</span>
@@ -155,7 +154,7 @@ export default function FoumZguidHub() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight leading-[1.1] mb-2.5 sm:mb-3 drop-shadow-lg"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white tracking-tight leading-[1.1] mb-2 sm:mb-3 drop-shadow-lg"
           >
             Foum Zguid <span className="text-[#EF9F27] font-serif font-normal italic">&amp;</span> The Wild South
           </motion.h1>
@@ -170,30 +169,43 @@ export default function FoumZguidHub() {
           </motion.p>
         </div>
 
-        {/* Bottom Hero Modules: Quick-Facts Bar & Lowered Search Navigation Bar */}
-        <div className="relative z-20 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12 space-y-3 sm:space-y-4">
-          {/* Quick-Facts Bar (Floating Glassmorphism Pill) */}
-          <div className="bg-black/55 backdrop-blur-xl border border-white/20 rounded-2xl md:rounded-full p-2.5 sm:p-3.5 shadow-2xl">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+        {/* Bottom Hero Module: Elevated Search Navigation Bar */}
+        <div className="relative z-20 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8 pt-1">
+          <div className="w-full">
+            <SearchBar defaultDestination="foumzguid" />
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          1.5 DEDICATED QUICK-FACTS STRIP (Dark Brown Saharan Earth Mood)
+          ========================================================================= */}
+      <section className="py-6 sm:py-8 bg-gradient-to-b from-[#1B110A] via-[#23160D] to-[#1B110A] text-white border-y border-[#BA7517]/30 relative z-10 shadow-xl overflow-hidden">
+        {/* Subtle Warm Desert Amber Glow Backdrop */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(186,117,23,0.12),transparent_70%)] pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#120B06]/75 backdrop-blur-md border border-[#BA7517]/35 rounded-2xl p-4 sm:p-5 shadow-2xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 divide-y sm:divide-y-0 sm:divide-x divide-[#BA7517]/20">
               {FOUM_ZGUID_HERO.quickFacts.map((fact, idx) => (
-                <div key={fact.label} className={cn("flex items-center space-x-3 px-3", idx > 0 ? "pt-2 sm:pt-0" : "")}>
-                  <span className="text-xl sm:text-2xl shrink-0 select-none">{fact.icon}</span>
-                  <div className="min-w-0">
-                    <p className="text-[10px] uppercase tracking-wider font-bold text-[#EF9F27] leading-none mb-1">
+                <div 
+                  key={fact.label} 
+                  className={`pt-3 sm:pt-0 ${idx > 0 ? 'sm:pl-6' : ''} text-left flex items-start space-x-3`}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-[#BA7517]/20 border border-[#BA7517]/40 flex items-center justify-center text-lg shrink-0 shadow-inner">
+                    <span>{fact.icon}</span>
+                  </div>
+                  <div>
+                    <div className="text-[#EF9F27] text-[11px] font-bold uppercase tracking-wider mb-0.5">
                       {fact.label}
-                    </p>
-                    <p className="text-xs sm:text-sm font-medium text-white truncate">
+                    </div>
+                    <p className="text-white text-xs sm:text-sm font-medium leading-snug">
                       {fact.value}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Search Navigation Bar (Lowered, completely unmerged, on the same cinematic background) */}
-          <div className="w-full">
-            <SearchBar defaultDestination="foumzguid" />
           </div>
         </div>
       </section>

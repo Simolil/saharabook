@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, Star, ShieldCheck, Map, Info, Check, Sparkles } from 'lucide-react';
+import { ArrowRight, Star, ShieldCheck, Map, Info, Check, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import SearchBar from '@/src/components/SearchBar';
 import CampCard from '@/src/components/CampCard';
 import Slideshow from '@/src/components/Slideshow';
@@ -10,6 +10,7 @@ import { mockCamps } from '@/src/lib/mockData';
 import { Helmet } from 'react-helmet-async';
 import { StarZellij } from '@/src/components/Zellij';
 import { useLanguage } from '@/src/lib/LanguageContext';
+import { cn } from '@/src/lib/utils';
 
 interface AnimatedHeroWordProps {
   word: string;
@@ -67,6 +68,75 @@ const AnimatedHeroWord = ({ word }: AnimatedHeroWordProps) => {
 export default function Home() {
   const [headerWord, setHeaderWord] = useState('Handpicked');
   const { t } = useLanguage();
+
+  // Horizontal carousel state for Top Rated Experiences
+  const topRatedScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeScrollIndex, setActiveScrollIndex] = useState(0);
+
+  // Curate exactly the top 6 premier desert experiences across Morocco
+  const top6Camps = useMemo(() => {
+    const featuredSlugs = [
+      'erg-chigaga-luxury-sanctuary',
+      'luxury-sand-spirit-camp',
+      'scarabeo-alternative-camp',
+      'nomad-dream-zagora',
+      'mhamid-chigaga-nomad-camp',
+      'ksar-ouarzazate-desert-lodge',
+    ];
+    const curated = featuredSlugs
+      .map(slug => mockCamps.find(c => c.slug === slug))
+      .filter((c): c is typeof mockCamps[0] => Boolean(c));
+
+    if (curated.length < 6) {
+      for (const camp of mockCamps) {
+        if (!curated.some(p => p.id === camp.id)) {
+          curated.push(camp);
+        }
+        if (curated.length === 6) break;
+      }
+    }
+    return curated.slice(0, 6);
+  }, []);
+
+  const checkScroll = () => {
+    if (topRatedScrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = topRatedScrollRef.current;
+      setCanScrollLeft(scrollLeft > 15);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
+
+      const maxScroll = scrollWidth - clientWidth;
+      if (maxScroll > 0) {
+        const ratio = scrollLeft / maxScroll;
+        const index = Math.min(top6Camps.length - 1, Math.max(0, Math.round(ratio * (top6Camps.length - 1))));
+        setActiveScrollIndex(index);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkScroll();
+    const ref = topRatedScrollRef.current;
+    if (ref) {
+      ref.addEventListener('scroll', checkScroll, { passive: true });
+      window.addEventListener('resize', checkScroll);
+      return () => {
+        ref.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+      };
+    }
+  }, [top6Camps]);
+
+  const handleTopRatedScroll = (direction: 'left' | 'right') => {
+    if (topRatedScrollRef.current) {
+      const cardWidth = 340; // Approx card width + gap
+      topRatedScrollRef.current.scrollBy({
+        left: direction === 'left' ? -cardWidth : cardWidth,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -236,18 +306,92 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Camps */}
-      <section className="py-12 md:py-16 bg-[#FAF7F2] border-y border-[#BA7517]/5">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center space-x-4 mb-8">
-            <ShieldCheck className="text-[#BA7517]" size={32} />
-            <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#0B132B]">{t('home.top_rated')}</h2>
+      {/* Featured Camps - Top Rated Experiences (Horizontal Left-to-Right Carousel) */}
+      <section className="py-12 md:py-16 bg-[#FAF7F2] border-y border-[#BA7517]/10 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header with Title and Left/Right Scroll Controls */}
+          <div className="flex items-end justify-between mb-6 sm:mb-8 gap-4">
+            <div>
+              <div className="flex items-center space-x-3 mb-2">
+                <ShieldCheck className="text-[#BA7517]" size={26} />
+                <span className="text-xs font-bold tracking-widest text-[#BA7517] uppercase">
+                  Top 6 Rated Desert Stays
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-[#0B132B] tracking-tight">
+                {t('home.top_rated')}
+              </h2>
+            </div>
+
+            {/* Left / Right Carousel Controls */}
+            <div className="flex items-center space-x-2 shrink-0">
+              <button
+                onClick={() => handleTopRatedScroll('left')}
+                disabled={!canScrollLeft}
+                aria-label="Previous experience"
+                className={cn(
+                  "w-10 h-10 rounded-full border border-[#BA7517]/30 flex items-center justify-center transition-all duration-200",
+                  canScrollLeft
+                    ? "bg-white text-[#0B132B] shadow-sm hover:border-[#BA7517] hover:bg-[#BA7517] hover:text-white cursor-pointer active:scale-95"
+                    : "bg-white/40 text-[#0B132B]/20 border-stone-200 cursor-not-allowed"
+                )}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={() => handleTopRatedScroll('right')}
+                disabled={!canScrollRight}
+                aria-label="Next experience"
+                className={cn(
+                  "w-10 h-10 rounded-full border border-[#BA7517]/30 flex items-center justify-center transition-all duration-200",
+                  canScrollRight
+                    ? "bg-white text-[#0B132B] shadow-sm hover:border-[#BA7517] hover:bg-[#BA7517] hover:text-white cursor-pointer active:scale-95"
+                    : "bg-white/40 text-[#0B132B]/20 border-stone-200 cursor-not-allowed"
+                )}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {mockCamps.map((camp) => (
-              <CampCard key={camp.id} camp={camp} variant="square" />
-            ))}
+          {/* Horizontal Scrolling Row - Top 6 Square Cards Only */}
+          <div className="relative">
+            <div
+              ref={topRatedScrollRef}
+              className="flex space-x-5 sm:space-x-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 pt-1 scrollbar-none -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {top6Camps.map((camp) => (
+                <div
+                  key={camp.id}
+                  className="w-[280px] sm:w-[320px] md:w-[350px] shrink-0 snap-start aspect-square"
+                >
+                  <CampCard camp={camp} variant="square" />
+                </div>
+              ))}
+            </div>
+
+            {/* Pagination indicator dots */}
+            <div className="flex justify-center items-center space-x-2 mt-4">
+              {top6Camps.map((camp, idx) => (
+                <button
+                  key={camp.id}
+                  onClick={() => {
+                    if (topRatedScrollRef.current) {
+                      const container = topRatedScrollRef.current;
+                      const cardStep = (container.scrollWidth - container.clientWidth) / (top6Camps.length - 1 || 1);
+                      container.scrollTo({ left: cardStep * idx, behavior: 'smooth' });
+                    }
+                  }}
+                  aria-label={`Slide to experience ${idx + 1}`}
+                  className="h-1.5 rounded-full transition-all duration-300 hover:bg-[#BA7517] cursor-pointer"
+                  style={{
+                    width: activeScrollIndex === idx ? '24px' : '6px',
+                    backgroundColor: activeScrollIndex === idx ? '#BA7517' : 'rgba(186, 117, 23, 0.25)'
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
