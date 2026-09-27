@@ -97,7 +97,7 @@ export default function FoumZguidHub() {
         {/* Wide Cinematic Background Photo - Vivid & Clearly Visible */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/src/assets/images/foum_zguid_lake_iriki_hero_1790326234555.jpg" 
+            src="/images/destinations/foum_zguid_lake_iriki_hero.jpg" 
             onError={(e) => {
               if (e.currentTarget.src !== '/images/destinations/foumzguid.jpg') {
                 e.currentTarget.src = '/images/destinations/foumzguid.jpg';
