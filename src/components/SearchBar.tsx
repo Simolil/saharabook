@@ -11,12 +11,12 @@ function formatShortDate(d: Date): string {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
-export default function SearchBar({ isSticky = false }: { isSticky?: boolean }) {
+export default function SearchBar({ isSticky = false, defaultDestination }: { isSticky?: boolean; defaultDestination?: string }) {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
   // Search parameters state
-  const [destination, setDestination] = useState<string>('merzouga');
+  const [destination, setDestination] = useState<string>(defaultDestination || 'merzouga');
 
   // Default dates: tomorrow to 2 days after tomorrow
   const [checkIn, setCheckIn] = useState<Date | null>(() => {

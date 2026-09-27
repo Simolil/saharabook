@@ -1,6 +1,7 @@
 import { Camp } from '@/src/types';
+import { FOUM_ZGUID_STAYS } from '@/src/data/foumZguidData';
 
-export const mockCamps: Camp[] = [
+const baseCamps: Camp[] = [
   {
     id: "1",
     slug: "luxury-sand-spirit-camp",
@@ -53,23 +54,6 @@ export const mockCamps: Camp[] = [
     created_at: new Date().toISOString()
   },
   {
-    id: "4",
-    slug: "chigaga-wild-dunes-camp",
-    name: "Chigaga Wild Dunes Camp",
-    description_en: "Unmatched isolation and luxury at the foot of Morocco's wildest dunes. Reached off-road via Foum Zguid.",
-    description_fr: "Isolement et luxe inégalés au pied des dunes les plus sauvages du Maroc. Accessible en hors-piste via Foum Zguid.",
-    destination: "foumzguid",
-    latitude: 29.85,
-    longitude: -6.21,
-    price_per_night: 240,
-    currency: "EUR",
-    verification_tier: "elite",
-    private_bathroom: true,
-    max_guests: 4,
-    status: "active",
-    created_at: new Date().toISOString()
-  },
-  {
     id: "5",
     slug: "mhamid-chigaga-nomad-camp",
     name: "M'Hamid Chigaga Nomad Camp",
@@ -103,4 +87,9 @@ export const mockCamps: Camp[] = [
     status: "active",
     created_at: new Date().toISOString()
   }
+];
+
+export const mockCamps: Camp[] = [
+  ...FOUM_ZGUID_STAYS,
+  ...baseCamps
 ];

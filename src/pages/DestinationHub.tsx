@@ -10,9 +10,15 @@ import { mockCamps } from '@/src/lib/mockData';
 import { tours } from '@/src/lib/toursData';
 import { FAQSchema } from '@/src/lib/seo';
 import { useLanguage } from '@/src/lib/LanguageContext';
+import FoumZguidHub from './FoumZguidHub';
 
 export default function DestinationHub() {
   const { id } = useParams<{ id: string }>();
+
+  if (id === 'foumzguid' || id === 'foum-zguid') {
+    return <FoumZguidHub />;
+  }
+
   const [isSticky, setIsSticky] = React.useState(() => 
     typeof window !== 'undefined' ? (window.innerWidth >= 768 && window.scrollY > 400) : false
   );

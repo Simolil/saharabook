@@ -122,10 +122,10 @@ export default function PropertyTypeBrowser() {
     : [];
 
   return (
-    <section className="py-10 md:py-14 bg-[#FAF7F2] border-b border-[#BA7517]/10 relative overflow-hidden">
+    <section className="py-8 md:py-10 bg-[#FAF7F2] border-b border-[#BA7517]/10 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header - Compact & refined */}
-        <div className="flex items-end justify-between mb-6 gap-4">
+        <div className="flex items-end justify-between mb-5 gap-4">
           <div>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0B132B] tracking-tight">
               {t('home.browse_by_type')}
@@ -184,10 +184,10 @@ export default function PropertyTypeBrowser() {
                   setSelectedType(item);
                 }
               }}
-              className="group w-[220px] sm:w-[240px] lg:w-auto shrink-0 snap-start flex flex-col cursor-pointer focus:outline-none"
+              className="group w-[190px] sm:w-[210px] lg:w-auto shrink-0 snap-start flex flex-col cursor-pointer focus:outline-none"
             >
-              {/* Image Container with Elegant Rounded Corners & Generous Height */}
-              <div className="relative h-48 sm:h-52 md:h-56 lg:h-60 w-full rounded-2xl overflow-hidden bg-stone-900 shadow-sm ring-1 ring-black/5 group-hover:shadow-lg transition-all duration-300">
+              {/* Image Container - Squared (1:1 ratio) */}
+              <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-stone-900 shadow-sm ring-1 ring-black/5 group-hover:shadow-md transition-all duration-300">
                 <img
                   src={item.image}
                   onError={(e) => {
@@ -204,7 +204,7 @@ export default function PropertyTypeBrowser() {
               </div>
 
               {/* Just the Title underneath */}
-              <div className="pt-3 px-1">
+              <div className="pt-2.5 px-1">
                 <h3 className="text-sm sm:text-base font-serif font-bold text-[#0B132B] group-hover:text-[#BA7517] transition-colors leading-tight">
                   {item.title}
                 </h3>

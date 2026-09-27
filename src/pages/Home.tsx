@@ -163,7 +163,7 @@ export default function Home() {
       </section>
 
       {/* Intro Hook Section */}
-      <section className="bg-gradient-to-b from-[#F5EFEB] via-[#FAF7F2] to-[#FAF7F2] py-14 sm:py-16 md:py-20 border-b border-[#BA7517]/15 relative z-10 overflow-hidden">
+      <section className="bg-gradient-to-b from-[#F5EFEB] via-[#FAF7F2] to-[#FAF7F2] py-8 sm:py-10 md:py-12 border-b border-[#BA7517]/15 relative z-10 overflow-hidden">
         {/* Soft Moroccan Zellij Accents */}
         <div className="absolute top-0 right-0 w-36 h-36 opacity-[0.05] translate-x-8 -translate-y-8 text-[#BA7517] pointer-events-none">
           <StarZellij />
@@ -192,9 +192,9 @@ export default function Home() {
       <PropertyTypeBrowser />
 
       {/* Destination Grid */}
-      <section className="py-24 bg-[#FAF7F2]">
+      <section className="pt-8 pb-14 md:pt-10 md:pb-16 bg-[#FAF7F2]">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 space-y-4 md:space-y-0">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-10 space-y-4 md:space-y-0">
             <div>
               <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#0B132B] mb-4">{t('home.find_your_camp')}</h2>
               <p className="text-[#0B132B]/60 max-w-md">{t('home.compare_desc')}</p>
@@ -210,7 +210,7 @@ export default function Home() {
               { id: 'merzouga', name: t('search.merzouga'), sub: 'The High Sahara', img: '/images/destinations/merzouga.jpg', fallback: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800' },
               { id: 'zagora', name: t('search.zagora'), sub: 'The Draa Gateway', img: '/images/destinations/zagora.jpg', fallback: 'https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800' },
               { id: 'agafay', name: t('search.agafay'), sub: 'The Marrakech Secret', img: '/images/destinations/agafay.jpg', fallback: 'https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=800' },
-              { id: 'foumzguid', name: t('search.foumzguid'), sub: 'Erg Chigaga Gateway', img: '/images/destinations/foumzguid.jpg', fallback: 'https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=800' },
+              { id: 'foum-zguid', name: t('search.foumzguid'), sub: 'Erg Chigaga Gateway', img: '/images/destinations/foumzguid.jpg', fallback: 'https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=800' },
               { id: 'mhamid', name: t('search.mhamid'), sub: 'The Dune Frontier', img: '/images/destinations/mhamid.jpg', fallback: 'https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800' },
               { id: 'ouarzazate', name: t('search.ouarzazate'), sub: 'The Kasbah Oasis', img: '/images/destinations/ouarzazate.jpg', fallback: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=800' }
             ].map((dest) => (
@@ -237,36 +237,36 @@ export default function Home() {
       </section>
 
       {/* Featured Camps */}
-      <section className="py-24 bg-[#FAF7F2] border-y border-[#BA7517]/5">
+      <section className="py-12 md:py-16 bg-[#FAF7F2] border-y border-[#BA7517]/5">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center space-x-4 mb-12">
+          <div className="flex items-center space-x-4 mb-8">
             <ShieldCheck className="text-[#BA7517]" size={32} />
             <h2 className="text-4xl md:text-5xl font-serif font-semibold text-[#0B132B]">{t('home.top_rated')}</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {mockCamps.map((camp) => (
-              <CampCard key={camp.id} camp={camp} />
+              <CampCard key={camp.id} camp={camp} variant="square" />
             ))}
           </div>
         </div>
       </section>
 
       {/* Trust Banner */}
-      <section className="py-24 bg-[#0B132B] text-white">
+      <section className="py-14 md:py-18 bg-[#0B132B] text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="mb-12 flex justify-center">
+          <div className="mb-8 flex justify-center">
             <div className="w-20 h-20 bg-[#BA7517]/10 rounded-full flex items-center justify-center border border-[#BA7517]/20">
                <div className="relative">
                  <Info className="text-[#BA7517]" size={40} />
                </div>
             </div>
           </div>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold italic mb-8 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-serif font-bold italic mb-6 leading-tight">
             {t('home.scam_title').split('Don\'t')[0]} 
             <span className="text-[#BA7517]"> Don't{t('home.scam_title').split('Don\'t')[1]}</span>
           </h2>
-          <p className="text-white/60 text-lg mb-12 leading-relaxed">
+          <p className="text-white/60 text-lg mb-8 leading-relaxed">
             {t('home.scam_desc')}
           </p>
           <Link to="/scam-guide" className="inline-flex items-center space-x-3 bg-white text-[#0B132B] px-8 py-4 rounded-lg md:rounded-xl font-bold hover:bg-[#BA7517] hover:text-white transition-all transform hover:-translate-y-1">

@@ -15,13 +15,25 @@ import { formatCurrency, cn } from "@/src/lib/utils";
 import { mockCamps } from "@/src/lib/mockData";
 import BackButton from "@/src/components/BackButton";
 
+import { useSearchParams } from "react-router-dom";
+
 export default function BookingFlow() {
   const { campSlug } = useParams<{ campSlug: string }>();
+  const [searchParams] = useSearchParams();
   const camp = mockCamps.find((c) => c.slug === campSlug) || mockCamps[0];
   const [step, setStep] = React.useState(1);
+
+  // Derive initial tent type
+  const tentParam = searchParams.get('tent');
+  const initialTent = camp.tent_options?.find(t => t.id === tentParam)?.name 
+    || camp.tent_options?.[0]?.name 
+    || "Royal Nomad Tent";
+
+  const guestsParam = parseInt(searchParams.get('guests') || '2', 10);
+
   const [formData, setFormData] = React.useState({
-    tentType: "Royal Suite",
-    guests: 2,
+    tentType: initialTent,
+    guests: guestsParam,
     fullName: "",
     email: "",
     whatsapp: "",
@@ -100,27 +112,34 @@ export default function BookingFlow() {
                         Choose your shelter
                       </label>
                       <div className="grid grid-cols-1 gap-4">
-                        {["Royal Suite", "Honeymoon Tent", "Shared Dorm"].map(
-                          (t) => (
-                            <button
-                              key={t}
-                              onClick={() =>
-                                setFormData({ ...formData, tentType: t })
-                              }
-                              className={cn(
-                                "p-6 rounded-3xl border-2 text-left transition-all",
-                                formData.tentType === t
-                                  ? "border-[#BA7517] bg-[#BA7517]/5"
-                                  : "border-gray-50 hover:border-gray-200",
-                              )}
-                            >
-                              <h4 className="font-bold text-[#0B132B]">{t}</h4>
-                              <p className="text-xs text-gray-500 mt-1">
-                                King bed, private ensuite bathroom, dune view.
+                        {(camp.tent_options || [
+                          { id: "1", name: "Royal Nomad Tent", description: "King bed, private ensuite bathroom, dune view.", price_per_night: camp.price_per_night },
+                          { id: "2", name: "Standard Bivouac Suite", description: "Comfortable nomad tent with private bathroom.", price_per_night: camp.price_per_night },
+                        ]).map((tentOpt) => (
+                          <button
+                            key={tentOpt.id}
+                            type="button"
+                            onClick={() =>
+                              setFormData({ ...formData, tentType: tentOpt.name })
+                            }
+                            className={cn(
+                              "p-5 rounded-2xl border-2 text-left transition-all cursor-pointer flex justify-between items-center",
+                              formData.tentType === tentOpt.name
+                                ? "border-[#BA7517] bg-[#BA7517]/5"
+                                : "border-stone-200 hover:border-stone-300",
+                            )}
+                          >
+                            <div>
+                              <h4 className="font-bold text-[#0B132B]">{tentOpt.name}</h4>
+                              <p className="text-xs text-gray-500 mt-1 max-w-sm">
+                                {tentOpt.description}
                               </p>
-                            </button>
-                          ),
-                        )}
+                            </div>
+                            <span className="font-bold text-sm text-[#0B132B]">
+                              {formatCurrency(tentOpt.price_per_night)}
+                            </span>
+                          </button>
+                        ))}
                       </div>
                     </div>
                   </div>

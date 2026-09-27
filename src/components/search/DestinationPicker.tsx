@@ -35,7 +35,7 @@ export const DESTINATIONS: DestinationOption[] = [
     highlight: 'Stone desert luxury'
   },
   {
-    id: 'foumzguid',
+    id: 'foum-zguid',
     nameKey: 'search.foumzguid',
     defaultName: 'Foum Zguid',
     region: 'Chigaga Gateway',

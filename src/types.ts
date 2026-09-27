@@ -1,4 +1,4 @@
-export type Destination = 'merzouga' | 'zagora' | 'agafay' | 'foumzguid' | 'ouarzazate' | 'mhamid' | 'chigaga';
+export type Destination = 'merzouga' | 'zagora' | 'agafay' | 'foumzguid' | 'foum-zguid' | 'ouarzazate' | 'mhamid' | 'chigaga';
 export type VerificationTier = 'listed' | 'verified' | 'elite';
 export type BookingStatus = 'pending' | 'confirmed' | 'cancelled';
 export type Language = 'en' | 'fr' | 'ar';
@@ -20,6 +20,49 @@ export interface Camp {
   featured_until?: string;
   status: 'active' | 'under_review';
   created_at: string;
+  category?: 'deep-sahara-bivouac' | 'desert-edge-lodge' | 'oasis-auberge';
+  distance_note?: string;
+  included_extras?: string[];
+  image?: string;
+  images?: string[];
+  sub_location?: string;
+  key_amenities?: string[];
+  logistics_transfer?: string;
+  tent_options?: TentOptionItem[];
+  trust_bar?: {
+    accommodation_type?: string;
+    facilities?: string;
+    power?: string;
+    included?: string;
+  };
+  logistics?: {
+    meeting_point?: string;
+    transfer_type?: string;
+    transfer_included?: boolean;
+    transfer_cost?: string;
+    drive_time_from_marrakech?: string;
+    parking_info?: string;
+    road_type?: string;
+  };
+  editorial_narrative?: {
+    arrival?: string;
+    evening?: string;
+    silence?: string;
+  };
+}
+
+export interface TentOptionItem {
+  id: string;
+  name: string;
+  badge?: string;
+  description: string;
+  price_per_night: number;
+  features: string[];
+  capacity: string;
+  bed_config?: string;
+  bed_type?: string;
+  sqm?: number;
+  image?: string;
 }
 
 export interface TentType {

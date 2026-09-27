@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Merzouga', path: '/destinations/merzouga', desc: 'Erg Chebbi Dunes' },
     { name: 'Zagora', path: '/destinations/zagora', desc: 'Draa Caravan Hub' },
     { name: 'Agafay', path: '/destinations/agafay', desc: 'Stone Desert' },
-    { name: 'Foum Zguid', path: '/destinations/foumzguid', desc: 'Erg Chigaga Wilds' },
+    { name: 'Foum Zguid', path: '/destinations/foum-zguid', desc: 'Erg Chigaga Wilds' },
     { name: "M'Hamid", path: '/destinations/mhamid', desc: 'Erg Chigaga Dunes' },
     { name: 'Ouarzazate', path: '/destinations/ouarzazate', desc: 'Desert Kasbahs' },
   ];
@@ -167,6 +167,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   );
 
   const isHeroPage = ['/', '/destinations/'].some(path => location.pathname === path || (path !== '/' && location.pathname.startsWith(path)));
+  const isFoumZguidPage = location.pathname === '/destinations/foum-zguid' || location.pathname === '/destinations/foumzguid';
   const isDarkSectionPage = ['/scam-guide'].includes(location.pathname);
   const useLightHeader = isHeroPage || isDarkSectionPage;
 
@@ -203,13 +204,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <link rel="alternate" href={currentUrl} hrefLang="fr" />
         <link rel="alternate" href={currentUrl} hrefLang="ar-MA" />
       </Helmet>
-      {/* Navigation */}
-      <nav className={cn(
-        "absolute top-0 left-0 right-0 z-50 h-16 md:h-20 lg:h-24 transition-all duration-300 flex items-center justify-center",
-        useLightHeader 
-          ? "bg-gradient-to-b from-black/20 to-transparent text-white" 
-          : "fixed bg-transparent text-white h-16 md:h-20 lg:h-24 py-2"
-      )}>
+      {/* Navigation - hidden on Foum Zguid destination hub page as requested */}
+      {!isFoumZguidPage && (
+        <nav className={cn(
+          "absolute top-0 left-0 right-0 z-50 h-16 md:h-20 lg:h-24 transition-all duration-300 flex items-center justify-center",
+          useLightHeader 
+            ? "bg-gradient-to-b from-black/20 to-transparent text-white" 
+            : "fixed bg-transparent text-white h-16 md:h-20 lg:h-24 py-2"
+        )}>
         {/* Header Zellij Patterns - Very subtle in the background */}
         <ZellijCorner className="absolute top-0 right-0 translate-x-12 -translate-y-12 opacity-5" />
         <ZellijCorner className="absolute bottom-0 left-0 -translate-x-16 translate-y-16 rotate-45 opacity-5" />
@@ -502,6 +504,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           )}
         </AnimatePresence>
       </nav>
+      )}
 
       {/* Main Content */}
       <main className={cn(

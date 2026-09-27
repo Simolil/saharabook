@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 // Pages
 import Home from './pages/Home';
 import DestinationHub from './pages/DestinationHub';
+import FoumZguidHub from './pages/FoumZguidHub';
 import CampDetail from './pages/CampDetail';
 import TourDetail from './pages/TourDetail';
 import ScamGuide from './pages/ScamGuide';
@@ -22,6 +23,8 @@ export default function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/destinations/foum-zguid" element={<FoumZguidHub />} />
+              <Route path="/destinations/foumzguid" element={<FoumZguidHub />} />
               <Route path="/destinations/:id" element={<DestinationHub />} />
               <Route path="/camps/:slug" element={<CampDetail />} />
               <Route path="/tours/:slug" element={<TourDetail />} />
