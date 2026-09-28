@@ -28,9 +28,11 @@ import {
   Sparkles
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'motion/react';
 import BackButton from '@/src/components/BackButton';
 import { mockCamps } from '@/src/lib/mockData';
 import VerificationBadge from '@/src/components/VerificationBadge';
+import { getCampImage, getCampFallbackImage } from '@/src/components/CampCard';
 import { formatCurrency, cn } from '@/src/lib/utils';
 import { LodgingBusinessSchema } from '@/src/lib/seo';
 import { useLanguage } from '@/src/lib/LanguageContext';
@@ -46,14 +48,17 @@ export default function CampDetail() {
 
   // Gallery Photos (fallback if none specified)
   const photos = useMemo(() => {
-    if (camp.images && camp.images.length > 0) return camp.images;
-    return [
-      "https://images.unsplash.com/photo-1509316975850-ff9958194c97?q=80&w=1400",
+    const mainImg = getCampImage(camp);
+    const fallbacks = [
       "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1200",
       "https://images.unsplash.com/photo-1489493585363-d6943649ef91?q=80&w=1200",
       "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1200",
       "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1200"
     ];
+    if (camp.images && camp.images.length > 0) {
+      return [mainImg, ...camp.images.slice(1)];
+    }
+    return [mainImg, ...fallbacks];
   }, [camp]);
 
   // Lightbox Modal state
@@ -238,8 +243,16 @@ export default function CampDetail() {
             onClick={() => { setActivePhotoIdx(0); setLightboxOpen(true); }}
             className="md:col-span-2 md:row-span-2 relative group cursor-pointer overflow-hidden bg-stone-900"
           >
-            <img 
+            <motion.img 
+              layoutId={`camp-hero-${camp.slug}`}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               src={photos[0]} 
+              onError={(e) => {
+                const fb = getCampFallbackImage(camp);
+                if (e.currentTarget.src !== fb) {
+                  e.currentTarget.src = fb;
+                }
+              }}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
               alt={`${camp.name} Master View`}
             />

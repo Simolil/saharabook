@@ -426,7 +426,9 @@ export default function FoumZguidHub() {
                           WebkitClipPath: 'url(#moorish-arch-clip)'
                         }}
                       >
-                        <img 
+                        <motion.img 
+                          layoutId={`camp-hero-${stay.slug}`}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                           src={stay.image} 
                           onError={(e) => {
                             if (e.currentTarget.src !== stay.fallbackImage) {

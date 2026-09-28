@@ -15,10 +15,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const currentUrl = `${import.meta.env.VITE_APP_URL || ''}${location.pathname}`;
 
-  React.useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, [location.pathname]);
-
   const languages: { code: Language; name: string; flag: string }[] = [
     { code: 'en', name: 'English', flag: '🇬🇧' },
     { code: 'fr', name: 'Français', flag: '🇫🇷' },

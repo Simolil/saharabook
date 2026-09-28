@@ -1,10 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { Star, MapPin, Bath, ArrowRight } from 'lucide-react';
 import { Camp } from '@/src/types';
 import { formatCurrency, cn } from '@/src/lib/utils';
 import VerificationBadge from './VerificationBadge';
 import { useLanguage } from '@/src/lib/LanguageContext';
+
+export const getCampImage = (camp: Camp): string => {
+  const anyCamp = camp as any;
+  if (anyCamp.image) return anyCamp.image;
+  if (camp.destination) return `/images/destinations/${camp.destination}.jpg`;
+  return '/images/destinations/merzouga.jpg';
+};
+
+export const getCampFallbackImage = (camp: Camp): string => {
+  const anyCamp = camp as any;
+  if (anyCamp.fallbackImage) return anyCamp.fallbackImage;
+  const images: Record<string, string> = {
+    merzouga: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800",
+    zagora: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800",
+    agafay: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=800",
+    foumzguid: "https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=800",
+    'foum-zguid': "https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=800",
+    ouarzazate: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=800",
+    mhamid: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800",
+    chigaga: "https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=800"
+  };
+  return images[camp.destination] || images.merzouga;
+};
 
 export default function CampCard({ 
   camp, 
@@ -15,23 +39,6 @@ export default function CampCard({
   key?: string 
 }) {
   const { t } = useLanguage();
-  // Image based on destination (prefers local image, falls back to Unsplash)
-  const getMockImage = (dest: string) => {
-    return `/images/destinations/${dest}.jpg`;
-  };
-
-  const getFallbackImage = (dest: string) => {
-    const images: Record<string, string> = {
-      merzouga: "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=800",
-      zagora: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800",
-      agafay: "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?auto=format&fit=crop&q=80&w=800",
-      foumzguid: "https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=800",
-      ouarzazate: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&q=80&w=800",
-      mhamid: "https://images.unsplash.com/photo-1509316975850-ff9958194c97?auto=format&fit=crop&q=80&w=800",
-      chigaga: "https://images.unsplash.com/photo-1489493585363-d6943649ef91?auto=format&fit=crop&q=80&w=800"
-    };
-    return images[dest] || images.merzouga;
-  };
 
   if (variant === 'square') {
     return (
@@ -40,10 +47,12 @@ export default function CampCard({
         className="group relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-[#BA7517]/25 shadow-md hover:shadow-2xl hover:border-[#BA7517]/60 transition-all duration-500 flex flex-col justify-between bg-stone-900"
       >
         {/* Full square background image */}
-        <img 
-          src={getMockImage(camp.destination)} 
+        <motion.img 
+          layoutId={`camp-hero-${camp.slug}`}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          src={getCampImage(camp)} 
           onError={(e) => {
-            const fb = getFallbackImage(camp.destination);
+            const fb = getCampFallbackImage(camp);
             if (e.currentTarget.src !== fb) {
               e.currentTarget.src = fb;
             }
@@ -52,9 +61,9 @@ export default function CampCard({
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
         />
 
-        {/* Ambient Dark Gradient Overlays for optimal readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B] via-[#0B132B]/55 to-black/35 pointer-events-none group-hover:via-[#0B132B]/45 transition-all" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent pointer-events-none" />
+        {/* Soft, lightened gradient overlays to reveal the background image vividly */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B]/85 via-[#0B132B]/20 to-transparent pointer-events-none group-hover:from-[#0B132B]/75 transition-all" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent pointer-events-none" />
 
         {/* Top bar: Verification Badge & Price Pill */}
         <div className="relative z-10 p-3 sm:p-4 flex justify-between items-start gap-2">
@@ -109,10 +118,12 @@ export default function CampCard({
     >
       {/* Thumbnail */}
       <div className="relative h-36 sm:h-40 overflow-hidden bg-stone-900">
-        <img 
-          src={getMockImage(camp.destination)} 
+        <motion.img 
+          layoutId={`camp-hero-${camp.slug}`}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          src={getCampImage(camp)} 
           onError={(e) => {
-            const fb = getFallbackImage(camp.destination);
+            const fb = getCampFallbackImage(camp);
             if (e.currentTarget.src !== fb) {
               e.currentTarget.src = fb;
             }
