@@ -42,6 +42,12 @@ function AnimatedRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/destinations/foum-zguid" element={<FoumZguidHub />} />
             <Route path="/destinations/foumzguid" element={<FoumZguidHub />} />
+            <Route path="/destination/foum-zguid" element={<FoumZguidHub />} />
+            <Route path="/destination/foumzguid" element={<FoumZguidHub />} />
+            <Route path="/destinations/foum-zguid/:slug" element={<CampDetail />} />
+            <Route path="/destinations/foumzguid/:slug" element={<CampDetail />} />
+            <Route path="/destination/foum-zguid/:slug" element={<CampDetail />} />
+            <Route path="/destination/foumzguid/:slug" element={<CampDetail />} />
             <Route path="/destinations/:id" element={<DestinationHub />} />
             <Route path="/camps/:slug" element={<CampDetail />} />
             <Route path="/tours/:slug" element={<TourDetail />} />

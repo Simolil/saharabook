@@ -23,7 +23,8 @@ import {
   Bath,
   Users,
   Clock,
-  Navigation
+  Navigation,
+  ExternalLink
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn, formatCurrency } from '@/src/lib/utils';
@@ -40,6 +41,7 @@ import { FAQSchema } from '@/src/lib/seo';
 import VerificationBadge from '@/src/components/VerificationBadge';
 import BackButton from '@/src/components/BackButton';
 import SearchBar from '@/src/components/SearchBar';
+import MarrakechToCampRouteMap from '@/src/components/MarrakechToCampRouteMap';
 
 export default function FoumZguidHub() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -287,8 +289,18 @@ export default function FoumZguidHub() {
               <ArrowRight size={13} />
             </a>
           </div>
+
+          {/* Interactive Route Map from Marrakech to Foum Zguid & Erg Chigaga */}
+          <div className="mt-10">
+            <MarrakechToCampRouteMap 
+              campName="Bivouac Les Nomades (Erg Chigaga)"
+              campSlug="bivouac-les-nomades"
+              meetingPointName="Foum Zguid Village Depot"
+            />
+          </div>
         </div>
       </section>
+
 
       {/* =========================================================================
           3. REGIONAL PROPERTY CATEGORIES (Using Moorish Arch Masking)
@@ -403,16 +415,95 @@ export default function FoumZguidHub() {
             </div>
           </div>
 
+          {/* Spotlight Card for Bivouac Les Nomades (bivouaclesnomades.com) */}
+          <div className="mb-10 bg-gradient-to-br from-[#0B132B] via-[#14213D] to-[#1A2E40] text-white rounded-3xl p-6 sm:p-8 border-2 border-[#BA7517]/50 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#BA7517]/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 justify-between">
+              <div className="max-w-2xl">
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <span className="bg-[#EF9F27] text-[#0B132B] font-bold text-[10px] uppercase px-2.5 py-0.5 rounded-full tracking-wider">
+                    Verified Owner Showcase
+                  </span>
+                  <span className="bg-white/10 text-white/90 border border-white/20 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full">
+                    Direct Approval from Mustapha Elayadi
+                  </span>
+                  <div className="flex items-center space-x-1 text-xs font-bold text-amber-300 ml-1">
+                    <Star size={13} className="fill-amber-300" />
+                    <span>5.0 TripAdvisor Rating (128 Reviews)</span>
+                  </div>
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight">
+                  Bivouac Les Nomades – Erg Chigaga
+                </h3>
+
+                <p className="text-sm text-white/80 leading-relaxed mb-4">
+                  The model example of transparent, authentic Saharan hosting. 67 km deep into the Erg Chigaga dunes via Lake Iriki. Features solar-powered luxury canvas and traditional tents, en-suite bathrooms with hot showers, authentic nomadic campfire drumming, and complete logistics clarity directly coordinated with the founding Berber family.
+                </p>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs text-white/90 mb-5">
+                  <div className="flex items-center space-x-2 bg-white/5 p-2 rounded-xl border border-white/10">
+                    <Check size={14} className="text-[#EF9F27] shrink-0" />
+                    <span>En-Suite Hot Bath &amp; Toilet</span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-white/5 p-2 rounded-xl border border-white/10">
+                    <Check size={14} className="text-[#EF9F27] shrink-0" />
+                    <span>100% Eco-Solar Array 24/7</span>
+                  </div>
+                  <div className="flex items-center space-x-2 bg-white/5 p-2 rounded-xl border border-white/10">
+                    <Check size={14} className="text-[#EF9F27] shrink-0" />
+                    <span>Free Guarded Foum Zguid Garage</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link
+                    to="/camps/bivouac-les-nomades"
+                    className="inline-flex items-center space-x-2 bg-[#BA7517] hover:bg-[#EF9F27] text-white px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-lg shadow-[#BA7517]/30"
+                  >
+                    <span>View Verified Camp Sanctuary</span>
+                    <ArrowRight size={15} />
+                  </Link>
+                  <a
+                    href="https://bivouaclesnomades.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-1.5 bg-white/10 hover:bg-white/20 text-[#EF9F27] border border-[#EF9F27]/30 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all"
+                  >
+                    <span>Visit Official Site</span>
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
+
+              <div className="w-full lg:w-72 shrink-0">
+                <div className="relative rounded-2xl overflow-hidden border-2 border-[#BA7517]/40 shadow-xl aspect-4/3">
+                  <img
+                    src="/src/assets/images/bivouac_les_nomades_1790671846484.jpg"
+                    alt="Bivouac Les Nomades in Erg Chigaga"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-2.5 left-3 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-md text-[11px] font-semibold text-white">
+                    From €95 / night
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Clean, Asymmetric Property Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredStays.map((stay, index) => {
               const isFirstSpecial = index === 0;
+              const isBivouacLesNomades = stay.slug === 'bivouac-les-nomades';
               return (
                 <article
                   key={stay.id}
                   className={cn(
                     "group bg-white rounded-3xl overflow-hidden border border-[#BA7517]/20 shadow-sm hover:shadow-2xl hover:border-[#BA7517]/40 transition-all duration-500 flex flex-col justify-between",
-                    isFirstSpecial ? "md:col-span-2 lg:col-span-1 ring-1 ring-[#BA7517]/30" : ""
+                    isFirstSpecial ? "md:col-span-2 lg:col-span-1 ring-1 ring-[#BA7517]/30" : "",
+                    isBivouacLesNomades ? "ring-2 ring-[#BA7517] shadow-xl border-[#BA7517]" : ""
                   )}
                 >
                   {/* Top: Moorish Arch Masked Image Area */}

@@ -49,6 +49,14 @@ export interface Camp {
     evening?: string;
     silence?: string;
   };
+  official_website?: string;
+  owner_name?: string;
+  owner_title?: string;
+  owner_quote?: string;
+  whatsapp?: string;
+  phone?: string;
+  tripadvisor_rating?: number;
+  tripadvisor_reviews?: number;
 }
 
 export interface TentOptionItem {

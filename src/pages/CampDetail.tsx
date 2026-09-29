@@ -25,7 +25,10 @@ import {
   ArrowRight,
   Plus,
   CheckCircle2,
-  Sparkles
+  Sparkles,
+  ExternalLink,
+  MessageCircle,
+  Award
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
@@ -37,17 +40,32 @@ import { formatCurrency, cn } from '@/src/lib/utils';
 import { LodgingBusinessSchema } from '@/src/lib/seo';
 import { useLanguage } from '@/src/lib/LanguageContext';
 import { TentOptionItem } from '@/src/types';
+import MarrakechToCampRouteMap from '@/src/components/MarrakechToCampRouteMap';
 
 export default function CampDetail() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug, campSlug } = useParams<{ slug?: string; campSlug?: string }>();
   const navigate = useNavigate();
   const { t } = useLanguage();
 
+  const activeSlug = (slug || campSlug || '').toLowerCase();
+
   // Find camp or fallback to the first camp
-  const camp = mockCamps.find(c => c.slug === slug) || mockCamps[0];
+  const camp = useMemo(() => {
+    return (
+      mockCamps.find(c => 
+        c.slug.toLowerCase() === activeSlug ||
+        (activeSlug === 'bivouac-nomades-chigaga' && c.slug === 'bivouac-les-nomades') ||
+        (activeSlug === 'bivouac-les-nomades' && c.slug === 'bivouac-nomades-chigaga') ||
+        (activeSlug === 'bivouaclesnomades' && c.slug === 'bivouac-les-nomades')
+      ) || mockCamps[0]
+    );
+  }, [activeSlug]);
 
   // Gallery Photos (fallback if none specified)
   const photos = useMemo(() => {
+    if (camp.images && camp.images.length > 0) {
+      return camp.images;
+    }
     const mainImg = getCampImage(camp);
     const fallbacks = [
       "https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?q=80&w=1200",
@@ -55,9 +73,6 @@ export default function CampDetail() {
       "https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1200",
       "https://images.unsplash.com/photo-1518684079-3c830dcef090?q=80&w=1200"
     ];
-    if (camp.images && camp.images.length > 0) {
-      return [mainImg, ...camp.images.slice(1)];
-    }
     return [mainImg, ...fallbacks];
   }, [camp]);
 
@@ -76,7 +91,7 @@ export default function CampDetail() {
         name: 'Classic Berber Tent Suite',
         description: 'Authentic canvas tent with private en-suite bathroom, handwoven nomad carpets, and solar illumination.',
         bed_type: '1 Queen Bed or 2 Twins',
-        capacity: 2,
+        capacity: '2',
         price_per_night: camp.price_per_night,
         image: photos[0],
         features: ['Private En-suite Shower', 'Moroccan Wool Blankets', '24/7 Solar USB', 'Complimentary Breakfast']
@@ -84,8 +99,16 @@ export default function CampDetail() {
     ];
   }, [camp, photos]);
 
-  // Selected tent state
-  const [selectedTentId, setSelectedTentId] = useState<string>(tentOptions[0].id);
+  // Selected tent state (auto sync with tentOptions)
+  const [selectedTentId, setSelectedTentId] = useState<string>(tentOptions[0]?.id || 'standard-suite');
+  
+  // Keep selected tent synced if camp changes
+  React.useEffect(() => {
+    if (tentOptions.length > 0 && !tentOptions.some(t => t.id === selectedTentId)) {
+      setSelectedTentId(tentOptions[0].id);
+    }
+  }, [tentOptions, selectedTentId]);
+
   const currentTent = tentOptions.find(t => t.id === selectedTentId) || tentOptions[0];
 
   // Interactive Booking Widget State
@@ -94,18 +117,32 @@ export default function CampDetail() {
   const [nights, setNights] = useState(2);
   const [guests, setGuests] = useState(2);
 
+  const isBivouacLesNomades = camp.slug === 'bivouac-les-nomades';
+
   // Add-ons state
   const [selectedAddons, setSelectedAddons] = useState<Record<string, boolean>>({
     transfer: false,
     quad: false,
-    stargazing: false
+    stargazing: false,
+    sandBread: false
   });
 
-  const addonPrices = {
-    transfer: 60, // Fixed per party
-    quad: 50 * guests, // Per guest
-    stargazing: 25 * guests // Per guest
-  };
+  const addonPrices = useMemo(() => {
+    if (isBivouacLesNomades) {
+      return {
+        transfer: 0, // Included complimentary with Bivouac Les Nomades
+        quad: 45 * guests,
+        stargazing: 20 * guests,
+        sandBread: 15 * guests
+      };
+    }
+    return {
+      transfer: 60,
+      quad: 50 * guests,
+      stargazing: 25 * guests,
+      sandBread: 20 * guests
+    };
+  }, [isBivouacLesNomades, guests]);
 
   const toggleAddon = (key: string) => {
     setSelectedAddons(prev => ({ ...prev, [key]: !prev[key] }));
@@ -117,7 +154,8 @@ export default function CampDetail() {
   const addonsTotal = 
     (selectedAddons.transfer ? addonPrices.transfer : 0) +
     (selectedAddons.quad ? addonPrices.quad : 0) +
-    (selectedAddons.stargazing ? addonPrices.stargazing : 0);
+    (selectedAddons.stargazing ? addonPrices.stargazing : 0) +
+    (selectedAddons.sandBread ? addonPrices.sandBread : 0);
 
   const grandTotal = tentRateTotal + ecoTaxes + addonsTotal;
 
@@ -212,8 +250,10 @@ export default function CampDetail() {
               </span>
               <div className="flex items-center space-x-1 text-xs font-bold text-[#0B132B] ml-1">
                 <Star size={14} className="text-amber-400 fill-amber-400" />
-                <span>4.9</span>
-                <span className="text-gray-400 font-normal">(48 verified reviews)</span>
+                <span>{camp.tripadvisor_rating || (camp as any).rating || 4.9}</span>
+                <span className="text-gray-400 font-normal">
+                  ({camp.tripadvisor_reviews || (camp as any).reviewCount || 48} verified reviews)
+                </span>
               </div>
             </div>
 
@@ -235,6 +275,57 @@ export default function CampDetail() {
             </div>
           </div>
         </div>
+
+        {/* Verified Owner Partner & Official Website Transparency Banner */}
+        {camp.official_website && (
+          <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0B132B] via-[#14213D] to-[#0B132B] text-white border border-[#BA7517]/35 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-start sm:items-center space-x-3.5">
+              <div className="w-12 h-12 rounded-2xl bg-[#BA7517]/20 border border-[#BA7517]/40 flex items-center justify-center shrink-0">
+                <ShieldCheck size={26} className="text-[#EF9F27]" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <span className="bg-[#EF9F27] text-[#0B132B] font-bold text-[10px] uppercase px-2 py-0.5 rounded-full tracking-wider">
+                    Direct Partner Authorization
+                  </span>
+                  <span className="text-white font-semibold text-xs sm:text-sm">
+                    Verified with Founder {camp.owner_name || 'Owner'}
+                  </span>
+                  <span className="text-[#EF9F27] text-xs font-bold flex items-center gap-1">
+                    <Star size={12} className="fill-[#EF9F27]" />
+                    <span>5.0 TripAdvisor Rating</span>
+                  </span>
+                </div>
+                <p className="text-xs text-white/75 leading-relaxed">
+                  Dunecamps holds complete booking and operations approval for this camp. Authentic direct rates, inspected sanitation, and direct coordination with Mustapha's team in Foum Zguid.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2.5 shrink-0 self-start md:self-auto">
+              <a 
+                href={camp.official_website} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-white/10 hover:bg-white/20 text-[#EF9F27] border border-[#EF9F27]/30 rounded-xl text-xs font-bold transition-all shadow-xs"
+              >
+                <span>bivouaclesnomades.com</span>
+                <ExternalLink size={13} />
+              </a>
+              {camp.whatsapp && (
+                <a 
+                  href={`https://wa.me/${camp.whatsapp.replace(/[^0-9]/g, '')}?text=Hello%20Mustapha,%20I%20am%20inquiring%20about%20booking%20Bivouac%20Les%20Nomades%20via%20Dunecamps`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-xs"
+                >
+                  <MessageCircle size={14} />
+                  <span>WhatsApp Host</span>
+                </a>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Asymmetric Bento-Grid Layout (4-5 high-res photos) */}
         <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-3 h-[420px] sm:h-[480px] md:h-[540px] rounded-3xl overflow-hidden shadow-lg border border-[#BA7517]/20">
@@ -427,6 +518,26 @@ export default function CampDetail() {
                     "{narrative.silence}"
                   </p>
                 </div>
+
+                {/* 4. Host & Nomadic Heritage (Direct from owner) */}
+                {camp.owner_name && (
+                  <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-[#BA7517]/25 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div className="w-14 h-14 rounded-2xl bg-[#BA7517]/15 border border-[#BA7517]/30 flex items-center justify-center text-[#BA7517] font-serif font-bold text-xl shrink-0">
+                      <Award size={26} />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                        <span className="font-serif font-bold text-base text-[#0B132B]">{camp.owner_name}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#BA7517] bg-[#BA7517]/10 px-2 py-0.5 rounded-full">
+                          {camp.owner_title || 'Local Nomad Founder ("Desert GPS")'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[#0B132B]/85 italic leading-relaxed font-serif">
+                        "{camp.owner_quote}"
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Key Amenities Grid */}
@@ -496,8 +607,27 @@ export default function CampDetail() {
                   <span>Drive duration from Marrakech: <strong>{logistics.drive_time_from_marrakech}</strong></span>
                   <span className="text-[#BA7517] font-semibold">{logistics.road_type}</span>
                 </div>
+
+                {/* Visual Route Map: Marrakech -> Foum Zguid -> Camp Destination */}
+                <div className="mt-6 pt-6 border-t border-[#BA7517]/15">
+                  <div className="mb-4">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517] block">Interactive Cartography</span>
+                    <h3 className="text-base sm:text-lg font-serif font-bold text-[#0B132B]">
+                      Visual Route &amp; Terrain Map (Marrakech &rarr; Foum Zguid &rarr; {camp.name})
+                    </h3>
+                    <p className="text-xs text-[#0B132B]/70 mt-0.5">
+                      Toggle between the interactive satellite-road map and the mountain elevation profile. Click waypoints for driving advice, road type status, and fuel warnings.
+                    </p>
+                  </div>
+                  <MarrakechToCampRouteMap 
+                    campName={camp.name}
+                    campSlug={camp.slug}
+                    meetingPointName={logistics.meeting_point}
+                  />
+                </div>
               </div>
             </section>
+
 
             {/* ========================================================================= */}
             {/* PHASE 2 - SECTION E: ROOMS / TENT OPTIONS                                 */}
@@ -534,6 +664,11 @@ export default function CampDetail() {
                         <div>
                           <div className="flex items-center space-x-2">
                             <h3 className="font-serif font-bold text-base sm:text-lg text-[#0B132B]">{option.name}</h3>
+                            {option.badge && (
+                              <span className="bg-[#BA7517]/10 text-[#BA7517] border border-[#BA7517]/25 text-[9px] font-bold uppercase px-2 py-0.5 rounded-full">
+                                {option.badge}
+                              </span>
+                            )}
                             {isSelected && (
                               <span className="bg-[#BA7517] text-white text-[9px] font-bold uppercase px-2 py-0.5 rounded-full">
                                 Selected
@@ -545,6 +680,15 @@ export default function CampDetail() {
                             <span className="bg-white px-2 py-0.5 rounded-md border border-stone-200">🛏 {option.bed_type}</span>
                             <span className="bg-white px-2 py-0.5 rounded-md border border-stone-200">👥 Max {option.capacity} Guests</span>
                           </div>
+                          {option.features && option.features.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mt-2">
+                              {option.features.map((feat, fIdx) => (
+                                <span key={fIdx} className="text-[10px] bg-stone-100/90 text-stone-700 px-2 py-0.5 rounded-md font-medium">
+                                  ✓ {feat}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -702,56 +846,125 @@ export default function CampDetail() {
                   Optional Add-Ons
                 </span>
                 <div className="space-y-2">
-                  {/* Addon 1: VIP 4x4 Transfer */}
-                  <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={selectedAddons.transfer}
-                      onChange={() => toggleAddon('transfer')}
-                      className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
-                    />
-                    <div className="flex-1">
-                      <div className="flex justify-between font-semibold text-[#0B132B]">
-                        <span>VIP Dedicated 4x4 Transfer</span>
-                        <span>+€{addonPrices.transfer}</span>
+                  {isBivouacLesNomades ? (
+                    <>
+                      {/* Bivouac Les Nomades Addon: 4x4 Notice */}
+                      <div className="flex items-start space-x-2 text-xs p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200/60">
+                        <Check size={14} className="text-emerald-600 mt-0.5 shrink-0" />
+                        <div className="flex-1">
+                          <div className="flex justify-between font-semibold text-emerald-950">
+                            <span>Lake Iriki 4x4 Expedition</span>
+                            <span className="text-emerald-700 font-bold">Included Free</span>
+                          </div>
+                          <span className="text-[10px] text-emerald-800/80">Guided transfer departing Foum Zguid at 14:30</span>
+                        </div>
                       </div>
-                      <span className="text-[10px] text-[#0B132B]/60">Private direct vehicle & luggage assistance</span>
-                    </div>
-                  </label>
 
-                  {/* Addon 2: Quad Biking */}
-                  <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={selectedAddons.quad}
-                      onChange={() => toggleAddon('quad')}
-                      className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
-                    />
-                    <div className="flex-1">
-                      <div className="flex justify-between font-semibold text-[#0B132B]">
-                        <span>Sunset Quad Biking Tour</span>
-                        <span>+€{addonPrices.quad}</span>
-                      </div>
-                      <span className="text-[10px] text-[#0B132B]/60">1h guided ridge safari (€50/guest)</span>
-                    </div>
-                  </label>
+                      {/* Addon 1: Quad Biking */}
+                      <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          checked={selectedAddons.quad}
+                          onChange={() => toggleAddon('quad')}
+                          className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
+                        />
+                        <div className="flex-1">
+                          <div className="flex justify-between font-semibold text-[#0B132B]">
+                            <span>High-Dune Quad Safari</span>
+                            <span>+€{addonPrices.quad}</span>
+                          </div>
+                          <span className="text-[10px] text-[#0B132B]/60">1h guided Erg Chigaga dunes (€45/guest)</span>
+                        </div>
+                      </label>
 
-                  {/* Addon 3: Astronomy Session */}
-                  <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={selectedAddons.stargazing}
-                      onChange={() => toggleAddon('stargazing')}
-                      className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
-                    />
-                    <div className="flex-1">
-                      <div className="flex justify-between font-semibold text-[#0B132B]">
-                        <span>Telescope Stargazing Session</span>
-                        <span>+€{addonPrices.stargazing}</span>
-                      </div>
-                      <span className="text-[10px] text-[#0B132B]/60">With local desert astronomer (€25/guest)</span>
-                    </div>
-                  </label>
+                      {/* Addon 2: Fossil Safari Walk */}
+                      <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          checked={selectedAddons.stargazing}
+                          onChange={() => toggleAddon('stargazing')}
+                          className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
+                        />
+                        <div className="flex-1">
+                          <div className="flex justify-between font-semibold text-[#0B132B]">
+                            <span>Lake Iriki Fossil Safari</span>
+                            <span>+€{addonPrices.stargazing}</span>
+                          </div>
+                          <span className="text-[10px] text-[#0B132B]/60">Prehistoric seabed walk with Mustapha (€20/guest)</span>
+                        </div>
+                      </label>
+
+                      {/* Addon 3: Sand Bread Workshop */}
+                      <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          checked={selectedAddons.sandBread}
+                          onChange={() => toggleAddon('sandBread')}
+                          className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
+                        />
+                        <div className="flex-1">
+                          <div className="flex justify-between font-semibold text-[#0B132B]">
+                            <span>Nomadic Sand Bread Masterclass</span>
+                            <span>+€{addonPrices.sandBread}</span>
+                          </div>
+                          <span className="text-[10px] text-[#0B132B]/60">Bake Taguella in desert embers (€15/guest)</span>
+                        </div>
+                      </label>
+                    </>
+                  ) : (
+                    <>
+                      {/* Addon 1: VIP 4x4 Transfer */}
+                      <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          checked={selectedAddons.transfer}
+                          onChange={() => toggleAddon('transfer')}
+                          className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
+                        />
+                        <div className="flex-1">
+                          <div className="flex justify-between font-semibold text-[#0B132B]">
+                            <span>VIP Dedicated 4x4 Transfer</span>
+                            <span>+€{addonPrices.transfer}</span>
+                          </div>
+                          <span className="text-[10px] text-[#0B132B]/60">Private direct vehicle & luggage assistance</span>
+                        </div>
+                      </label>
+
+                      {/* Addon 2: Quad Biking */}
+                      <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          checked={selectedAddons.quad}
+                          onChange={() => toggleAddon('quad')}
+                          className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
+                        />
+                        <div className="flex-1">
+                          <div className="flex justify-between font-semibold text-[#0B132B]">
+                            <span>Sunset Quad Biking Tour</span>
+                            <span>+€{addonPrices.quad}</span>
+                          </div>
+                          <span className="text-[10px] text-[#0B132B]/60">1h guided ridge safari (€50/guest)</span>
+                        </div>
+                      </label>
+
+                      {/* Addon 3: Astronomy Session */}
+                      <label className="flex items-start space-x-2 text-xs p-2 rounded-xl hover:bg-[#FAF7F2] transition-colors cursor-pointer">
+                        <input 
+                          type="checkbox" 
+                          checked={selectedAddons.stargazing}
+                          onChange={() => toggleAddon('stargazing')}
+                          className="mt-0.5 rounded text-[#BA7517] focus:ring-[#BA7517]"
+                        />
+                        <div className="flex-1">
+                          <div className="flex justify-between font-semibold text-[#0B132B]">
+                            <span>Telescope Stargazing Session</span>
+                            <span>+€{addonPrices.stargazing}</span>
+                          </div>
+                          <span className="text-[10px] text-[#0B132B]/60">With local desert astronomer (€25/guest)</span>
+                        </div>
+                      </label>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -787,9 +1000,21 @@ export default function CampDetail() {
                 onClick={handleReserve}
                 className="w-full bg-[#BA7517] hover:bg-[#9E6010] text-white text-center py-4 rounded-xl font-bold text-sm shadow-lg shadow-[#BA7517]/25 transition-all transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer"
               >
-                <span>Instant Reserve & Request Verification</span>
+                <span>{isBivouacLesNomades ? 'Reserve Sanctuary with Mustapha' : 'Instant Reserve & Request Verification'}</span>
                 <ArrowRight size={16} />
               </button>
+
+              {camp.whatsapp && (
+                <a 
+                  href={`https://wa.me/${camp.whatsapp.replace(/[^0-9]/g, '')}?text=Hello%20Mustapha,%20I%20am%20inquiring%20about%20booking%20Bivouac%20Les%20Nomades%20via%20Dunecamps`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 w-full bg-emerald-700/10 hover:bg-emerald-700/20 text-emerald-800 border border-emerald-300/60 text-center py-2.5 rounded-xl font-bold text-xs transition-all flex items-center justify-center space-x-2 cursor-pointer"
+                >
+                  <MessageCircle size={15} className="text-emerald-700" />
+                  <span>Chat with Mustapha on WhatsApp</span>
+                </a>
+              )}
 
               {/* Trust Subtext - NO aggressive fake scarcity ("Only 1 left!") */}
               <div className="mt-4 flex items-center justify-center space-x-1.5 text-[11px] text-[#0B132B]/60 text-center">
