@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -24,7 +24,11 @@ import {
   Users,
   Clock,
   Navigation,
-  ExternalLink
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+  LayoutGrid,
+  Rows
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn, formatCurrency } from '@/src/lib/utils';
@@ -41,13 +45,38 @@ import { FAQSchema } from '@/src/lib/seo';
 import VerificationBadge from '@/src/components/VerificationBadge';
 import BackButton from '@/src/components/BackButton';
 import SearchBar from '@/src/components/SearchBar';
-import MarrakechToCampRouteMap from '@/src/components/MarrakechToCampRouteMap';
+import FoumZguidRegionalMap from '@/src/components/FoumZguidRegionalMap';
 
 export default function FoumZguidHub() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [selectedStayForModal, setSelectedStayForModal] = useState<FoumZguidStay | null>(null);
   const [sortBy, setSortBy] = useState<'recommended' | 'price-asc' | 'distance'>('recommended');
+  const [selectedCampForMap, setSelectedCampForMap] = useState<string>('bivouac-les-nomades');
+  const [staysLayoutMode, setStaysLayoutMode] = useState<'carousel' | 'grid'>('carousel');
+
+  // Horizontal Scroll Container Refs
+  const staysScrollRef = useRef<HTMLDivElement | null>(null);
+  const logisticsScrollRef = useRef<HTMLDivElement | null>(null);
+  const categoriesScrollRef = useRef<HTMLDivElement | null>(null);
+  const dispatchesScrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollSection = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right', distance = 380) => {
+    if (ref.current) {
+      ref.current.scrollBy({
+        left: direction === 'left' ? -distance : distance,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleScrollToMapCamp = (slug: string) => {
+    setSelectedCampForMap(slug);
+    const el = document.getElementById('foum-zguid-map');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const filteredStays = useMemo(() => {
     let list = FOUM_ZGUID_STAYS;
@@ -217,26 +246,52 @@ export default function FoumZguidHub() {
           ========================================================================= */}
       <section className="pt-12 sm:pt-16 pb-12 sm:pb-14 bg-gradient-to-b from-[#FAF7F2] to-[#F4EEE5] border-b border-[#BA7517]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="max-w-3xl mb-10 text-left">
-            <div className="inline-flex items-center space-x-2 text-[#BA7517] text-xs font-bold uppercase tracking-wider mb-2">
-              <ShieldAlert size={15} />
-              <span>Know Before You Go • Deep-Desert Logistics</span>
+          {/* Header with Scroll Buttons for Mobile/Tablet */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div className="max-w-3xl text-left">
+              <div className="inline-flex items-center space-x-2 text-[#BA7517] text-xs font-bold uppercase tracking-wider mb-2">
+                <ShieldAlert size={15} />
+                <span>Know Before You Go • Deep-Desert Logistics</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#0B132B] tracking-tight">
+                {LOGISTICS_GRID.headline}
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-[#0B132B]/75 leading-relaxed">
+                {LOGISTICS_GRID.subhead}
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#0B132B] tracking-tight">
-              {LOGISTICS_GRID.headline}
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-[#0B132B]/75 leading-relaxed">
-              {LOGISTICS_GRID.subhead}
-            </p>
+
+            {/* Scroll Navigation on Mobile/Tablet */}
+            <div className="flex md:hidden items-center space-x-2 self-end">
+              <span className="text-[11px] text-[#0B132B]/60 font-medium">Swipe cards &rarr;</span>
+              <button 
+                type="button"
+                onClick={() => scrollSection(logisticsScrollRef, 'left', 300)}
+                className="w-8 h-8 rounded-full bg-white text-[#0B132B] border border-stone-200 flex items-center justify-center shadow-xs cursor-pointer"
+                title="Previous"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button 
+                type="button"
+                onClick={() => scrollSection(logisticsScrollRef, 'right', 300)}
+                className="w-8 h-8 rounded-full bg-white text-[#0B132B] border border-stone-200 flex items-center justify-center shadow-xs cursor-pointer"
+                title="Next"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
           </div>
 
-          {/* Three-Column Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {/* Three-Column Horizontal Snap Track */}
+          <div 
+            ref={logisticsScrollRef}
+            className="flex md:grid md:grid-cols-3 gap-6 lg:gap-8 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scroll-smooth no-scrollbar"
+          >
             {LOGISTICS_GRID.columns.map((col, idx) => (
               <div 
                 key={col.title}
-                className="bg-white rounded-2xl p-6 sm:p-7 border border-[#BA7517]/20 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between"
+                className="w-[285px] sm:w-[330px] md:w-auto shrink-0 md:shrink snap-start bg-white rounded-2xl p-6 sm:p-7 border border-[#BA7517]/20 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between"
               >
                 {/* Subtle Moroccan motif backdrop watermark */}
                 <div className="absolute -right-4 -bottom-4 text-[#BA7517]/5 pointer-events-none">
@@ -270,6 +325,7 @@ export default function FoumZguidHub() {
             ))}
           </div>
 
+
           {/* Quick Assurance Strip */}
           <div className="mt-8 bg-[#0B132B] text-white rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-3 text-left">
@@ -290,16 +346,29 @@ export default function FoumZguidHub() {
             </a>
           </div>
 
-          {/* Interactive Route Map from Marrakech to Foum Zguid & Erg Chigaga */}
-          <div className="mt-10">
-            <MarrakechToCampRouteMap 
-              campName="Bivouac Les Nomades (Erg Chigaga)"
-              campSlug="bivouac-les-nomades"
-              meetingPointName="Foum Zguid Village Depot"
+          {/* Simple Regional Map Section */}
+          <div id="foum-zguid-map" className="mt-8 scroll-mt-24">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517] block">
+                  Route &amp; Stays Map
+                </span>
+                <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#0B132B]">
+                  Marrakech to Foum Zguid Highway &amp; Lodge Locations
+                </h3>
+                <p className="text-xs text-[#0B132B]/70 mt-0.5">
+                  Follow the scenic paved road from Marrakech through the High Atlas, then click any lodge to find its exact location, coordinates, and desert transfer.
+                </p>
+              </div>
+            </div>
+
+            <FoumZguidRegionalMap 
+              initialSelectedSlug={selectedCampForMap} 
             />
           </div>
         </div>
       </section>
+
 
 
       {/* =========================================================================
@@ -389,34 +458,12 @@ export default function FoumZguidHub() {
       </section>
 
       {/* =========================================================================
-          4. THE CURATED PROPERTY GRID
+          4. THE CURATED PROPERTY SHOWCASE (Horizontal Scroll Carousel)
           ========================================================================= */}
       <section className="py-8 sm:py-12 bg-[#FAF7F2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Active Filter Bar & Count Feedback */}
-          <div className="flex items-center justify-between pb-6 border-b border-[#BA7517]/15 mb-8">
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-bold text-[#0B132B]">
-                Showing {filteredStays.length} Verified Properties
-              </span>
-              {selectedCategory !== 'all' && (
-                <button
-                  onClick={() => setSelectedCategory('all')}
-                  className="text-xs text-[#BA7517] hover:underline font-semibold ml-2 cursor-pointer"
-                >
-                  (Clear filter)
-                </button>
-              )}
-            </div>
-
-            <div className="flex items-center space-x-2 text-xs text-[#0B132B]/60">
-              <ShieldCheck size={14} className="text-[#BA7517]" />
-              <span className="hidden sm:inline">100% Physically Inspected On-Site</span>
-            </div>
-          </div>
-
           {/* Spotlight Card for Bivouac Les Nomades (bivouaclesnomades.com) */}
-          <div className="mb-10 bg-gradient-to-br from-[#0B132B] via-[#14213D] to-[#1A2E40] text-white rounded-3xl p-6 sm:p-8 border-2 border-[#BA7517]/50 shadow-2xl relative overflow-hidden">
+          <div className="mb-8 bg-gradient-to-br from-[#0B132B] via-[#14213D] to-[#1A2E40] text-white rounded-3xl p-6 sm:p-8 border-2 border-[#BA7517]/50 shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#BA7517]/10 rounded-full blur-3xl pointer-events-none" />
             
             <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 justify-between">
@@ -465,6 +512,13 @@ export default function FoumZguidHub() {
                     <span>View Verified Camp Sanctuary</span>
                     <ArrowRight size={15} />
                   </Link>
+                  <button
+                    onClick={() => handleScrollToMapCamp('bivouac-les-nomades')}
+                    className="inline-flex items-center space-x-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <MapPin size={14} />
+                    <span>Exact Map Location</span>
+                  </button>
                   <a
                     href="https://bivouaclesnomades.com/"
                     target="_blank"
@@ -492,8 +546,86 @@ export default function FoumZguidHub() {
             </div>
           </div>
 
-          {/* Clean, Asymmetric Property Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Active Filter Bar & Layout Switcher & Left/Right Scroll Controls (DIRECTLY ABOVE PROPERTY CARDS SCROLL) */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#BA7517]/15 mb-6 gap-4">
+            <div className="flex items-center space-x-2">
+              <span className="text-sm font-bold text-[#0B132B]">
+                Showing {filteredStays.length} Verified Properties
+              </span>
+              {selectedCategory !== 'all' && (
+                <button
+                  onClick={() => setSelectedCategory('all')}
+                  className="text-xs text-[#BA7517] hover:underline font-semibold ml-2 cursor-pointer"
+                >
+                  (Clear filter)
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center space-x-3 self-end sm:self-auto">
+              {/* Layout Mode Switcher */}
+              <div className="bg-stone-200/90 p-1 rounded-xl border border-stone-300 flex items-center space-x-1 text-xs">
+                <button
+                  onClick={() => setStaysLayoutMode('carousel')}
+                  className={cn(
+                    "px-2.5 py-1 rounded-lg font-bold transition-all flex items-center space-x-1 cursor-pointer",
+                    staysLayoutMode === 'carousel'
+                      ? "bg-[#0B132B] text-white shadow-xs"
+                      : "text-[#0B132B]/70 hover:text-[#0B132B]"
+                  )}
+                  title="Horizontal scroll view"
+                >
+                  <Rows size={13} />
+                  <span>Scroll View</span>
+                </button>
+                <button
+                  onClick={() => setStaysLayoutMode('grid')}
+                  className={cn(
+                    "px-2.5 py-1 rounded-lg font-bold transition-all flex items-center space-x-1 cursor-pointer",
+                    staysLayoutMode === 'grid'
+                      ? "bg-[#0B132B] text-white shadow-xs"
+                      : "text-[#0B132B]/70 hover:text-[#0B132B]"
+                  )}
+                  title="Full grid view"
+                >
+                  <LayoutGrid size={13} />
+                  <span>Grid View</span>
+                </button>
+              </div>
+
+              {/* Left / Right Carousel Controls */}
+              {staysLayoutMode === 'carousel' && (
+                <div className="flex items-center space-x-1.5">
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(staysScrollRef, 'left')}
+                    className="w-8 h-8 rounded-full bg-white hover:bg-[#FAF7F2] text-[#0B132B] border border-stone-300 flex items-center justify-center shadow-xs cursor-pointer"
+                    title="Previous stays"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(staysScrollRef, 'right')}
+                    className="w-8 h-8 rounded-full bg-white hover:bg-[#FAF7F2] text-[#0B132B] border border-stone-300 flex items-center justify-center shadow-xs cursor-pointer"
+                    title="Next stays"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Stays Container: Horizontal Snap Track OR Grid View */}
+          <div 
+            ref={staysScrollRef}
+            className={cn(
+              staysLayoutMode === 'carousel'
+                ? "flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth no-scrollbar"
+                : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            )}
+          >
             {filteredStays.map((stay, index) => {
               const isFirstSpecial = index === 0;
               const isBivouacLesNomades = stay.slug === 'bivouac-les-nomades';
@@ -502,7 +634,8 @@ export default function FoumZguidHub() {
                   key={stay.id}
                   className={cn(
                     "group bg-white rounded-3xl overflow-hidden border border-[#BA7517]/20 shadow-sm hover:shadow-2xl hover:border-[#BA7517]/40 transition-all duration-500 flex flex-col justify-between",
-                    isFirstSpecial ? "md:col-span-2 lg:col-span-1 ring-1 ring-[#BA7517]/30" : "",
+                    staysLayoutMode === 'carousel' ? "w-[305px] sm:w-[350px] md:w-[380px] shrink-0 snap-start" : "",
+                    isFirstSpecial && staysLayoutMode === 'grid' ? "md:col-span-2 lg:col-span-1 ring-1 ring-[#BA7517]/30" : "",
                     isBivouacLesNomades ? "ring-2 ring-[#BA7517] shadow-xl border-[#BA7517]" : ""
                   )}
                 >
@@ -578,11 +711,26 @@ export default function FoumZguidHub() {
                         </Link>
                       </h3>
 
-                      {/* Sub-detail */}
-                      <p className="text-xs font-semibold text-[#0B132B]/80 mb-4 pb-3 border-b border-[#BA7517]/10 flex items-center gap-1.5">
-                        <Navigation size={13} className="text-[#BA7517] shrink-0" />
-                        <span>{stay.subDetail}</span>
-                      </p>
+                      {/* Sub-detail with Direct Locate on Map Button */}
+                      <div className="flex items-center justify-between text-xs font-semibold text-[#0B132B]/80 mb-4 pb-3 border-b border-[#BA7517]/10">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <Navigation size={13} className="text-[#BA7517] shrink-0" />
+                          <span className="truncate">{stay.subDetail}</span>
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleScrollToMapCamp(stay.slug);
+                          }}
+                          className="shrink-0 ml-2 inline-flex items-center space-x-1 text-[10px] font-bold text-[#BA7517] hover:text-white bg-[#BA7517]/10 hover:bg-[#BA7517] px-2.5 py-1 rounded-lg transition-all cursor-pointer"
+                          title="Locate exact coordinates on Foum Zguid regional map"
+                        >
+                          <MapPin size={11} />
+                          <span>Exact Map</span>
+                        </button>
+                      </div>
+
 
                       {/* Included Extras */}
                       <div className="mb-4">
@@ -620,7 +768,7 @@ export default function FoumZguidHub() {
 
                     <Link
                       to={`/camps/${stay.slug}`}
-                      className="inline-flex items-center space-x-1.5 bg-[#BA7517] hover:bg-[#EF9F27] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md group-hover:translate-x-0.5"
+                      className="inline-flex items-center space-x-1.5 bg-[#BA7517] hover:bg-[#EF9F27] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md group-hover:translate-x-0.5 cursor-pointer"
                     >
                       <span>View Sanctuary</span>
                       <ArrowRight size={13} />
@@ -630,8 +778,32 @@ export default function FoumZguidHub() {
               );
             })}
           </div>
+
+          {/* Bottom Carousel Helper & Dot Strip */}
+          {staysLayoutMode === 'carousel' && (
+            <div className="mt-6 pt-4 border-t border-[#BA7517]/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#0B132B]/60">
+              <span className="text-[11px] font-medium">
+                &larr; Showing all {filteredStays.length} verified sanctuaries • Scroll sideways to explore &rarr;
+              </span>
+              <div className="flex items-center space-x-1.5 overflow-x-auto max-w-full py-1">
+                {filteredStays.map((s, idx) => (
+                  <button
+                    key={s.id}
+                    onClick={() => {
+                      if (staysScrollRef.current) {
+                        staysScrollRef.current.scrollTo({ left: idx * 360, behavior: 'smooth' });
+                      }
+                    }}
+                    className="w-2.5 h-2.5 rounded-full bg-stone-300 hover:bg-[#BA7517] transition-colors cursor-pointer"
+                    title={s.name}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
+
 
       {/* =========================================================================
           5. LOCAL EXPERT GUIDE & REGION LORE
@@ -651,16 +823,45 @@ export default function FoumZguidHub() {
             </p>
           </div>
 
-          {/* Three Detailed Field Dispatches */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          {/* Three Detailed Field Dispatches Header & Controls */}
+          <div className="flex items-center justify-between mt-10 mb-4">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#BA7517]">
+              Field Lore Dispatches
+            </span>
+            <div className="flex md:hidden items-center space-x-2">
+              <span className="text-[11px] text-[#0B132B]/60 font-medium">Swipe dispatches &rarr;</span>
+              <button 
+                type="button"
+                onClick={() => scrollSection(dispatchesScrollRef, 'left', 300)}
+                className="w-7 h-7 rounded-full bg-white text-[#0B132B] border border-stone-200 flex items-center justify-center shadow-xs cursor-pointer"
+                title="Previous"
+              >
+                <ChevronLeft size={14} />
+              </button>
+              <button 
+                type="button"
+                onClick={() => scrollSection(dispatchesScrollRef, 'right', 300)}
+                className="w-7 h-7 rounded-full bg-white text-[#0B132B] border border-stone-200 flex items-center justify-center shadow-xs cursor-pointer"
+                title="Next"
+              >
+                <ChevronRight size={14} />
+              </button>
+            </div>
+          </div>
+
+          {/* Three Detailed Field Dispatches in Horizontal Snap Track */}
+          <div 
+            ref={dispatchesScrollRef}
+            className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory scroll-smooth no-scrollbar"
+          >
             {EXPERT_GUIDE_CONTENT.deepDives.map((item, idx) => (
               <div 
                 key={item.title}
-                className="bg-white p-6 rounded-2xl border border-[#BA7517]/20 shadow-sm flex flex-col justify-between"
+                className="w-[285px] sm:w-[330px] md:w-auto shrink-0 md:shrink snap-start bg-white p-6 rounded-2xl border border-[#BA7517]/20 shadow-sm flex flex-col justify-between"
               >
                 <div>
                   <div className="w-8 h-8 rounded-full bg-[#BA7517]/10 text-[#BA7517] flex items-center justify-center font-bold text-xs mb-4">
-                    {idx + 1}
+                    0{idx + 1}
                   </div>
                   <h3 className="text-lg font-serif font-bold text-[#0B132B] mb-3">
                     {item.title}
@@ -672,6 +873,7 @@ export default function FoumZguidHub() {
               </div>
             ))}
           </div>
+
 
           {/* Physical Audit Stamp Banner */}
           <div className="mt-12 bg-stone-900 text-white p-6 sm:p-8 rounded-3xl border border-[#BA7517]/30 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">

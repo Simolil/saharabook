@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { 
   Star, 
@@ -28,12 +28,14 @@ import {
   Sparkles,
   ExternalLink,
   MessageCircle,
-  Award
+  Award,
+  Layers
 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import BackButton from '@/src/components/BackButton';
 import { mockCamps } from '@/src/lib/mockData';
+import { FOUM_ZGUID_STAYS } from '@/src/data/foumZguidData';
 import VerificationBadge from '@/src/components/VerificationBadge';
 import { getCampImage, getCampFallbackImage } from '@/src/components/CampCard';
 import { formatCurrency, cn } from '@/src/lib/utils';
@@ -41,6 +43,7 @@ import { LodgingBusinessSchema } from '@/src/lib/seo';
 import { useLanguage } from '@/src/lib/LanguageContext';
 import { TentOptionItem } from '@/src/types';
 import MarrakechToCampRouteMap from '@/src/components/MarrakechToCampRouteMap';
+
 
 export default function CampDetail() {
   const { slug, campSlug } = useParams<{ slug?: string; campSlug?: string }>();
@@ -189,6 +192,153 @@ export default function CampDetail() {
     evening: "As dusk transforms the dune shadows from amber to violet, lantern carpet walkways lead to the open campfire. Berber drummers share hypnotic Sahrawi rhythms while slow-cooked tagines simmer over acacia coals.",
     silence: "At night, miles from artificial lights and cellular noise, the silence is profound. Sleep on hand-woven artisan linens within insulated canvas, waking to the sunrise shifting dune crests into radiant gold."
   };
+
+  // Horizontal Scroll Container Refs & Scrolling Handler
+  const tentScrollRef = useRef<HTMLDivElement | null>(null);
+  const narrativeScrollRef = useRef<HTMLDivElement | null>(null);
+  const amenitiesScrollRef = useRef<HTMLDivElement | null>(null);
+  const experiencesScrollRef = useRef<HTMLDivElement | null>(null);
+  const auditScrollRef = useRef<HTMLDivElement | null>(null);
+  const similarStaysScrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollSection = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right', distance = 380) => {
+    if (ref.current) {
+      ref.current.scrollBy({
+        left: direction === 'left' ? -distance : distance,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Narrative Chapters Array for Horizontal Carousel
+  const narrativeChapters = useMemo(() => {
+    const chapters = [
+      {
+        id: 'arrival',
+        chapterNum: '01',
+        title: 'The Journey & Arrival',
+        subtitle: 'Leaving Asphalt for Shimmering Lake Iriki',
+        icon: <Car size={18} className="text-[#BA7517]" />,
+        text: narrative.arrival,
+        tag: 'Dakar Crossing'
+      },
+      {
+        id: 'evening',
+        chapterNum: '02',
+        title: 'The Evening Under Stars',
+        subtitle: 'Campfire, Fresh Taguella & Sahrawi Blues',
+        icon: <Flame size={18} className="text-[#BA7517]" />,
+        text: narrative.evening,
+        tag: 'Saharan Nights'
+      },
+      {
+        id: 'silence',
+        chapterNum: '03',
+        title: 'The Deep Dune Silence',
+        subtitle: 'Profound Solitude & Dawn Awakening',
+        icon: <VolumeX size={18} className="text-[#BA7517]" />,
+        text: narrative.silence,
+        tag: 'Pure Silence'
+      }
+    ];
+
+    if (camp.owner_name) {
+      chapters.push({
+        id: 'heritage',
+        chapterNum: '04',
+        title: 'Nomadic Heritage & Host',
+        subtitle: `${camp.owner_name} • ${camp.owner_title || 'Master Desert Guide'}`,
+        icon: <Award size={18} className="text-[#BA7517]" />,
+        text: camp.owner_quote || '',
+        tag: 'Verified Founder'
+      });
+    }
+
+    return chapters;
+  }, [narrative, camp]);
+
+  // Curated Experiences & Add-ons Array for Horizontal Carousel
+  const curatedExperiences = useMemo(() => {
+    return [
+      {
+        id: 'quad',
+        title: 'High-Dune Quad Safari',
+        subtitle: '1-Hour Guided Erg Chigaga Safari',
+        image: '/images/destinations/foumzguid.jpg',
+        priceLabel: `+€${addonPrices.quad}`,
+        priceSub: '€45 / guest',
+        description: 'Guided quad excursion along the high dunes and open plateaus with seasoned desert safety lead.',
+        isAddon: true,
+        addonKey: 'quad',
+        included: false
+      },
+      {
+        id: 'transfer',
+        title: 'Lake Iriki 4x4 Dakar Crossing',
+        subtitle: 'Departing Foum Zguid Meeting Depot',
+        image: '/images/destinations/foum_zguid_lake_iriki_hero.jpg',
+        priceLabel: isBivouacLesNomades ? 'Included Free' : `+€${addonPrices.transfer}`,
+        priceSub: isBivouacLesNomades ? 'Included in Booking' : 'Private Land Cruiser',
+        description: 'Scenic off-road Land Cruiser expedition across the cracked salt lakebed and ancient fossil valleys.',
+        isAddon: !isBivouacLesNomades,
+        addonKey: 'transfer',
+        included: isBivouacLesNomades
+      },
+      {
+        id: 'sandBread',
+        title: 'Nomadic Sand Bread Masterclass',
+        subtitle: 'Bake Taguella in Desert Embers',
+        image: '/src/assets/images/nomad_tent_interior_1790671861252.jpg',
+        priceLabel: `+€${addonPrices.sandBread}`,
+        priceSub: '€15 / guest',
+        description: 'Learn the ancient desert craft of preparing and baking artisanal nomad bread directly in clean acacia coals.',
+        isAddon: true,
+        addonKey: 'sandBread',
+        included: false
+      },
+      {
+        id: 'camel',
+        title: 'Sunset Camel Ridge Trek',
+        subtitle: 'Ascend the 300m Dune Crest',
+        image: '/src/assets/images/bivouac_les_nomades_1790671846484.jpg',
+        priceLabel: 'Included Free',
+        priceSub: 'Complimentary with Stay',
+        description: 'Mount traditional dromedary camels at golden hour to witness 360° sunset panoramic views over the Sahara.',
+        isAddon: false,
+        addonKey: '',
+        included: true
+      },
+      {
+        id: 'stargazing',
+        title: 'Sahrawi Blues & Star Jam',
+        subtitle: 'Acoustic Drums by the Campfire',
+        image: '/src/assets/images/chigaga_milkyway_tent_1790326245816.jpg',
+        priceLabel: 'Included Free',
+        priceSub: 'Nightly Performance',
+        description: 'Local nomad musicians play traditional desert blues guitars, flutes, and drums under the unpolluted Milky Way.',
+        isAddon: false,
+        addonKey: '',
+        included: true
+      },
+      {
+        id: 'telescope',
+        title: 'Telescope Stargazing Session',
+        subtitle: 'Guided by Desert Sky Host',
+        image: '/images/slideshow/slide-1.jpg',
+        priceLabel: `+€${addonPrices.stargazing}`,
+        priceSub: '€20 / guest',
+        description: 'Discover Saturn rings, lunar craters, and deep space constellations with our on-site optical equipment.',
+        isAddon: true,
+        addonKey: 'stargazing',
+        included: false
+      }
+    ];
+  }, [isBivouacLesNomades, addonPrices]);
+
+  // Similar Stays in Foum Zguid
+  const similarStays = useMemo(() => {
+    return FOUM_ZGUID_STAYS.filter(s => s.slug !== camp.slug).slice(0, 6);
+  }, [camp.slug]);
 
   return (
     <div className="bg-[#FAF7F2] min-h-screen text-[#0B132B] pb-24">
@@ -477,91 +627,132 @@ export default function CampDetail() {
             {/* PHASE 2 - SECTION C: THE CORE NARRATIVE ("THE EXPERIENCE")                */}
             {/* ========================================================================= */}
             <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/15 shadow-sm">
-              <div className="inline-flex items-center space-x-2 text-[#BA7517] text-xs font-bold uppercase tracking-widest mb-3">
-                <Sparkles size={14} />
-                <span>Editorial Dispatch</span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                <div>
+                  <div className="inline-flex items-center space-x-2 text-[#BA7517] text-xs font-bold uppercase tracking-widest mb-1.5">
+                    <Sparkles size={14} />
+                    <span>Editorial Dispatch • 4 Chapters</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0B132B]">
+                    The Experience
+                  </h2>
+                </div>
+
+                {/* Left / Right Scroll Controls */}
+                <div className="flex items-center space-x-2 self-end sm:self-auto">
+                  <span className="text-[11px] text-[#0B132B]/60 font-medium mr-1 hidden sm:inline">
+                    Scroll chapters &rarr;
+                  </span>
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(narrativeScrollRef, 'left')}
+                    className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#BA7517]/15 text-[#0B132B] border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+                    title="Previous chapter"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(narrativeScrollRef, 'right')}
+                    className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#BA7517]/15 text-[#0B132B] border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+                    title="Next chapter"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0B132B] mb-6">
-                The Experience
-              </h2>
 
-              <div className="space-y-6 text-[#0B132B]/85 text-sm sm:text-base leading-relaxed">
-                {/* 1. Arrival */}
-                <div className="border-l-2 border-[#BA7517] pl-4 sm:pl-5">
-                  <h3 className="font-serif font-bold text-[#0B132B] text-base mb-1.5 flex items-center gap-2">
-                    <Car size={16} className="text-[#BA7517]" />
-                    <span>The Journey & Arrival</span>
-                  </h3>
-                  <p className="italic text-[#0B132B]/80 font-serif">
-                    "{narrative.arrival}"
-                  </p>
-                </div>
-
-                {/* 2. Evening */}
-                <div className="border-l-2 border-[#BA7517] pl-4 sm:pl-5">
-                  <h3 className="font-serif font-bold text-[#0B132B] text-base mb-1.5 flex items-center gap-2">
-                    <Flame size={16} className="text-[#BA7517]" />
-                    <span>The Evening Under Stars</span>
-                  </h3>
-                  <p className="italic text-[#0B132B]/80 font-serif">
-                    "{narrative.evening}"
-                  </p>
-                </div>
-
-                {/* 3. Silence */}
-                <div className="border-l-2 border-[#BA7517] pl-4 sm:pl-5">
-                  <h3 className="font-serif font-bold text-[#0B132B] text-base mb-1.5 flex items-center gap-2">
-                    <VolumeX size={16} className="text-[#BA7517]" />
-                    <span>The Deep Dune Silence</span>
-                  </h3>
-                  <p className="italic text-[#0B132B]/80 font-serif">
-                    "{narrative.silence}"
-                  </p>
-                </div>
-
-                {/* 4. Host & Nomadic Heritage (Direct from owner) */}
-                {camp.owner_name && (
-                  <div className="bg-[#FAF7F2] p-5 rounded-2xl border border-[#BA7517]/25 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-[#BA7517]/15 border border-[#BA7517]/30 flex items-center justify-center text-[#BA7517] font-serif font-bold text-xl shrink-0">
-                      <Award size={26} />
-                    </div>
+              {/* Horizontal Scroll Narrative Chapters */}
+              <div 
+                ref={narrativeScrollRef}
+                className="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar"
+              >
+                {narrativeChapters.map((chap) => (
+                  <div 
+                    key={chap.id}
+                    className="w-[285px] sm:w-[340px] md:w-[380px] shrink-0 snap-start bg-[#FAF7F2] p-5 sm:p-6 rounded-2xl border border-[#BA7517]/20 flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group"
+                  >
                     <div>
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <span className="font-serif font-bold text-base text-[#0B132B]">{camp.owner_name}</span>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#BA7517] bg-[#BA7517]/10 px-2 py-0.5 rounded-full">
-                          {camp.owner_title || 'Local Nomad Founder ("Desert GPS")'}
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-[10px] font-mono font-bold text-[#BA7517] bg-[#BA7517]/10 px-2.5 py-0.5 rounded-full uppercase">
+                          Chapter {chap.chapterNum} • {chap.tag}
                         </span>
+                        <div className="w-8 h-8 rounded-xl bg-white border border-[#BA7517]/25 flex items-center justify-center shadow-xs">
+                          {chap.icon}
+                        </div>
                       </div>
-                      <p className="text-xs text-[#0B132B]/85 italic leading-relaxed font-serif">
-                        "{camp.owner_quote}"
+
+                      <h3 className="font-serif font-bold text-base sm:text-lg text-[#0B132B] mb-1">
+                        {chap.title}
+                      </h3>
+                      <p className="text-[11px] font-semibold text-[#BA7517] mb-3">
+                        {chap.subtitle}
+                      </p>
+
+                      <p className="text-xs sm:text-sm text-[#0B132B]/85 italic font-serif leading-relaxed line-clamp-6">
+                        "{chap.text}"
                       </p>
                     </div>
+
+                    <div className="mt-4 pt-3 border-t border-[#BA7517]/15 flex items-center justify-between text-[11px] text-[#0B132B]/60">
+                      <span>Verified On-Site Diary</span>
+                      <span className="text-[#BA7517] font-bold">Dunecamps Exclusive</span>
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
 
-              {/* Key Amenities Grid */}
-              <div className="mt-8 pt-8 border-t border-[#BA7517]/15">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-[#0B132B]/60 mb-4">
-                  Confirmed On-Site Comforts
-                </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {/* Key Amenities Horizontal Ribbon */}
+              <div className="mt-6 pt-6 border-t border-[#BA7517]/15">
+                <div className="flex items-center justify-between mb-3.5">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-[#0B132B]/70 flex items-center space-x-1.5">
+                    <CheckCircle2 size={14} className="text-emerald-600" />
+                    <span>Confirmed On-Site Comforts</span>
+                  </h4>
+                  <div className="flex items-center space-x-1">
+                    <button 
+                      type="button"
+                      onClick={() => scrollSection(amenitiesScrollRef, 'left', 240)}
+                      className="w-6 h-6 rounded-full bg-[#FAF7F2] hover:bg-stone-200 text-stone-700 flex items-center justify-center transition-colors cursor-pointer text-xs"
+                    >
+                      <ChevronLeft size={13} />
+                    </button>
+                    <button 
+                      type="button"
+                      onClick={() => scrollSection(amenitiesScrollRef, 'right', 240)}
+                      className="w-6 h-6 rounded-full bg-[#FAF7F2] hover:bg-stone-200 text-stone-700 flex items-center justify-center transition-colors cursor-pointer text-xs"
+                    >
+                      <ChevronRight size={13} />
+                    </button>
+                  </div>
+                </div>
+
+                <div 
+                  ref={amenitiesScrollRef}
+                  className="flex gap-2.5 overflow-x-auto pb-2 scroll-smooth no-scrollbar"
+                >
                   {(camp.key_amenities || [
                     "Private En-Suite Bathroom",
-                    "Solar Powered Electricity",
+                    "Solar Powered Electricity 24/7",
                     "Sunset Camel Safari",
                     "Traditional Berber Tagine",
                     "Campfire Drum Circle",
-                    "Private Dune Deck"
+                    "Private Dune Deck",
+                    "Free Guarded Foum Zguid Parking",
+                    "Sandboarding on Site"
                   ]).map((amenity, idx) => (
-                    <div key={idx} className="flex items-center space-x-2 text-xs font-medium text-[#0B132B]">
-                      <CheckCircle2 size={15} className="text-emerald-600 shrink-0" />
-                      <span>{amenity}</span>
+                    <div 
+                      key={idx} 
+                      className="bg-[#FAF7F2] border border-[#BA7517]/20 px-3.5 py-2 rounded-xl flex items-center space-x-2 text-xs font-semibold text-[#0B132B] shrink-0 hover:bg-[#BA7517]/10 transition-colors shadow-2xs"
+                    >
+                      <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
+                      <span className="whitespace-nowrap">{amenity}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </section>
+
 
             {/* ========================================================================= */}
             {/* PHASE 2 - SECTION D: TRANSPARENT LOGISTICS & GETTING THERE                */}
@@ -608,15 +799,15 @@ export default function CampDetail() {
                   <span className="text-[#BA7517] font-semibold">{logistics.road_type}</span>
                 </div>
 
-                {/* Visual Route Map: Marrakech -> Foum Zguid -> Camp Destination */}
+                {/* Camp Location & Access Map */}
                 <div className="mt-6 pt-6 border-t border-[#BA7517]/15">
-                  <div className="mb-4">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517] block">Interactive Cartography</span>
+                  <div className="mb-3">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517] block">Camp Location &amp; Access</span>
                     <h3 className="text-base sm:text-lg font-serif font-bold text-[#0B132B]">
-                      Visual Route &amp; Terrain Map (Marrakech &rarr; Foum Zguid &rarr; {camp.name})
+                      Location &amp; Meeting Point Map
                     </h3>
                     <p className="text-xs text-[#0B132B]/70 mt-0.5">
-                      Toggle between the interactive satellite-road map and the mountain elevation profile. Click waypoints for driving advice, road type status, and fuel warnings.
+                      Foum Zguid secure meeting depot and 4x4 desert access to {camp.name}.
                     </p>
                   </div>
                   <MarrakechToCampRouteMap 
@@ -630,84 +821,117 @@ export default function CampDetail() {
 
 
             {/* ========================================================================= */}
-            {/* PHASE 2 - SECTION E: ROOMS / TENT OPTIONS                                 */}
+            {/* PHASE 2 - SECTION E: CURATED DESERT EXPERIENCES & EXCURSIONS              */}
             {/* ========================================================================= */}
             <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/20 shadow-sm">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517]">Choose Your Sanctuary</span>
-                  <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0B132B]">Rooms & Tent Options</h2>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517] block">
+                    Curated Sahara Adventures
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0B132B]">
+                    Desert Experiences &amp; Guided Excursions
+                  </h2>
                 </div>
-                <span className="text-xs text-[#0B132B]/60 font-medium">Click to select for booking</span>
+
+                {/* Left / Right Scroll Controls */}
+                <div className="flex items-center space-x-2 self-end sm:self-auto">
+                  <span className="text-[11px] text-[#0B132B]/60 font-medium mr-1 hidden sm:inline">
+                    Swipe activities &rarr;
+                  </span>
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(experiencesScrollRef, 'left')}
+                    className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#BA7517]/15 text-[#0B132B] border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+                    title="Previous experience"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(experiencesScrollRef, 'right')}
+                    className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#BA7517]/15 text-[#0B132B] border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+                    title="Next experience"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
               </div>
 
-              <div className="space-y-4">
-                {tentOptions.map((option) => {
-                  const isSelected = selectedTentId === option.id;
+              {/* Horizontal Scroll Track for Experiences */}
+              <div 
+                ref={experiencesScrollRef}
+                className="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar"
+              >
+                {curatedExperiences.map((exp) => {
+                  const isChecked = exp.isAddon && selectedAddons[exp.addonKey];
                   return (
                     <div 
-                      key={option.id}
-                      onClick={() => setSelectedTentId(option.id)}
+                      key={exp.id}
                       className={cn(
-                        "rounded-2xl p-4 sm:p-5 border transition-all cursor-pointer flex flex-col sm:flex-row gap-5 items-start sm:items-center justify-between",
-                        isSelected 
-                          ? "border-[#BA7517] bg-[#FAF7F2] shadow-md ring-1 ring-[#BA7517]" 
-                          : "border-stone-200 bg-white hover:border-[#BA7517]/40"
+                        "w-[260px] sm:w-[290px] md:w-[320px] shrink-0 snap-start bg-[#FAF7F2] rounded-2xl border transition-all flex flex-col justify-between overflow-hidden hover:shadow-md",
+                        isChecked 
+                          ? "border-[#BA7517] ring-1 ring-[#BA7517] bg-[#FAF7F2]" 
+                          : "border-stone-200/90"
                       )}
                     >
-                      <div className="flex items-center space-x-4">
-                        <img 
-                          src={option.image} 
-                          alt={option.name} 
-                          className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl object-cover shrink-0" 
-                        />
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <h3 className="font-serif font-bold text-base sm:text-lg text-[#0B132B]">{option.name}</h3>
-                            {option.badge && (
-                              <span className="bg-[#BA7517]/10 text-[#BA7517] border border-[#BA7517]/25 text-[9px] font-bold uppercase px-2 py-0.5 rounded-full">
-                                {option.badge}
-                              </span>
-                            )}
-                            {isSelected && (
-                              <span className="bg-[#BA7517] text-white text-[9px] font-bold uppercase px-2 py-0.5 rounded-full">
-                                Selected
-                              </span>
-                            )}
-                          </div>
-                          <p className="text-xs text-[#0B132B]/70 mt-1 max-w-md line-clamp-2">{option.description}</p>
-                          <div className="flex flex-wrap gap-2 mt-2 text-[10px] font-semibold text-[#0B132B]/80">
-                            <span className="bg-white px-2 py-0.5 rounded-md border border-stone-200">🛏 {option.bed_type}</span>
-                            <span className="bg-white px-2 py-0.5 rounded-md border border-stone-200">👥 Max {option.capacity} Guests</span>
-                          </div>
-                          {option.features && option.features.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5 mt-2">
-                              {option.features.map((feat, fIdx) => (
-                                <span key={fIdx} className="text-[10px] bg-stone-100/90 text-stone-700 px-2 py-0.5 rounded-md font-medium">
-                                  ✓ {feat}
-                                </span>
-                              ))}
-                            </div>
+                      <div>
+                        {/* Experience Thumbnail Image */}
+                        <div className="relative h-36 w-full overflow-hidden bg-stone-900">
+                          <img 
+                            src={exp.image} 
+                            alt={exp.title} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                          <span className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold uppercase px-2 py-0.5 rounded-full">
+                            {exp.priceSub}
+                          </span>
+                          {exp.included && (
+                            <span className="absolute top-2.5 right-2.5 bg-emerald-600 text-white text-[9px] font-bold uppercase px-2 py-0.5 rounded-full shadow-sm">
+                              Included Free
+                            </span>
                           )}
+                        </div>
+
+                        {/* Experience Info */}
+                        <div className="p-4">
+                          <h3 className="font-serif font-bold text-base text-[#0B132B] mb-0.5">
+                            {exp.title}
+                          </h3>
+                          <p className="text-[11px] font-semibold text-[#BA7517] mb-2">
+                            {exp.subtitle}
+                          </p>
+                          <p className="text-xs text-[#0B132B]/75 leading-relaxed line-clamp-3">
+                            {exp.description}
+                          </p>
                         </div>
                       </div>
 
-                      <div className="sm:text-right shrink-0 w-full sm:w-auto flex sm:flex-col justify-between items-center sm:items-end pt-3 sm:pt-0 border-t sm:border-t-0 border-stone-100">
+                      {/* Bottom Action Footer */}
+                      <div className="p-4 pt-0 border-t border-stone-200/60 mt-2 flex items-center justify-between">
                         <div>
-                          <span className="text-xl font-bold font-serif text-[#0B132B]">{formatCurrency(option.price_per_night)}</span>
-                          <span className="text-xs text-[#0B132B]/60"> / night</span>
+                          <span className="text-sm font-bold text-[#0B132B] font-serif">{exp.priceLabel}</span>
                         </div>
-                        <button
-                          type="button"
-                          className={cn(
-                            "mt-2 px-4 py-1.5 rounded-xl text-xs font-bold transition-colors",
-                            isSelected 
-                              ? "bg-[#0B132B] text-white" 
-                              : "bg-[#BA7517]/10 text-[#BA7517] hover:bg-[#BA7517] hover:text-white"
-                          )}
-                        >
-                          {isSelected ? "Active Choice" : "Select Option"}
-                        </button>
+
+                        {exp.included ? (
+                          <span className="text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded-lg">
+                            ✓ In Stay
+                          </span>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => toggleAddon(exp.addonKey)}
+                            className={cn(
+                              "px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer",
+                              isChecked
+                                ? "bg-[#0B132B] text-white"
+                                : "bg-[#BA7517]/10 hover:bg-[#BA7517] text-[#BA7517] hover:text-white"
+                            )}
+                          >
+                            {isChecked ? "Added ✓" : "+ Add to Stay"}
+                          </button>
+                        )}
                       </div>
                     </div>
                   );
@@ -715,34 +939,264 @@ export default function CampDetail() {
               </div>
             </section>
 
-            {/* Dunecamps Verification Guarantee Proof */}
-            <section className="bg-[#0B132B] text-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/30 shadow-xl">
-              <div className="flex items-center space-x-3 mb-4">
-                <ShieldCheck size={28} className="text-[#EF9F27]" />
-                <h3 className="text-xl font-serif font-bold text-white">The Dunecamps Physical Inspection Audit</h3>
+
+            {/* ========================================================================= */}
+            {/* PHASE 2 - SECTION F: ROOMS / TENT OPTIONS (HORIZONTAL CAROUSEL)            */}
+            {/* ========================================================================= */}
+            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/20 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                <div>
+                  <div className="inline-flex items-center space-x-2 text-[#BA7517] text-xs font-bold uppercase tracking-widest mb-1.5">
+                    <Tent size={14} />
+                    <span>Choose Your Sanctuary • {tentOptions.length} Suites Available</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0B132B]">
+                    Rooms &amp; Tent Options
+                  </h2>
+                </div>
+
+                {/* Left / Right Scroll Controls */}
+                <div className="flex items-center space-x-2 self-end sm:self-auto">
+                  <span className="text-[11px] text-[#0B132B]/60 font-medium mr-1 hidden sm:inline">
+                    Swipe suites &rarr;
+                  </span>
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(tentScrollRef, 'left')}
+                    className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#BA7517]/15 text-[#0B132B] border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+                    title="Previous suite"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(tentScrollRef, 'right')}
+                    className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#BA7517]/15 text-[#0B132B] border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+                    title="Next suite"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
               </div>
-              <p className="text-xs sm:text-sm text-white/80 leading-relaxed mb-6">
-                Unlike mass-market OTAs where unverified operators can publish stolen photos, {camp.name} underwent an in-person physical inspection by our Saharan operations team.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-white/90">
-                <div className="flex items-center space-x-2 bg-white/5 p-3 rounded-xl border border-white/10">
-                  <Check size={16} className="text-emerald-400 shrink-0" />
-                  <span>Private bathroom running water & pressure tested</span>
-                </div>
-                <div className="flex items-center space-x-2 bg-white/5 p-3 rounded-xl border border-white/10">
-                  <Check size={16} className="text-emerald-400 shrink-0" />
-                  <span>Solar battery capacity verified for 24/7 charging</span>
-                </div>
-                <div className="flex items-center space-x-2 bg-white/5 p-3 rounded-xl border border-white/10">
-                  <Check size={16} className="text-emerald-400 shrink-0" />
-                  <span>Licensed 4x4 drivers with sand extraction gear</span>
-                </div>
-                <div className="flex items-center space-x-2 bg-white/5 p-3 rounded-xl border border-white/10">
-                  <Check size={16} className="text-emerald-400 shrink-0" />
-                  <span>Direct operator WhatsApp channel unlocked at checkout</span>
+
+              {/* Horizontal Scroll Track for Tent Suites */}
+              <div 
+                ref={tentScrollRef}
+                className="flex gap-5 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar"
+              >
+                {tentOptions.map((option) => {
+                  const isSelected = selectedTentId === option.id;
+                  return (
+                    <div 
+                      key={option.id}
+                      onClick={() => setSelectedTentId(option.id)}
+                      className={cn(
+                        "w-[305px] sm:w-[350px] md:w-[380px] shrink-0 snap-start rounded-3xl border transition-all cursor-pointer flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-lg relative group",
+                        isSelected 
+                          ? "border-[#BA7517] bg-[#FAF7F2]/40 shadow-lg ring-2 ring-[#BA7517]" 
+                          : "border-stone-200 bg-white hover:border-[#BA7517]/40"
+                      )}
+                    >
+                      <div>
+                        {/* Tent Photo */}
+                        <div className="relative h-48 w-full overflow-hidden bg-stone-900">
+                          <img 
+                            src={option.image} 
+                            alt={option.name} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                          
+                          {/* Badge pill */}
+                          {option.badge && (
+                            <span className="absolute top-3 left-3 bg-[#BA7517] text-white text-[9px] font-bold uppercase px-2.5 py-1 rounded-full shadow-md">
+                              {option.badge}
+                            </span>
+                          )}
+
+                          {/* Selected Pill */}
+                          {isSelected && (
+                            <span className="absolute top-3 right-3 bg-emerald-600 text-white text-[9px] font-bold uppercase px-2.5 py-1 rounded-full shadow-md flex items-center space-x-1">
+                              <span>Active Choice</span>
+                              <Check size={11} />
+                            </span>
+                          )}
+
+                          <div className="absolute bottom-3 left-3 right-3 text-white">
+                            <span className="text-[10px] uppercase font-bold text-[#EF9F27] block">
+                              {option.bed_type}
+                            </span>
+                            <h3 className="font-serif font-bold text-lg text-white leading-tight drop-shadow-sm">
+                              {option.name}
+                            </h3>
+                          </div>
+                        </div>
+
+                        {/* Body Details */}
+                        <div className="p-5">
+                          <div className="flex items-center space-x-2 text-[10px] font-semibold text-[#0B132B]/80 mb-3">
+                            <span className="bg-stone-100 px-2 py-0.5 rounded-md border border-stone-200">
+                              👥 Max {option.capacity} Guests
+                            </span>
+                            <span className="bg-stone-100 px-2 py-0.5 rounded-md border border-stone-200">
+                              🛏 {option.bed_type}
+                            </span>
+                          </div>
+
+                          <p className="text-xs text-[#0B132B]/70 leading-relaxed mb-4 line-clamp-3">
+                            {option.description}
+                          </p>
+
+                          {/* Features */}
+                          {option.features && option.features.length > 0 && (
+                            <div className="space-y-1.5 pt-3 border-t border-stone-100">
+                              {option.features.map((feat, fIdx) => (
+                                <div key={fIdx} className="flex items-center space-x-1.5 text-xs text-[#0B132B]/85">
+                                  <Check size={13} className="text-[#BA7517] shrink-0" />
+                                  <span className="line-clamp-1">{feat}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Card Footer: Price & Selection */}
+                      <div className="p-5 pt-3 border-t border-stone-100 bg-white/70 flex items-center justify-between">
+                        <div>
+                          <div className="text-xl font-bold font-serif text-[#0B132B]">
+                            {formatCurrency(option.price_per_night)}
+                          </div>
+                          <span className="text-[10px] text-[#0B132B]/60">per night • taxes included</span>
+                        </div>
+
+                        <button
+                          type="button"
+                          className={cn(
+                            "px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs",
+                            isSelected 
+                              ? "bg-[#0B132B] text-white" 
+                              : "bg-[#BA7517] hover:bg-[#9E6010] text-white"
+                          )}
+                        >
+                          {isSelected ? "Active Choice ✓" : "Select Suite"}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Suite Dots Indicator & Helper */}
+              <div className="mt-4 pt-3 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[#0B132B]/60">
+                <span className="text-[11px]">
+                  &larr; Scroll sideways to compare all {tentOptions.length} suites &amp; rates &rarr;
+                </span>
+                <div className="flex items-center space-x-1.5">
+                  {tentOptions.map((opt) => (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setSelectedTentId(opt.id)}
+                      className={cn(
+                        "w-2.5 h-2.5 rounded-full transition-all cursor-pointer",
+                        selectedTentId === opt.id ? "bg-[#BA7517] w-6" : "bg-stone-300 hover:bg-stone-400"
+                      )}
+                      title={opt.name}
+                    />
+                  ))}
                 </div>
               </div>
             </section>
+
+
+            {/* ========================================================================= */}
+            {/* PHASE 2 - SECTION G: DUNECAMPS PHYSICAL INSPECTION AUDIT                   */}
+            {/* ========================================================================= */}
+            <section className="bg-[#0B132B] text-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/30 shadow-xl">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div className="flex items-center space-x-3">
+                  <ShieldCheck size={28} className="text-[#EF9F27] shrink-0" />
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#EF9F27] block">
+                      Direct Verification
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-serif font-bold text-white">
+                      The Dunecamps Physical Inspection Audit
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Scroll Buttons */}
+                <div className="flex items-center space-x-2 self-end sm:self-auto">
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(auditScrollRef, 'left', 260)}
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    <ChevronLeft size={14} />
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => scrollSection(auditScrollRef, 'right', 260)}
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    <ChevronRight size={14} />
+                  </button>
+                </div>
+              </div>
+
+              <p className="text-xs sm:text-sm text-white/80 leading-relaxed mb-5">
+                Unlike mass-market OTAs where unverified operators can publish stolen photos, {camp.name} underwent an in-person physical inspection by our Saharan operations team.
+              </p>
+
+              {/* Horizontal Scroll Audit Cards */}
+              <div 
+                ref={auditScrollRef}
+                className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth no-scrollbar"
+              >
+                <div className="w-[230px] sm:w-[260px] shrink-0 snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
+                  <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-xs text-white block mb-0.5">Water Pressure &amp; Heat</span>
+                    <p className="text-[11px] text-white/70 leading-relaxed">
+                      Private bathroom running hot water &amp; ceramic flush toilet inspected.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-[230px] sm:w-[260px] shrink-0 snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
+                  <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-xs text-white block mb-0.5">Solar Battery Array</span>
+                    <p className="text-[11px] text-white/70 leading-relaxed">
+                      Solar capacity tested for 24/7 tent lighting and camera/USB charging.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-[230px] sm:w-[260px] shrink-0 snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
+                  <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-xs text-white block mb-0.5">Dune Navigation Gear</span>
+                    <p className="text-[11px] text-white/70 leading-relaxed">
+                      Licensed 4x4 drivers equipped with GPS, sand recovery boards &amp; deflators.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-[230px] sm:w-[260px] shrink-0 snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
+                  <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-xs text-white block mb-0.5">Direct WhatsApp Line</span>
+                    <p className="text-[11px] text-white/70 leading-relaxed">
+                      Direct host WhatsApp coordinate unlocked immediately upon booking.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
 
           </div>
 
@@ -1026,6 +1480,132 @@ export default function CampDetail() {
 
         </div>
       </div>
+
+      {/* ========================================================================= */}
+      {/* PHASE 2 - SECTION H: SIMILAR SANCTUARIES (HORIZONTAL EXPLORER)             */}
+      {/* ========================================================================= */}
+      {similarStays.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-6">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/20 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517] block">
+                  Regional Collection
+                </span>
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0B132B]">
+                  Other Verified Stays in Foum Zguid &amp; Erg Chigaga
+                </h2>
+                <p className="text-xs text-[#0B132B]/70 mt-0.5">
+                  Browse handpicked alternative bivouacs, luxury dune sanctuaries, and oasis auberges.
+                </p>
+              </div>
+
+              {/* Scroll Controls */}
+              <div className="flex items-center space-x-2 self-end sm:self-auto">
+                <span className="text-[11px] text-[#0B132B]/60 font-medium mr-1 hidden sm:inline">
+                  Swipe sanctuaries &rarr;
+                </span>
+                <button 
+                  type="button"
+                  onClick={() => scrollSection(similarStaysScrollRef, 'left')}
+                  className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#BA7517]/15 text-[#0B132B] border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+                  title="Previous camp"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => scrollSection(similarStaysScrollRef, 'right')}
+                  className="w-8 h-8 rounded-full bg-[#FAF7F2] hover:bg-[#BA7517]/15 text-[#0B132B] border border-stone-200 flex items-center justify-center transition-colors cursor-pointer"
+                  title="Next camp"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            </div>
+
+            {/* Horizontal Scroll Track */}
+            <div 
+              ref={similarStaysScrollRef}
+              className="flex gap-5 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar"
+            >
+              {similarStays.map((stay) => (
+                <div 
+                  key={stay.id}
+                  className="w-[270px] sm:w-[310px] md:w-[340px] shrink-0 snap-start bg-white rounded-2xl border border-stone-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group"
+                >
+                  <div>
+                    {/* Stay Image */}
+                    <div className="relative h-44 w-full overflow-hidden bg-stone-900">
+                      <img 
+                        src={stay.image || stay.fallbackImage} 
+                        alt={stay.name} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <span className="absolute top-2.5 left-2.5 bg-[#0B132B]/80 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold uppercase px-2.5 py-0.5 rounded-full">
+                        {stay.categoryLabel}
+                      </span>
+                      <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-white text-[11px] font-bold">
+                        <div className="flex items-center space-x-1">
+                          <Star size={13} className="text-amber-400 fill-amber-400" />
+                          <span>{stay.rating.toFixed(2)}</span>
+                          <span className="text-white/70">({stay.reviewCount})</span>
+                        </div>
+                        <span className="text-[#EF9F27]">{stay.distanceKm} km into dunes</span>
+                      </div>
+                    </div>
+
+                    {/* Stay Body */}
+                    <div className="p-4">
+                      <h3 className="font-serif font-bold text-base text-[#0B132B] group-hover:text-[#BA7517] transition-colors line-clamp-1 mb-1">
+                        {stay.name}
+                      </h3>
+                      <p className="text-xs text-[#0B132B]/70 line-clamp-2 leading-relaxed mb-3">
+                        {stay.description_en}
+                      </p>
+
+                      <div className="text-[10px] text-stone-600 bg-stone-50 border border-stone-100 p-2 rounded-lg line-clamp-1">
+                        📍 {stay.subDetail || 'Erg Chigaga, Foum Zguid'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stay Footer */}
+                  <div className="p-4 pt-3 border-t border-stone-100 flex items-center justify-between">
+                    <div>
+                      <span className="text-lg font-bold font-serif text-[#0B132B]">
+                        {formatCurrency(stay.price_per_night)}
+                      </span>
+                      <span className="text-[10px] text-[#0B132B]/60"> / night</span>
+                    </div>
+
+                    <Link
+                      to={`/camps/${stay.slug}`}
+                      className="px-3.5 py-1.5 rounded-xl bg-[#BA7517]/10 hover:bg-[#BA7517] text-[#BA7517] hover:text-white font-bold text-xs transition-colors flex items-center space-x-1 cursor-pointer"
+                    >
+                      <span>Explore</span>
+                      <ArrowRight size={12} />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* View All Foum Zguid Hub Link */}
+            <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs text-[#0B132B]/75">
+              <span>Looking for edge lodges or town auberges?</span>
+              <Link 
+                to="/destination/foumzguid" 
+                className="font-bold text-[#BA7517] hover:underline flex items-center space-x-1"
+              >
+                <span>View Full Foum Zguid Hub (14 Stays)</span>
+                <ArrowRight size={13} />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ========================================================================= */}
       {/* FULL-SCREEN IMAGE LIGHTBOX MODAL                                          */}
