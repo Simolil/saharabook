@@ -26,8 +26,6 @@ import {
   Plus,
   CheckCircle2,
   Sparkles,
-  ExternalLink,
-  MessageCircle,
   Award,
   Layers
 } from 'lucide-react';
@@ -426,57 +424,6 @@ export default function CampDetail() {
           </div>
         </div>
 
-        {/* Verified Owner Partner & Official Website Transparency Banner */}
-        {camp.official_website && (
-          <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#0B132B] via-[#14213D] to-[#0B132B] text-white border border-[#BA7517]/35 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="flex items-start sm:items-center space-x-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-[#BA7517]/20 border border-[#BA7517]/40 flex items-center justify-center shrink-0">
-                <ShieldCheck size={26} className="text-[#EF9F27]" />
-              </div>
-              <div>
-                <div className="flex items-center gap-2 flex-wrap mb-1">
-                  <span className="bg-[#EF9F27] text-[#0B132B] font-bold text-[10px] uppercase px-2 py-0.5 rounded-full tracking-wider">
-                    Direct Partner Authorization
-                  </span>
-                  <span className="text-white font-semibold text-xs sm:text-sm">
-                    Verified with Founder {camp.owner_name || 'Owner'}
-                  </span>
-                  <span className="text-[#EF9F27] text-xs font-bold flex items-center gap-1">
-                    <Star size={12} className="fill-[#EF9F27]" />
-                    <span>5.0 TripAdvisor Rating</span>
-                  </span>
-                </div>
-                <p className="text-xs text-white/75 leading-relaxed">
-                  Dunecamps holds complete booking and operations approval for this camp. Authentic direct rates, inspected sanitation, and direct coordination with Mustapha's team in Foum Zguid.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-2.5 shrink-0 self-start md:self-auto">
-              <a 
-                href={camp.official_website} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-white/10 hover:bg-white/20 text-[#EF9F27] border border-[#EF9F27]/30 rounded-xl text-xs font-bold transition-all shadow-xs"
-              >
-                <span>bivouaclesnomades.com</span>
-                <ExternalLink size={13} />
-              </a>
-              {camp.whatsapp && (
-                <a 
-                  href={`https://wa.me/${camp.whatsapp.replace(/[^0-9]/g, '')}?text=Hello%20Mustapha,%20I%20am%20inquiring%20about%20booking%20Bivouac%20Les%20Nomades%20via%20Dunecamps`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-xs"
-                >
-                  <MessageCircle size={14} />
-                  <span>WhatsApp Host</span>
-                </a>
-              )}
-            </div>
-          </div>
-        )}
-
         {/* Asymmetric Bento-Grid Layout (4-5 high-res photos) */}
         <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-3 h-[420px] sm:h-[480px] md:h-[540px] rounded-3xl overflow-hidden shadow-lg border border-[#BA7517]/20">
           {/* Main Large Hero Bento Item */}
@@ -798,32 +745,45 @@ export default function CampDetail() {
                   <span>Drive duration from Marrakech: <strong>{logistics.drive_time_from_marrakech}</strong></span>
                   <span className="text-[#BA7517] font-semibold">{logistics.road_type}</span>
                 </div>
+              </div>
+            </section>
 
-                {/* Camp Location & Access Map */}
-                <div className="mt-6 pt-6 border-t border-[#BA7517]/15">
-                  <div className="mb-3">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517] block">Camp Location &amp; Access</span>
-                    <h3 className="text-base sm:text-lg font-serif font-bold text-[#0B132B]">
-                      Location &amp; Meeting Point Map
-                    </h3>
-                    <p className="text-xs text-[#0B132B]/70 mt-0.5">
-                      Foum Zguid secure meeting depot and 4x4 desert access to {camp.name}.
-                    </p>
+
+            {/* ========================================================================= */}
+            {/* CAMP LOCATION & ACCESS ROUTE MAP (EXTENDED ACROSS DESKTOP)                */}
+            {/* ========================================================================= */}
+            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/20 shadow-sm lg:w-[calc(150%_+_1.25rem)] lg:max-w-none relative z-10">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                <div>
+                  <div className="inline-flex items-center space-x-2 text-[#BA7517] text-xs font-bold uppercase tracking-widest mb-1.5">
+                    <MapPin size={14} />
+                    <span>Cartography &amp; GPS Coordinate Verified</span>
                   </div>
-                  <MarrakechToCampRouteMap 
-                    campName={camp.name}
-                    campSlug={camp.slug}
-                    meetingPointName={logistics.meeting_point}
-                  />
+                  <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#0B132B]">
+                    Location &amp; Meeting Point Map
+                  </h2>
+                  <p className="text-xs sm:text-sm text-[#0B132B]/75 mt-1">
+                    Foum Zguid secure meeting depot and 4x4 desert access route to {camp.name}.
+                  </p>
+                </div>
+                <div className="px-3.5 py-1.5 bg-[#FAF7F2] border border-[#BA7517]/20 rounded-xl text-xs font-semibold text-[#0B132B] flex items-center space-x-2 shrink-0 self-start sm:self-auto">
+                  <Compass size={14} className="text-[#BA7517]" />
+                  <span>Lake Iriki Basin / Erg Chigaga Sector</span>
                 </div>
               </div>
+
+              <MarrakechToCampRouteMap 
+                campName={camp.name}
+                campSlug={camp.slug}
+                meetingPointName={logistics.meeting_point}
+              />
             </section>
 
 
             {/* ========================================================================= */}
             {/* PHASE 2 - SECTION E: CURATED DESERT EXPERIENCES & EXCURSIONS              */}
             {/* ========================================================================= */}
-            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/20 shadow-sm">
+            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/20 shadow-sm lg:w-[calc(150%_+_1.25rem)] lg:max-w-none relative z-10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#BA7517] block">
@@ -943,7 +903,7 @@ export default function CampDetail() {
             {/* ========================================================================= */}
             {/* PHASE 2 - SECTION F: ROOMS / TENT OPTIONS (HORIZONTAL CAROUSEL)            */}
             {/* ========================================================================= */}
-            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/20 shadow-sm">
+            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/20 shadow-sm lg:w-[calc(150%_+_1.25rem)] lg:max-w-none relative z-10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                 <div>
                   <div className="inline-flex items-center space-x-2 text-[#BA7517] text-xs font-bold uppercase tracking-widest mb-1.5">
@@ -1113,7 +1073,7 @@ export default function CampDetail() {
             {/* ========================================================================= */}
             {/* PHASE 2 - SECTION G: DUNECAMPS PHYSICAL INSPECTION AUDIT                   */}
             {/* ========================================================================= */}
-            <section className="bg-[#0B132B] text-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/30 shadow-xl">
+            <section className="bg-[#0B132B] text-white rounded-3xl p-6 sm:p-8 border border-[#BA7517]/30 shadow-xl lg:w-[calc(150%_+_1.25rem)] lg:max-w-none relative z-10">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div className="flex items-center space-x-3">
                   <ShieldCheck size={28} className="text-[#EF9F27] shrink-0" />
@@ -1150,12 +1110,12 @@ export default function CampDetail() {
                 Unlike mass-market OTAs where unverified operators can publish stolen photos, {camp.name} underwent an in-person physical inspection by our Saharan operations team.
               </p>
 
-              {/* Horizontal Scroll Audit Cards */}
+              {/* Horizontal Scroll Audit Cards - Expands to 4-Column Grid on Extended Desktop */}
               <div 
                 ref={auditScrollRef}
-                className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth no-scrollbar"
+                className="flex lg:grid lg:grid-cols-4 gap-3 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth no-scrollbar"
               >
-                <div className="w-[230px] sm:w-[260px] shrink-0 snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
+                <div className="w-[230px] sm:w-[260px] lg:w-auto shrink-0 lg:shrink snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
                   <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-xs text-white block mb-0.5">Water Pressure &amp; Heat</span>
@@ -1165,7 +1125,7 @@ export default function CampDetail() {
                   </div>
                 </div>
 
-                <div className="w-[230px] sm:w-[260px] shrink-0 snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
+                <div className="w-[230px] sm:w-[260px] lg:w-auto shrink-0 lg:shrink snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
                   <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-xs text-white block mb-0.5">Solar Battery Array</span>
@@ -1175,7 +1135,7 @@ export default function CampDetail() {
                   </div>
                 </div>
 
-                <div className="w-[230px] sm:w-[260px] shrink-0 snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
+                <div className="w-[230px] sm:w-[260px] lg:w-auto shrink-0 lg:shrink snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
                   <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold text-xs text-white block mb-0.5">Dune Navigation Gear</span>
@@ -1185,12 +1145,12 @@ export default function CampDetail() {
                   </div>
                 </div>
 
-                <div className="w-[230px] sm:w-[260px] shrink-0 snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
+                <div className="w-[230px] sm:w-[260px] lg:w-auto shrink-0 lg:shrink snap-start bg-white/5 p-4 rounded-2xl border border-white/10 flex items-start space-x-3">
                   <Check size={18} className="text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold text-xs text-white block mb-0.5">Direct WhatsApp Line</span>
+                    <span className="font-bold text-xs text-white block mb-0.5">Verified Host Coordination</span>
                     <p className="text-[11px] text-white/70 leading-relaxed">
-                      Direct host WhatsApp coordinate unlocked immediately upon booking.
+                      Direct host coordination and arrival transfer instructions provided upon confirmed booking.
                     </p>
                   </div>
                 </div>
@@ -1344,7 +1304,7 @@ export default function CampDetail() {
                             <span>Lake Iriki Fossil Safari</span>
                             <span>+€{addonPrices.stargazing}</span>
                           </div>
-                          <span className="text-[10px] text-[#0B132B]/60">Prehistoric seabed walk with Mustapha (€20/guest)</span>
+                          <span className="text-[10px] text-[#0B132B]/60">Prehistoric seabed walk with desert guide (€20/guest)</span>
                         </div>
                       </label>
 
@@ -1448,27 +1408,15 @@ export default function CampDetail() {
                 </div>
               </div>
 
-              {/* CTA Button: Reserve / Request Verification */}
+              {/* CTA Button: Reserve Sanctuary */}
               <button 
                 type="button"
                 onClick={handleReserve}
                 className="w-full bg-[#BA7517] hover:bg-[#9E6010] text-white text-center py-4 rounded-xl font-bold text-sm shadow-lg shadow-[#BA7517]/25 transition-all transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer"
               >
-                <span>{isBivouacLesNomades ? 'Reserve Sanctuary with Mustapha' : 'Instant Reserve & Request Verification'}</span>
+                <span>Instant Reserve &amp; Guarantee Stay</span>
                 <ArrowRight size={16} />
               </button>
-
-              {camp.whatsapp && (
-                <a 
-                  href={`https://wa.me/${camp.whatsapp.replace(/[^0-9]/g, '')}?text=Hello%20Mustapha,%20I%20am%20inquiring%20about%20booking%20Bivouac%20Les%20Nomades%20via%20Dunecamps`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 w-full bg-emerald-700/10 hover:bg-emerald-700/20 text-emerald-800 border border-emerald-300/60 text-center py-2.5 rounded-xl font-bold text-xs transition-all flex items-center justify-center space-x-2 cursor-pointer"
-                >
-                  <MessageCircle size={15} className="text-emerald-700" />
-                  <span>Chat with Mustapha on WhatsApp</span>
-                </a>
-              )}
 
               {/* Trust Subtext - NO aggressive fake scarcity ("Only 1 left!") */}
               <div className="mt-4 flex items-center justify-center space-x-1.5 text-[11px] text-[#0B132B]/60 text-center">

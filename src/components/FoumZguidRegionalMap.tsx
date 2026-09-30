@@ -17,17 +17,19 @@ import {
 import { FOUM_ZGUID_STAYS, FoumZguidStay } from '../data/foumZguidData';
 import { cn } from '../lib/utils';
 
-// Tile providers
+// Authentic Google Maps Terrain cartography matching reference
 const TILES = {
   topo: {
     name: 'Terrain',
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
-    attribution: '&copy; Esri'
+    url: 'https://mt{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
+    subdomains: ['0', '1', '2', '3'],
+    attribution: '&copy; Google Maps'
   },
   satellite: {
     name: 'Satellite',
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    attribution: '&copy; Esri, Maxar'
+    url: 'https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+    subdomains: ['0', '1', '2', '3'],
+    attribution: '&copy; Google Maps'
   }
 };
 
@@ -172,74 +174,60 @@ export const FoumZguidRegionalMap: React.FC<FoumZguidRegionalMapProps> = ({
     map.fitBounds(bounds, { padding: [25, 25] });
 
     const tileLayer = L.tileLayer(TILES.topo.url, {
+      subdomains: TILES.topo.subdomains,
       attribution: TILES.topo.attribution,
-      maxZoom: 18
+      maxZoom: 19
     }).addTo(map);
 
     tileLayerRef.current = tileLayer;
     mapInstanceRef.current = map;
 
-    // 1. Draw Paved Highway Line (Marrakech -> Foum Zguid)
+    // 1. Draw Paved Highway Line (Marrakech -> Foum Zguid) - Google Maps Style
+    L.polyline(MARRAKECH_TO_FOUM_ZGUID_HIGHWAY, {
+      color: '#1557B0',
+      weight: 7.5,
+      opacity: 0.95,
+      lineCap: 'round',
+      lineJoin: 'round'
+    }).addTo(map);
+
     const highwayLine = L.polyline(MARRAKECH_TO_FOUM_ZGUID_HIGHWAY, {
-      color: '#1E3A8A',
-      weight: 4.5,
-      opacity: 0.95
+      color: '#1A73E8',
+      weight: 5,
+      opacity: 1,
+      lineCap: 'round',
+      lineJoin: 'round'
     }).addTo(map);
 
-    highwayLine.bindTooltip('🚗 Paved Highway: Marrakech → Foum Zguid (395 km • ~6 hrs)', {
+    highwayLine.bindTooltip('🚗 Paved Highway: Marrakech → Foum Zguid (395 km • ~5h 45m)', {
       sticky: true,
-      className: 'bg-[#0B132B] text-white text-xs px-2.5 py-1 rounded shadow-lg'
+      className: 'bg-white text-stone-900 border border-stone-300 text-xs px-2.5 py-1 rounded-md shadow-md font-sans font-semibold'
     });
 
-    // 2. Draw 4x4 Desert Track (Foum Zguid -> Lake Iriki -> Dunes)
+    // 2. Draw 4x4 Desert Track (Foum Zguid -> Lake Iriki -> Dunes) - Google Maps Trail Style
+    L.polyline(DESERT_4X4_TRACK, {
+      color: '#1557B0',
+      weight: 6.5,
+      opacity: 0.9,
+      lineCap: 'round',
+      lineJoin: 'round'
+    }).addTo(map);
+
     const desertTrackLine = L.polyline(DESERT_4X4_TRACK, {
-      color: '#EA580C',
-      weight: 3.5,
-      opacity: 0.85,
-      dashArray: '7, 7'
+      color: '#4285F4',
+      weight: 4.5,
+      opacity: 1,
+      dashArray: '8, 8',
+      lineCap: 'round',
+      lineJoin: 'round'
     }).addTo(map);
 
-    desertTrackLine.bindTooltip('🏜️ 4x4 Off-Road Track via Lake Iriki to Erg Chigaga', {
+    desertTrackLine.bindTooltip('🏜️ 4x4 Off-Road Track via Lake Iriki to Erg Chigaga (~67 km)', {
       sticky: true,
-      className: 'bg-[#BA7517] text-white text-xs px-2.5 py-1 rounded shadow-lg'
+      className: 'bg-white text-stone-900 border border-stone-300 text-xs px-2.5 py-1 rounded-md shadow-md font-sans font-semibold'
     });
 
-    // 3. Lake Iriki Milestone Marker
-    const lakeIrikiIcon = L.divIcon({
-      className: 'custom-lake-marker',
-      html: `
-        <div style="
-          background: #0284C7;
-          color: white;
-          border: 1.5px solid white;
-          border-radius: 999px;
-          padding: 2px 7px;
-          font-size: 10px;
-          font-weight: 700;
-          white-space: nowrap;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-          display: flex;
-          align-items: center;
-          gap: 3px;
-        ">
-          <span>🌊</span>
-          <span>Lake Iriki Basin</span>
-        </div>
-      `,
-      iconSize: [95, 22],
-      iconAnchor: [47, 11]
-    });
 
-    L.marker([29.8450, -6.5300], { icon: lakeIrikiIcon })
-      .addTo(map)
-      .bindPopup(`
-        <div style="font-family: sans-serif; font-size: 12px; padding: 4px; min-width: 180px;">
-          <b style="color: #0284C7; font-size: 13px;">Lake Iriki (Dry Clay Basin)</b>
-          <p style="margin: 4px 0 0; color: #444; font-size: 11px;">
-            Ancient dry salt bed and marine fossil fields. Reached only by 4x4 on the way into Erg Chigaga dunes.
-          </p>
-        </div>
-      `);
 
     // 4. Highway Stop Markers
     HIGHWAY_STOPS.forEach((stop) => {
@@ -377,7 +365,19 @@ export const FoumZguidRegionalMap: React.FC<FoumZguidRegionalMapProps> = ({
       lodgeMarkersRef.current[stay.slug] = marker;
     });
 
+    // ResizeObserver ensures Leaflet updates viewport instantly when container extends to right
+    const resizeObserver = new ResizeObserver(() => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.invalidateSize();
+      }
+    });
+
+    if (mapContainerRef.current) {
+      resizeObserver.observe(mapContainerRef.current);
+    }
+
     return () => {
+      resizeObserver.disconnect();
       map.remove();
       mapInstanceRef.current = null;
     };
@@ -393,8 +393,9 @@ export const FoumZguidRegionalMap: React.FC<FoumZguidRegionalMapProps> = ({
     }
 
     const newLayer = L.tileLayer(TILES[style].url, {
+      subdomains: TILES[style].subdomains,
       attribution: TILES[style].attribution,
-      maxZoom: 18
+      maxZoom: 19
     }).addTo(mapInstanceRef.current);
 
     tileLayerRef.current = newLayer;

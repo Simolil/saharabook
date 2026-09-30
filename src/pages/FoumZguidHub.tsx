@@ -28,7 +28,8 @@ import {
   ChevronLeft,
   ChevronRight,
   LayoutGrid,
-  Rows
+  Rows,
+  Tent
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn, formatCurrency } from '@/src/lib/utils';
@@ -325,27 +326,6 @@ export default function FoumZguidHub() {
             ))}
           </div>
 
-
-          {/* Quick Assurance Strip */}
-          <div className="mt-8 bg-[#0B132B] text-white rounded-xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-3 text-left">
-              <div className="w-10 h-10 rounded-full bg-[#BA7517]/20 border border-[#BA7517]/40 flex items-center justify-center shrink-0">
-                <Car size={18} className="text-[#EF9F27]" />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-white">Rental Car Driving To Foum Zguid?</p>
-                <p className="text-xs text-white/70">Paved roads lead all the way to town. Secure guarded parking is arranged for all 14 stays below.</p>
-              </div>
-            </div>
-            <a 
-              href="#faqs" 
-              className="shrink-0 px-4 py-2 bg-white/10 hover:bg-white/20 text-[#EF9F27] text-xs font-bold rounded-lg border border-[#EF9F27]/30 transition-colors flex items-center space-x-1.5"
-            >
-              <span>Read Vehicle FAQ</span>
-              <ArrowRight size={13} />
-            </a>
-          </div>
-
           {/* Simple Regional Map Section */}
           <div id="foum-zguid-map" className="mt-8 scroll-mt-24">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
@@ -462,92 +442,8 @@ export default function FoumZguidHub() {
           ========================================================================= */}
       <section className="py-8 sm:py-12 bg-[#FAF7F2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Spotlight Card for Bivouac Les Nomades (bivouaclesnomades.com) */}
-          <div className="mb-8 bg-gradient-to-br from-[#0B132B] via-[#14213D] to-[#1A2E40] text-white rounded-3xl p-6 sm:p-8 border-2 border-[#BA7517]/50 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#BA7517]/10 rounded-full blur-3xl pointer-events-none" />
-            
-            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 justify-between">
-              <div className="max-w-2xl">
-                <div className="flex flex-wrap items-center gap-2 mb-3">
-                  <span className="bg-[#EF9F27] text-[#0B132B] font-bold text-[10px] uppercase px-2.5 py-0.5 rounded-full tracking-wider">
-                    Verified Owner Showcase
-                  </span>
-                  <span className="bg-white/10 text-white/90 border border-white/20 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full">
-                    Direct Approval from Mustapha Elayadi
-                  </span>
-                  <div className="flex items-center space-x-1 text-xs font-bold text-amber-300 ml-1">
-                    <Star size={13} className="fill-amber-300" />
-                    <span>5.0 TripAdvisor Rating (128 Reviews)</span>
-                  </div>
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2 leading-tight">
-                  Bivouac Les Nomades – Erg Chigaga
-                </h3>
-
-                <p className="text-sm text-white/80 leading-relaxed mb-4">
-                  The model example of transparent, authentic Saharan hosting. 67 km deep into the Erg Chigaga dunes via Lake Iriki. Features solar-powered luxury canvas and traditional tents, en-suite bathrooms with hot showers, authentic nomadic campfire drumming, and complete logistics clarity directly coordinated with the founding Berber family.
-                </p>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs text-white/90 mb-5">
-                  <div className="flex items-center space-x-2 bg-white/5 p-2 rounded-xl border border-white/10">
-                    <Check size={14} className="text-[#EF9F27] shrink-0" />
-                    <span>En-Suite Hot Bath &amp; Toilet</span>
-                  </div>
-                  <div className="flex items-center space-x-2 bg-white/5 p-2 rounded-xl border border-white/10">
-                    <Check size={14} className="text-[#EF9F27] shrink-0" />
-                    <span>100% Eco-Solar Array 24/7</span>
-                  </div>
-                  <div className="flex items-center space-x-2 bg-white/5 p-2 rounded-xl border border-white/10">
-                    <Check size={14} className="text-[#EF9F27] shrink-0" />
-                    <span>Free Guarded Foum Zguid Garage</span>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-3">
-                  <Link
-                    to="/camps/bivouac-les-nomades"
-                    className="inline-flex items-center space-x-2 bg-[#BA7517] hover:bg-[#EF9F27] text-white px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-lg shadow-[#BA7517]/30"
-                  >
-                    <span>View Verified Camp Sanctuary</span>
-                    <ArrowRight size={15} />
-                  </Link>
-                  <button
-                    onClick={() => handleScrollToMapCamp('bivouac-les-nomades')}
-                    className="inline-flex items-center space-x-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer"
-                  >
-                    <MapPin size={14} />
-                    <span>Exact Map Location</span>
-                  </button>
-                  <a
-                    href="https://bivouaclesnomades.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1.5 bg-white/10 hover:bg-white/20 text-[#EF9F27] border border-[#EF9F27]/30 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all"
-                  >
-                    <span>Visit Official Site</span>
-                    <ExternalLink size={14} />
-                  </a>
-                </div>
-              </div>
-
-              <div className="w-full lg:w-72 shrink-0">
-                <div className="relative rounded-2xl overflow-hidden border-2 border-[#BA7517]/40 shadow-xl aspect-4/3">
-                  <img
-                    src="/src/assets/images/bivouac_les_nomades_1790671846484.jpg"
-                    alt="Bivouac Les Nomades in Erg Chigaga"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute bottom-2.5 left-3 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-md text-[11px] font-semibold text-white">
-                    From €95 / night
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Active Filter Bar & Layout Switcher & Left/Right Scroll Controls (DIRECTLY ABOVE PROPERTY CARDS SCROLL) */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#BA7517]/15 mb-6 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#BA7517]/15 mb-5 gap-3">
             <div className="flex items-center space-x-2">
               <span className="text-sm font-bold text-[#0B132B]">
                 Showing {filteredStays.length} Verified Properties
@@ -562,9 +458,9 @@ export default function FoumZguidHub() {
               )}
             </div>
 
-            <div className="flex items-center space-x-3 self-end sm:self-auto">
+            <div className="flex items-center space-x-2.5 self-end sm:self-auto">
               {/* Layout Mode Switcher */}
-              <div className="bg-stone-200/90 p-1 rounded-xl border border-stone-300 flex items-center space-x-1 text-xs">
+              <div className="bg-stone-200/90 p-0.5 rounded-xl border border-stone-300 flex items-center space-x-0.5 text-xs">
                 <button
                   onClick={() => setStaysLayoutMode('carousel')}
                   className={cn(
@@ -576,7 +472,7 @@ export default function FoumZguidHub() {
                   title="Horizontal scroll view"
                 >
                   <Rows size={13} />
-                  <span>Scroll View</span>
+                  <span>Scroll</span>
                 </button>
                 <button
                   onClick={() => setStaysLayoutMode('grid')}
@@ -589,16 +485,16 @@ export default function FoumZguidHub() {
                   title="Full grid view"
                 >
                   <LayoutGrid size={13} />
-                  <span>Grid View</span>
+                  <span>Grid</span>
                 </button>
               </div>
 
               {/* Left / Right Carousel Controls */}
               {staysLayoutMode === 'carousel' && (
-                <div className="flex items-center space-x-1.5">
+                <div className="flex items-center space-x-1">
                   <button 
                     type="button"
-                    onClick={() => scrollSection(staysScrollRef, 'left')}
+                    onClick={() => scrollSection(staysScrollRef, 'left', 310)}
                     className="w-8 h-8 rounded-full bg-white hover:bg-[#FAF7F2] text-[#0B132B] border border-stone-300 flex items-center justify-center shadow-xs cursor-pointer"
                     title="Previous stays"
                   >
@@ -606,7 +502,7 @@ export default function FoumZguidHub() {
                   </button>
                   <button 
                     type="button"
-                    onClick={() => scrollSection(staysScrollRef, 'right')}
+                    onClick={() => scrollSection(staysScrollRef, 'right', 310)}
                     className="w-8 h-8 rounded-full bg-white hover:bg-[#FAF7F2] text-[#0B132B] border border-stone-300 flex items-center justify-center shadow-xs cursor-pointer"
                     title="Next stays"
                   >
@@ -617,162 +513,129 @@ export default function FoumZguidHub() {
             </div>
           </div>
 
-          {/* Stays Container: Horizontal Snap Track OR Grid View */}
+          {/* Stays Container: Balanced, Phone-Optimized Cards with Key Information */}
           <div 
             ref={staysScrollRef}
             className={cn(
               staysLayoutMode === 'carousel'
-                ? "flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scroll-smooth no-scrollbar"
-                : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                ? "flex gap-4 sm:gap-5 overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scroll-smooth no-scrollbar"
+                : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
             )}
           >
-            {filteredStays.map((stay, index) => {
-              const isFirstSpecial = index === 0;
+            {filteredStays.map((stay) => {
               const isBivouacLesNomades = stay.slug === 'bivouac-les-nomades';
               return (
                 <article
                   key={stay.id}
                   className={cn(
-                    "group bg-white rounded-3xl overflow-hidden border border-[#BA7517]/20 shadow-sm hover:shadow-2xl hover:border-[#BA7517]/40 transition-all duration-500 flex flex-col justify-between",
-                    staysLayoutMode === 'carousel' ? "w-[305px] sm:w-[350px] md:w-[380px] shrink-0 snap-start" : "",
-                    isFirstSpecial && staysLayoutMode === 'grid' ? "md:col-span-2 lg:col-span-1 ring-1 ring-[#BA7517]/30" : "",
-                    isBivouacLesNomades ? "ring-2 ring-[#BA7517] shadow-xl border-[#BA7517]" : ""
+                    "group bg-white rounded-2xl sm:rounded-3xl overflow-hidden border border-[#BA7517]/20 shadow-xs hover:shadow-xl hover:border-[#BA7517]/40 transition-all duration-300 flex flex-col justify-between",
+                    staysLayoutMode === 'carousel' ? "w-[270px] sm:w-[295px] md:w-[320px] shrink-0 snap-start" : "w-full",
+                    isBivouacLesNomades ? "ring-2 ring-[#BA7517] shadow-md" : ""
                   )}
                 >
-                  {/* Top: Moorish Arch Masked Image Area */}
+                  {/* Top: Photo Area with Status & Overlay */}
                   <div>
-                    <div className="relative p-3 pb-0 bg-gradient-to-b from-[#F7EFE4] to-white">
-                      {/* Moorish Arch Container */}
-                      <div 
-                        className="relative h-64 sm:h-72 w-full overflow-hidden bg-stone-900 shadow-inner"
-                        style={{
-                          clipPath: 'url(#moorish-arch-clip)',
-                          WebkitClipPath: 'url(#moorish-arch-clip)'
+                    <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-stone-900">
+                      <motion.img 
+                        layoutId={`camp-hero-${stay.slug}`}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        src={stay.image} 
+                        onError={(e) => {
+                          if (e.currentTarget.src !== stay.fallbackImage) {
+                            e.currentTarget.src = stay.fallbackImage;
+                          }
                         }}
-                      >
-                        <motion.img 
-                          layoutId={`camp-hero-${stay.slug}`}
-                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                          src={stay.image} 
-                          onError={(e) => {
-                            if (e.currentTarget.src !== stay.fallbackImage) {
-                              e.currentTarget.src = stay.fallbackImage;
-                            }
-                          }}
-                          alt={stay.name}
-                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-                        />
-                        {/* Soft architectural dark vignette */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/25 pointer-events-none" />
+                        alt={stay.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/25 pointer-events-none" />
 
-                        {/* Top Badges */}
-                        <div className="absolute top-4 left-4 z-10">
-                          <VerificationBadge tier={stay.verification_tier} />
-                        </div>
-
-                        {stay.highlightPill && (
-                          <div className="absolute top-4 right-4 z-10 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-[#EF9F27] border border-[#EF9F27]/30 uppercase tracking-wider">
-                            {stay.highlightPill}
-                          </div>
-                        )}
-
-                        {/* Bottom Overlay Info on Image */}
-                        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white z-10">
-                          <div className="flex items-center space-x-1.5 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-md text-xs">
-                            <Star size={13} className="text-amber-400 fill-amber-400" />
-                            <span className="font-bold">{stay.rating}</span>
-                            <span className="text-white/60 text-[10px]">({stay.reviewCount})</span>
-                          </div>
-
-                          <div className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#0B132B] shadow">
-                            From {formatCurrency(stay.price_per_night)} <span className="text-[10px] text-[#0B132B]/60 font-medium">/ night</span>
-                          </div>
-                        </div>
+                      {/* Top Badges */}
+                      <div className="absolute top-2.5 left-2.5 z-10">
+                        <VerificationBadge tier={stay.verification_tier} compact />
                       </div>
 
-                      {/* Delicate Moorish Keystone Arch Filigree Line (Golden architectural crown) */}
-                      <div className="w-full flex justify-center -mt-0.5 pointer-events-none">
-                        <div className="w-12 h-1 bg-[#BA7517]/40 rounded-full" />
+                      {/* Category Pill */}
+                      <div className="absolute top-2.5 right-2.5 z-10 bg-black/60 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-bold text-[#EF9F27] border border-[#EF9F27]/30 uppercase tracking-wider">
+                        {stay.categoryLabel}
+                      </div>
+
+                      {/* Bottom Overlay: Price & Rating */}
+                      <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white z-10">
+                        <div className="flex items-center space-x-1.5 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-lg text-xs font-bold">
+                          <Star size={12} className="text-amber-400 fill-amber-400" />
+                          <span>{stay.rating}</span>
+                          <span className="text-white/70 text-[10px]">({stay.reviewCount})</span>
+                        </div>
+
+                        <div className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-[#0B132B] shadow-sm">
+                          From {formatCurrency(stay.price_per_night)} <span className="text-[10px] text-[#0B132B]/60 font-normal">/ nt</span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Card Body */}
-                    <div className="p-6 text-left">
-                      {/* Physical Inspection Badge (Specific to prompt blueprint) */}
-                      <div className="flex items-center space-x-1.5 text-emerald-700 text-[11px] font-bold tracking-wide mb-2">
-                        <Check size={14} className="text-emerald-600 stroke-[3]" />
-                        <span>Physically Inspected &amp; Verified</span>
+                    {/* Card Body with Key Info */}
+                    <div className="p-4 text-left flex flex-col justify-between flex-1">
+                      <div>
+                        {/* Tent Style / Suite Type */}
+                        <div className="flex items-center space-x-1.5 text-[11px] font-bold uppercase tracking-wider text-[#BA7517] mb-1">
+                          <Tent size={13} className="shrink-0" />
+                          <span className="truncate">{stay.tentType || 'Saharan Canvas Suite'}</span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-base font-serif font-bold text-[#0B132B] group-hover:text-[#BA7517] transition-colors line-clamp-1 mb-1.5 leading-snug">
+                          <Link to={`/camps/${stay.slug}`} title={stay.name}>
+                            {stay.name}
+                          </Link>
+                        </h3>
+
+                        {/* Distance & Terrain */}
+                        <div className="flex items-center text-xs text-[#0B132B]/75 gap-1.5 mb-3">
+                          <Navigation size={12} className="text-[#BA7517] shrink-0" />
+                          <span className="truncate font-medium">
+                            {stay.distanceKm > 0 ? `${stay.distanceKm} km off-road via Lake Iriki` : 'Direct road access in town'}
+                          </span>
+                        </div>
+
+                        {/* Key Highlights / Included Extras */}
+                        {stay.includedExtras && stay.includedExtras.length > 0 && (
+                          <div className="space-y-1.5 pt-2.5 pb-3 border-t border-stone-100 text-xs text-[#0B132B]/80">
+                            {stay.includedExtras.slice(0, 2).map((item, idx) => (
+                              <div key={idx} className="flex items-start space-x-1.5 leading-tight">
+                                <Check size={13} className="text-emerald-600 shrink-0 mt-0.5" />
+                                <span className="line-clamp-1 text-[11px] font-medium">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
-                      {/* Title */}
-                      <h3 className="text-xl font-serif font-bold text-[#0B132B] group-hover:text-[#BA7517] transition-colors leading-snug mb-2">
-                        <Link to={`/camps/${stay.slug}`}>
-                          {stay.name}
-                        </Link>
-                      </h3>
-
-                      {/* Sub-detail with Direct Locate on Map Button */}
-                      <div className="flex items-center justify-between text-xs font-semibold text-[#0B132B]/80 mb-4 pb-3 border-b border-[#BA7517]/10">
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <Navigation size={13} className="text-[#BA7517] shrink-0" />
-                          <span className="truncate">{stay.subDetail}</span>
-                        </div>
+                      {/* Card Action Buttons */}
+                      <div className="flex items-center gap-2 pt-3 border-t border-stone-100">
                         <button
+                          type="button"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             handleScrollToMapCamp(stay.slug);
                           }}
-                          className="shrink-0 ml-2 inline-flex items-center space-x-1 text-[10px] font-bold text-[#BA7517] hover:text-white bg-[#BA7517]/10 hover:bg-[#BA7517] px-2.5 py-1 rounded-lg transition-all cursor-pointer"
-                          title="Locate exact coordinates on Foum Zguid regional map"
+                          className="px-3 py-2 rounded-xl text-xs font-bold text-[#BA7517] bg-[#BA7517]/10 hover:bg-[#BA7517] hover:text-white transition-all flex items-center space-x-1.5 shrink-0 cursor-pointer"
+                          title="Locate exact pin on regional map"
                         >
-                          <MapPin size={11} />
-                          <span>Exact Map</span>
+                          <MapPin size={12} />
+                          <span>Map</span>
                         </button>
-                      </div>
 
-
-                      {/* Included Extras */}
-                      <div className="mb-4">
-                        <p className="text-[10px] uppercase font-bold tracking-wider text-[#BA7517] mb-2">
-                          Included Extras:
-                        </p>
-                        <ul className="space-y-1.5">
-                          {stay.includedExtras.slice(0, 3).map((extra, idx) => (
-                            <li key={idx} className="flex items-start text-xs text-[#0B132B]/75 leading-tight">
-                              <span className="text-[#BA7517] mr-2 text-xs">✦</span>
-                              <span>{extra}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Logistics Assurance Tag */}
-                      <div className="bg-[#FAF7F2] p-2.5 rounded-xl border border-[#BA7517]/15 text-[11px] text-[#0B132B]/75 flex items-start space-x-2">
-                        <Car size={13} className="text-[#BA7517] shrink-0 mt-0.5" />
-                        <span className="leading-tight">{stay.transferDetails}</span>
+                        <Link
+                          to={`/camps/${stay.slug}`}
+                          className="flex-1 text-center py-2 px-3 bg-[#0B132B] hover:bg-[#BA7517] text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-1.5 shadow-xs"
+                        >
+                          <span>View Sanctuary</span>
+                          <ArrowRight size={13} />
+                        </Link>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Card Bottom CTA Footer */}
-                  <div className="px-6 py-4 bg-gradient-to-t from-[#0B132B] via-[#14213D] to-[#1D2D50] border-t border-[#BA7517]/20 flex items-center justify-between text-white">
-                    <div>
-                      <span className="text-[10px] uppercase font-bold tracking-widest text-[#EF9F27]">
-                        {stay.categoryLabel}
-                      </span>
-                      <p className="text-xs text-white/80 font-medium">
-                        {stay.distanceKm > 0 ? `${stay.distanceKm} km off-road` : 'Direct road access'}
-                      </p>
-                    </div>
-
-                    <Link
-                      to={`/camps/${stay.slug}`}
-                      className="inline-flex items-center space-x-1.5 bg-[#BA7517] hover:bg-[#EF9F27] text-white px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md group-hover:translate-x-0.5 cursor-pointer"
-                    >
-                      <span>View Sanctuary</span>
-                      <ArrowRight size={13} />
-                    </Link>
                   </div>
                 </article>
               );
@@ -781,9 +644,9 @@ export default function FoumZguidHub() {
 
           {/* Bottom Carousel Helper & Dot Strip */}
           {staysLayoutMode === 'carousel' && (
-            <div className="mt-6 pt-4 border-t border-[#BA7517]/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#0B132B]/60">
+            <div className="mt-4 pt-3 border-t border-[#BA7517]/15 flex items-center justify-between gap-3 text-xs text-[#0B132B]/60">
               <span className="text-[11px] font-medium">
-                &larr; Showing all {filteredStays.length} verified sanctuaries • Scroll sideways to explore &rarr;
+                &larr; Swipe to explore all {filteredStays.length} verified stays &rarr;
               </span>
               <div className="flex items-center space-x-1.5 overflow-x-auto max-w-full py-1">
                 {filteredStays.map((s, idx) => (
@@ -791,7 +654,7 @@ export default function FoumZguidHub() {
                     key={s.id}
                     onClick={() => {
                       if (staysScrollRef.current) {
-                        staysScrollRef.current.scrollTo({ left: idx * 360, behavior: 'smooth' });
+                        staysScrollRef.current.scrollTo({ left: idx * 295, behavior: 'smooth' });
                       }
                     }}
                     className="w-2.5 h-2.5 rounded-full bg-stone-300 hover:bg-[#BA7517] transition-colors cursor-pointer"
