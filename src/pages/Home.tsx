@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet-async';
 import { StarZellij } from '@/src/components/Zellij';
 import { useLanguage } from '@/src/lib/LanguageContext';
 import { cn } from '@/src/lib/utils';
+import MoroccanGateArch from '@/src/components/MoroccanGateArch';
 
 interface AnimatedHeroWordProps {
   word: string;
@@ -296,6 +297,12 @@ export default function Home() {
                   alt={dest.name} 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B]/90 via-transparent to-transparent" />
+                {/* Moroccan Gate Arch crown */}
+                <MoroccanGateArch 
+                  fillColor="#0B132B" 
+                  strokeColor="#EF9F27" 
+                  heightClass="h-7 sm:h-8" 
+                />
                 <div className="absolute bottom-8 left-8">
                    <p className="text-[#BA7517] text-[10px] font-bold uppercase tracking-widest mb-1">{dest.sub}</p>
                    <h3 className="text-3xl font-serif font-semibold text-white">{dest.name}</h3>

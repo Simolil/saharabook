@@ -5,6 +5,7 @@ import { useLanguage } from '@/src/lib/LanguageContext';
 import { mockCamps } from '@/src/lib/mockData';
 import { formatCurrency, cn } from '@/src/lib/utils';
 import VerificationBadge from './VerificationBadge';
+import MoroccanGateArch from './MoroccanGateArch';
 
 export interface PropertyTypeItem {
   id: string;
@@ -201,6 +202,13 @@ export default function PropertyTypeBrowser() {
                 
                 {/* Gentle Ambient Vignette for image depth */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none group-hover:opacity-75 transition-opacity" />
+
+                {/* Moroccan Gate Arch look above the image with dark blue spandrels */}
+                <MoroccanGateArch 
+                  fillColor="#0B132B" 
+                  strokeColor="#BA7517" 
+                  heightClass="h-5 sm:h-6" 
+                />
               </div>
 
               {/* Just the Title underneath */}

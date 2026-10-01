@@ -44,6 +44,7 @@ import {
 } from '@/src/data/foumZguidData';
 import { FAQSchema } from '@/src/lib/seo';
 import VerificationBadge from '@/src/components/VerificationBadge';
+import MoroccanGateArch from '@/src/components/MoroccanGateArch';
 import BackButton from '@/src/components/BackButton';
 import SearchBar from '@/src/components/SearchBar';
 import FoumZguidRegionalMap from '@/src/components/FoumZguidRegionalMap';
@@ -549,6 +550,13 @@ export default function FoumZguidHub() {
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/25 pointer-events-none" />
+
+                      {/* Moroccan Gate Arch crowning the photo with dark blue spandrels */}
+                      <MoroccanGateArch 
+                        fillColor="#0B132B" 
+                        strokeColor="#BA7517" 
+                        heightClass="h-6 sm:h-7" 
+                      />
 
                       {/* Top Badges */}
                       <div className="absolute top-2.5 left-2.5 z-10">

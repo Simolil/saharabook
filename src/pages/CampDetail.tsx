@@ -41,6 +41,7 @@ import { LodgingBusinessSchema } from '@/src/lib/seo';
 import { useLanguage } from '@/src/lib/LanguageContext';
 import { TentOptionItem } from '@/src/types';
 import MarrakechToCampRouteMap from '@/src/components/MarrakechToCampRouteMap';
+import MoroccanGateArch from '@/src/components/MoroccanGateArch';
 
 
 export default function CampDetail() {
@@ -357,11 +358,14 @@ export default function CampDetail() {
         reviewCount={48}
       />
 
-      {/* Top Bar with Back Link */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-4">
-        <div className="flex items-center justify-between">
+      {/* ========================================================================= */}
+      {/* 1. TOP BAR & CAMP NAME FIRST                                              */}
+      {/* ========================================================================= */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-3">
+        {/* Top Action Row: BackButton, Share, Favorite */}
+        <div className="flex items-center justify-between mb-4">
           <BackButton />
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2.5">
             <button 
               onClick={() => {
                 if (navigator.share) {
@@ -381,49 +385,17 @@ export default function CampDetail() {
             </button>
           </div>
         </div>
-      </div>
+
+        {/* Camp Name First */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[#0B132B] tracking-tight leading-tight">
+          {camp.name}
+        </h1>
+      </section>
 
       {/* ========================================================================= */}
-      {/* PHASE 2 - SECTION A: THE IMMERSIVE GALLERY & HEADER (NO BORING SLIDERS)    */}
+      {/* 2. THE IMMERSIVE GALLERY (IMAGES SECOND)                                  */}
       {/* ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        {/* Header Block */}
-        <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div>
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <VerificationBadge tier={camp.verification_tier} />
-              <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200">
-                <Check size={11} className="text-emerald-600" />
-                <span>Physically Inspected & Verified</span>
-              </span>
-              <div className="flex items-center space-x-1 text-xs font-bold text-[#0B132B] ml-1">
-                <Star size={14} className="text-amber-400 fill-amber-400" />
-                <span>{camp.tripadvisor_rating || (camp as any).rating || 4.9}</span>
-                <span className="text-gray-400 font-normal">
-                  ({camp.tripadvisor_reviews || (camp as any).reviewCount || 48} verified reviews)
-                </span>
-              </div>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-[#0B132B] tracking-tight mb-2">
-              {camp.name}
-            </h1>
-
-            <div className="flex items-center space-x-2 text-[#BA7517] font-semibold text-sm">
-              <MapPin size={16} />
-              <span>{camp.sub_location || `${camp.destination.toUpperCase()} Desert, Morocco`}</span>
-            </div>
-          </div>
-
-          <div className="hidden sm:block text-right">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#0B132B]/50 block">Nightly Rate From</span>
-            <div className="flex items-baseline space-x-1 justify-end">
-              <span className="text-3xl font-bold font-serif text-[#0B132B]">{formatCurrency(camp.price_per_night)}</span>
-              <span className="text-xs text-[#0B132B]/60">/ night</span>
-            </div>
-          </div>
-        </div>
-
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
         {/* Asymmetric Bento-Grid Layout (4-5 high-res photos) */}
         <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-3 h-[420px] sm:h-[480px] md:h-[540px] rounded-3xl overflow-hidden shadow-lg border border-[#BA7517]/20">
           {/* Main Large Hero Bento Item */}
@@ -491,7 +463,7 @@ export default function CampDetail() {
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors" />
             <div className="absolute bottom-3 left-4 text-white text-[11px] font-semibold drop-shadow-sm">
-              Twilight & Stargazing
+              Twilight &amp; Stargazing
             </div>
 
             {/* View All Photos Button */}
@@ -506,6 +478,45 @@ export default function CampDetail() {
               <Camera size={13} className="text-[#BA7517]" />
               <span>View All Photos ({photos.length})</span>
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 3. SMALL ADDITIONAL METADATA & DETAILS (UNDER THE IMAGES)                  */}
+      {/* ========================================================================= */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 sm:p-5 bg-white rounded-2xl border border-[#BA7517]/20 shadow-xs">
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <VerificationBadge tier={camp.verification_tier} />
+              <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200">
+                <Check size={11} className="text-emerald-600" />
+                <span>Physically Inspected &amp; Verified</span>
+              </span>
+              <div className="flex items-center space-x-1 text-xs font-bold text-[#0B132B] ml-1">
+                <Star size={14} className="text-amber-400 fill-amber-400" />
+                <span>{camp.tripadvisor_rating || (camp as any).rating || 4.9}</span>
+                <span className="text-gray-400 font-normal">
+                  ({camp.tripadvisor_reviews || (camp as any).reviewCount || 48} verified reviews)
+                </span>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2 text-[#BA7517] font-semibold text-xs sm:text-sm">
+              <MapPin size={16} className="shrink-0" />
+              <span>{camp.sub_location || `${camp.destination.toUpperCase()} Desert, Morocco`}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between md:justify-end gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-[#BA7517]/15">
+            <div className="text-left md:text-right">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#0B132B]/50 block">Nightly Rate From</span>
+              <div className="flex items-baseline space-x-1">
+                <span className="text-2xl sm:text-3xl font-bold font-serif text-[#0B132B]">{formatCurrency(camp.price_per_night)}</span>
+                <span className="text-xs text-[#0B132B]/60">/ night</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -844,7 +855,13 @@ export default function CampDetail() {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                          <span className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold uppercase px-2 py-0.5 rounded-full">
+                          {/* Moroccan Gate Arch crown with dark blue spandrels */}
+                          <MoroccanGateArch 
+                            fillColor="#0B132B" 
+                            strokeColor="#BA7517" 
+                            heightClass="h-5 sm:h-6" 
+                          />
+                          <span className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold uppercase px-2 py-0.5 rounded-full z-10">
                             {exp.priceSub}
                           </span>
                           {exp.included && (
@@ -967,9 +984,16 @@ export default function CampDetail() {
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                           
+                          {/* Moroccan Gate Arch crown with dark blue spandrels */}
+                          <MoroccanGateArch 
+                            fillColor="#0B132B" 
+                            strokeColor="#BA7517" 
+                            heightClass="h-6 sm:h-7" 
+                          />
+
                           {/* Badge pill */}
                           {option.badge && (
-                            <span className="absolute top-3 left-3 bg-[#BA7517] text-white text-[9px] font-bold uppercase px-2.5 py-1 rounded-full shadow-md">
+                            <span className="absolute top-3 left-3 bg-[#BA7517] text-white text-[9px] font-bold uppercase px-2.5 py-1 rounded-full shadow-md z-10">
                               {option.badge}
                             </span>
                           )}
@@ -1491,7 +1515,13 @@ export default function CampDetail() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <span className="absolute top-2.5 left-2.5 bg-[#0B132B]/80 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold uppercase px-2.5 py-0.5 rounded-full">
+                      {/* Moroccan Gate Arch crown with dark blue spandrels */}
+                      <MoroccanGateArch 
+                        fillColor="#0B132B" 
+                        strokeColor="#BA7517" 
+                        heightClass="h-6 sm:h-7" 
+                      />
+                      <span className="absolute top-2.5 left-2.5 bg-[#0B132B]/80 backdrop-blur-md text-white border border-white/20 text-[9px] font-bold uppercase px-2.5 py-0.5 rounded-full z-10">
                         {stay.categoryLabel}
                       </span>
                       <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-white text-[11px] font-bold">

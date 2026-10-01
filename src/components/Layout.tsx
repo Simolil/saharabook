@@ -162,10 +162,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </div>
   );
 
-  const isHeroPage = ['/', '/destinations/'].some(path => location.pathname === path || (path !== '/' && location.pathname.startsWith(path)));
-  const isFoumZguidPage = location.pathname === '/destinations/foum-zguid' || location.pathname === '/destinations/foumzguid';
-  const isDarkSectionPage = ['/scam-guide'].includes(location.pathname);
-  const useLightHeader = isHeroPage || isDarkSectionPage;
+  const isDestinationPage = location.pathname.startsWith('/destinations') || location.pathname.startsWith('/destination');
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] font-sans text-[#0B132B] relative overflow-x-hidden">
@@ -200,52 +197,33 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <link rel="alternate" href={currentUrl} hrefLang="fr" />
         <link rel="alternate" href={currentUrl} hrefLang="ar-MA" />
       </Helmet>
-      {/* Navigation - hidden on Foum Zguid destination hub page as requested */}
-      {!isFoumZguidPage && (
-        <nav className={cn(
-          "absolute top-0 left-0 right-0 z-50 h-16 md:h-20 lg:h-24 transition-all duration-300 flex items-center justify-center",
-          useLightHeader 
-            ? "bg-gradient-to-b from-black/20 to-transparent text-white" 
-            : "fixed bg-transparent text-white h-16 md:h-20 lg:h-24 py-2"
-        )}>
+      {/* Navigation - transparent as on first page across entire project, hidden on destination pages */}
+      {!isDestinationPage && (
+        <nav className="absolute top-0 left-0 right-0 z-50 h-16 md:h-20 lg:h-24 transition-all duration-300 flex items-center justify-center bg-gradient-to-b from-black/25 via-black/10 to-transparent text-white">
         {/* Header Zellij Patterns - Very subtle in the background */}
         <ZellijCorner className="absolute top-0 right-0 translate-x-12 -translate-y-12 opacity-5" />
         <ZellijCorner className="absolute bottom-0 left-0 -translate-x-16 translate-y-16 rotate-45 opacity-5" />
 
-        <div className={cn(
-          "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full w-full relative z-10 transition-all duration-300",
-          !useLightHeader && "bg-[#0B132B]/95 backdrop-blur-md rounded-2xl md:rounded-3xl border border-[#BA7517]/25 shadow-2xl px-6 md:px-8"
-        )}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full w-full relative z-10 transition-all duration-300">
           <div className="flex justify-between items-center h-full">
             {/* Left: Hamburger Menu & Language Switcher */}
             <div className="w-1/3 md:w-1/3 flex items-center">
               <div className="flex items-center relative z-[70] md:space-x-1">
-                <div className={cn(
-                  "flex items-center rounded-lg md:rounded-xl transition-all duration-300 border h-8 md:h-10",
-                  useLightHeader 
-                    ? "border-[#BA7517]/40 text-white shadow-[0_2px_6px_rgba(0,0,0,0.15)]" 
-                    : "border-[#BA7517]/30 text-white"
-                )}>
+                <div className="flex items-center rounded-lg md:rounded-xl transition-all duration-300 border h-8 md:h-10 border-[#BA7517]/40 text-white shadow-[0_2px_6px_rgba(0,0,0,0.15)]">
                   <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className={cn(
-                      "h-full px-2 md:px-4 flex items-center justify-center transition-all duration-300 rounded-l-lg md:rounded-l-xl",
-                      useLightHeader ? "hover:bg-white/5" : "hover:bg-white/5"
-                    )}
+                    className="h-full px-2 md:px-4 flex items-center justify-center transition-all duration-300 rounded-l-lg md:rounded-l-xl hover:bg-white/10"
                   >
                     {isMenuOpen ? <X size={16} /> : <Menu size={16} className="md:w-5 md:h-5 text-[#BA7517]" />}
                     <span className="hidden md:inline ml-2 text-[10px] md:text-xs font-black uppercase tracking-widest text-white">{t('nav.menu')}</span>
                   </button>
 
-                  <div className={cn("w-[1px] h-3 md:hidden", useLightHeader ? "bg-white/20" : "bg-white/20")} />
+                  <div className="w-[1px] h-3 md:hidden bg-white/20" />
 
                   <div className="relative md:hidden h-full">
                     <button
                       onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                      className={cn(
-                        "h-full px-2.5 flex items-center justify-center transition-all duration-300 rounded-r-lg md:rounded-r-xl",
-                        useLightHeader ? "hover:bg-white/5" : "hover:bg-white/5"
-                      )}
+                      className="h-full px-2.5 flex items-center justify-center transition-all duration-300 rounded-r-lg md:rounded-r-xl hover:bg-white/10"
                       title={t('nav.select_lang')}
                     >
                       <span className="text-[10px] font-bold uppercase text-white">{language}</span>
@@ -257,12 +235,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <div className="hidden md:block relative">
                   <button
                     onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                    className={cn(
-                      "h-10 px-3.5 flex items-center justify-center transition-all rounded-xl border",
-                      useLightHeader 
-                        ? "text-white border-[#BA7517]/30 shadow-[0_2px_6px_rgba(0,0,0,0.15)] hover:bg-white/10" 
-                        : "text-white border-transparent hover:bg-white/10"
-                    )}
+                    className="h-10 px-3.5 flex items-center justify-center transition-all rounded-xl border text-white border-[#BA7517]/30 shadow-[0_2px_6px_rgba(0,0,0,0.15)] hover:bg-white/10"
                     title={t('nav.select_lang')}
                   >
                     <Globe size={16} className={cn("text-[#BA7517] transition-transform duration-500", isLangDropdownOpen && "rotate-180")} />
@@ -328,10 +301,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div className="w-1/3 md:w-1/3 flex justify-end items-center space-x-2 md:space-x-4">
               <Link 
                 to="/compare" 
-                className={cn(
-                  "hidden lg:flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] transition-opacity hover:opacity-75 group drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]",
-                  useLightHeader ? "text-white" : "text-white"
-                )}
+                className="hidden lg:flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] transition-opacity hover:opacity-75 group drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)] text-white"
               >
                 <Search size={14} className="text-[#BA7517]" />
                 <span className="text-white group-hover:text-[#BA7517] transition-colors">{t('nav.help')}</span>
@@ -339,12 +309,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               
               <Link 
                 to="/book" 
-                className={cn(
-                  "transition-all duration-300 border h-8 md:h-10 px-4 md:px-5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest whitespace-nowrap flex items-center justify-center",
-                  useLightHeader 
-                    ? "border-[#BA7517]/40 text-white hover:bg-white/10 shadow-[0_2px_6px_rgba(0,0,0,0.15)]" 
-                    : "border-[#BA7517]/40 text-[#BA7517] hover:bg-white/5 bg-transparent"
-                )}
+                className="transition-all duration-300 border h-8 md:h-10 px-4 md:px-5 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest whitespace-nowrap flex items-center justify-center border-[#BA7517]/40 text-white hover:bg-white/10 shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
               >
                 <span className="flex flex-col md:flex-row items-center justify-center leading-[0.8] md:leading-normal">
                   <span className="text-white">{t('nav.book').split(' ')[0]}</span>
@@ -505,7 +470,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <main className={cn(
         "flex-1 relative z-10",
-        !isHeroPage && !isDarkSectionPage ? "pt-24" : "pt-0"
+        location.pathname !== '/' && !isDestinationPage ? "pt-16 md:pt-20" : "pt-0"
       )}>
         {children}
       </main>

@@ -5,6 +5,7 @@ import { Star, MapPin, Bath, ArrowRight } from 'lucide-react';
 import { Camp } from '@/src/types';
 import { formatCurrency, cn } from '@/src/lib/utils';
 import VerificationBadge from './VerificationBadge';
+import MoroccanGateArch from './MoroccanGateArch';
 import { useLanguage } from '@/src/lib/LanguageContext';
 
 export const getCampImage = (camp: Camp): string => {
@@ -65,6 +66,13 @@ export default function CampCard({
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B132B]/85 via-[#0B132B]/20 to-transparent pointer-events-none group-hover:from-[#0B132B]/75 transition-all" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent pointer-events-none" />
 
+        {/* Moroccan Gate Arch overlay crowning the image with dark blue spandrels */}
+        <MoroccanGateArch 
+          fillColor="#0B132B" 
+          strokeColor="#EF9F27" 
+          heightClass="h-6 sm:h-7" 
+        />
+
         {/* Top bar: Verification Badge & Price Pill */}
         <div className="relative z-10 p-3 sm:p-4 flex justify-between items-start gap-2">
           <VerificationBadge tier={camp.verification_tier} compact />
@@ -116,7 +124,7 @@ export default function CampCard({
       to={`/camps/${camp.slug}`}
       className="group bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#BA7517]/15 shadow-xs hover:shadow-lg hover:border-[#BA7517]/30 transition-all duration-300 flex flex-col h-full"
     >
-      {/* Thumbnail */}
+      {/* Thumbnail with Moroccan Gate Arch look */}
       <div className="relative h-36 sm:h-40 overflow-hidden bg-stone-900">
         <motion.img 
           layoutId={`camp-hero-${camp.slug}`}
@@ -131,10 +139,18 @@ export default function CampCard({
           alt={camp.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-106"
         />
-        <div className="absolute top-2.5 left-2.5">
+
+        {/* Moroccan Gate Arch crowning the photo with dark blue spandrels */}
+        <MoroccanGateArch 
+          fillColor="#0B132B" 
+          strokeColor="#BA7517" 
+          heightClass="h-5 sm:h-6" 
+        />
+
+        <div className="absolute top-2.5 left-2.5 z-10">
           <VerificationBadge tier={camp.verification_tier} />
         </div>
-        <div className="absolute bottom-2.5 right-2.5 bg-white/95 backdrop-blur-xs px-2 py-0.5 rounded-md text-[11px] font-bold text-[#0B132B] shadow-xs">
+        <div className="absolute bottom-2.5 right-2.5 bg-white/95 backdrop-blur-xs px-2 py-0.5 rounded-md text-[11px] font-bold text-[#0B132B] shadow-xs z-10">
           {formatCurrency(camp.price_per_night)} <span className="text-[9px] opacity-60 font-normal">{t('camp.night')}</span>
         </div>
       </div>
