@@ -6,6 +6,7 @@ import { cn } from '@/src/lib/utils';
 import { Helmet } from 'react-helmet-async';
 import { StarZellij, ZellijCorner } from './Zellij';
 import { useLanguage, Language } from '../lib/LanguageContext';
+import BackToTop from './BackToTop';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -520,6 +521,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       </footer>
+
+      {/* Floating Back to Top Control */}
+      <BackToTop />
     </div>
   );
 }
