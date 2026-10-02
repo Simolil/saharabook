@@ -42,6 +42,7 @@ import { useLanguage } from '@/src/lib/LanguageContext';
 import { TentOptionItem } from '@/src/types';
 import MarrakechToCampRouteMap from '@/src/components/MarrakechToCampRouteMap';
 import MoroccanGateArch from '@/src/components/MoroccanGateArch';
+import { getLodgeImages } from '@/src/data/lodges';
 
 
 export default function CampDetail() {
@@ -63,8 +64,12 @@ export default function CampDetail() {
     );
   }, [activeSlug]);
 
-  // Gallery Photos (fallback if none specified)
+  // Gallery Photos (from dedicated lodge image file with fallback)
   const photos = useMemo(() => {
+    const lodge = getLodgeImages(camp.slug);
+    if (lodge?.gallery && lodge.gallery.length > 0) {
+      return lodge.gallery;
+    }
     if (camp.images && camp.images.length > 0) {
       return camp.images;
     }
@@ -82,10 +87,16 @@ export default function CampDetail() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activePhotoIdx, setActivePhotoIdx] = useState(0);
 
-  // Tent options available
+  // Tent options available (synced with lodge image configuration)
   const tentOptions: TentOptionItem[] = useMemo(() => {
+    const lodge = getLodgeImages(camp.slug);
     if (camp.tent_options && camp.tent_options.length > 0) {
-      return camp.tent_options;
+      return camp.tent_options.map(tent => {
+        if (lodge?.tents?.[tent.id]) {
+          return { ...tent, image: lodge.tents[tent.id] };
+        }
+        return tent;
+      });
     }
     return [
       {

@@ -1,4 +1,5 @@
 import { Camp } from '@/src/types';
+import { LODGE_IMAGES } from './lodges';
 
 export interface FoumZguidStay extends Camp {
   category: 'deep-sahara-bivouac' | 'desert-edge-lodge' | 'oasis-auberge';
@@ -86,7 +87,7 @@ export const FOUM_ZGUID_CATEGORIES = [
   }
 ];
 
-export const FOUM_ZGUID_STAYS: FoumZguidStay[] = [
+const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
   {
     id: 'fz-1',
     slug: 'erg-chigaga-luxury-sanctuary',
@@ -659,6 +660,18 @@ export const FOUM_ZGUID_STAYS: FoumZguidStay[] = [
     highlightPill: 'Old Caravan Outpost'
   }
 ];
+
+// Automatically synchronise stay images with dedicated lodge image files
+export const FOUM_ZGUID_STAYS: FoumZguidStay[] = RAW_FOUM_ZGUID_STAYS.map(stay => {
+  const lodge = LODGE_IMAGES[stay.slug];
+  if (!lodge) return stay;
+  return {
+    ...stay,
+    image: lodge.hero || stay.image,
+    fallbackImage: lodge.fallback || stay.fallbackImage,
+    images: lodge.gallery && lodge.gallery.length > 0 ? lodge.gallery : stay.images
+  };
+});
 
 export const EXPERT_GUIDE_CONTENT = {
   subheading: 'Why Choose Foum Zguid Over Merzouga?',

@@ -7,8 +7,13 @@ import { formatCurrency, cn } from '@/src/lib/utils';
 import VerificationBadge from './VerificationBadge';
 import MoroccanGateArch from './MoroccanGateArch';
 import { useLanguage } from '@/src/lib/LanguageContext';
+import { getLodgeImages } from '@/src/data/lodges';
 
 export const getCampImage = (camp: Camp): string => {
+  if (camp.slug) {
+    const lodge = getLodgeImages(camp.slug);
+    if (lodge?.hero) return lodge.hero;
+  }
   const anyCamp = camp as any;
   if (anyCamp.image) return anyCamp.image;
   if (camp.destination) return `/images/destinations/${camp.destination}.jpg`;
@@ -16,6 +21,10 @@ export const getCampImage = (camp: Camp): string => {
 };
 
 export const getCampFallbackImage = (camp: Camp): string => {
+  if (camp.slug) {
+    const lodge = getLodgeImages(camp.slug);
+    if (lodge?.fallback) return lodge.fallback;
+  }
   const anyCamp = camp as any;
   if (anyCamp.fallbackImage) return anyCamp.fallbackImage;
   const images: Record<string, string> = {

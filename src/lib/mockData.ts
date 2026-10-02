@@ -1,7 +1,8 @@
 import { Camp } from '@/src/types';
 import { FOUM_ZGUID_STAYS } from '@/src/data/foumZguidData';
+import { LODGE_IMAGES } from '@/src/data/lodges';
 
-const baseCamps: Camp[] = [
+const RAW_baseCamps: Camp[] = [
   {
     id: "1",
     slug: "luxury-sand-spirit-camp",
@@ -88,6 +89,17 @@ const baseCamps: Camp[] = [
     created_at: new Date().toISOString()
   }
 ];
+
+const baseCamps: Camp[] = RAW_baseCamps.map(camp => {
+  const lodge = LODGE_IMAGES[camp.slug];
+  if (!lodge) return camp;
+  return {
+    ...camp,
+    image: lodge.hero || (camp as any).image,
+    fallbackImage: lodge.fallback || (camp as any).fallbackImage,
+    images: lodge.gallery || (camp as any).images
+  };
+});
 
 export const mockCamps: Camp[] = [
   ...FOUM_ZGUID_STAYS,
