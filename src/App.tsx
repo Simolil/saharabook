@@ -16,6 +16,7 @@ import ScamGuide from './pages/ScamGuide';
 import Compare from './pages/Compare';
 import BookingFlow from './pages/BookingFlow';
 import PartnerPortal from './pages/PartnerPortal';
+import ProgramDetail from './pages/ProgramDetail';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -48,6 +49,8 @@ function AnimatedRoutes() {
             <Route path="/destinations/foumzguid/:slug" element={<CampDetail />} />
             <Route path="/destination/foum-zguid/:slug" element={<CampDetail />} />
             <Route path="/destination/foumzguid/:slug" element={<CampDetail />} />
+            <Route path="/foum-zguid/:slug" element={<ProgramDetail />} />
+            <Route path="/programs/:slug" element={<ProgramDetail />} />
             <Route path="/destinations/:id" element={<DestinationHub />} />
             <Route path="/camps/:slug" element={<CampDetail />} />
             <Route path="/tours/:slug" element={<TourDetail />} />

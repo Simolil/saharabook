@@ -43,6 +43,7 @@ import { TentOptionItem } from '@/src/types';
 import MarrakechToCampRouteMap from '@/src/components/MarrakechToCampRouteMap';
 import MoroccanGateArch from '@/src/components/MoroccanGateArch';
 import { getLodgeImages } from '@/src/data/lodges';
+import ProgramsBrowser from '@/src/components/ProgramsBrowser';
 
 
 export default function CampDetail() {
@@ -130,7 +131,10 @@ export default function CampDetail() {
   const [nights, setNights] = useState(2);
   const [guests, setGuests] = useState(2);
 
-  const isBivouacLesNomades = camp.slug === 'bivouac-les-nomades';
+  const isBivouacLesNomades = camp.slug === 'bivouac-les-nomades' || 
+                              camp.slug === 'bivouac-nomades-chigaga' || 
+                              activeSlug.includes('nomade');
+  const [selectedProgram, setSelectedProgram] = useState<any | null>(null);
 
   // Add-ons state
   const [selectedAddons, setSelectedAddons] = useState<Record<string, boolean>>({
@@ -162,7 +166,9 @@ export default function CampDetail() {
   };
 
   // Price calculations
-  const tentRateTotal = currentTent.price_per_night * nights;
+  const tentRateTotal = selectedProgram 
+    ? selectedProgram.pricePerPerson * guests 
+    : currentTent.price_per_night * nights;
   const ecoTaxes = 3.5 * guests * nights;
   const addonsTotal = 
     (selectedAddons.transfer ? addonPrices.transfer : 0) +
@@ -174,7 +180,10 @@ export default function CampDetail() {
 
   // Handle reserve click
   const handleReserve = () => {
-    navigate(`/book/${camp.slug}?tent=${selectedTentId}&guests=${guests}&nights=${nights}`);
+    const programQuery = selectedProgram 
+      ? `&program=${encodeURIComponent(selectedProgram.id)}&programName=${encodeURIComponent(selectedProgram.title)}` 
+      : '';
+    navigate(`/book/${camp.slug}?tent=${selectedTentId}&guests=${guests}&nights=${nights}${programQuery}`);
   };
 
   // Trust bar data
@@ -518,6 +527,18 @@ export default function CampDetail() {
               <MapPin size={16} className="shrink-0" />
               <span>{camp.sub_location || `${camp.destination.toUpperCase()} Desert, Morocco`}</span>
             </div>
+
+            {isBivouacLesNomades && (
+              <div className="pt-1">
+                <a 
+                  href="#desert-programs" 
+                  className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#BA7517]/10 text-[#BA7517] hover:bg-[#BA7517] hover:text-white transition-all border border-[#BA7517]/30 shadow-2xs"
+                >
+                  <Compass size={13} />
+                  <span>5 Shortlisted Desert Programs from Foum Zguid (from 99 €) ↓</span>
+                </a>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center justify-between md:justify-end gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-[#BA7517]/15">
@@ -927,6 +948,15 @@ export default function CampDetail() {
               </div>
             </section>
 
+            {/* ========================================================================= */}
+            {/* BIVOUAC LES NOMADES - SHORTLISTED DESERT PROGRAMS FROM FOUM ZGUID         */}
+            {/* ========================================================================= */}
+            {isBivouacLesNomades && (
+              <div className="lg:w-[calc(150%_+_1.25rem)] lg:max-w-none relative z-10">
+                <ProgramsBrowser />
+              </div>
+            )}
+
 
             {/* ========================================================================= */}
             {/* PHASE 2 - SECTION F: ROOMS / TENT OPTIONS (HORIZONTAL CAROUSEL)            */}
@@ -1199,7 +1229,7 @@ export default function CampDetail() {
           {/* PHASE 2 - SECTION F: STICKY BOOKING WIDGET (CONVERSION ENGINE)            */}
           {/* ========================================================================= */}
           <aside className="lg:col-span-1">
-            <div className="sticky top-24 bg-white rounded-3xl p-6 sm:p-7 border border-[#BA7517]/25 shadow-xl">
+            <div id="booking-sidebar" className="sticky top-24 bg-white rounded-3xl p-6 sm:p-7 border border-[#BA7517]/25 shadow-xl scroll-mt-28">
               
               {/* Header with Price */}
               <div className="flex items-baseline justify-between mb-6 pb-4 border-b border-[#BA7517]/15">
@@ -1207,15 +1237,38 @@ export default function CampDetail() {
                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#0B132B]/50 block">Guaranteed Direct Rate</span>
                   <div className="flex items-baseline space-x-1">
                     <span className="text-3xl font-serif font-bold text-[#0B132B]">
-                      {formatCurrency(currentTent.price_per_night)}
+                      {selectedProgram ? `${selectedProgram.pricePerPerson} €` : formatCurrency(currentTent.price_per_night)}
                     </span>
-                    <span className="text-xs text-[#0B132B]/60">/ night</span>
+                    <span className="text-xs text-[#0B132B]/60">{selectedProgram ? '/ person' : '/ night'}</span>
                   </div>
                 </div>
                 <span className="px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold uppercase tracking-wider rounded-full">
                   Instant Verification
                 </span>
               </div>
+
+              {/* Selected Program Banner if active */}
+              {selectedProgram && (
+                <div className="mb-4 bg-[#BA7517]/10 p-3.5 rounded-2xl border border-[#BA7517]/30 text-xs">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] uppercase font-bold text-[#BA7517] tracking-wider">
+                      Selected Desert Tour
+                    </span>
+                    <button 
+                      type="button" 
+                      onClick={() => setSelectedProgram(null)}
+                      className="text-[10px] text-stone-500 hover:text-stone-800 underline cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  </div>
+                  <div className="font-bold text-[#0B132B]">{selectedProgram.title}</div>
+                  <div className="text-[11px] text-stone-600 mt-0.5 flex items-center justify-between">
+                    <span>{selectedProgram.length}</span>
+                    <span className="font-bold text-[#BA7517]">{selectedProgram.pricePerPerson} € / pers</span>
+                  </div>
+                </div>
+              )}
 
               {/* Selected Tent Pill */}
               <div className="mb-4 bg-[#FAF7F2] p-3 rounded-2xl border border-[#BA7517]/20 flex items-center justify-between text-xs">
@@ -1420,8 +1473,12 @@ export default function CampDetail() {
               {/* Transparent Price Breakdown */}
               <div className="space-y-2 mb-6 pt-3 border-t border-[#BA7517]/15 text-xs text-[#0B132B]/80">
                 <div className="flex justify-between">
-                  <span>{formatCurrency(currentTent.price_per_night)} x {nights} nights</span>
-                  <span className="font-semibold text-[#0B132B]">{formatCurrency(tentRateTotal)}</span>
+                  <span className="truncate pr-2">
+                    {selectedProgram 
+                      ? `${selectedProgram.title} (${selectedProgram.pricePerPerson} € x ${guests})` 
+                      : `${formatCurrency(currentTent.price_per_night)} x ${nights} nights`}
+                  </span>
+                  <span className="font-semibold text-[#0B132B] shrink-0">{formatCurrency(tentRateTotal)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Tourism & Eco-Conservation Levy</span>
@@ -1449,7 +1506,11 @@ export default function CampDetail() {
                 onClick={handleReserve}
                 className="w-full bg-[#BA7517] hover:bg-[#9E6010] text-white text-center py-4 rounded-xl font-bold text-sm shadow-lg shadow-[#BA7517]/25 transition-all transform active:scale-98 flex items-center justify-center space-x-2 cursor-pointer"
               >
-                <span>Instant Reserve &amp; Guarantee Stay</span>
+                <span>
+                  {selectedProgram 
+                    ? `Reserve Program (${formatCurrency(grandTotal)})` 
+                    : "Instant Reserve & Guarantee Stay"}
+                </span>
                 <ArrowRight size={16} />
               </button>
 

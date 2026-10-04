@@ -30,10 +30,13 @@ export default function BookingFlow() {
     || "Royal Nomad Tent";
 
   const guestsParam = parseInt(searchParams.get('guests') || '2', 10);
+  const programParam = searchParams.get('program');
+  const programNameParam = searchParams.get('programName');
 
   const [formData, setFormData] = React.useState({
     tentType: initialTent,
     guests: guestsParam,
+    program: programNameParam || "",
     fullName: "",
     email: "",
     whatsapp: "",
@@ -103,9 +106,23 @@ export default function BookingFlow() {
                   exit={{ opacity: 0, x: -20 }}
                   className="bg-[#FAF7F2] p-8 md:p-12 rounded-[40px] shadow-sm border border-[#BA7517]/15"
                 >
-                  <h2 className="text-3xl font-bold tracking-tighter text-[#0B132B] mb-8">
+                  <h2 className="text-3xl font-bold tracking-tighter text-[#0B132B] mb-6">
                     Refine your selection
                   </h2>
+
+                  {programNameParam && (
+                    <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-[#BA7517]/10 border border-[#BA7517]/30 text-xs text-[#0B132B]">
+                      <span className="text-[10px] uppercase font-bold text-[#BA7517] tracking-wider block mb-1">
+                        Selected Desert Expedition / Tour
+                      </span>
+                      <span className="font-bold font-serif text-base text-[#0B132B] block">
+                        {programNameParam}
+                      </span>
+                      <span className="text-[11px] text-stone-600 mt-1 block">
+                        Official program from Foum Zguid operator. Rate and details confirmed directly with camp.
+                      </span>
+                    </div>
+                  )}
                   <div className="space-y-6">
                     <div>
                       <label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 block">
