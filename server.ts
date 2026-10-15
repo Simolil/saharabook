@@ -10,12 +10,46 @@ dotenv.config();
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.static(path.join(process.cwd(), "public")));
 
 // API Routes
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok", time: new Date().toISOString() });
+});
+
+// Image Upload Endpoint for Destination & Lodge Portfolio
+app.post("/api/upload-lodge-image", (req, res) => {
+  try {
+    const { destination, lodge, filename, base64Data } = req.body;
+    if (!destination || !lodge || !filename || !base64Data) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    const safeDest = destination.replace(/[^a-zA-Z0-9_-]/g, "");
+    const safeLodge = lodge.replace(/[^a-zA-Z0-9_-]/g, "");
+    const safeFilename = path.basename(filename).replace(/[^a-zA-Z0-9._-]/g, "");
+
+    const targetDir = path.join(process.cwd(), "public", "images", "destinations", safeDest, safeLodge);
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true });
+    }
+
+    const cleanBase64 = base64Data.replace(/^data:image\/\w+;base64,/, "");
+    const buffer = Buffer.from(cleanBase64, "base64");
+    const filePath = path.join(targetDir, safeFilename);
+
+    fs.writeFileSync(filePath, buffer);
+
+    const publicUrl = `/images/destinations/${safeDest}/${safeLodge}/${safeFilename}`;
+    console.log(`[Upload] Saved image to ${filePath} (${buffer.length} bytes)`);
+
+    return res.json({ success: true, url: publicUrl, size: buffer.length });
+  } catch (err: any) {
+    console.error("[Upload] Error:", err);
+    return res.status(500).json({ error: err.message });
+  }
 });
 
 // Pre-render & SEO Injector for Crawlers and Search Engines

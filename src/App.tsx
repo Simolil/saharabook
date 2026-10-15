@@ -17,6 +17,7 @@ import Compare from './pages/Compare';
 import BookingFlow from './pages/BookingFlow';
 import PartnerPortal from './pages/PartnerPortal';
 import ProgramDetail from './pages/ProgramDetail';
+import PhotoUploader from './pages/PhotoUploader';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -58,6 +59,8 @@ function AnimatedRoutes() {
             <Route path="/compare" element={<Compare />} />
             <Route path="/book/:campSlug" element={<BookingFlow />} />
             <Route path="/partners" element={<PartnerPortal />} />
+            <Route path="/upload" element={<PhotoUploader />} />
+            <Route path="/admin/photos" element={<PhotoUploader />} />
           </Routes>
         </motion.div>
       </AnimatePresence>

@@ -102,12 +102,12 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid Meeting Depot",
     endPoint: "Foum Zguid",
     transportType: "Rugged 4x4 Land Cruiser transfer",
-    image: "/src/assets/images/bivouac_les_nomades_1790671846484.jpg",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
     gallery: [
-      "/src/assets/images/bivouac_les_nomades_1790671846484.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
       "/images/destinations/foum_zguid_lake_iriki_hero.jpg",
-      "/src/assets/images/nomad_tent_interior_1790671861252.jpg",
-      "/src/assets/images/chigaga_milkyway_tent_1790326245816.jpg"
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg"
     ],
     category: "overnight",
     activityTags: ["Dunes & Sunset", "Fossil Beds", "Nomadic Tea", "Stargazing"],
@@ -213,11 +213,11 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid Private Welcome Lounge",
     endPoint: "Foum Zguid",
     transportType: "Private Air-Conditioned 4x4",
-    image: "/src/assets/images/chigaga_milkyway_tent_1790326245816.jpg",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg",
     gallery: [
-      "/src/assets/images/chigaga_milkyway_tent_1790326245816.jpg",
-      "/src/assets/images/nomad_tent_interior_1790671861252.jpg",
-      "/src/assets/images/bivouac_les_nomades_1790671846484.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
       "/images/slideshow/slide-2.jpg"
     ],
     category: "luxury",
@@ -318,7 +318,7 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     image: "/images/destinations/foum_zguid_lake_iriki_hero.jpg",
     gallery: [
       "/images/destinations/foum_zguid_lake_iriki_hero.jpg",
-      "/src/assets/images/bivouac_les_nomades_1790671846484.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
       "/images/slideshow/slide-3.jpg",
       "/images/slideshow/slide-6.jpg"
     ],
@@ -432,7 +432,7 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     image: "/images/slideshow/slide-5.jpg",
     gallery: [
       "/images/slideshow/slide-5.jpg",
-      "/src/assets/images/bivouac_les_nomades_1790671846484.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
       "/images/slideshow/slide-4.jpg",
       "/images/slideshow/slide-8.jpg"
     ],
@@ -549,7 +549,7 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     image: "/images/slideshow/slide-7.jpg",
     gallery: [
       "/images/slideshow/slide-7.jpg",
-      "/src/assets/images/bivouac_les_nomades_1790671846484.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
       "/images/slideshow/slide-9.jpg",
       "/images/slideshow/slide-10.jpg"
     ],
