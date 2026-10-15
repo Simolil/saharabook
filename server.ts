@@ -12,6 +12,14 @@ const PORT = 3000;
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+// Serve static images with explicit no-cache headers so replaced images show immediately on refresh
+app.use("/images", (req, res, next) => {
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
+  next();
+}, express.static(path.join(process.cwd(), "public", "images")));
+
 app.use(express.static(path.join(process.cwd(), "public")));
 
 // API Routes
@@ -31,21 +39,36 @@ app.post("/api/upload-lodge-image", (req, res) => {
     const safeLodge = lodge.replace(/[^a-zA-Z0-9_-]/g, "");
     const safeFilename = path.basename(filename).replace(/[^a-zA-Z0-9._-]/g, "");
 
-    const targetDir = path.join(process.cwd(), "public", "images", "destinations", safeDest, safeLodge);
-    if (!fs.existsSync(targetDir)) {
-      fs.mkdirSync(targetDir, { recursive: true });
-    }
-
     const cleanBase64 = base64Data.replace(/^data:image\/\w+;base64,/, "");
     const buffer = Buffer.from(cleanBase64, "base64");
-    const filePath = path.join(targetDir, safeFilename);
 
-    fs.writeFileSync(filePath, buffer);
+    // 1. Write to public/
+    const publicTargetDir = path.join(process.cwd(), "public", "images", "destinations", safeDest, safeLodge);
+    if (!fs.existsSync(publicTargetDir)) {
+      fs.mkdirSync(publicTargetDir, { recursive: true });
+    }
+    const publicFilePath = path.join(publicTargetDir, safeFilename);
+    fs.writeFileSync(publicFilePath, buffer);
+
+    // 2. Also write to dist/ (so production build serves it instantly without rebuilding)
+    const distTargetDir = path.join(process.cwd(), "dist", "images", "destinations", safeDest, safeLodge);
+    if (fs.existsSync(path.join(process.cwd(), "dist"))) {
+      if (!fs.existsSync(distTargetDir)) {
+        fs.mkdirSync(distTargetDir, { recursive: true });
+      }
+      fs.writeFileSync(path.join(distTargetDir, safeFilename), buffer);
+    }
+
+    // 3. Also write to src/assets/images/ (permanent code backup)
+    const assetsDir = path.join(process.cwd(), "src", "assets", "images");
+    if (fs.existsSync(assetsDir)) {
+      fs.writeFileSync(path.join(assetsDir, `${safeLodge}_${safeFilename}`), buffer);
+    }
 
     const publicUrl = `/images/destinations/${safeDest}/${safeLodge}/${safeFilename}`;
-    console.log(`[Upload] Saved image to ${filePath} (${buffer.length} bytes)`);
+    console.log(`[Upload] Synchronized image to public, dist, and assets (${buffer.length} bytes)`);
 
-    return res.json({ success: true, url: publicUrl, size: buffer.length });
+    return res.json({ success: true, url: publicUrl, size: buffer.length, version: Date.now() });
   } catch (err: any) {
     console.error("[Upload] Error:", err);
     return res.status(500).json({ error: err.message });

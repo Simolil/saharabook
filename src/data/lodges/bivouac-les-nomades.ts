@@ -9,13 +9,13 @@ import { LodgeImages } from './types';
 export const bivouacLesNomadesImages: LodgeImages = {
   slug: 'bivouac-les-nomades',
   name: 'Bivouac Les Nomades – Erg Chigaga Desert Camp',
-  hero: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg',
+  hero: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2',
   fallback: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1200',
   gallery: [
-    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg',
-    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg',
-    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg',
-    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-lake-iriki.jpg',
+    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2',
+    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg?v=2',
+    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg?v=2',
+    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-lake-iriki.jpg?v=2',
     '/images/slideshow/slide-11.jpg'
   ],
   tents: {

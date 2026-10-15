@@ -505,7 +505,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <li><Link to="/scam-guide" className="hover:text-[#BA7517] transition-colors">{t('footer.scam_guide')}</Link></li>
                 <li><Link to="/compare" className="hover:text-[#BA7517] transition-colors">{t('footer.compare')}</Link></li>
                 <li><Link to="/partners" className="hover:text-[#BA7517] transition-colors">{t('footer.partners')}</Link></li>
-                <li><Link to="/upload" className="text-[#BA7517] hover:text-[#9E6010] font-semibold transition-colors flex items-center space-x-1"><span>📷 Manage Lodge Photos</span></Link></li>
               </ul>
             </div>
           </div>

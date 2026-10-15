@@ -315,13 +315,13 @@ const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
     rating: 5.0,
     reviewCount: 128,
     tentType: 'Luxury & Traditional Nomadic Suites',
-    image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg',
+    image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2',
     fallbackImage: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1200',
     images: [
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg',
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg',
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg',
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-lake-iriki.jpg',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg?v=2',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg?v=2',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-lake-iriki.jpg?v=2',
       '/images/slideshow/slide-11.jpg'
     ],
     sub_location: 'Erg Chigaga Dunes (67km deep via Lake Iriki), Foum Zguid, Tata Province',

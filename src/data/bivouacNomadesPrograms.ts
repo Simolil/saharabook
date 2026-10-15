@@ -102,9 +102,9 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid Meeting Depot",
     endPoint: "Foum Zguid",
     transportType: "Rugged 4x4 Land Cruiser transfer",
-    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2",
     gallery: [
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2",
       "/images/destinations/foum_zguid_lake_iriki_hero.jpg",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg"
