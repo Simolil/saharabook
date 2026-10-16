@@ -12,11 +12,43 @@ const PORT = 3000;
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-// Serve static images with explicit no-cache headers so replaced images show immediately on refresh
+// Serve static images with explicit no-cache headers and resilient extension resolution
 app.use("/images", (req, res, next) => {
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   res.setHeader("Pragma", "no-cache");
   res.setHeader("Expires", "0");
+
+  const requestedRelPath = decodeURIComponent(req.path);
+  const basePath = path.join(process.cwd(), "public", "images");
+  const fullPath = path.join(basePath, requestedRelPath);
+
+  if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
+    return res.sendFile(fullPath);
+  }
+
+  // Resilient fallback: search for alternative extensions and double-extensions
+  const ext = path.extname(requestedRelPath);
+  const withoutExt = ext ? requestedRelPath.slice(0, -ext.length) : requestedRelPath;
+  const candidates = [
+    withoutExt + ".webp",
+    withoutExt + ".jpg",
+    withoutExt + ".jpeg",
+    withoutExt + ".png",
+    withoutExt + ".jpg.jpg",
+    withoutExt + ".jpg.webp",
+    withoutExt + ".jpg.jpeg",
+    requestedRelPath + ".webp",
+    requestedRelPath + ".jpg",
+    requestedRelPath + ".jpg.jpg"
+  ];
+
+  for (const candidate of candidates) {
+    const candidatePath = path.join(basePath, candidate);
+    if (fs.existsSync(candidatePath) && fs.statSync(candidatePath).isFile()) {
+      return res.sendFile(candidatePath);
+    }
+  }
+
   next();
 }, express.static(path.join(process.cwd(), "public", "images")));
 

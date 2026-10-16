@@ -102,12 +102,12 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid Meeting Depot",
     endPoint: "Foum Zguid",
     transportType: "Rugged 4x4 Land Cruiser transfer",
-    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-2day.webp",
     gallery: [
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2",
-      "/images/destinations/foum_zguid_lake_iriki_hero.jpg",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg"
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-2day.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp"
     ],
     category: "overnight",
     activityTags: ["Dunes & Sunset", "Fossil Beds", "Nomadic Tea", "Stargazing"],
@@ -213,12 +213,12 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid Private Welcome Lounge",
     endPoint: "Foum Zguid",
     transportType: "Private Air-Conditioned 4x4",
-    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp",
     gallery: [
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
-      "/images/slideshow/slide-2.jpg"
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-food-tagine.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp"
     ],
     category: "luxury",
     activityTags: ["Luxury Glamping", "Private En-Suite", "Sunset Camel Trek", "Gourmet Dining"],
@@ -315,12 +315,12 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid",
     endPoint: "Zagora (or return transfer)",
     transportType: "Full 3-Day Expedition 4x4 with Guide",
-    image: "/images/destinations/foum_zguid_lake_iriki_hero.jpg",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
     gallery: [
-      "/images/destinations/foum_zguid_lake_iriki_hero.jpg",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
-      "/images/slideshow/slide-3.jpg",
-      "/images/slideshow/slide-6.jpg"
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-camel.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-03.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-04.webp"
     ],
     category: "multi-day",
     activityTags: ["One-Way Traverse", "Two Different Camps", "Draa Valley Oasis", "Kasbah Heritage"],
@@ -429,12 +429,12 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid",
     endPoint: "Foum Zguid",
     transportType: "Dedicated 4x4 Support Vehicle",
-    image: "/images/slideshow/slide-5.jpg",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-culture.jpg",
     gallery: [
-      "/images/slideshow/slide-5.jpg",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
-      "/images/slideshow/slide-4.jpg",
-      "/images/slideshow/slide-8.jpg"
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-culture.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-host-mustapha.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-camel.jpg",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-food-tagine.webp"
     ],
     category: "cultural",
     activityTags: ["Deep Culture", "Family Friendly", "Desert Farm Agriculture", "Guided Hiking"],
@@ -546,12 +546,12 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid",
     endPoint: "Foum Zguid",
     transportType: "Rugged 4x4 Expedition Vehicle",
-    image: "/images/slideshow/slide-7.jpg",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-adventure.webp",
     gallery: [
-      "/images/slideshow/slide-7.jpg",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg",
-      "/images/slideshow/slide-9.jpg",
-      "/images/slideshow/slide-10.jpg"
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-adventure.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-01.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp"
     ],
     category: "adventure",
     activityTags: ["Quad Biking Included", "Sandboarding", "Camel Trek", "Paris-Dakar 4x4"],

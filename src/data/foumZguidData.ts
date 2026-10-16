@@ -315,14 +315,15 @@ const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
     rating: 5.0,
     reviewCount: 128,
     tentType: 'Luxury & Traditional Nomadic Suites',
-    image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2',
+    image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp',
     fallbackImage: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1200',
     images: [
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg?v=2',
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg?v=2',
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg?v=2',
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-lake-iriki.jpg?v=2',
-      '/images/slideshow/slide-11.jpg'
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-food-tagine.webp',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-01.webp',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-02.webp'
     ],
     sub_location: 'Erg Chigaga Dunes (67km deep via Lake Iriki), Foum Zguid, Tata Province',
     official_website: 'https://bivouaclesnomades.com/',
@@ -374,7 +375,7 @@ const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
         bed_type: '1 Queen Bed or 2 Twin Beds',
         capacity: '2-3',
         price_per_night: 95,
-        image: '/images/slideshow/slide-11.jpg',
+        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-02.webp',
         features: ['Private En-suite Shower & Toilet', 'Woven Berber Wool Carpets', '24/7 Solar USB Charging', 'Traditional Breakfast Included']
       },
       {
@@ -385,7 +386,7 @@ const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
         bed_type: '1 Plush King Bed',
         capacity: '2',
         price_per_night: 150,
-        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.jpg',
+        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp',
         features: ['34 m² Space & King Bed', 'Private En-Suite Hot Shower & Toilet', 'Private Shaded Dune Deck', 'Dinner & Breakfast Included', 'USB & Camera Charging Station']
       },
       {
@@ -396,7 +397,7 @@ const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
         bed_type: '1 King Bed + 2 Twin Beds',
         capacity: '4',
         price_per_night: 230,
-        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.jpg',
+        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-family.jpg',
         features: ['45 m² Multi-Bed Suite (Max 4 Guests)', 'Private En-Suite Hot Bathroom', 'Panoramic High-Dune View', 'Full Board Dinner & Breakfast', 'Complimentary Camel Safari']
       },
       {
@@ -407,7 +408,7 @@ const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
         bed_type: 'Custom Configuration (1-3 Tents)',
         capacity: '2-6',
         price_per_night: 380,
-        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-night.jpg',
+        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp',
         features: ['100% Private Isolated Dune Encampment', 'Dedicated Private Chef & Butler', 'Custom 4-Course Candlelit Dune Banquet', 'Exclusive Stargazing & Music Setup', 'Round-Trip Private 4x4 Included']
       }
     ],
