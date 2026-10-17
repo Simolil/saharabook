@@ -9,10 +9,10 @@ import { LodgeImages } from './types';
 export const bivouacLesNomadesImages: LodgeImages = {
   slug: 'bivouac-les-nomades',
   name: 'Bivouac Les Nomades – Erg Chigaga Desert Camp',
-  hero: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp',
+  hero: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png',
   fallback: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1200',
   gallery: [
-    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp',
+    '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png',
     '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp',
     '/images/destinations/foum-zguid/bivouac-les-nomades/bln-food-tagine.webp',
     '/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp',
@@ -29,7 +29,7 @@ export const bivouacLesNomadesImages: LodgeImages = {
     'traditional-nomad-tent': '/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-02.webp',
     'luxury-canvas-suite': '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp',
     'royal-family-pavilion': '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-family.jpg',
-    'exclusive-private-bivouac': '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp'
+    'exclusive-private-bivouac': '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png'
   },
   caption: 'Authentic Saharan Nomad Bivouac nestled deep in Erg Chigaga dunes'
 };

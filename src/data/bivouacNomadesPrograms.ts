@@ -105,7 +105,7 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-2day.webp",
     gallery: [
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-2day.webp",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp"
     ],
@@ -217,7 +217,7 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     gallery: [
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-food-tagine.webp",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp"
     ],
     category: "luxury",
@@ -315,9 +315,9 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     startPoint: "Foum Zguid",
     endPoint: "Zagora (or return transfer)",
     transportType: "Full 3-Day Expedition 4x4 with Guide",
-    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+    image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png",
     gallery: [
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-camel.jpg",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-03.webp",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-04.webp"
@@ -549,7 +549,7 @@ export const STRUCTURED_PROGRAMS: StructuredDesertProgram[] = [
     image: "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-adventure.webp",
     gallery: [
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-tour-adventure.webp",
-      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp",
+      "/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-gallery-01.webp",
       "/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp"
     ],

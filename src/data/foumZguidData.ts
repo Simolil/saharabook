@@ -315,10 +315,10 @@ const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
     rating: 5.0,
     reviewCount: 128,
     tentType: 'Luxury & Traditional Nomadic Suites',
-    image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp',
+    image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png',
     fallbackImage: 'https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&q=80&w=1200',
     images: [
-      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp',
+      '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png',
       '/images/destinations/foum-zguid/bivouac-les-nomades/bln-tent-luxury.webp',
       '/images/destinations/foum-zguid/bivouac-les-nomades/bln-food-tagine.webp',
       '/images/destinations/foum-zguid/bivouac-les-nomades/bln-activity-campfire.webp',
@@ -408,7 +408,7 @@ const RAW_FOUM_ZGUID_STAYS: FoumZguidStay[] = [
         bed_type: 'Custom Configuration (1-3 Tents)',
         capacity: '2-6',
         price_per_night: 380,
-        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.webp',
+        image: '/images/destinations/foum-zguid/bivouac-les-nomades/bln-hero.png',
         features: ['100% Private Isolated Dune Encampment', 'Dedicated Private Chef & Butler', 'Custom 4-Course Candlelit Dune Banquet', 'Exclusive Stargazing & Music Setup', 'Round-Trip Private 4x4 Included']
       }
     ],
